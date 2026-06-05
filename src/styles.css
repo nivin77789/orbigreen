@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-emerald-deep: var(--emerald-deep);
+  --color-lime-electric: var(--lime-electric);
+  --font-display: "Inter", "SF Pro Display", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+:root {
+  --emerald-deep: #008f4c;
+  --lime-electric: #00ff87;
+}
+
+@layer base {
+  * {
+    border-color: oklch(1 0 0 / 0.08);
+  }
+  html {
+    scroll-behavior: smooth;
+    background: #050505;
+  }
+  body {
+    background-color: #050505;
+    color: oklch(0.985 0 0 / 0.9);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: var(--lime-electric);
+    color: #050505;
+  }
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility text-pretty {
+  text-wrap: pretty;
+}
+
+@utility gradient-border-cta {
+  position: relative;
+  background:
+    linear-gradient(#0a0a0c, #0a0a0c) padding-box,
+    linear-gradient(135deg, var(--lime-electric), var(--emerald-deep)) border-box;
+  border: 1px solid transparent;
+}
+
+@utility glass-nav {
+  background: rgba(5, 5, 5, 0.55);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
