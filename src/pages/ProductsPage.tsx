@@ -1,23 +1,18 @@
 import { lazy, Suspense } from "react";
 import { Nav } from "@/components/Nav";
+import { ProductGalleryFallback } from "@/components/ProductGalleryFallback";
 
 const ProductDepthGallery = lazy(() =>
   import("@/components/ProductDepthGallery").then((module) => ({
     default: module.ProductDepthGallery,
-  }))
+  })),
 );
 
 export default function ProductsPage() {
   return (
-    <div className="h-svh w-full overflow-hidden">
+    <div className="h-svh w-full overflow-hidden bg-section">
       <Nav />
-      <Suspense
-        fallback={
-          <div className="product-depth-gallery flex h-svh w-full items-center justify-center bg-[#f5f8f7] text-[12px] uppercase tracking-[0.2em] text-primary/50">
-            Loading…
-          </div>
-        }
-      >
+      <Suspense fallback={<ProductGalleryFallback />}>
         <ProductDepthGallery />
       </Suspense>
     </div>

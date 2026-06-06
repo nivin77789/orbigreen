@@ -24,7 +24,7 @@ class TrailHeadParticles {
 
     for (let index = 0; index < this.maxParticles; index += 1) {
       const material = new THREE.MeshBasicMaterial({
-        color: new THREE.Color('#f6f9ff'),
+        color: new THREE.Color('#5CBF2A'),
         transparent: true,
         opacity: 0,
         depthWrite: false,

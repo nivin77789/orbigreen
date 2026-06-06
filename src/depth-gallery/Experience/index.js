@@ -10,7 +10,7 @@ class Experience {
     this.container = container
     this.isInitialized = false
     this.isDisposed = false
-    this.frameDarkPlaneCount = 3
+    this.frameDarkPlaneCount = 0
     this.isFrameTextDark = null
     this.debug = new Debug()
     this.gallery = new Gallery(this.debug, container)

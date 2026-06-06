@@ -13,16 +13,16 @@ class Background {
     this.material = null
     this.mesh = null
 
-    this.backgroundColor = new THREE.Color('#FBE8CD')
-    this.blob1Color = new THREE.Color('#FFD56D')
-    this.blob2Color = new THREE.Color('#5D816A')
+    this.backgroundColor = new THREE.Color('#F5F8F7')
+    this.blob1Color = new THREE.Color('#5CBF2A')
+    this.blob2Color = new THREE.Color('#0B5F7E')
     this.nextBackgroundColor = new THREE.Color()
     this.nextBlob1Color = new THREE.Color()
     this.nextBlob2Color = new THREE.Color()
 
     this.baseBlobRadius = 0.65
     this.secondaryBlobRadiusRatio = 0.78
-    this.baseBlobStrength = 0.9
+    this.baseBlobStrength = 0.48
 
     this.depthToRadiusAmount = 0.08
     this.velocityToStrengthAmount = 0.1
@@ -34,7 +34,7 @@ class Background {
 
     this.blobRadius = this.baseBlobRadius
     this.blobStrength = this.baseBlobStrength
-    this.noiseStrength = 0.04
+    this.noiseStrength = 0.025
   }
 
   init() {
@@ -46,6 +46,7 @@ class Background {
     this.material = new THREE.ShaderMaterial({
       vertexShader,
       fragmentShader,
+      transparent: true,
       depthWrite: false,
       depthTest: false,
       uniforms: {

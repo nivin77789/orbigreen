@@ -33,6 +33,7 @@ class Engine {
     })
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2))
     this.renderer.outputColorSpace = THREE.SRGBColorSpace
+    this.renderer.setClearColor(0x000000, 0)
     this.renderer.autoClear = false
 
     this.onResize = () => {

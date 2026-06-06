@@ -39,13 +39,13 @@ void main() {
   color = mix(color, blob1SoftColor, blob1 * uBlobStrength);
   color = mix(color, blob2SoftColor, blob2 * uBlobStrength);
 
-  // Velocity luminance lift
-  color += uVelocityIntensity * 0.10;
+  // Velocity luminance lift — subtle green tint on scroll
+  color += vec3(0.02, 0.05, 0.03) * uVelocityIntensity;
 
   // Film grain
   float grain = random(vUv * vec2(1387.13, 947.91)) - 0.5;
   color += grain * uNoiseStrength;
   color = clamp(color, 0.0, 1.0);
 
-  gl_FragColor = vec4(color, 1.0);
+  gl_FragColor = vec4(color, 0.28);
 }

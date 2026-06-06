@@ -18,8 +18,8 @@ class Trail {
     this.jumpResetDistance = 999 // Hard reset threshold for huge jumps
 
     this.material = new THREE.MeshStandardMaterial({
-      color: new THREE.Color('#f6f9ff'),
-      emissive: new THREE.Color('#7fd5ff'),
+      color: new THREE.Color('#8DD128'),
+      emissive: new THREE.Color('#5CBF2A'),
       emissiveIntensity: 1.35,
       roughness: 0.2,
       metalness: 0.05,

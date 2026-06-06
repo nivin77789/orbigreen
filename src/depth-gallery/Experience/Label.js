@@ -8,7 +8,6 @@ class Label {
     this.wordElement = null
     this.categoryElement = null
     this.descriptionElement = null
-    this.chipElement = null
     this.activePlaneIndex = -1
   }
 
@@ -20,24 +19,22 @@ class Label {
     const element = document.createElement('section')
     element.className = 'plane-label-overlay'
     element.innerHTML = `
-      <div class="plane-label-glass plane-label-overlay__left">
+      <div class="plane-label-overlay__left">
         <p class="plane-label-overlay__index"></p>
         <p class="plane-label-card__word"><span class="plane-label-card__word-text"></span></p>
-        <span class="plane-label-overlay__chip"></span>
       </div>
-      <article class="plane-label-glass plane-label-card plane-label-overlay__right">
-        <p class="plane-label-card__category"><span class="plane-label-card__category-text"></span></p>
+      <div class="plane-label-overlay__right">
+        <p class="plane-label-card__category"></p>
         <p class="plane-label-card__description"></p>
-      </article>
+      </div>
     `
 
     return {
       element,
       leftIndexElement: element.querySelector('.plane-label-overlay__index'),
       wordElement: element.querySelector('.plane-label-card__word-text'),
-      categoryElement: element.querySelector('.plane-label-card__category-text'),
+      categoryElement: element.querySelector('.plane-label-card__category'),
       descriptionElement: element.querySelector('.plane-label-card__description'),
-      chipElement: element.querySelector('.plane-label-overlay__chip'),
     }
   }
 
@@ -50,7 +47,6 @@ class Label {
       wordElement,
       categoryElement,
       descriptionElement,
-      chipElement,
     } = this.createElement()
 
     this.overlayElement = element
@@ -58,33 +54,10 @@ class Label {
     this.wordElement = wordElement
     this.categoryElement = categoryElement
     this.descriptionElement = descriptionElement
-    this.chipElement = chipElement
     this.overlayElement.style.opacity = '0'
 
     const mountTarget = this.container || document.body
     mountTarget.append(this.overlayElement)
-  }
-
-  normalizeHexColor(rawColor) {
-    const fallbackColor = '#0b5f7e'
-    if (typeof rawColor !== 'string') return fallbackColor
-
-    let hexColor = rawColor.trim()
-    if (!hexColor) return fallbackColor
-    if (!hexColor.startsWith('#')) {
-      hexColor = `#${hexColor}`
-    }
-
-    if (/^#[0-9a-fA-F]{3}$/.test(hexColor)) {
-      const shortHex = hexColor.slice(1)
-      hexColor = `#${shortHex
-        .split('')
-        .map((character) => `${character}${character}`)
-        .join('')}`
-    }
-
-    if (!/^#[0-9a-fA-F]{6}$/.test(hexColor)) return fallbackColor
-    return hexColor.toLowerCase()
   }
 
   getTargetPlaneIndex(cameraZ) {
@@ -98,19 +71,13 @@ class Label {
     if (!plane || this.activePlaneIndex === planeIndex) return
 
     const labelData = plane.userData.label || {}
-    const accentColor = this.normalizeHexColor(plane.userData.accentColor)
-
-    const textColor = labelData.color || '#F8FAF9'
-    const highlightColor = labelData.highlight || '#5CBF2A'
 
     this.leftIndexElement.textContent = String(planeIndex + 1).padStart(2, '0')
     this.wordElement.textContent = labelData.word || 'Product'
     this.categoryElement.textContent = labelData.category || 'Industrial'
     this.descriptionElement.textContent = labelData.description || ''
-    this.chipElement.style.backgroundColor = accentColor
-    this.overlayElement.style.setProperty('--label-text', textColor)
-    this.overlayElement.style.setProperty('--label-highlight', highlightColor)
-    this.overlayElement.dataset.tone = textColor.toLowerCase() === '#0b5f7e' ? 'light' : 'dark'
+    this.overlayElement.style.setProperty('--label-text', '#ffffff')
+    this.overlayElement.style.setProperty('--label-highlight', '#ffffff')
 
     this.activePlaneIndex = planeIndex
   }
@@ -139,7 +106,6 @@ class Label {
     this.wordElement = null
     this.categoryElement = null
     this.descriptionElement = null
-    this.chipElement = null
     this.activePlaneIndex = -1
   }
 }

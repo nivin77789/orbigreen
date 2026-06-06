@@ -1,9 +1,17 @@
-import { useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import { HeroFrameCanvas } from "@/components/HeroFrameCanvas";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { ContactSection } from "@/components/ContactSection";
+import { HomeMetricsStrip } from "@/components/HomeMetricsStrip";
+import { ProductGalleryFallback } from "@/components/ProductGalleryFallback";
+
+const ProductDepthGallery = lazy(() =>
+  import("@/components/ProductDepthGallery").then((module) => ({
+    default: module.ProductDepthGallery,
+  })),
+);
 
 function ScrollHint() {
   return (
@@ -227,6 +235,11 @@ export default function HomePage() {
   const progressRef = useRef(0);
   const [phase, setPhase] = useState<"hero" | "metrics" | "workflow" | "closing">("hero");
 
+  useEffect(() => {
+    document.documentElement.classList.add("home-snap-scroll");
+    return () => document.documentElement.classList.remove("home-snap-scroll");
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: trackRef,
     offset: ["start start", "end end"],
@@ -248,7 +261,7 @@ export default function HomePage() {
     <div id="top" className="relative bg-section text-body">
       <Nav />
 
-      <section ref={trackRef} className="relative h-[400vh]">
+      <section ref={trackRef} className="relative h-[400vh] snap-start">
         <div className="sticky top-0 h-screen w-full overflow-hidden">
           <HeroFrameCanvas progressRef={progressRef} />
 
@@ -277,6 +290,15 @@ export default function HomePage() {
         </div>
       </section>
 
+      <HomeMetricsStrip />
+      <section
+        id="products"
+        className="relative h-svh min-h-svh w-full snap-start snap-always overflow-hidden bg-section"
+      >
+        <Suspense fallback={<ProductGalleryFallback embedded />}>
+          <ProductDepthGallery embedded />
+        </Suspense>
+      </section>
       <ContactSection />
       <Footer />
     </div>

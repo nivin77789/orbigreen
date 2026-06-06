@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { SocialLinks } from "@/components/SocialLinks";
 import logo from "../logo.png";
 
 export function Footer() {
@@ -10,6 +11,10 @@ export function Footer() {
             <img src={logo} alt="Orbigreen Techsource" className="h-12 w-auto max-w-[220px] object-contain" />
           </Link>
           <p className="mt-3 max-w-xs leading-relaxed text-primary/55">Smart. Sustainable. Sourcing.</p>
+          <div className="mt-5">
+            <h5 className="text-[10px] uppercase tracking-[0.25em] text-primary/50">Follow Us</h5>
+            <SocialLinks className="mt-3" />
+          </div>
         </div>
         <div>
           <h5 className="text-[10px] uppercase tracking-[0.25em] text-primary/50">Quick Links</h5>
@@ -48,8 +53,16 @@ export function Footer() {
         <div>
           <h5 className="text-[10px] uppercase tracking-[0.25em] text-primary/50">Reach</h5>
           <ul className="mt-4 space-y-2 text-primary/70">
-            <li>+91 98883 38615</li>
-            <li>info@orbigreen.com</li>
+            <li>
+              <a href="tel:+919888338615" className="transition-colors hover:text-primary">
+                +91 98883 38615
+              </a>
+            </li>
+            <li>
+              <a href="mailto:info@orbigreen.com" className="transition-colors hover:text-primary">
+                info@orbigreen.com
+              </a>
+            </li>
             <li>Zirakpur, Punjab</li>
           </ul>
         </div>

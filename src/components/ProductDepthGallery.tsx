@@ -2,7 +2,13 @@ import { useEffect, useRef } from "react";
 import { Engine } from "@/depth-gallery/Experience/Engine";
 import "@/depth-gallery/styles/depth-gallery.css";
 
-export function ProductDepthGallery() {
+import bgImage from "../hero bg image frames/ezgif-frame-240.png";
+
+type ProductDepthGalleryProps = {
+  embedded?: boolean;
+};
+
+export function ProductDepthGallery({ embedded = false }: ProductDepthGalleryProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const engineRef = useRef<Engine | null>(null);
@@ -29,9 +35,13 @@ export function ProductDepthGallery() {
   return (
     <section
       ref={containerRef}
-      className="product-depth-gallery"
+      className={`product-depth-gallery${embedded ? " product-depth-gallery--embedded" : ""}`}
       aria-label="Our products"
     >
+      <div className="product-depth-gallery__bg" aria-hidden>
+        <img src={bgImage} alt="" className="product-depth-gallery__bg-image" />
+        <div className="product-depth-gallery__glass-glow" />
+      </div>
       <canvas ref={canvasRef} className="webgl" />
       <p className="product-depth-gallery__hint">Scroll to explore</p>
     </section>

@@ -6,6 +6,7 @@ import ResourcesPage from "@/pages/ResourcesPage";
 import SourcingMarketsPage from "@/pages/SourcingMarketsPage";
 import ProductsPage from "@/pages/ProductsPage";
 import ServicesPage from "@/pages/ServicesPage";
+import { ChatBot } from "@/components/ChatBot";
 
 function ScrollToHash() {
   const { pathname, hash } = useLocation();
@@ -35,6 +36,7 @@ export default function App() {
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/services" element={<ServicesPage />} />
       </Routes>
+      <ChatBot />
     </BrowserRouter>
   );
 }

@@ -52,8 +52,8 @@ class TrailController {
         opacitySmoothing: 0.12, // Opacity lerp speed
       },
       visualSettings: {
-        trailColor: '#f6f9ff', // Main trail color
-        glowColor: '#ffffff', // Emissive color
+        trailColor: '#8DD128', // Main trail color
+        glowColor: '#5CBF2A', // Emissive color
         glowIntensity: 1.35, // Emissive intensity
         curveTension: 0.67, // Curviness of the generated spline
         pointSmoothing: 0.53, // Smoothing when adding new points
