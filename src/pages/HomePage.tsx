@@ -31,7 +31,7 @@ function MetricsServices({ visible }: { visible: boolean }) {
   ];
   const services = [
     {
-      t: "Consultancy & Advisory",
+      t: "Training, Consultancy & Advisory",
       d: "Strategic consulting for procurement optimization and sourcing transformation.",
     },
     {

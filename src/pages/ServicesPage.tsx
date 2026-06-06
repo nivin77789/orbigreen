@@ -19,7 +19,7 @@ import imgSite from "../services image/site-installation.png";
 
 const SERVICES = [
   {
-    t: "Consultancy & Advisory",
+    t: "Training, Consultancy & Advisory",
     d: "Professional consulting services to help businesses optimize procurement and sourcing.",
     image: imgConsultancy,
     accent: "#5CBF2A",
@@ -209,7 +209,7 @@ export default function ServicesPage() {
                 <div className="overflow-hidden rounded-[1.25rem]">
                   <img
                     src={imgConsultancy}
-                    alt="Consultancy and advisory services"
+                    alt="Training, consultancy and advisory services"
                     className="h-[280px] w-full object-cover object-center lg:h-[360px]"
                   />
                 </div>
