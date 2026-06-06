@@ -1,0 +1,87 @@
+import { useState } from "react";
+
+export function ContactSection() {
+  const [sent, setSent] = useState(false);
+
+  return (
+    <section id="contact" className="relative border-t border-primary/10 bg-section py-28">
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-secondary/50 to-transparent" />
+      <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-16 px-6 lg:grid-cols-2 lg:px-10">
+        <div>
+          <span className="text-[10px] uppercase tracking-[0.3em] text-secondary">Contact Us Today</span>
+          <h3 className="mt-4 text-[clamp(2rem,3.5vw,3rem)] font-semibold leading-[1.05] tracking-tight text-primary">
+            Let's build your
+            <br />
+            supply advantage.
+          </h3>
+          <dl className="mt-10 space-y-6">
+            <div>
+              <dt className="text-[10px] uppercase tracking-[0.25em] text-primary/50">Phone</dt>
+              <dd className="mt-1 text-[16px] font-medium text-primary">+91 98883 38615</dd>
+            </div>
+            <div>
+              <dt className="text-[10px] uppercase tracking-[0.25em] text-primary/50">Email</dt>
+              <dd className="mt-1 text-[16px] font-medium text-primary">info@orbigreen.com</dd>
+            </div>
+            <div>
+              <dt className="text-[10px] uppercase tracking-[0.25em] text-primary/50">Office</dt>
+              <dd className="mt-1 max-w-xs text-[14px] leading-relaxed text-primary/70">
+                SCO 26, First Floor, Saraswati Vihar,
+                <br />
+                Dhakoli, Zirakpur, Punjab – 160104, India
+              </dd>
+            </div>
+          </dl>
+        </div>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            setSent(true);
+            setTimeout(() => setSent(false), 2800);
+          }}
+          className="flex flex-col gap-4 rounded-2xl border border-primary/10 bg-white p-8 shadow-sm"
+        >
+          <label className="text-[10px] uppercase tracking-[0.25em] text-primary/50">Quick contact</label>
+          <input
+            required
+            placeholder="Full name"
+            className="border-b border-primary/15 bg-transparent py-3 text-[15px] text-primary placeholder-primary/35 outline-none transition-colors focus:border-secondary"
+          />
+          <input
+            required
+            type="email"
+            placeholder="Work email"
+            className="border-b border-primary/15 bg-transparent py-3 text-[15px] text-primary placeholder-primary/35 outline-none transition-colors focus:border-secondary"
+          />
+          <textarea
+            required
+            rows={4}
+            placeholder="Tell us about your sourcing requirement"
+            className="resize-none border-b border-primary/15 bg-transparent py-3 text-[15px] text-primary placeholder-primary/35 outline-none transition-colors focus:border-secondary"
+          />
+          <button
+            type="submit"
+            className="gradient-border-cta group mt-4 inline-flex items-center justify-center gap-2 self-start rounded-full px-7 py-3 text-[13px] font-medium transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
+          >
+            <span>{sent ? "Sent" : "Send"}</span>
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              className={`transition-transform duration-500 ${sent ? "translate-x-3 opacity-0" : "group-hover:translate-x-1"}`}
+            >
+              <path
+                d="M5 12h14M13 6l6 6-6 6"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        </form>
+      </div>
+    </section>
+  );
+}

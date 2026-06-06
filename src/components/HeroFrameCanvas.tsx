@@ -6,8 +6,8 @@ import {
 } from "@/lib/scroll-frames";
 
 /**
- * Sticky full-screen canvas playing the 120-frame hero sequence from
- * ./hero-bg-image-frames/, scrubbed by scroll progress.
+ * Sticky full-screen canvas playing the hero frame sequence from
+ * src/hero bg image frames/, scrubbed by scroll progress.
  */
 export function HeroFrameCanvas({
   progressRef,
@@ -66,7 +66,7 @@ export function HeroFrameCanvas({
 
       const img = images[frameIndex];
       if (img?.complete && img.naturalWidth > 0) {
-        ctx.fillStyle = "#050505";
+        ctx.fillStyle = "#F5F8F7";
         ctx.fillRect(0, 0, w, h);
         drawCover(img);
 
@@ -75,9 +75,9 @@ export function HeroFrameCanvas({
           const cx = w / 2;
           const cy = h / 2;
           const bloom = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(w, h) * 0.55);
-          bloom.addColorStop(0, `rgba(0, 143, 76, ${0.18 * t})`);
-          bloom.addColorStop(0.45, `rgba(5, 8, 6, ${0.08 * t})`);
-          bloom.addColorStop(1, "rgba(5, 5, 5, 0)");
+          bloom.addColorStop(0, `rgba(92, 191, 42, ${0.2 * t})`);
+          bloom.addColorStop(0.45, `rgba(11, 95, 126, ${0.1 * t})`);
+          bloom.addColorStop(1, "rgba(245, 248, 247, 0)");
           ctx.fillStyle = bloom;
           ctx.fillRect(0, 0, w, h);
         }
@@ -99,7 +99,7 @@ export function HeroFrameCanvas({
     <canvas
       ref={canvasRef}
       className="absolute inset-0 h-full w-full"
-      style={{ background: "#050505" }}
+      style={{ background: "#F5F8F7" }}
     />
   );
 }

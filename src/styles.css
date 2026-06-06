@@ -1,35 +1,41 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-emerald-deep: var(--emerald-deep);
-  --color-lime-electric: var(--lime-electric);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-body: var(--text);
+  --color-section: var(--section-bg);
   --font-display: "Inter", "SF Pro Display", system-ui, sans-serif;
   --font-sans: "Inter", system-ui, sans-serif;
 }
 
 :root {
-  --emerald-deep: #008f4c;
-  --lime-electric: #00ff87;
+  --primary: #0b5f7e;
+  --secondary: #5cbf2a;
+  --accent: #8dd128;
+  --text: #f8faf9;
+  --section-bg: #f5f8f7;
 }
 
 @layer base {
   * {
-    border-color: oklch(1 0 0 / 0.08);
+    border-color: color-mix(in srgb, var(--primary) 12%, transparent);
   }
   html {
     scroll-behavior: smooth;
-    background: #050505;
+    background: var(--section-bg);
   }
   body {
-    background-color: #050505;
-    color: oklch(0.985 0 0 / 0.9);
+    background-color: var(--section-bg);
+    color: var(--text);
     font-family: var(--font-sans);
     font-feature-settings: "ss01", "cv11";
     -webkit-font-smoothing: antialiased;
   }
   ::selection {
-    background: var(--lime-electric);
-    color: #050505;
+    background: var(--accent);
+    color: white;
   }
 }
 
@@ -44,14 +50,78 @@
 @utility gradient-border-cta {
   position: relative;
   background:
-    linear-gradient(#0a0a0c, #0a0a0c) padding-box,
-    linear-gradient(135deg, var(--lime-electric), var(--emerald-deep)) border-box;
+    linear-gradient(var(--primary), var(--primary)) padding-box,
+    linear-gradient(135deg, var(--secondary), var(--accent)) border-box;
   border: 1px solid transparent;
+  color: white;
+}
+
+@utility gradient-border-cta-outline {
+  position: relative;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)) padding-box,
+    linear-gradient(135deg, var(--secondary), var(--accent)) border-box;
+  border: 1px solid transparent;
+  color: var(--text);
 }
 
 @utility glass-nav {
-  background: rgba(5, 5, 5, 0.55);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+  backdrop-filter: saturate(180%) blur(28px);
+  -webkit-backdrop-filter: saturate(180%) blur(28px);
+  border: none;
+  box-shadow:
+    0 4px 24px rgba(11, 95, 126, 0.1),
+    0 1px 2px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.06);
+}
+
+@utility glass-card {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+  backdrop-filter: saturate(180%) blur(28px);
+  -webkit-backdrop-filter: saturate(180%) blur(28px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow:
+    0 4px 24px rgba(11, 95, 126, 0.1),
+    0 1px 2px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.06);
+}
+
+@utility glass-card-hover {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.26) 0%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  border-color: rgba(141, 209, 40, 0.35);
+  box-shadow:
+    0 8px 40px rgba(92, 191, 42, 0.14),
+    0 4px 24px rgba(11, 95, 126, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.08);
+}
+
+@utility glass-card-light {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.82) 0%,
+    rgba(245, 248, 247, 0.58) 100%
+  );
+  backdrop-filter: saturate(190%) blur(32px);
+  -webkit-backdrop-filter: saturate(190%) blur(32px);
+  border: none;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 8px 40px rgba(11, 95, 126, 0.08),
+    0 0 48px rgba(255, 255, 255, 0.2);
 }
