@@ -53,7 +53,7 @@ export function Nav() {
 
         <div className="flex items-center gap-2">
           <Link
-            to="/#contact"
+            to="/contact"
             className="gradient-border-cta hidden rounded-full px-5 py-2.5 text-[13px] font-semibold shadow-[0_4px_16px_rgba(11,95,126,0.18)] transition-all hover:shadow-[0_0_24px_-2px_rgba(92,191,42,0.45)] sm:inline-flex"
           >
             Get Quote
@@ -135,7 +135,7 @@ export function Nav() {
 
               <div className="mt-2 border-t border-primary/10 pt-2">
                 <Link
-                  to="/#contact"
+                  to="/contact"
                   onClick={() => setMenuOpen(false)}
                   className="gradient-border-cta flex w-full items-center justify-center rounded-2xl px-5 py-3.5 text-[14px] font-semibold"
                 >

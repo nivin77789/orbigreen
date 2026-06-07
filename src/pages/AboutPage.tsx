@@ -1,15 +1,10 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 
-import heroBg from "../hero bg image frames/ezgif-frame-006.png";
-import imgStory from "../hero bg image frames/ezgif-frame-030.png";
-import imgPartner from "../hero bg image frames/ezgif-frame-054.png";
-import imgProcess1 from "../hero bg image frames/ezgif-frame-072.png";
-import imgProcess2 from "../hero bg image frames/ezgif-frame-102.png";
-import imgProcess3 from "../hero bg image frames/ezgif-frame-132.png";
-import imgProcess4 from "../hero bg image frames/ezgif-frame-168.png";
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 const CAPABILITIES = [
   {
@@ -55,28 +50,24 @@ const VALUES = [
 
 const PROCESS = [
   {
-    n: "1",
+    n: "01",
     t: "Understand & Plan",
     d: "We start by understanding your requirements, volumes, quality standards, and timelines. From there we define scope, identify risks, and agree on a clear plan.",
-    image: imgProcess1,
   },
   {
-    n: "2",
+    n: "02",
     t: "Source & Qualify",
     d: "We tap our global network to source and qualify suppliers, run technical and commercial evaluations, and recommend the best fit for your project.",
-    image: imgProcess2,
   },
   {
-    n: "3",
+    n: "03",
     t: "Execute & Assure Quality",
     d: "We coordinate production, manage quality inspections and audits, and keep you updated at every stage so you stay in control without the operational burden.",
-    image: imgProcess3,
   },
   {
-    n: "4",
+    n: "04",
     t: "Deliver & Support",
     d: "We manage logistics and delivery to your door, and support installation and commissioning when needed. Our relationship continues with ongoing supply and continuous improvement.",
-    image: imgProcess4,
   },
 ];
 
@@ -92,96 +83,287 @@ const fadeUp = {
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] as const },
+    transition: { duration: 0.65, delay: i * 0.07, ease: EASE },
   }),
 };
 
 function SectionLabel({ children }: { children: string }) {
   return (
-    <span className="text-[10px] uppercase tracking-[0.3em] text-secondary">{children}</span>
+    <motion.span
+      initial={{ opacity: 0, letterSpacing: "0.15em" }}
+      whileInView={{ opacity: 1, letterSpacing: "0.3em" }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, ease: EASE }}
+      className="inline-block text-[10px] uppercase tracking-[0.3em] text-secondary"
+    >
+      {children}
+    </motion.span>
+  );
+}
+
+function PageBackground() {
+  return (
+    <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+      <div className="metrics-section-grid absolute inset-0 opacity-60" />
+      <div className="absolute -left-[10%] top-[8%] h-[40vh] w-[40vw] rounded-full bg-primary/[0.06] blur-[90px]" />
+      <div className="absolute -right-[8%] bottom-[12%] h-[36vh] w-[36vw] rounded-full bg-secondary/[0.08] blur-[80px]" />
+    </div>
+  );
+}
+
+function StatsBand() {
+  return (
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.35 }}
+      className="metrics-band relative w-full overflow-hidden rounded-[1.5rem] sm:rounded-[1.75rem]"
+    >
+      <div className="grid grid-cols-2 lg:grid-cols-4">
+        {STATS.map((stat, i) => (
+          <motion.div
+            key={stat.label}
+            variants={fadeUp}
+            custom={i}
+            className="group relative px-4 py-6 text-center sm:px-5 sm:py-7 lg:px-6 lg:py-8"
+          >
+            {i > 0 && (
+              <span
+                className="absolute left-0 top-1/2 hidden h-10 w-px -translate-y-1/2 bg-gradient-to-b from-transparent via-primary/15 to-transparent lg:block"
+                aria-hidden
+              />
+            )}
+            <motion.div
+              className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-[clamp(1.35rem,3vw,2rem)] font-semibold leading-none tracking-tight text-transparent"
+              whileHover={{ scale: 1.04 }}
+              transition={{ type: "spring", stiffness: 400, damping: 24 }}
+            >
+              {stat.value}
+            </motion.div>
+            <div className="mt-2 text-[10px] font-bold uppercase tracking-[0.2em] text-primary/65">{stat.label}</div>
+          </motion.div>
+        ))}
+      </div>
+      <motion.div
+        className="metrics-band-shine absolute inset-x-0 top-0 h-px"
+        animate={{ opacity: [0.4, 0.9, 0.4] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+      />
+    </motion.div>
+  );
+}
+
+function ValuesExplorer() {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  return (
+    <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-10">
+      <div className="flex flex-col gap-2.5">
+        {VALUES.map((value, i) => {
+          const isActive = i === activeIndex;
+          return (
+            <motion.button
+              key={value.t}
+              type="button"
+              custom={i}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-40px" }}
+              variants={fadeUp}
+              onClick={() => setActiveIndex(i)}
+              whileHover={{ x: isActive ? 0 : 4 }}
+              className={`highlight-pill group relative flex w-full items-center gap-4 rounded-2xl px-4 py-4 text-left transition-all duration-500 sm:px-5 ${
+                isActive
+                  ? "highlight-pill--active shadow-[0_12px_40px_-14px_rgba(11,95,126,0.2)]"
+                  : "opacity-75 hover:opacity-100"
+              }`}
+            >
+              <span
+                className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-[13px] font-bold tabular-nums transition-colors duration-500 ${
+                  isActive
+                    ? "bg-gradient-to-br from-primary to-secondary text-white"
+                    : "bg-primary/[0.06] text-primary/35 group-hover:text-secondary"
+                }`}
+              >
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span
+                className={`text-[14px] font-semibold leading-snug tracking-tight ${
+                  isActive ? "text-primary" : "text-primary/75"
+                }`}
+              >
+                {value.t}
+              </span>
+              {isActive && (
+                <motion.div
+                  layoutId="about-value-bar"
+                  className="absolute bottom-0 left-4 right-4 h-0.5 rounded-full bg-gradient-to-r from-secondary to-accent sm:left-5 sm:right-5"
+                  transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                />
+              )}
+            </motion.button>
+          );
+        })}
+      </div>
+
+      <motion.div
+        variants={fadeUp}
+        custom={4}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="highlight-panel relative min-h-[220px] overflow-hidden rounded-[1.5rem] p-6 sm:p-7 lg:p-8"
+      >
+        <div className="highlight-panel-grid absolute inset-0 opacity-50" aria-hidden />
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeIndex}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.45, ease: EASE }}
+            className="relative z-10"
+          >
+            <span className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.24em] text-secondary">
+              <span className="h-1.5 w-1.5 rounded-full bg-secondary" />
+              Core value
+            </span>
+            <h3 className="mt-4 text-[clamp(1.35rem,2.5vw,1.85rem)] font-semibold leading-snug tracking-tight text-primary">
+              {VALUES[activeIndex].t}
+            </h3>
+            <p className="mt-4 text-[14px] leading-relaxed text-primary/68 sm:text-[15px]">
+              {VALUES[activeIndex].d}
+            </p>
+          </motion.div>
+        </AnimatePresence>
+      </motion.div>
+    </div>
+  );
+}
+
+function ProcessTimeline() {
+  return (
+    <div className="relative">
+      <div className="absolute bottom-4 left-[1.65rem] top-4 hidden w-px bg-gradient-to-b from-secondary/50 via-primary/15 to-transparent lg:block" />
+
+      <div className="space-y-5">
+        {PROCESS.map((step, i) => (
+          <motion.article
+            key={step.n}
+            custom={i}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            variants={fadeUp}
+            className="glass-card-light group relative grid gap-5 rounded-3xl p-6 transition-all duration-500 ease-out hover:glass-card-hover sm:p-7 lg:grid-cols-[auto_1fr] lg:items-start lg:gap-8 lg:p-8"
+          >
+            <div className="relative z-10 flex items-center gap-4 lg:flex-col lg:items-center lg:gap-3">
+              <motion.div
+                className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-secondary text-[15px] font-bold tabular-nums text-white shadow-[0_8px_24px_-8px_rgba(11,95,126,0.45)]"
+                whileHover={{ scale: 1.06, rotate: -2 }}
+                transition={{ type: "spring", stiffness: 400, damping: 22 }}
+              >
+                {step.n}
+              </motion.div>
+              <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-secondary lg:text-center">
+                Step {step.n}
+              </span>
+            </div>
+
+            <div>
+              <h3 className="text-[clamp(1.2rem,2vw,1.55rem)] font-semibold tracking-tight text-primary">
+                {step.t}
+              </h3>
+              <p className="mt-3 max-w-2xl text-[14px] leading-relaxed text-primary/65 sm:text-[15px]">
+                {step.d}
+              </p>
+              <motion.div
+                className="mt-5 h-0.5 max-w-[120px] origin-left rounded-full bg-gradient-to-r from-secondary to-accent"
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.15, ease: EASE }}
+              />
+            </div>
+          </motion.article>
+        ))}
+      </div>
+    </div>
   );
 }
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen overflow-hidden bg-section text-primary">
+    <div className="relative min-h-screen overflow-hidden bg-section text-primary">
       <Nav />
 
-      <main className="pt-28">
+      <main className="relative pt-28">
         {/* Hero */}
-        <section className="relative mx-auto max-w-[1280px] px-6 pb-20 lg:px-10">
-          <div className="pointer-events-none absolute -right-20 top-0 h-[420px] w-[420px] rounded-full bg-secondary/10 blur-[100px]" />
-          <div className="pointer-events-none absolute -left-16 bottom-0 h-[320px] w-[320px] rounded-full bg-primary/10 blur-[90px]" />
+        <section className="relative mx-auto max-w-[1280px] px-6 pb-16 lg:px-10 lg:pb-20">
+          <PageBackground />
 
-          <div className="relative grid items-center gap-12 lg:grid-cols-2">
+          <motion.div
+            initial={{ opacity: 0, y: 32 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: EASE }}
+            className="relative max-w-3xl"
+          >
+            <SectionLabel>Who we are</SectionLabel>
+            <h1 className="mt-4 text-balance text-[clamp(2.5rem,5vw,4rem)] font-semibold leading-[1.05] tracking-tight text-primary">
+              About{" "}
+              <span className="bg-gradient-to-br from-primary via-primary to-secondary bg-clip-text text-transparent">
+                Orbigreen Techsource
+              </span>
+            </h1>
             <motion.div
-              initial={{ opacity: 0, y: 32 }}
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 1, delay: 0.25, ease: EASE }}
+              className="mt-4 h-1 w-24 origin-left rounded-full bg-gradient-to-r from-secondary to-accent"
+            />
+            <p className="mt-6 max-w-xl text-pretty text-[16px] leading-relaxed text-primary/70">
+              Integrated sourcing for industrial engineering — combining supplier networks, procurement, and quality
+              management to improve supply chain efficiency. We support OEMs worldwide with a single-window approach
+              from components to delivery.
+            </p>
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.8, delay: 0.25, ease: EASE }}
+              className="mt-8 flex flex-wrap gap-3"
             >
-              <SectionLabel>Who we are</SectionLabel>
-              <h1 className="mt-4 text-balance text-[clamp(2.5rem,5vw,4rem)] font-semibold leading-[1.05] tracking-tight text-primary">
-                About Orbigreen Techsource
-              </h1>
-              <p className="mt-6 max-w-xl text-pretty text-[16px] leading-relaxed text-primary/70">
-                Integrated sourcing for industrial engineering — combining supplier networks, procurement, and quality
-                management to improve supply chain efficiency. We support OEMs worldwide with a single-window approach
-                from components to delivery.
-              </p>
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                className="mt-8 flex flex-wrap gap-3"
+              <Link
+                to="/contact"
+                className="gradient-border-cta rounded-full px-6 py-3 text-[13px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
               >
-                <Link
-                  to="/#contact"
-                  className="gradient-border-cta rounded-full px-6 py-3 text-[13px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
-                >
-                  Get in Touch
-                </Link>
-                <Link
-                  to="/services"
-                  className="glass-card-light rounded-full px-6 py-3 text-[13px] font-semibold text-primary transition-all hover:glass-card-hover"
-                >
-                  Our Services
-                </Link>
-              </motion.div>
+                Get in Touch
+              </Link>
+              <Link
+                to="/services"
+                className="glass-card-light rounded-full px-6 py-3 text-[13px] font-semibold text-primary transition-all hover:glass-card-hover"
+              >
+                Our Services
+              </Link>
             </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="glass-card-light relative overflow-hidden rounded-3xl p-2"
-            >
-              <div className="overflow-hidden rounded-[1.25rem]">
-                <img
-                  src={heroBg}
-                  alt="Orbigreen Techsource industrial sourcing"
-                  className="h-[280px] w-full object-cover object-center lg:h-[340px]"
-                />
-              </div>
-              <div className="pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-t from-primary/20 via-transparent to-transparent" />
-            </motion.div>
-          </div>
+          </motion.div>
         </section>
 
-        {/* Our Story */}
-        <section className="relative border-t border-primary/10 bg-white py-20">
+        {/* Story + Partner */}
+        <section className="relative border-t border-primary/10 py-16 lg:py-20">
           <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-secondary/40 to-transparent" />
-          <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
+          <div className="mx-auto grid max-w-[1280px] gap-6 px-6 lg:grid-cols-2 lg:gap-8 lg:px-10">
             <motion.article
+              custom={0}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-80px" }}
+              viewport={{ once: true, margin: "-60px" }}
               variants={fadeUp}
-              custom={0}
-              className="glass-card-light group grid overflow-hidden rounded-3xl transition-all duration-500 ease-out hover:glass-card-hover lg:grid-cols-2"
+              className="highlight-panel relative overflow-hidden rounded-[1.5rem] p-7 lg:p-9"
             >
-              <div className="flex flex-col justify-center p-7 lg:p-10">
+              <div className="highlight-panel-grid absolute inset-0 opacity-40" aria-hidden />
+              <div className="relative z-10">
                 <SectionLabel>Our Story</SectionLabel>
-                <h2 className="mt-3 text-[clamp(1.5rem,2.5vw,2.25rem)] font-semibold tracking-tight text-primary">
+                <h2 className="mt-3 text-[clamp(1.5rem,2.5vw,2rem)] font-semibold tracking-tight text-primary">
                   Why we exist
                 </h2>
                 <div className="mt-6 space-y-4">
@@ -191,70 +373,56 @@ export default function AboutPage() {
                     delivery — without managing multiple vendors alone.
                   </p>
                   <p className="text-[15px] leading-relaxed text-primary/70">
-                    We operate as a global sourcing partner, not a manufacturer. Our network of people, technology, and
-                    supplier ecosystems manages your supply chain with visibility and predictability.
+                    We operate as a global sourcing partner, not a manufacturer. Our network manages your supply chain
+                    with visibility and predictability.
                   </p>
                 </div>
               </div>
+            </motion.article>
 
-              <div className="relative min-h-[260px] overflow-hidden lg:min-h-[360px]">
-                <motion.img
-                  src={imgStory}
-                  alt="Our story"
-                  className="h-full w-full object-cover object-center"
-                  whileHover={{ scale: 1.04 }}
-                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-l from-primary/35 via-primary/10 to-transparent" />
+            <motion.article
+              custom={1}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-60px" }}
+              variants={fadeUp}
+              className="glass-card-light relative overflow-hidden rounded-[1.5rem] p-7 transition-all duration-500 hover:glass-card-hover lg:p-9"
+            >
+              <SectionLabel>A Global Sourcing Partner</SectionLabel>
+              <h2 className="mt-3 text-[clamp(1.35rem,2.2vw,1.85rem)] font-semibold leading-snug tracking-tight text-primary">
+                People, technology, and supplier ecosystems — managed end to end.
+              </h2>
+              <div className="mt-6 space-y-4">
+                <p className="text-[15px] leading-relaxed text-primary/70">
+                  Our approach enables better visibility, scalability, and operational predictability across procurement
+                  and supply chain operations. We work as an extension of your team.
+                </p>
+                <p className="text-[15px] leading-relaxed text-primary/70">
+                  By centralizing sourcing, quality, and logistics through a single partner, you reduce complexity,
+                  mitigate supplier risk, and free internal teams to focus on core product development.
+                </p>
               </div>
             </motion.article>
           </div>
         </section>
 
-        {/* Global Sourcing Partner */}
-        <section className="py-20">
+        {/* Capabilities */}
+        <section className="py-16 lg:py-20">
           <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
-            <motion.article
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-80px" }}
-              variants={fadeUp}
-              custom={0}
-              className="glass-card-light group grid overflow-hidden rounded-3xl transition-all duration-500 ease-out hover:glass-card-hover lg:grid-cols-2 lg:[&>*:first-child]:order-2"
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: EASE }}
+              className="mb-10 max-w-2xl"
             >
-              <div className="flex flex-col justify-center p-7 lg:p-10">
-                <SectionLabel>A Global Sourcing Partner</SectionLabel>
-                <h2 className="mt-3 text-[clamp(1.35rem,2.5vw,2.1rem)] font-semibold leading-snug tracking-tight text-primary">
-                  We combine people, technology, and supplier ecosystems to manage your entire supply chain — from
-                  strategy and sourcing to quality and delivery.
-                </h2>
-                <div className="mt-6 space-y-4">
-                  <p className="text-[15px] leading-relaxed text-primary/70">
-                    Our approach enables businesses to gain better visibility, scalability, and operational predictability
-                    across their procurement and supply chain operations. We work as an extension of your team, aligning
-                    our processes with your goals and timelines.
-                  </p>
-                  <p className="text-[15px] leading-relaxed text-primary/70">
-                    By centralizing sourcing, quality management, and logistics through a single partner, you reduce
-                    complexity, mitigate supplier risk, and free your internal teams to focus on core product and business
-                    development.
-                  </p>
-                </div>
-              </div>
+              <SectionLabel>What we deliver</SectionLabel>
+              <h2 className="mt-3 text-[clamp(1.5rem,2.5vw,2.25rem)] font-semibold tracking-tight text-primary">
+                Core capabilities across your supply chain
+              </h2>
+            </motion.div>
 
-              <div className="relative min-h-[260px] overflow-hidden lg:min-h-[360px]">
-                <motion.img
-                  src={imgPartner}
-                  alt="Global sourcing partner"
-                  className="h-full w-full object-cover object-center"
-                  whileHover={{ scale: 1.04 }}
-                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/35 via-primary/10 to-transparent" />
-              </div>
-            </motion.article>
-
-            <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {CAPABILITIES.map((item, i) => (
                 <motion.div
                   key={item.t}
@@ -263,12 +431,13 @@ export default function AboutPage() {
                   whileInView="visible"
                   viewport={{ once: true, margin: "-40px" }}
                   variants={fadeUp}
-                  className="glass-card-light group rounded-2xl p-6 transition-all duration-500 ease-out hover:glass-card-hover lg:last:col-span-1"
+                  whileHover={{ y: -4 }}
+                  className="glass-card-light group rounded-2xl p-6 transition-all duration-500 ease-out hover:glass-card-hover"
                 >
-                  <span className="text-[10px] tabular-nums tracking-widest text-primary/35 transition-colors group-hover:text-secondary">
-                    0{i + 1}
+                  <span className="text-[clamp(1.25rem,2vw,1.75rem)] font-semibold tabular-nums leading-none text-primary/25 transition-colors duration-500 group-hover:text-secondary">
+                    {String(i + 1).padStart(2, "0")}
                   </span>
-                  <h3 className="mt-2 text-[16px] font-semibold tracking-tight text-primary">{item.t}</h3>
+                  <h3 className="mt-3 text-[16px] font-semibold tracking-tight text-primary">{item.t}</h3>
                   <p className="mt-2 text-[13px] leading-relaxed text-primary/65">{item.d}</p>
                 </motion.div>
               ))}
@@ -277,127 +446,50 @@ export default function AboutPage() {
         </section>
 
         {/* Stats */}
-        <section className="border-t border-primary/10 bg-white py-16">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="mx-auto grid max-w-[1280px] grid-cols-2 gap-4 px-6 md:grid-cols-4 lg:px-10"
-          >
-            {STATS.map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                custom={i}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeUp}
-                className="glass-card-light rounded-2xl p-5 text-center transition-all duration-500 hover:glass-card-hover"
-              >
-                <div className="text-[clamp(1.5rem,3vw,2rem)] font-semibold tracking-tight text-primary">{stat.value}</div>
-                <div className="mt-1 text-[11px] uppercase tracking-[0.2em] text-primary/55">{stat.label}</div>
-              </motion.div>
-            ))}
-          </motion.div>
+        <section className="border-t border-primary/10 py-14 lg:py-16">
+          <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
+            <StatsBand />
+          </div>
         </section>
 
         {/* Values */}
-        <section className="py-20">
+        <section className="py-16 lg:py-20">
           <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="mb-12 max-w-3xl"
+              transition={{ duration: 0.8, ease: EASE }}
+              className="mb-10 max-w-2xl"
             >
               <SectionLabel>Our Values</SectionLabel>
               <h2 className="mt-3 text-[clamp(1.5rem,2.5vw,2.25rem)] font-semibold tracking-tight text-primary">
-                The principles that guide how we work with clients and suppliers every day.
+                The principles that guide how we work every day
               </h2>
             </motion.div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
-              {VALUES.map((v, i) => (
-                <motion.div
-                  key={v.t}
-                  custom={i}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "-40px" }}
-                  variants={fadeUp}
-                  className="glass-card-light group rounded-2xl p-6 transition-all duration-500 ease-out hover:glass-card-hover"
-                >
-                  <div className="flex items-start gap-4">
-                    <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-secondary/30 bg-secondary/10 text-[12px] font-semibold text-secondary">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <div>
-                      <h3 className="text-[16px] font-semibold tracking-tight text-primary">{v.t}</h3>
-                      <p className="mt-2 text-[13px] leading-relaxed text-primary/65">{v.d}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+            <ValuesExplorer />
           </div>
         </section>
 
-        {/* How We Work */}
-        <section className="border-t border-primary/10 bg-white py-20">
+        {/* Process */}
+        <section className="relative border-t border-primary/10 bg-white py-16 lg:py-20">
           <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-secondary/40 to-transparent" />
           <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="mb-12 max-w-2xl"
+              transition={{ duration: 0.8, ease: EASE }}
+              className="mb-10 max-w-2xl"
             >
               <SectionLabel>How We Work With You</SectionLabel>
               <h2 className="mt-3 text-[clamp(1.5rem,2.5vw,2.25rem)] font-semibold tracking-tight text-primary">
-                A collaborative, transparent process from first contact to final delivery.
+                A collaborative, transparent process from first contact to final delivery
               </h2>
             </motion.div>
 
-            <div className="space-y-8">
-              {PROCESS.map((step, i) => (
-                <motion.article
-                  key={step.n}
-                  custom={i}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "-80px" }}
-                  variants={fadeUp}
-                  className={`glass-card-light group grid overflow-hidden rounded-3xl transition-all duration-500 ease-out hover:glass-card-hover lg:grid-cols-[1fr_1.1fr] ${
-                    i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""
-                  }`}
-                >
-                  <div className="relative min-h-[200px] overflow-hidden lg:min-h-[240px]">
-                    <motion.img
-                      src={step.image}
-                      alt={step.t}
-                      className="h-full w-full object-cover object-center"
-                      whileHover={{ scale: 1.04 }}
-                      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-primary/40 via-primary/15 to-transparent" />
-                    <span className="absolute left-5 top-5 text-[48px] font-semibold tabular-nums leading-none tracking-tight text-body/90">
-                      {step.n}
-                    </span>
-                  </div>
-
-                  <div className="flex flex-col justify-center p-7 lg:p-9">
-                    <span className="text-[10px] uppercase tracking-[0.25em] text-secondary">Step {step.n}</span>
-                    <h3 className="mt-2 text-[clamp(1.2rem,2vw,1.5rem)] font-semibold tracking-tight text-primary">
-                      {step.t}
-                    </h3>
-                    <p className="mt-3 text-[14px] leading-relaxed text-primary/65">{step.d}</p>
-                  </div>
-                </motion.article>
-              ))}
-            </div>
+            <ProcessTimeline />
           </div>
         </section>
 
@@ -408,16 +500,18 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 32 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.9, ease: EASE }}
             className="relative mx-auto max-w-[1280px] px-6 text-center lg:px-10"
           >
             <SectionLabel>Partner With Us</SectionLabel>
             <h2 className="mx-auto mt-4 max-w-2xl text-balance text-[clamp(1.75rem,3.5vw,2.75rem)] font-semibold tracking-tight text-primary">
-              Discover how our integrated sourcing approach can transform your supply chain — with better visibility,
-              lower risk, and a single partner you can rely on.
+              Discover how our integrated sourcing approach can transform your supply chain
             </h2>
+            <p className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-primary/65">
+              Better visibility, lower risk, and a single partner you can rely on — from first quote to final delivery.
+            </p>
             <Link
-              to="/#contact"
+              to="/contact"
               className="gradient-border-cta mt-10 inline-flex rounded-full px-8 py-3.5 text-[14px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
             >
               Get in Touch

@@ -4,7 +4,7 @@ export function ContactSection() {
   const [sent, setSent] = useState(false);
 
   return (
-    <section id="contact" className="relative border-t border-primary/10 bg-section py-28">
+    <section id="contact" className="content-auto relative border-t border-primary/10 bg-section py-28">
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-secondary/50 to-transparent" />
       <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-16 px-6 lg:grid-cols-2 lg:px-10">
         <div>

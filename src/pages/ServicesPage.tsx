@@ -1,85 +1,9 @@
-import { lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { Tilt3DCard } from "@/components/Tilt3DCard";
-
-const ServicesScene3D = lazy(() =>
-  import("@/components/ServicesScene3D").then((module) => ({
-    default: module.ServicesScene3D,
-  }))
-);
-
-import imgConsultancy from "../services image/consultancy-advisory.png";
-import imgSourcing from "../services image/global-sourcing.png";
-import imgEngineering from "../services image/engineering-services.png";
-import imgQuality from "../services image/quality-inspection.png";
-import imgSite from "../services image/site-installation.png";
-
-const SERVICES = [
-  {
-    t: "Training, Consultancy & Advisory",
-    d: "Professional consulting services to help businesses optimize procurement and sourcing.",
-    image: imgConsultancy,
-    accent: "#5CBF2A",
-    items: [
-      "Supply chain strategy",
-      "Procurement advisory",
-      "Cost optimization",
-      "Supplier evaluation",
-      "Sourcing transformation",
-    ],
-  },
-  {
-    t: "Global Sourcing",
-    d: "International sourcing solutions to connect you with the best suppliers worldwide.",
-    image: imgSourcing,
-    accent: "#0B5F7E",
-    items: [
-      "Supplier identification",
-      "Vendor qualification",
-      "Procurement management",
-      "Cost-effective sourcing",
-    ],
-  },
-  {
-    t: "Engineering Services",
-    d: "Engineering support for manufacturing projects from concept to production.",
-    image: imgEngineering,
-    accent: "#8DD128",
-    items: [
-      "Design engineering",
-      "Technical evaluation",
-      "Product development",
-      "Manufacturing engineering",
-    ],
-  },
-  {
-    t: "Quality & Inspection Services",
-    d: "Quality assurance throughout the supply chain ensuring compliance and excellence.",
-    image: imgQuality,
-    accent: "#0B5F7E",
-    items: [
-      "Factory inspection",
-      "Production monitoring",
-      "Quality audits",
-      "Compliance checks",
-    ],
-  },
-  {
-    t: "Site & Installation Services",
-    d: "Support during project implementation for smooth, on-time delivery.",
-    image: imgSite,
-    accent: "#5CBF2A",
-    items: [
-      "On-site supervision",
-      "Equipment installation",
-      "Commissioning",
-      "Operational support",
-    ],
-  },
-];
+import { SERVICES } from "@/data/servicesData";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 32, rotateX: 14 },
@@ -126,121 +50,78 @@ function SectionLabel({ children }: { children: string }) {
 export default function ServicesPage() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-section text-primary">
-      <Suspense fallback={null}>
-        <ServicesScene3D />
-      </Suspense>
       <Nav />
 
       <main className="relative pt-28 [perspective:1600px]">
         {/* Hero */}
         <section className="relative mx-auto max-w-[1280px] px-6 pb-24 lg:px-10">
-          <div className="relative grid items-center gap-12 lg:grid-cols-2">
+          <div className="pointer-events-none absolute -right-20 top-0 h-[420px] w-[420px] rounded-full bg-secondary/10 blur-[100px]" />
+          <div className="pointer-events-none absolute -left-16 bottom-0 h-[320px] w-[320px] rounded-full bg-primary/10 blur-[90px]" />
+
+          <motion.div
+            initial={{ opacity: 0, y: 40, rotateX: 12 }}
+            animate={{ opacity: 1, y: 0, rotateX: 0 }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="relative max-w-3xl"
+            style={{ transformStyle: "preserve-3d" }}
+          >
+            <SectionLabel>What We Offer</SectionLabel>
+            <h1 className="mt-4 text-balance text-[clamp(2.5rem,5vw,4rem)] font-semibold leading-[1.05] tracking-tight text-primary">
+              Our{" "}
+              <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+                Services
+              </span>
+            </h1>
             <motion.div
-              initial={{ opacity: 0, y: 40, rotateX: 12 }}
-              animate={{ opacity: 1, y: 0, rotateX: 0 }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              style={{ transformStyle: "preserve-3d" }}
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-4 h-1 w-24 origin-left rounded-full bg-gradient-to-r from-secondary to-accent"
+            />
+            <p className="mt-6 max-w-xl text-pretty text-[16px] leading-relaxed text-primary/70">
+              Comprehensive industrial sourcing, engineering, and quality solutions designed to optimize your
+              operations end to end.
+            </p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-8 flex flex-wrap gap-3"
             >
-              <SectionLabel>What We Offer</SectionLabel>
-              <h1 className="mt-4 text-balance text-[clamp(2.5rem,5vw,4rem)] font-semibold leading-[1.05] tracking-tight text-primary">
-                Our{" "}
-                <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-                  Services
-                </span>
-              </h1>
-              <motion.div
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                className="mt-4 h-1 w-24 origin-left rounded-full bg-gradient-to-r from-secondary to-accent"
-              />
-              <p className="mt-6 max-w-xl text-pretty text-[16px] leading-relaxed text-primary/70">
-                Comprehensive industrial sourcing, engineering, and quality solutions designed to optimize your
-                operations end to end.
-              </p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                className="mt-8 flex flex-wrap gap-3"
+              <Link
+                to="/#contact"
+                className="gradient-border-cta rounded-full px-6 py-3 text-[13px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
               >
-                <Link
-                  to="/#contact"
-                  className="gradient-border-cta rounded-full px-6 py-3 text-[13px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
-                >
-                  Get in Touch
-                </Link>
-                <Link
-                  to="/sourcing-markets"
-                  className="glass-card-light rounded-full px-6 py-3 text-[13px] font-semibold text-primary transition-all hover:glass-card-hover"
-                >
-                  Explore Markets
-                </Link>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.6, duration: 0.8 }}
-                className="mt-10 flex flex-wrap gap-2"
+                Get in Touch
+              </Link>
+              <Link
+                to="/sourcing-markets"
+                className="glass-card-light rounded-full px-6 py-3 text-[13px] font-semibold text-primary transition-all hover:glass-card-hover"
               >
-                {SERVICES.slice(0, 3).map((s, i) => (
-                  <motion.span
-                    key={s.t}
-                    initial={{ opacity: 0, scale: 0.9, rotateX: 20 }}
-                    animate={{ opacity: 1, scale: 1, rotateX: 0 }}
-                    transition={{ delay: 0.7 + i * 0.1 }}
-                    className="glass-card-light rounded-full px-3 py-1.5 text-[11px] font-semibold text-primary/80"
-                  >
-                    {s.t.split(" ")[0]}
-                  </motion.span>
-                ))}
-              </motion.div>
+                Explore Markets
+              </Link>
             </motion.div>
 
-            <Tilt3DCard depth={14} float className="relative">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.94, rotateY: -12 }}
-                animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-                transition={{ duration: 1.1, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-                className="glass-card-light relative overflow-hidden rounded-3xl p-2 [transform:translateZ(24px)]"
-              >
-                <div className="overflow-hidden rounded-[1.25rem]">
-                  <img
-                    src={imgConsultancy}
-                    alt="Training, consultancy and advisory services"
-                    className="h-[280px] w-full object-cover object-center lg:h-[360px]"
-                  />
-                </div>
-                <div className="pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-t from-primary/25 via-transparent to-transparent" />
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, x: 20, rotateX: 20 }}
-                animate={{ opacity: 1, x: 0, rotateX: 0 }}
-                transition={{ delay: 0.8, duration: 0.7 }}
-                className="glass-card-light absolute -bottom-4 -left-4 rounded-2xl px-4 py-3 [transform:translateZ(48px)] lg:-left-8"
-              >
-                <div className="text-[1.5rem] font-semibold text-primary">5</div>
-                <div className="text-[10px] uppercase tracking-[0.2em] text-primary/55">Core Services</div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0, y: [0, 8, 0] }}
-                transition={{
-                  opacity: { delay: 1, duration: 0.7 },
-                  x: { delay: 1, duration: 0.7 },
-                  y: { delay: 1.7, duration: 5, repeat: Infinity, ease: "easeInOut" },
-                }}
-                className="glass-card-light absolute -right-2 top-8 rounded-2xl px-4 py-3 [transform:translateZ(56px)] lg:-right-6"
-              >
-                <div className="text-[10px] uppercase tracking-[0.2em] text-secondary">Global Reach</div>
-                <div className="mt-0.5 text-[13px] font-semibold text-primary">4+ Markets</div>
-              </motion.div>
-            </Tilt3DCard>
-          </div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
+              className="mt-10 flex flex-wrap gap-2"
+            >
+              {SERVICES.slice(0, 3).map((s, i) => (
+                <motion.span
+                  key={s.slug}
+                  initial={{ opacity: 0, scale: 0.9, rotateX: 20 }}
+                  animate={{ opacity: 1, scale: 1, rotateX: 0 }}
+                  transition={{ delay: 0.7 + i * 0.1 }}
+                  className="glass-card-light rounded-full px-3 py-1.5 text-[11px] font-semibold text-primary/80"
+                >
+                  {s.title.split(" ")[0]}
+                </motion.span>
+              ))}
+            </motion.div>
+          </motion.div>
         </section>
 
         {/* Service cards */}
@@ -261,7 +142,7 @@ export default function ServicesPage() {
           <div className="mx-auto max-w-[1280px] space-y-12 px-6 lg:px-10">
             {SERVICES.map((service, i) => (
               <motion.div
-                key={service.t}
+                key={service.slug}
                 custom={i}
                 initial="hidden"
                 whileInView="visible"
@@ -285,7 +166,9 @@ export default function ServicesPage() {
                     <div className="relative h-[260px] shrink-0 overflow-hidden sm:h-[280px] lg:h-full [transform:translateZ(12px)]">
                       <motion.img
                         src={service.image}
-                        alt={service.t}
+                        alt={service.title}
+                        loading="lazy"
+                        decoding="async"
                         className="absolute inset-0 h-full w-full object-cover object-center"
                         whileHover={{ scale: 1.06, rotateZ: 0.5 }}
                         transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
@@ -304,10 +187,10 @@ export default function ServicesPage() {
 
                     <div className="relative flex h-full min-h-0 flex-col p-7 lg:p-8 [transform:translateZ(20px)]">
                       <h2 className="line-clamp-2 min-h-[3.5rem] text-[1.35rem] font-semibold leading-snug tracking-tight text-primary lg:min-h-[3.25rem] lg:text-[1.5rem]">
-                        {service.t}
+                        {service.title}
                       </h2>
                       <p className="mt-3 line-clamp-3 min-h-[4.5rem] text-[14px] leading-relaxed text-primary/65 lg:min-h-[4.25rem]">
-                        {service.d}
+                        {service.shortDescription}
                       </p>
                       <ul className="mt-5 flex min-h-[7.5rem] flex-wrap content-start gap-2 lg:min-h-[6.5rem]">
                         {service.items.map((item, j) => (
@@ -324,7 +207,7 @@ export default function ServicesPage() {
                         ))}
                       </ul>
                       <Link
-                        to="/#contact"
+                        to={`/services/${service.slug}`}
                         className="gradient-border-cta mt-auto inline-flex w-fit shrink-0 items-center gap-2 rounded-full px-5 py-2.5 text-[12px] font-semibold uppercase tracking-[0.15em] transition-all hover:shadow-[0_0_28px_-4px_rgba(92,191,42,0.45)]"
                       >
                         Learn More

@@ -26,8 +26,15 @@
     scroll-behavior: smooth;
     background: var(--section-bg);
   }
-  html.home-snap-scroll {
-    scroll-snap-type: y mandatory;
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  html.lenis-enabled {
+    scroll-behavior: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
   }
   body {
     background-color: var(--section-bg);
@@ -35,6 +42,19 @@
     font-family: var(--font-sans);
     font-feature-settings: "ss01", "cv11";
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
   ::selection {
     background: var(--accent);
@@ -129,6 +149,20 @@
     0 0 48px rgba(255, 255, 255, 0.2);
 }
 
+@utility content-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
+
+@media (max-width: 768px) {
+  .glass-nav,
+  .glass-card,
+  .glass-card-light {
+    backdrop-filter: saturate(160%) blur(14px);
+    -webkit-backdrop-filter: saturate(160%) blur(14px);
+  }
+}
+
 @keyframes home-stats-gradient {
   0%,
   100% {
@@ -175,6 +209,13 @@
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .home-stats-bg,
+  .home-stats-orb {
+    animation: none !important;
+  }
+}
+
 .home-stats-bg {
   position: absolute;
   inset: 0;
@@ -194,6 +235,8 @@
   border-radius: 50%;
   pointer-events: none;
   filter: blur(72px);
+  will-change: transform, opacity;
+  contain: layout style paint;
 }
 
 .home-stats-orb--1 {
@@ -212,6 +255,100 @@
   height: min(52vw, 460px);
   background: rgba(11, 95, 126, 0.16);
   animation: home-stats-orb-2 16s ease-in-out infinite;
+}
+
+.products-section-grid,
+.metrics-section-grid {
+  background-image:
+    linear-gradient(rgba(11, 95, 126, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(11, 95, 126, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 20%, transparent 75%);
+}
+
+.metrics-band {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.88) 0%,
+    rgba(245, 248, 247, 0.62) 100%
+  );
+  border: 1px solid rgba(11, 95, 126, 0.08);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.95) inset,
+    0 20px 56px -20px rgba(11, 95, 126, 0.14);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+
+.metrics-band-shine {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(92, 191, 42, 0.45),
+    rgba(141, 209, 40, 0.35),
+    transparent
+  );
+}
+
+.highlight-pill {
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(11, 95, 126, 0.08);
+}
+
+.highlight-pill--active {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(245, 248, 247, 0.75) 100%
+  );
+  border-color: rgba(92, 191, 42, 0.28);
+}
+
+.highlight-panel {
+  background: linear-gradient(
+    145deg,
+    rgba(11, 95, 126, 0.04) 0%,
+    rgba(255, 255, 255, 0.82) 45%,
+    rgba(245, 248, 247, 0.9) 100%
+  );
+  border: 1px solid rgba(11, 95, 126, 0.1);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 16px 48px -20px rgba(11, 95, 126, 0.12);
+}
+
+.highlight-panel-grid {
+  background-image:
+    linear-gradient(rgba(11, 95, 126, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(11, 95, 126, 0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse 90% 80% at 70% 30%, black 15%, transparent 70%);
+}
+
+@media (max-width: 768px) {
+  .metrics-band {
+    backdrop-filter: saturate(160%) blur(12px);
+    -webkit-backdrop-filter: saturate(160%) blur(12px);
+  }
+}
+
+.products-spotlight-frame {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(245, 248, 247, 0.55) 100%
+  );
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.95) inset,
+    0 24px 64px -16px rgba(11, 95, 126, 0.18);
+}
+
+@utility scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .home-stats-orb--3 {

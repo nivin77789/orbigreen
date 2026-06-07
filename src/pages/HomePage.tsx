@@ -1,17 +1,12 @@
-import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import { HeroFrameCanvas } from "@/components/HeroFrameCanvas";
+import { useInView } from "@/hooks/useInView";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
-import { ContactSection } from "@/components/ContactSection";
 import { HomeMetricsStrip } from "@/components/HomeMetricsStrip";
-import { ProductGalleryFallback } from "@/components/ProductGalleryFallback";
-
-const ProductDepthGallery = lazy(() =>
-  import("@/components/ProductDepthGallery").then((module) => ({
-    default: module.ProductDepthGallery,
-  })),
-);
+import { ProductsShowcase } from "@/components/ProductsShowcase";
 
 function ScrollHint() {
   return (
@@ -191,18 +186,18 @@ function HeroCopy({ visible }: { visible: boolean }) {
         sustainable supply solutions worldwide.
       </p>
       <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-        <a
-          href="#services"
+        <Link
+          to="/services"
           className="gradient-border-cta rounded-full px-6 py-3 text-[13px] font-medium transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
         >
           Our Services
-        </a>
-        <a
-          href="#contact"
+        </Link>
+        <Link
+          to="/contact"
           className="gradient-border-cta-outline rounded-full px-6 py-3 text-[13px] font-medium transition-all hover:bg-white/15 hover:shadow-sm"
         >
           Get in Touch
-        </a>
+        </Link>
       </div>
     </motion.div>
   );
@@ -233,12 +228,8 @@ function ClosingCTA({ visible }: { visible: boolean }) {
 export default function HomePage() {
   const trackRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef(0);
+  const heroActive = useInView(trackRef, "120px");
   const [phase, setPhase] = useState<"hero" | "metrics" | "workflow" | "closing">("hero");
-
-  useEffect(() => {
-    document.documentElement.classList.add("home-snap-scroll");
-    return () => document.documentElement.classList.remove("home-snap-scroll");
-  }, []);
 
   const { scrollYProgress } = useScroll({
     target: trackRef,
@@ -261,9 +252,9 @@ export default function HomePage() {
     <div id="top" className="relative bg-section text-body">
       <Nav />
 
-      <section ref={trackRef} className="relative h-[400vh] snap-start">
+      <section ref={trackRef} className="relative h-[400vh]">
         <div className="sticky top-0 h-screen w-full overflow-hidden">
-          <HeroFrameCanvas progressRef={progressRef} />
+          <HeroFrameCanvas progressRef={progressRef} active={heroActive} />
 
           <motion.div
             style={{ opacity: overlayOpacity }}
@@ -291,15 +282,7 @@ export default function HomePage() {
       </section>
 
       <HomeMetricsStrip />
-      <section
-        id="products"
-        className="relative h-svh min-h-svh w-full snap-start snap-always overflow-hidden bg-section"
-      >
-        <Suspense fallback={<ProductGalleryFallback embedded />}>
-          <ProductDepthGallery embedded />
-        </Suspense>
-      </section>
-      <ContactSection />
+      <ProductsShowcase variant="section" />
       <Footer />
     </div>
   );

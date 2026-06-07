@@ -116,6 +116,9 @@ export function ServicesScene3D() {
 
     const animate = () => {
       frameId = requestAnimationFrame(animate);
+
+      if (document.hidden) return;
+
       const elapsed = clock.getElapsedTime();
 
       group.rotation.y = elapsed * 0.08 + mouseX * 0.18;

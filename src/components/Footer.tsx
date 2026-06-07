@@ -4,7 +4,7 @@ import logo from "../logo.png";
 
 export function Footer() {
   return (
-    <footer className="border-t border-primary/10 bg-white py-12">
+    <footer id="footer" className="border-t border-primary/10 bg-white py-12">
       <div className="mx-auto grid max-w-[1280px] grid-cols-2 gap-10 px-6 text-[12px] md:grid-cols-4 lg:px-10">
         <div>
           <Link to="/" className="inline-block">
@@ -44,10 +44,31 @@ export function Footer() {
         <div>
           <h5 className="text-[10px] uppercase tracking-[0.25em] text-primary/50">Services</h5>
           <ul className="mt-4 space-y-2 text-primary/70">
-            <li>Global Sourcing</li>
-            <li>Engineering</li>
-            <li>Quality & Inspection</li>
-            <li>Site & Installation</li>
+            <li>
+              <Link to="/services/consultancy-advisory" className="transition-colors hover:text-primary">
+                Training & Consultancy
+              </Link>
+            </li>
+            <li>
+              <Link to="/services/global-sourcing" className="transition-colors hover:text-primary">
+                Global Sourcing
+              </Link>
+            </li>
+            <li>
+              <Link to="/services/engineering-services" className="transition-colors hover:text-primary">
+                Engineering
+              </Link>
+            </li>
+            <li>
+              <Link to="/services/quality-inspection" className="transition-colors hover:text-primary">
+                Quality & Inspection
+              </Link>
+            </li>
+            <li>
+              <Link to="/services/site-installation" className="transition-colors hover:text-primary">
+                Site & Installation
+              </Link>
+            </li>
           </ul>
         </div>
         <div>

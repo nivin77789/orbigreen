@@ -1,9 +1,7 @@
 import { useEffect, useRef } from "react";
-import {
-  FRAME_COUNT,
-  frameUrl,
-  scrollProgressToFrame,
-} from "@/lib/scroll-frames";
+import { getFrameImage, preloadFramesAround, preloadInitialFrames } from "@/lib/frame-cache";
+import { scrollProgressToFrame } from "@/lib/scroll-frames";
+import { usePageVisible } from "@/hooks/usePageVisible";
 
 /**
  * Sticky full-screen canvas playing the hero frame sequence from
@@ -11,12 +9,17 @@ import {
  */
 export function HeroFrameCanvas({
   progressRef,
+  active = true,
 }: {
   progressRef: React.MutableRefObject<number>;
+  active?: boolean;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rafRef = useRef(0);
   const lastFrameRef = useRef(-1);
+  const lastProgressRef = useRef(-1);
+  const pageVisible = usePageVisible();
+  const shouldDraw = active && pageVisible;
 
   useEffect(() => {
     const canvas = canvasRef.current!;
@@ -24,15 +27,13 @@ export function HeroFrameCanvas({
     let w = 0;
     let h = 0;
     let dpr = 1;
+    let active = true;
 
-    const images = Array.from({ length: FRAME_COUNT }, (_, i) => {
-      const img = new Image();
-      img.src = frameUrl(i + 1);
-      return img;
-    });
+    preloadInitialFrames();
 
     const resize = () => {
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const isMobile = window.innerWidth < 768;
+      dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1.15 : 1.5);
       w = canvas.clientWidth;
       h = canvas.clientHeight;
       canvas.width = w * dpr;
@@ -54,17 +55,30 @@ export function HeroFrameCanvas({
     };
 
     const draw = () => {
-      const p = Math.min(1, Math.max(0, progressRef.current));
-      const frameNumber = scrollProgressToFrame(p);
-      const frameIndex = frameNumber - 1;
-      const closingGlow = p > 0.85;
+      if (!active) return;
 
-      if (!closingGlow && frameIndex === lastFrameRef.current) {
+      if (!shouldDraw) {
         rafRef.current = requestAnimationFrame(draw);
         return;
       }
 
-      const img = images[frameIndex];
+      const p = Math.min(1, Math.max(0, progressRef.current));
+      const frameNumber = scrollProgressToFrame(p);
+      const frameIndex = frameNumber - 1;
+      const closingGlow = p > 0.85;
+      const progressChanged = Math.abs(p - lastProgressRef.current) > 0.0005;
+      lastProgressRef.current = p;
+
+      if (progressChanged) {
+        preloadFramesAround(frameNumber, 4);
+      }
+
+      if (!closingGlow && frameIndex === lastFrameRef.current && !progressChanged) {
+        rafRef.current = requestAnimationFrame(draw);
+        return;
+      }
+
+      const img = getFrameImage(frameNumber);
       if (img?.complete && img.naturalWidth > 0) {
         ctx.fillStyle = "#F5F8F7";
         ctx.fillRect(0, 0, w, h);
@@ -90,10 +104,11 @@ export function HeroFrameCanvas({
 
     rafRef.current = requestAnimationFrame(draw);
     return () => {
+      active = false;
       cancelAnimationFrame(rafRef.current);
       window.removeEventListener("resize", resize);
     };
-  }, [progressRef]);
+  }, [progressRef, shouldDraw]);
 
   return (
     <canvas
