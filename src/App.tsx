@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { MotionConfig } from "framer-motion";
+import { AppBootstrap } from "@/components/AppBootstrap";
 import { PageLoader } from "@/components/PageLoader";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { getLenis, scrollToTarget } from "@/lib/lenis";
@@ -40,26 +41,28 @@ function ScrollToHash() {
 
 export default function App() {
   return (
-    <MotionConfig reducedMotion="user" transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}>
-      <BrowserRouter>
-        <SmoothScroll />
-        <ScrollToHash />
-        <Suspense fallback={<PageLoader />}>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/resources" element={<ResourcesPage />} />
-            <Route path="/sourcing-markets" element={<SourcingMarketsPage />} />
-            <Route path="/products" element={<ProductsPage />} />
-            <Route path="/services" element={<ServicesPage />} />
-            <Route path="/services/:slug" element={<ServiceDetailPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-          </Routes>
-        </Suspense>
-        <Suspense fallback={null}>
-          <ChatBot />
-        </Suspense>
-      </BrowserRouter>
-    </MotionConfig>
+    <AppBootstrap>
+      <MotionConfig reducedMotion="user" transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}>
+        <BrowserRouter>
+          <SmoothScroll />
+          <ScrollToHash />
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/resources" element={<ResourcesPage />} />
+              <Route path="/sourcing-markets" element={<SourcingMarketsPage />} />
+              <Route path="/products" element={<ProductsPage />} />
+              <Route path="/services" element={<ServicesPage />} />
+              <Route path="/services/:slug" element={<ServiceDetailPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+            </Routes>
+          </Suspense>
+          <Suspense fallback={null}>
+            <ChatBot />
+          </Suspense>
+        </BrowserRouter>
+      </MotionConfig>
+    </AppBootstrap>
   );
 }
