@@ -29,7 +29,7 @@ export default function ProductsPage() {
               procurement plan around your product requirements.
             </p>
             <Link
-              to="/#contact"
+              to="/quotation"
               className="gradient-border-cta mt-10 inline-flex rounded-full px-8 py-3.5 text-[14px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
             >
               Discuss your requirement

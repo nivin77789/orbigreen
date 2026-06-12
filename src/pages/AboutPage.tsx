@@ -73,9 +73,9 @@ const PROCESS = [
 
 const STATS = [
   { label: "Core capabilities", value: "5" },
+  { label: "Service offerings", value: "6" },
+  { label: "Product categories", value: "10" },
   { label: "Sourcing markets", value: "4+" },
-  { label: "Engagement model", value: "Single-window" },
-  { label: "Client focus", value: "Global OEMs" },
 ];
 
 const fadeUp = {

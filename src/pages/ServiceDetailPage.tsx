@@ -63,7 +63,7 @@ export default function ServiceDetailPage() {
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
-                  to="/#contact"
+                  to="/quotation"
                   className="gradient-border-cta rounded-full px-6 py-3 text-[13px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
                 >
                   Get in Touch
@@ -221,7 +221,7 @@ export default function ServiceDetailPage() {
               sourcing and delivery goals.
             </p>
             <Link
-              to="/#contact"
+              to="/quotation"
               className="gradient-border-cta mt-10 inline-flex rounded-full px-8 py-3.5 text-[14px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
             >
               Discuss your requirement

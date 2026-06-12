@@ -90,7 +90,7 @@ export default function ServicesPage() {
               className="mt-8 flex flex-wrap gap-3"
             >
               <Link
-                to="/#contact"
+                to="/quotation"
                 className="gradient-border-cta rounded-full px-6 py-3 text-[13px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
               >
                 Get in Touch
@@ -109,7 +109,7 @@ export default function ServicesPage() {
               transition={{ delay: 0.6, duration: 0.8 }}
               className="mt-10 flex flex-wrap gap-2"
             >
-              {SERVICES.slice(0, 3).map((s, i) => (
+              {SERVICES.slice(0, 6).map((s, i) => (
                 <motion.span
                   key={s.slug}
                   initial={{ opacity: 0, scale: 0.9, rotateX: 20 }}
@@ -287,7 +287,7 @@ export default function ServicesPage() {
               </p>
               <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
                 <Link
-                  to="/#contact"
+                  to="/quotation"
                   className="gradient-border-cta mt-10 inline-flex rounded-full px-8 py-3.5 text-[14px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
                 >
                   Discuss your requirement

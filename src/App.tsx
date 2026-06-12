@@ -14,6 +14,8 @@ const ProductsPage = lazy(() => import("@/pages/ProductsPage"));
 const ServicesPage = lazy(() => import("@/pages/ServicesPage"));
 const ServiceDetailPage = lazy(() => import("@/pages/ServiceDetailPage"));
 const ContactPage = lazy(() => import("@/pages/ContactPage"));
+const QuotationPage = lazy(() => import("@/pages/QuotationPage"));
+const GlobalPresencePage = lazy(() => import("@/pages/GlobalPresencePage"));
 const ChatBot = lazy(() =>
   import("@/components/ChatBot").then((module) => ({ default: module.ChatBot })),
 );
@@ -56,6 +58,8 @@ export default function App() {
               <Route path="/services" element={<ServicesPage />} />
               <Route path="/services/:slug" element={<ServiceDetailPage />} />
               <Route path="/contact" element={<ContactPage />} />
+            <Route path="/quotation" element={<QuotationPage />} />
+            <Route path="/global-presence" element={<GlobalPresencePage />} />
             </Routes>
           </Suspense>
           <Suspense fallback={null}>

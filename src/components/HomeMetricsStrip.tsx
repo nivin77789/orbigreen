@@ -230,7 +230,7 @@ export function HomeMetricsStrip() {
   return (
     <section
       id="stats"
-      className="content-auto relative flex min-h-svh w-full items-center justify-center overflow-hidden border-t border-primary/10 py-16 sm:py-20 lg:py-24"
+      className="content-auto relative flex min-h-svh w-full items-center justify-center overflow-hidden border-t border-primary/10 bg-white py-16 sm:py-20 lg:py-24"
     >
       <MetricsBackground />
 

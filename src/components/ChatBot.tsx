@@ -17,13 +17,13 @@ const QUICK_REPLIES = [
 
 const BOT_RESPONSES: Record<string, string> = {
   "our services":
-    "We offer training, consultancy & advisory, global sourcing, engineering services, quality & inspection, and site & installation support.",
+    "We offer training, consultancy & advisory, global sourcing, engineering services, quality & inspection, site & installation, and transport & logistics.",
   "sourcing markets":
     "We source across China, Vietnam, India, and Turkey with on-the-ground teams for supplier qualification, audits, and delivery management.",
   "contact details":
-    "Phone: +91 98883 38615 · Email: info@orbigreen.com · Office: SCO 26, First Floor, Saraswati Vihar, Dhakoli, Zirakpur, Punjab – 160104, India.",
+    "Phone: +91 99718 63450 · Email: info@orbigreen.com · Office: SCO 26, First Floor, Saraswati Vihar, Dhakoli, Zirakpur, Punjab – 160104, India.",
   "get a quote":
-    "Share your requirement via our contact form and our team will respond with sourcing options and a commercial proposal.",
+    "Submit your requirement on our Request Quotation page — you can attach drawings, specs, and reference files for a detailed commercial proposal.",
 };
 
 const WELCOME =
@@ -164,7 +164,7 @@ export function ChatBot() {
             </form>
 
             <div className="border-t border-primary/8 px-4 py-2.5 text-center">
-              <Link to="/#contact" className="text-[11px] font-medium text-secondary transition-colors hover:text-primary">
+              <Link to="/quotation" className="text-[11px] font-medium text-secondary transition-colors hover:text-primary">
                 Contact our team →
               </Link>
             </div>

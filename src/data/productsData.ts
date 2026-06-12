@@ -82,4 +82,22 @@ export const PRODUCTS: Product[] = [
     image: imgTransmission,
     accent: "#5CBF2A",
   },
+  {
+    id: 9,
+    title: "Forging",
+    category: "Metal Forming",
+    description:
+      "Closed-die, open-die, and precision forgings for industrial, automotive, and heavy-engineering applications.",
+    image: imgCastings,
+    accent: "#0B5F7E",
+  },
+  {
+    id: 10,
+    title: "Assemblies",
+    category: "Integrated",
+    description:
+      "Sub-assemblies and fully integrated mechanical assemblies — sourced, inspected, and delivered ready for installation.",
+    image: imgFabrication,
+    accent: "#8DD128",
+  },
 ];

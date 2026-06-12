@@ -116,7 +116,7 @@ export default function SourcingMarketsPage() {
               className="mt-8 flex flex-wrap gap-3"
             >
               <Link
-                to="/#contact"
+                to="/contact"
                 className="gradient-border-cta rounded-full px-6 py-3 text-[13px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
               >
                 Get in Touch
@@ -207,7 +207,7 @@ export default function SourcingMarketsPage() {
                   </ul>
 
                   <Link
-                    to="/#contact"
+                    to="/quotation"
                     className="gradient-border-cta mt-8 inline-flex w-fit items-center gap-2 rounded-full px-5 py-2.5 text-[12px] font-semibold uppercase tracking-[0.15em] transition-all hover:shadow-[0_0_28px_-4px_rgba(92,191,42,0.45)]"
                   >
                     Explore {market.country}
@@ -265,7 +265,7 @@ export default function SourcingMarketsPage() {
               options for your program.
             </p>
             <Link
-              to="/#contact"
+              to="/quotation"
               className="gradient-border-cta mt-10 inline-flex rounded-full px-8 py-3.5 text-[14px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
             >
               Discuss your requirement

@@ -1,14 +1,16 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { EMAIL, OFFICE_ADDRESS, PHONE_DISPLAY, PHONE_TEL } from "@/lib/constants";
 
 export function ContactSection() {
   const [sent, setSent] = useState(false);
 
   return (
-    <section id="contact" className="content-auto relative border-t border-primary/10 bg-section py-28">
+    <section id="contact" className="content-auto relative border-t border-primary/10 bg-white py-28">
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-secondary/50 to-transparent" />
       <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-16 px-6 lg:grid-cols-2 lg:px-10">
         <div>
-          <span className="text-[10px] uppercase tracking-[0.3em] text-secondary">Contact Us Today</span>
+          <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-secondary">Contact Us Today</span>
           <h3 className="mt-4 text-[clamp(2rem,3.5vw,3rem)] font-semibold leading-[1.05] tracking-tight text-primary">
             Let's build your
             <br />
@@ -16,22 +18,32 @@ export function ContactSection() {
           </h3>
           <dl className="mt-10 space-y-6">
             <div>
-              <dt className="text-[10px] uppercase tracking-[0.25em] text-primary/50">Phone</dt>
-              <dd className="mt-1 text-[16px] font-medium text-primary">+91 98883 38615</dd>
-            </div>
-            <div>
-              <dt className="text-[10px] uppercase tracking-[0.25em] text-primary/50">Email</dt>
-              <dd className="mt-1 text-[16px] font-medium text-primary">info@orbigreen.com</dd>
-            </div>
-            <div>
-              <dt className="text-[10px] uppercase tracking-[0.25em] text-primary/50">Office</dt>
-              <dd className="mt-1 max-w-xs text-[14px] leading-relaxed text-primary/70">
-                SCO 26, First Floor, Saraswati Vihar,
-                <br />
-                Dhakoli, Zirakpur, Punjab – 160104, India
+              <dt className="text-[11px] font-bold uppercase tracking-[0.25em] text-primary/50">Phone</dt>
+              <dd className="mt-1">
+                <a href={`tel:${PHONE_TEL}`} className="text-[17px] font-medium text-primary hover:text-secondary">
+                  {PHONE_DISPLAY}
+                </a>
               </dd>
             </div>
+            <div>
+              <dt className="text-[11px] font-bold uppercase tracking-[0.25em] text-primary/50">Email</dt>
+              <dd className="mt-1">
+                <a href={`mailto:${EMAIL}`} className="text-[17px] font-medium text-primary hover:text-secondary">
+                  {EMAIL}
+                </a>
+              </dd>
+            </div>
+            <div>
+              <dt className="text-[11px] font-bold uppercase tracking-[0.25em] text-primary/50">Office</dt>
+              <dd className="mt-1 max-w-xs text-[15px] leading-relaxed text-primary/70">{OFFICE_ADDRESS}</dd>
+            </div>
           </dl>
+          <Link
+            to="/quotation"
+            className="gradient-border-cta mt-8 inline-flex rounded-full px-6 py-3 text-[14px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
+          >
+            Request Quotation →
+          </Link>
         </div>
         <form
           onSubmit={(e) => {
@@ -39,46 +51,31 @@ export function ContactSection() {
             setSent(true);
             setTimeout(() => setSent(false), 2800);
           }}
-          className="flex flex-col gap-4 rounded-2xl border border-primary/10 bg-white p-8 shadow-sm"
+          className="flex flex-col gap-4 rounded-2xl border border-primary/10 bg-section p-8 shadow-sm"
         >
-          <label className="text-[10px] uppercase tracking-[0.25em] text-primary/50">Quick contact</label>
+          <label className="text-[11px] font-bold uppercase tracking-[0.25em] text-primary/50">Quick contact</label>
           <input
             required
             placeholder="Full name"
-            className="border-b border-primary/15 bg-transparent py-3 text-[15px] text-primary placeholder-primary/35 outline-none transition-colors focus:border-secondary"
+            className="border-b border-primary/15 bg-transparent py-3 text-[16px] text-primary placeholder-primary/35 outline-none transition-colors focus:border-secondary"
           />
           <input
             required
             type="email"
             placeholder="Work email"
-            className="border-b border-primary/15 bg-transparent py-3 text-[15px] text-primary placeholder-primary/35 outline-none transition-colors focus:border-secondary"
+            className="border-b border-primary/15 bg-transparent py-3 text-[16px] text-primary placeholder-primary/35 outline-none transition-colors focus:border-secondary"
           />
           <textarea
             required
             rows={4}
             placeholder="Tell us about your sourcing requirement"
-            className="resize-none border-b border-primary/15 bg-transparent py-3 text-[15px] text-primary placeholder-primary/35 outline-none transition-colors focus:border-secondary"
+            className="resize-none border-b border-primary/15 bg-transparent py-3 text-[16px] text-primary placeholder-primary/35 outline-none transition-colors focus:border-secondary"
           />
           <button
             type="submit"
-            className="gradient-border-cta group mt-4 inline-flex items-center justify-center gap-2 self-start rounded-full px-7 py-3 text-[13px] font-medium transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
+            className="gradient-border-cta group mt-4 inline-flex items-center justify-center gap-2 self-start rounded-full px-7 py-3 text-[14px] font-medium transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
           >
-            <span>{sent ? "Sent" : "Send"}</span>
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              className={`transition-transform duration-500 ${sent ? "translate-x-3 opacity-0" : "group-hover:translate-x-1"}`}
-            >
-              <path
-                d="M5 12h14M13 6l6 6-6 6"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            <span>{sent ? "Sent" : "Send message"}</span>
           </button>
         </form>
       </div>

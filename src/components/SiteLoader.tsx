@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import logo from "../logo.png";
+import { BrandLogo } from "@/components/BrandLogo";
 
 type SiteLoaderProps = {
   progress: number;
@@ -26,7 +26,9 @@ export function SiteLoader({ progress }: SiteLoaderProps) {
         >
           <div className="site-loader-ring absolute inset-0 -m-6 rounded-full" aria-hidden />
           <div className="site-loader-ring site-loader-ring--delayed absolute inset-0 -m-10 rounded-full" aria-hidden />
-          <img src={logo} alt="Orbigreen Techsource" className="relative h-14 w-auto object-contain md:h-16" />
+          <div className="relative">
+            <BrandLogo variant="loader" />
+          </div>
         </motion.div>
 
         <motion.p

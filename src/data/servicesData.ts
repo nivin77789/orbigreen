@@ -3,6 +3,7 @@ import imgSourcing from "../services image/global-sourcing.png";
 import imgEngineering from "../services image/engineering-services.png";
 import imgQuality from "../services image/quality-inspection.png";
 import imgSite from "../services image/site-installation.png";
+import imgLogistics from "../services image/global-sourcing.png";
 
 export type ServiceDetail = {
   slug: string;
@@ -135,6 +136,30 @@ export const SERVICES: ServiceDetail[] = [
       "Our personnel bring localized logistical solutions directly to your facilities, reducing setup times and minimizing unnecessary operational downtime.",
     quote:
       "Delivering reliable, hands-on construction and technical installation that guarantees operational continuity.",
+  },
+  {
+    slug: "transport-logistics",
+    title: "Transport & Logistics",
+    shortDescription:
+      "End-to-end freight coordination, customs clearance, and on-time delivery across global supply routes.",
+    image: imgLogistics,
+    accent: "#8DD128",
+    sectionTitle: "Moving Your Supply Chain Forward",
+    overview:
+      "Reliable logistics is the backbone of global sourcing. We coordinate multimodal transport, customs documentation, and last-mile delivery — ensuring your components and equipment arrive on schedule, in spec, and with full shipment visibility.",
+    focusLabel: "Logistics Capabilities",
+    items: [
+      "Freight forwarding",
+      "Customs & documentation",
+      "Multimodal shipping",
+      "Warehouse coordination",
+      "Delivery tracking",
+    ],
+    partnerTitle: "Seamless Global Movement",
+    partnerDescription:
+      "Our logistics partners span air, sea, and road networks across key trade corridors — reducing transit risk and giving you predictable lead times from factory floor to your facility.",
+    quote:
+      "Connecting sourcing excellence with dependable transport — so your supply chain never stops moving.",
   },
 ];
 

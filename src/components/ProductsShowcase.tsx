@@ -126,7 +126,7 @@ function ProductSpotlight({
           transition={{ delay: 0.18, duration: 0.5, ease: EASE }}
         >
           <Link
-            to="/#contact"
+            to="/quotation"
             className="gradient-border-cta inline-flex rounded-full px-6 py-3 text-[13px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
           >
             Request sourcing
@@ -342,7 +342,7 @@ function ProductsCarousel({ variant }: { variant: "page" | "section" }) {
   return (
     <section
       id={isSection ? "products" : undefined}
-      className={`content-auto relative overflow-hidden py-20 lg:py-28 ${
+      className={`content-auto relative overflow-hidden bg-white py-20 lg:py-28 ${
         isSection ? "border-t border-primary/10" : ""
       }`}
       onMouseEnter={() => setPaused(true)}
