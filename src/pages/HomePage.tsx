@@ -7,9 +7,9 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { HomeAboutSection } from "@/components/HomeAboutSection";
 import { HomeMetricsStrip } from "@/components/HomeMetricsStrip";
+import { HomeFaqSection } from "@/components/HomeFaqSection";
 import { IndustriesSection } from "@/components/IndustriesSection";
 import { ProductsShowcase } from "@/components/ProductsShowcase";
-import { AnimatedStatValue } from "@/components/AnimatedStatValue";
 
 function ScrollHint() {
   return (
@@ -17,96 +17,6 @@ function ScrollHint() {
       <span className="text-[12px] uppercase tracking-[0.3em] text-body/45">Scroll</span>
       <div className="h-10 w-px bg-gradient-to-b from-secondary to-transparent" />
     </div>
-  );
-}
-
-function MetricsServices({ visible }: { visible: boolean }) {
-  const metrics = [
-    { n: "500+", l: "Projects Delivered" },
-    { n: "50+", l: "Global Clients" },
-    { n: "15+", l: "Years Experience" },
-    { n: "100%", l: "Quality Commitment" },
-  ];
-  const services = [
-    {
-      t: "Training, Consultancy & Advisory",
-      d: "Strategic consulting for procurement optimization and sourcing transformation.",
-    },
-    {
-      t: "Global Sourcing",
-      d: "International supplier identification, qualification, and cost-effective procurement.",
-    },
-    {
-      t: "Engineering Services",
-      d: "Design engineering, technical evaluation, and manufacturing support.",
-    },
-    {
-      t: "Quality & Inspection",
-      d: "Factory inspections, production monitoring, and compliance audits.",
-    },
-    {
-      t: "Site & Installation",
-      d: "On-site supervision, equipment installation, and commissioning.",
-    },
-  ];
-
-  return (
-    <motion.div
-      initial={false}
-      animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-      transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
-      className="pointer-events-auto mx-auto w-full max-w-[min(100%,52rem)] px-4 sm:max-w-[56rem] sm:px-5 lg:max-w-[64rem]"
-    >
-      <div className="hero-scroll-panel rounded-[1.35rem] p-4 sm:rounded-2xl sm:p-5 lg:p-5">
-        <div className="hero-scroll-panel__content grid grid-cols-1 gap-5 md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] md:items-center md:gap-0">
-          <div className="hero-scroll-metrics flex flex-col items-center justify-center text-center md:min-h-[13rem] md:pr-5">
-            <span className="text-[11px] font-bold uppercase tracking-[0.26em] text-primary/55 sm:text-[12px]">
-              By the Numbers
-            </span>
-            <div className="mt-4 grid w-full max-w-[16rem] grid-cols-2 place-items-center gap-x-5 gap-y-5 sm:max-w-[18rem] sm:gap-x-6 sm:gap-y-6">
-              {metrics.map((m, i) => (
-                <div key={m.l} className="flex w-full flex-col items-center text-center">
-                  <AnimatedStatValue
-                    value={m.n}
-                    immediate
-                    delay={i * 0.1}
-                    className="text-[clamp(1.5rem,3.5vw,2.15rem)] font-semibold leading-none tracking-tight text-primary"
-                  />
-                  <div className="mt-1 max-w-[7rem] text-[11px] font-semibold uppercase leading-snug tracking-[0.14em] text-primary/52 sm:text-[12px]">
-                    {m.l}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div id="services" className="hero-scroll-panel__divider md:pl-5">
-            <span className="text-[11px] font-bold uppercase tracking-[0.26em] text-secondary sm:text-[12px]">
-              Our Services
-            </span>
-            <div className="mt-3 flex flex-col gap-2">
-              {services.map((s, i) => (
-                <div key={s.t} className="hero-scroll-service group rounded-xl px-3 py-2.5 sm:px-3.5 sm:py-3">
-                  <div className="flex items-start gap-2.5 sm:gap-3">
-                    <span className="hero-scroll-service__index mt-0.5 shrink-0 tabular-nums">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <div className="min-w-0 flex-1">
-                      <h4 className="text-[14px] font-semibold leading-snug tracking-tight text-primary sm:text-[15px]">
-                        {s.t}
-                      </h4>
-                      <p className="mt-0.5 line-clamp-2 text-[13px] leading-relaxed text-primary/62 sm:line-clamp-none sm:text-[14px]">
-                        {s.d}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </motion.div>
   );
 }
 
@@ -316,7 +226,7 @@ export default function HomePage() {
                 <ScrollHint />
               </>
             )}
-            {phase === "metrics" && <MetricsServices visible />}
+            {phase === "metrics" && <HomeFaqSection variant="hero" visible />}
             {phase === "workflow" && (
               <div className="flex h-full w-full items-center justify-center overflow-y-auto py-20 sm:py-16">
                 <Workflow />

@@ -1080,6 +1080,89 @@
   mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, black 15%, transparent 72%);
 }
 
+.faq-section-grid {
+  background-image:
+    linear-gradient(rgba(11, 95, 126, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(11, 95, 126, 0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, black 15%, transparent 72%);
+}
+
+.faq-item {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.72) 100%);
+  border: 1px solid rgba(11, 95, 126, 0.08);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.9) inset;
+}
+
+.faq-item--open {
+  border-color: rgba(92, 191, 42, 0.22);
+}
+
+.faq-item__trigger:hover .faq-item__checkbox {
+  border-color: rgba(92, 191, 42, 0.35);
+}
+
+.faq-item--hero {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.32) 0%,
+    rgba(255, 255, 255, 0.18) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.34);
+}
+
+.faq-item--flat {
+  box-shadow:
+    0 0 0 0.5px rgba(255, 255, 255, 0.1) inset,
+    0 8px 22px -14px rgba(11, 95, 126, 0.12);
+}
+
+.faq-zigzag {
+  position: relative;
+}
+
+.faq-zigzag::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0.25rem;
+  bottom: 0.25rem;
+  width: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255, 255, 255, 0.35) 12%,
+    rgba(11, 95, 126, 0.12) 50%,
+    rgba(255, 255, 255, 0.35) 88%,
+    transparent
+  );
+  pointer-events: none;
+}
+
+.faq-zigzag-item {
+  position: relative;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.46) 0%,
+    rgba(255, 255, 255, 0.26) 55%,
+    rgba(255, 255, 255, 0.18) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.faq-item__cta {
+  background: linear-gradient(135deg, rgba(11, 95, 126, 0.06) 0%, rgba(92, 191, 42, 0.08) 100%);
+  border: 1px solid rgba(11, 95, 126, 0.1);
+  color: var(--primary);
+}
+
+.faq-item__cta:hover {
+  border-color: rgba(92, 191, 42, 0.35);
+  background: linear-gradient(135deg, rgba(11, 95, 126, 0.08) 0%, rgba(92, 191, 42, 0.14) 100%);
+  box-shadow: 0 8px 24px -12px rgba(11, 95, 126, 0.2);
+}
+
 .global-presence-heading-line {
   width: 3.5rem;
   height: 3px;
