@@ -5,7 +5,7 @@ import { usePageVisible } from "@/hooks/usePageVisible";
 
 /**
  * Sticky full-screen canvas playing the hero frame sequence from
- * src/hero bg image frames/, scrubbed by scroll progress.
+ * src/new bg/, scrubbed by scroll progress.
  */
 export function HeroFrameCanvas({
   progressRef,
@@ -83,6 +83,9 @@ export function HeroFrameCanvas({
         ctx.fillStyle = "#F5F8F7";
         ctx.fillRect(0, 0, w, h);
         drawCover(img);
+
+        ctx.fillStyle = "rgba(255, 255, 255, 0.1)";
+        ctx.fillRect(0, 0, w, h);
 
         if (closingGlow) {
           const t = (p - 0.85) / 0.15;

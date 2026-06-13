@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import { AnimatedStatValue } from "@/components/AnimatedStatValue";
+import productsAboutBanner from "@/assets/products-about-banner.webp";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -101,16 +103,6 @@ function SectionLabel({ children }: { children: string }) {
   );
 }
 
-function PageBackground() {
-  return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
-      <div className="metrics-section-grid absolute inset-0 opacity-60" />
-      <div className="absolute -left-[10%] top-[8%] h-[40vh] w-[40vw] rounded-full bg-primary/[0.06] blur-[90px]" />
-      <div className="absolute -right-[8%] bottom-[12%] h-[36vh] w-[36vw] rounded-full bg-secondary/[0.08] blur-[80px]" />
-    </div>
-  );
-}
-
 function StatsBand() {
   return (
     <motion.div
@@ -134,11 +126,14 @@ function StatsBand() {
               />
             )}
             <motion.div
-              className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-[clamp(1.35rem,3vw,2rem)] font-semibold leading-none tracking-tight text-transparent"
               whileHover={{ scale: 1.04 }}
               transition={{ type: "spring", stiffness: 400, damping: 24 }}
             >
-              {stat.value}
+              <AnimatedStatValue
+                value={stat.value}
+                delay={i * 0.1}
+                className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-[clamp(1.35rem,3vw,2rem)] font-semibold leading-none tracking-tight text-transparent"
+              />
             </motion.div>
             <div className="mt-2 text-[10px] font-bold uppercase tracking-[0.2em] text-primary/65">{stat.label}</div>
           </motion.div>
@@ -292,44 +287,43 @@ function ProcessTimeline() {
   );
 }
 
-export default function AboutPage() {
+function AboutHero() {
   return (
-    <div className="relative min-h-screen overflow-hidden bg-section text-primary">
-      <Nav />
+    <section className="relative overflow-hidden border-b border-primary/10 bg-white">
+      <div className="pointer-events-none absolute inset-0" aria-hidden>
+        <img
+          src={productsAboutBanner}
+          alt=""
+          className="h-full w-full object-cover object-[65%_center] sm:object-[right_center]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-white from-30% via-white/92 to-white/40 sm:from-35% lg:via-white/72 lg:to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/50 via-transparent to-white" />
+      </div>
 
-      <main className="relative pt-28">
-        {/* Hero */}
-        <section className="relative mx-auto max-w-[1280px] px-6 pb-16 lg:px-10 lg:pb-20">
-          <PageBackground />
-
+      <div className="relative z-10 mx-auto max-w-[1280px] px-6 pb-10 pt-[5.75rem] lg:px-10 lg:pb-14 lg:pt-[6.25rem]">
+        <div className="grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-12">
           <motion.div
             initial={{ opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: EASE }}
-            className="relative max-w-3xl"
           >
             <SectionLabel>Who we are</SectionLabel>
-            <h1 className="mt-4 text-balance text-[clamp(2.5rem,5vw,4rem)] font-semibold leading-[1.05] tracking-tight text-primary">
+            <h1 className="mt-4 text-balance text-[clamp(2.25rem,5vw,3.75rem)] font-semibold leading-[1.05] tracking-tight text-primary">
               About{" "}
-              <span className="bg-gradient-to-br from-primary via-primary to-secondary bg-clip-text text-transparent">
+              <span className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-transparent">
                 Orbigreen Techsource
               </span>
             </h1>
-            <motion.div
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ duration: 1, delay: 0.25, ease: EASE }}
-              className="mt-4 h-1 w-24 origin-left rounded-full bg-gradient-to-r from-secondary to-accent"
-            />
-            <p className="mt-6 max-w-xl text-pretty text-[16px] leading-relaxed text-primary/70">
+            <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-primary/75">
               Integrated sourcing for industrial engineering — combining supplier networks, procurement, and quality
               management to improve supply chain efficiency. We support OEMs worldwide with a single-window approach
               from components to delivery.
             </p>
+            <div className="global-presence-heading-line mt-6" />
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.25, ease: EASE }}
+              transition={{ delay: 0.25, duration: 0.7, ease: EASE }}
               className="mt-8 flex flex-wrap gap-3"
             >
               <Link
@@ -340,13 +334,71 @@ export default function AboutPage() {
               </Link>
               <Link
                 to="/services"
-                className="glass-card-light rounded-full px-6 py-3 text-[13px] font-semibold text-primary transition-all hover:glass-card-hover"
+                className="glass-card-light rounded-full px-6 py-3 text-[13px] font-semibold text-primary hover:glass-card-hover"
               >
                 Our Services
               </Link>
             </motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.45, duration: 0.8 }}
+              className="mt-8 flex flex-wrap gap-2"
+            >
+              {CAPABILITIES.map((cap, i) => (
+                <motion.span
+                  key={cap.t}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.5 + i * 0.05 }}
+                  className="global-hero-stat rounded-full px-3 py-1.5 text-[11px] font-semibold text-primary/80"
+                >
+                  {cap.t.split(" ")[0]}
+                </motion.span>
+              ))}
+            </motion.div>
           </motion.div>
-        </section>
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.85, ease: EASE }}
+            className="grid grid-cols-2 gap-3 lg:max-w-md lg:justify-self-end"
+          >
+            {STATS.map((stat, i) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, scale: 0.94 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.2 + i * 0.08, duration: 0.55, ease: EASE }}
+                whileHover={{ y: -3 }}
+                className="global-hero-stat rounded-2xl px-4 py-5 text-center transition-all sm:px-5 sm:py-6"
+              >
+                <AnimatedStatValue
+                  value={stat.value}
+                  immediate
+                  delay={0.2 + i * 0.08}
+                  className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-[clamp(1.75rem,3.5vw,2.25rem)] font-semibold leading-none text-transparent"
+                />
+                <div className="mt-2 text-[10px] font-bold uppercase tracking-[0.2em] text-primary/55">
+                  {stat.label}
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default function AboutPage() {
+  return (
+    <div className="relative min-h-screen overflow-hidden bg-section text-primary">
+      <Nav />
+
+      <main className="relative">
+        <AboutHero />
 
         {/* Story + Partner */}
         <section className="relative border-t border-primary/10 py-16 lg:py-20">

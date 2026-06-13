@@ -5,11 +5,11 @@ import { BrandLogo } from "@/components/BrandLogo";
 
 const NAV = [
   { label: "Home", to: "/" },
+  { label: "About", to: "/about" },
   { label: "Services", to: "/services" },
   { label: "Products", to: "/products" },
   { label: "Global Network", to: "/global-presence" },
   { label: "Sourcing Markets", to: "/sourcing-markets" },
-  { label: "About", to: "/about" },
 ];
 
 export function Nav() {

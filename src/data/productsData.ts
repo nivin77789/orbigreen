@@ -1,11 +1,11 @@
-import imgCastings from "../products image/castings.png";
-import imgMachining from "../products image/machining.png";
-import imgFabrication from "../products image/fabrication.png";
-import imgPressureVessels from "../products image/pressure-vessels-tanks.png";
-import imgStamping from "../products image/stamping-parts-assemblies.png";
-import imgProprietary from "../products image/proprietary-machines-parts.png";
-import imgFasteners from "../products image/fasteners.png";
-import imgTransmission from "../products image/transmission-gears.png";
+import imgCastings from "../products image/castings.webp";
+import imgMachining from "../products image/machining.webp";
+import imgFabrication from "../products image/fabrication.webp";
+import imgPressureVessels from "../products image/pressure-vessels-tanks.webp";
+import imgStamping from "../products image/stamping-parts-assemblies.webp";
+import imgProprietary from "../products image/proprietary-machines-parts.webp";
+import imgFasteners from "../products image/fasteners.webp";
+import imgTransmission from "../products image/transmission-gears.webp";
 
 export type Product = {
   id: number;

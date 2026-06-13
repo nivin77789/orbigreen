@@ -7,6 +7,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 
 type ProductsShowcaseProps = {
   variant?: "page" | "section";
+  showHeader?: boolean;
 };
 
 function ProductsSectionBackground({ accent }: { accent: string }) {
@@ -25,6 +26,44 @@ function ProductsSectionBackground({ accent }: { accent: string }) {
       />
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-secondary/40 to-transparent" />
     </div>
+  );
+}
+
+function CarouselArrow({
+  direction,
+  onClick,
+  label,
+}: {
+  direction: "prev" | "next";
+  onClick: () => void;
+  label: string;
+}) {
+  return (
+    <motion.button
+      type="button"
+      onClick={onClick}
+      aria-label={label}
+      whileHover={{ scale: 1.06, x: direction === "prev" ? -2 : 2 }}
+      whileTap={{ scale: 0.94 }}
+      className={`products-carousel-arrow glass-card-light absolute top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full text-primary shadow-[0_8px_28px_-8px_rgba(11,95,126,0.22)] transition-all hover:glass-card-hover sm:h-12 sm:w-12 ${
+        direction === "prev" ? "left-0 sm:left-1" : "right-0 sm:right-1"
+      }`}
+    >
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden
+        className={direction === "prev" ? "" : "rotate-180"}
+      >
+        <path d="M15 18l-6-6 6-6" />
+      </svg>
+    </motion.button>
   );
 }
 
@@ -167,11 +206,22 @@ function ProductRail({
         </span>
       </div>
 
-      <div className="relative">
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-section to-transparent lg:w-12" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-section to-transparent lg:w-12" />
+      <div className="relative px-10 py-1 sm:px-12 lg:px-14">
+        <CarouselArrow
+          direction="prev"
+          onClick={() => onSelect((activeIndex - 1 + PRODUCTS.length) % PRODUCTS.length)}
+          label="Previous category"
+        />
+        <CarouselArrow
+          direction="next"
+          onClick={() => onSelect((activeIndex + 1) % PRODUCTS.length)}
+          label="Next category"
+        />
 
-        <div className="-mx-2 flex gap-3 overflow-x-auto px-2 pb-2 scrollbar-none sm:gap-3.5">
+        <div className="pointer-events-none absolute inset-y-0 left-10 z-10 w-6 bg-gradient-to-r from-white to-transparent sm:left-12 lg:left-14" />
+        <div className="pointer-events-none absolute inset-y-0 right-10 z-10 w-6 bg-gradient-to-l from-white to-transparent sm:right-12 lg:right-14" />
+
+        <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none sm:gap-3.5">
           {PRODUCTS.map((product, index) => {
             const isActive = index === activeIndex;
             return (
@@ -298,7 +348,7 @@ function ProductsCarouselHeader({
   );
 }
 
-function ProductsCarousel({ variant }: { variant: "page" | "section" }) {
+function ProductsCarousel({ variant, showHeader = true }: { variant: "page" | "section"; showHeader?: boolean }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [progress, setProgress] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -312,6 +362,11 @@ function ProductsCarousel({ variant }: { variant: "page" | "section" }) {
 
   const goNext = useCallback(() => {
     setActiveIndex((current) => (current + 1) % PRODUCTS.length);
+    setProgress(0);
+  }, []);
+
+  const goPrev = useCallback(() => {
+    setActiveIndex((current) => (current - 1 + PRODUCTS.length) % PRODUCTS.length);
     setProgress(0);
   }, []);
 
@@ -357,9 +412,18 @@ function ProductsCarousel({ variant }: { variant: "page" | "section" }) {
       <ProductsSectionBackground accent={activeProduct.accent} />
 
       <div className="relative z-10 mx-auto max-w-[1280px] px-6 lg:px-10">
-        <ProductsCarouselHeader showViewAllLink={isSection} scrollTriggered={isSection} />
+        {showHeader && (
+          <ProductsCarouselHeader showViewAllLink={isSection} scrollTriggered={isSection} />
+        )}
 
-        <div className="mt-12 min-h-[420px] sm:min-h-[460px] lg:mt-14 lg:min-h-[400px]">
+        <div
+          className={`relative px-10 sm:px-12 lg:px-14 ${
+            showHeader ? "mt-12 min-h-[420px] sm:min-h-[460px] lg:mt-14 lg:min-h-[400px]" : "min-h-[420px] sm:min-h-[460px] lg:min-h-[400px]"
+          }`}
+        >
+          <CarouselArrow direction="prev" onClick={goPrev} label="Previous product" />
+          <CarouselArrow direction="next" onClick={goNext} label="Next product" />
+
           <AnimatePresence mode="wait">
             <ProductSpotlight
               key={activeProduct.id}
@@ -381,6 +445,6 @@ function ProductsCarousel({ variant }: { variant: "page" | "section" }) {
   );
 }
 
-export function ProductsShowcase({ variant = "page" }: ProductsShowcaseProps) {
-  return <ProductsCarousel variant={variant} />;
+export function ProductsShowcase({ variant = "page", showHeader = true }: ProductsShowcaseProps) {
+  return <ProductsCarousel variant={variant} showHeader={showHeader} />;
 }

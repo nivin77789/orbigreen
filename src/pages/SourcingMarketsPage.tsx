@@ -2,6 +2,17 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import { AnimatedStatValue } from "@/components/AnimatedStatValue";
+import sourcingMarketsBanner from "@/assets/sourcing-markets-banner.webp";
+
+const EASE = [0.16, 1, 0.3, 1] as const;
+
+const HERO_STATS = [
+  { value: "4", label: "Active markets" },
+  { value: "500+", label: "Supplier network" },
+  { value: "50+", label: "Global clients" },
+  { value: "15+", label: "Years experience" },
+];
 
 const HIGHLIGHTS = [
   {
@@ -84,52 +95,117 @@ function SectionLabel({ children }: { children: string }) {
   );
 }
 
+function SourcingMarketsHero() {
+  return (
+    <section className="relative overflow-hidden border-b border-primary/10 bg-white">
+      <div className="pointer-events-none absolute inset-0" aria-hidden>
+        <img
+          src={sourcingMarketsBanner}
+          alt=""
+          className="h-full w-full object-cover object-[65%_center] sm:object-[right_center]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-white from-30% via-white/92 to-white/40 sm:from-35% lg:via-white/72 lg:to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/50 via-transparent to-white" />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-[1280px] px-6 pb-10 pt-[5.75rem] lg:px-10 lg:pb-14 lg:pt-[6.25rem]">
+        <div className="grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-12">
+          <motion.div
+            initial={{ opacity: 0, y: 32 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: EASE }}
+          >
+            <SectionLabel>Global Reach</SectionLabel>
+            <h1 className="mt-4 text-balance text-[clamp(2.25rem,5vw,3.75rem)] font-semibold leading-[1.05] tracking-tight text-primary">
+              Sourcing{" "}
+              <span className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-transparent">
+                Markets
+              </span>
+            </h1>
+            <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-primary/75">
+              Access trusted suppliers across key manufacturing regions with on-the-ground sourcing and quality
+              support.
+            </p>
+            <div className="global-presence-heading-line mt-6" />
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.25, duration: 0.7, ease: EASE }}
+              className="mt-8 flex flex-wrap gap-3"
+            >
+              <Link
+                to="/quotation"
+                className="gradient-border-cta rounded-full px-6 py-3 text-[13px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
+              >
+                Request Quotation
+              </Link>
+              <Link
+                to="/global-presence"
+                className="glass-card-light rounded-full px-6 py-3 text-[13px] font-semibold text-primary hover:glass-card-hover"
+              >
+                Global Network
+              </Link>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.45, duration: 0.8 }}
+              className="mt-8 flex flex-wrap gap-2"
+            >
+              {MARKETS.map((market, i) => (
+                <motion.span
+                  key={market.country}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.5 + i * 0.06 }}
+                  className="global-hero-stat rounded-full px-3 py-1.5 text-[11px] font-semibold text-primary/80"
+                >
+                  {market.country}
+                </motion.span>
+              ))}
+            </motion.div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.85, ease: EASE }}
+            className="grid grid-cols-2 gap-3 lg:max-w-md lg:justify-self-end"
+          >
+            {HERO_STATS.map((stat, i) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, scale: 0.94 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.2 + i * 0.08, duration: 0.55, ease: EASE }}
+                whileHover={{ y: -3 }}
+                className="global-hero-stat rounded-2xl px-4 py-5 text-center transition-all sm:px-5 sm:py-6"
+              >
+                <AnimatedStatValue
+                  value={stat.value}
+                  immediate
+                  delay={0.2 + i * 0.08}
+                  className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-[clamp(1.75rem,3.5vw,2.25rem)] font-semibold leading-none text-transparent"
+                />
+                <div className="mt-2 text-[10px] font-bold uppercase tracking-[0.2em] text-primary/55">
+                  {stat.label}
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function SourcingMarketsPage() {
   return (
     <div className="min-h-screen overflow-hidden bg-section text-primary">
       <Nav />
 
-      <main className="pt-28">
-        {/* Hero */}
-        <section className="relative mx-auto max-w-[1280px] px-6 pb-20 lg:px-10">
-          <div className="pointer-events-none absolute -right-20 top-0 h-[420px] w-[420px] rounded-full bg-secondary/10 blur-[100px]" />
-          <div className="pointer-events-none absolute -left-16 bottom-0 h-[320px] w-[320px] rounded-full bg-primary/10 blur-[90px]" />
-
-          <motion.div
-            initial={{ opacity: 0, y: 32 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="relative max-w-3xl"
-          >
-            <SectionLabel>Global Reach</SectionLabel>
-            <h1 className="mt-4 text-balance text-[clamp(2.5rem,5vw,4rem)] font-semibold leading-[1.05] tracking-tight text-primary">
-              Sourcing Markets
-            </h1>
-            <p className="mt-6 max-w-xl text-pretty text-[16px] leading-relaxed text-primary/70">
-              Access trusted suppliers across key manufacturing regions with on-the-ground sourcing and quality
-              support.
-            </p>
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-8 flex flex-wrap gap-3"
-            >
-              <Link
-                to="/contact"
-                className="gradient-border-cta rounded-full px-6 py-3 text-[13px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
-              >
-                Get in Touch
-              </Link>
-              <Link
-                to="/products"
-                className="glass-card-light rounded-full px-6 py-3 text-[13px] font-semibold text-primary transition-all hover:glass-card-hover"
-              >
-                View Products
-              </Link>
-            </motion.div>
-          </motion.div>
-        </section>
+      <main>
+        <SourcingMarketsHero />
 
         {/* Highlights */}
         <section className="relative border-t border-primary/10 bg-white py-16">

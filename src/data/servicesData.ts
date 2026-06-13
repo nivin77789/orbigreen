@@ -1,9 +1,9 @@
-import imgConsultancy from "../services image/consultancy-advisory.png";
-import imgSourcing from "../services image/global-sourcing.png";
-import imgEngineering from "../services image/engineering-services.png";
-import imgQuality from "../services image/quality-inspection.png";
-import imgSite from "../services image/site-installation.png";
-import imgLogistics from "../services image/global-sourcing.png";
+import imgConsultancy from "../services image/consultancy-advisory.webp";
+import imgSourcing from "../services image/global-sourcing.webp";
+import imgEngineering from "../services image/engineering-services.webp";
+import imgQuality from "../services image/quality-inspection.webp";
+import imgSite from "../services image/site-installation.webp";
+import imgLogistics from "../services image/transport-logistics.webp";
 
 export type ServiceDetail = {
   slug: string;

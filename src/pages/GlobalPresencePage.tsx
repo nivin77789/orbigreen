@@ -3,12 +3,24 @@ import { motion } from "framer-motion";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { GlobalNetworkMap } from "@/components/GlobalNetworkMap";
+import { AnimatedStatValue } from "@/components/AnimatedStatValue";
+import { NETWORK_CORRIDORS } from "@/data/globalHubsData";
+import globalNetworkBanner from "@/assets/global-network-banner.webp";
+
+const EASE = [0.16, 1, 0.3, 1] as const;
+
+const HERO_STATS = [
+  { value: "8", label: "Global hubs" },
+  { value: "4+", label: "Sourcing markets" },
+  { value: "500+", label: "Suppliers" },
+  { value: "50+", label: "Clients worldwide" },
+];
 
 const NETWORK_STATS = [
-  { value: "4+", label: "Sourcing markets" },
-  { value: "500+", label: "Supplier network" },
-  { value: "50+", label: "Global clients" },
   { value: "15+", label: "Years experience" },
+  { value: "100%", label: "Quality focus" },
+  { value: "500+", label: "Projects delivered" },
+  { value: "24/7", label: "Program visibility" },
 ];
 
 const PRESENCE = [
@@ -30,18 +42,34 @@ const PRESENCE = [
   },
 ];
 
-export default function GlobalPresencePage() {
-  return (
-    <div className="min-h-screen bg-white text-primary">
-      <Nav />
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.65, delay: i * 0.07, ease: EASE },
+  }),
+};
 
-      <main className="pt-28">
-        <section className="relative mx-auto max-w-[1280px] px-6 pb-16 lg:px-10 lg:pb-20">
+function GlobalNetworkHero() {
+  return (
+    <section className="relative overflow-hidden border-b border-primary/10">
+      <div className="pointer-events-none absolute inset-0" aria-hidden>
+        <img
+          src={globalNetworkBanner}
+          alt=""
+          className="h-full w-full object-cover object-[70%_center] sm:object-[right_center]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-white from-30% via-white/92 to-white/45 sm:from-35% lg:via-white/75 lg:to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/50 via-transparent to-white" />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-[1280px] px-6 pb-10 pt-[5.75rem] lg:px-10 lg:pb-14 lg:pt-[6.25rem]">
+        <div className="grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-12">
           <motion.div
             initial={{ opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-3xl"
+            transition={{ duration: 0.9, ease: EASE }}
           >
             <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-secondary">
               Global Network
@@ -52,76 +80,276 @@ export default function GlobalPresencePage() {
                 & network
               </span>
             </h1>
-            <p className="mt-6 text-[17px] leading-relaxed text-primary/70">
+            <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-primary/75">
               A single-window sourcing partner with on-the-ground presence across key manufacturing hubs and
               logistics corridors — connecting you to the right suppliers, anywhere in the world.
             </p>
+            <div className="global-presence-heading-line mt-6" />
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.25, duration: 0.7, ease: EASE }}
+              className="mt-8 flex flex-wrap gap-3"
+            >
+              <Link
+                to="/quotation"
+                className="gradient-border-cta rounded-full px-6 py-3 text-[13px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
+              >
+                Request Quotation
+              </Link>
+              <Link
+                to="/sourcing-markets"
+                className="glass-card-light rounded-full px-6 py-3 text-[13px] font-semibold text-primary hover:glass-card-hover"
+              >
+                Sourcing Markets
+              </Link>
+            </motion.div>
           </motion.div>
-        </section>
 
-        <section className="border-t border-primary/10 bg-section py-14 lg:py-16">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.85, ease: EASE }}
+            className="grid grid-cols-2 gap-3 lg:max-w-md lg:justify-self-end"
+          >
+            {HERO_STATS.map((stat, i) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, scale: 0.94 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.2 + i * 0.08, duration: 0.55, ease: EASE }}
+                whileHover={{ y: -3 }}
+                className="global-hero-stat rounded-2xl px-4 py-5 text-center transition-all sm:px-5 sm:py-6"
+              >
+                <AnimatedStatValue
+                  value={stat.value}
+                  immediate
+                  delay={0.2 + i * 0.08}
+                  className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-[clamp(1.75rem,3.5vw,2.25rem)] font-semibold leading-none text-transparent"
+                />
+                <div className="mt-2 text-[10px] font-bold uppercase tracking-[0.2em] text-primary/55">
+                  {stat.label}
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default function GlobalPresencePage() {
+  return (
+    <div className="min-h-screen overflow-hidden bg-white text-primary">
+      <Nav />
+
+      <main>
+        <GlobalNetworkHero />
+
+        {/* Map + hubs */}
+        <section className="relative border-t border-primary/10 bg-section/50 py-14 lg:py-16">
           <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              variants={fadeUp}
+              custom={0}
+              className="mb-10 max-w-2xl"
+            >
+              <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-secondary">
+                Worldwide Footprint
+              </span>
+              <h2 className="mt-3 text-[clamp(1.65rem,3vw,2.35rem)] font-semibold tracking-tight text-primary">
+                India HQ at the center of your supply network
+              </h2>
+              <p className="mt-3 text-[16px] leading-relaxed text-primary/65">
+                Select a hub to explore its role in your sourcing program — from manufacturing and near-shore to
+                logistics and client partnerships.
+              </p>
+            </motion.div>
             <GlobalNetworkMap />
           </div>
         </section>
 
-        <section className="py-14 lg:py-16">
+        {/* Stats band */}
+        <section className="border-t border-primary/10 bg-white py-14 lg:py-16">
           <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
-            <div className="metrics-band relative overflow-hidden rounded-[1.5rem]">
-              <div className="grid grid-cols-2">
-                {NETWORK_STATS.map((stat) => (
-                  <div key={stat.label} className="px-4 py-7 text-center sm:px-6">
-                    <div className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-[clamp(1.75rem,4vw,2.5rem)] font-semibold text-transparent">
-                      {stat.value}
-                    </div>
-                    <div className="mt-2 text-[11px] font-bold uppercase tracking-[0.2em] text-primary/60">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.35 }}
+              className="metrics-band relative overflow-hidden rounded-[1.5rem]"
+            >
+              <div className="grid grid-cols-2 lg:grid-cols-4">
+                {NETWORK_STATS.map((stat, i) => (
+                  <motion.div
+                    key={stat.label}
+                    variants={fadeUp}
+                    custom={i}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    className="group relative px-4 py-7 text-center sm:px-6 sm:py-8"
+                  >
+                    {i > 0 && (
+                      <span
+                        className="absolute left-0 top-1/2 hidden h-10 w-px -translate-y-1/2 bg-gradient-to-b from-transparent via-primary/15 to-transparent lg:block"
+                        aria-hidden
+                      />
+                    )}
+                    <motion.div
+                      whileHover={{ scale: 1.04 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 24 }}
+                    >
+                      <AnimatedStatValue
+                        value={stat.value}
+                        delay={i * 0.1}
+                        className="bg-gradient-to-br from-primary via-primary to-secondary bg-clip-text text-[clamp(1.75rem,4vw,2.5rem)] font-semibold text-transparent"
+                      />
+                    </motion.div>
+                    <div className="mt-2 text-[10px] font-bold uppercase tracking-[0.2em] text-primary/60">
                       {stat.label}
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
-            </div>
+              <motion.div
+                className="metrics-band-shine absolute inset-x-0 top-0 h-px"
+                animate={{ opacity: [0.4, 0.9, 0.4] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              />
+            </motion.div>
           </div>
         </section>
 
-        <section className="border-t border-primary/10 bg-white py-16 lg:py-20">
+        {/* Corridors */}
+        <section className="border-t border-primary/10 bg-section/40 py-14 lg:py-16">
           <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
-            <h2 className="text-[clamp(1.5rem,2.5vw,2.25rem)] font-semibold tracking-tight text-primary">
-              How our network works for you
-            </h2>
-            <div className="mt-10 grid gap-5 sm:grid-cols-2">
-              {PRESENCE.map((item, i) => (
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              custom={0}
+              className="mb-10 max-w-2xl"
+            >
+              <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-secondary">
+                Supply Corridors
+              </span>
+              <h2 className="mt-3 text-[clamp(1.65rem,3vw,2.35rem)] font-semibold tracking-tight text-primary">
+                Three corridors. One coordinated network.
+              </h2>
+            </motion.div>
+
+            <div className="grid gap-4 lg:grid-cols-3">
+              {NETWORK_CORRIDORS.map((corridor, i) => (
                 <motion.div
-                  key={item.t}
-                  initial={{ opacity: 0, y: 20 }}
+                  key={corridor.t}
+                  initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.06, duration: 0.55 }}
-                  className="glass-card-light rounded-2xl p-6 transition-all hover:glass-card-hover"
+                  transition={{ delay: i * 0.1, duration: 0.6, ease: EASE }}
+                  whileHover={{ y: -4 }}
+                  className="glass-card-light relative overflow-hidden rounded-2xl p-6 transition-all hover:glass-card-hover lg:p-7"
                 >
-                  <span className="text-[12px] font-bold tabular-nums text-secondary">
+                  <span className="text-[11px] font-bold tabular-nums text-secondary/80">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <h3 className="mt-2 text-[17px] font-semibold text-primary">{item.t}</h3>
-                  <p className="mt-2 text-[15px] leading-relaxed text-primary/65">{item.d}</p>
+                  <h3 className="mt-3 text-[17px] font-semibold text-primary">{corridor.t}</h3>
+                  <p className="mt-2 text-[14px] leading-relaxed text-primary/65">{corridor.d}</p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {corridor.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full border border-primary/10 bg-white/80 px-3 py-1 text-[11px] font-semibold text-primary/70"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="border-t border-primary/10 py-20">
-          <div className="mx-auto max-w-[1280px] px-6 text-center lg:px-10">
-            <h2 className="text-[clamp(1.5rem,2.5vw,2rem)] font-semibold text-primary">
-              Expand your supply base with confidence
+        {/* Capabilities */}
+        <section className="border-t border-primary/10 py-16 lg:py-20">
+          <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
+            <div className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start lg:gap-14">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeUp}
+                custom={0}
+                className="lg:sticky lg:top-32"
+              >
+                <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-secondary">
+                  Network Capabilities
+                </span>
+                <h2 className="mt-3 text-[clamp(1.65rem,3vw,2.35rem)] font-semibold tracking-tight text-primary">
+                  How our network works for you
+                </h2>
+                <p className="mt-4 text-[16px] leading-relaxed text-primary/65">
+                  From supplier identification to final delivery — every stage is managed through one accountable
+                  partner with global reach.
+                </p>
+                <div className="global-presence-heading-line mt-6" />
+              </motion.div>
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                {PRESENCE.map((item, i) => (
+                  <motion.div
+                    key={item.t}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.08, duration: 0.55, ease: EASE }}
+                    whileHover={{ y: -3 }}
+                    className="glass-card-light rounded-2xl p-6 transition-all hover:glass-card-hover"
+                  >
+                    <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-secondary text-[12px] font-bold text-white">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <h3 className="mt-4 text-[16px] font-semibold text-primary">{item.t}</h3>
+                    <p className="mt-2 text-[14px] leading-relaxed text-primary/65">{item.d}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="relative overflow-hidden border-t border-primary/10 py-20 lg:py-24">
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/[0.04] via-white to-secondary/[0.06]" aria-hidden />
+          <div className="pointer-events-none absolute -left-20 top-1/2 h-64 w-64 -translate-y-1/2 rounded-full bg-secondary/10 blur-[80px]" aria-hidden />
+          <div className="pointer-events-none absolute -right-20 top-1/2 h-64 w-64 -translate-y-1/2 rounded-full bg-primary/10 blur-[80px]" aria-hidden />
+
+          <motion.div
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.75, ease: EASE }}
+            className="relative z-10 mx-auto max-w-[1280px] px-6 text-center lg:px-10"
+          >
+            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">Get Started</span>
+            <h2 className="mt-4 text-balance text-[clamp(1.75rem,3.5vw,2.75rem)] font-semibold tracking-tight text-primary">
+              Expand your supply base{" "}
+              <span className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-transparent">
+                with confidence
+              </span>
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-[16px] text-primary/65">
+            <p className="mx-auto mt-5 max-w-xl text-[16px] leading-relaxed text-primary/65">
               Tell us your target regions and product categories — we'll map the right network for your program.
             </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <div className="mt-9 flex flex-wrap justify-center gap-3">
               <Link
                 to="/quotation"
-                className="gradient-border-cta rounded-full px-7 py-3.5 text-[14px] font-semibold"
+                className="gradient-border-cta rounded-full px-7 py-3.5 text-[14px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
               >
                 Request Quotation
               </Link>
@@ -132,7 +360,7 @@ export default function GlobalPresencePage() {
                 Contact Us
               </Link>
             </div>
-          </div>
+          </motion.div>
         </section>
       </main>
 

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { AnimatedStatValue } from "@/components/AnimatedStatValue";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -79,11 +80,14 @@ function MetricsBand() {
               />
             )}
             <motion.div
-              className="bg-gradient-to-br from-primary via-primary to-secondary bg-clip-text text-[clamp(1.75rem,4vw,2.75rem)] font-semibold leading-none tracking-tight text-transparent"
               whileHover={{ scale: 1.04 }}
               transition={{ type: "spring", stiffness: 400, damping: 24 }}
             >
-              {metric.n}
+              <AnimatedStatValue
+                value={metric.n}
+                delay={i * 0.1}
+                className="bg-gradient-to-br from-primary via-primary to-secondary bg-clip-text text-[clamp(1.75rem,4vw,2.75rem)] font-semibold leading-none tracking-tight text-transparent"
+              />
             </motion.div>
             <div className="mt-2 text-[10px] font-bold uppercase tracking-[0.22em] text-primary/70 sm:mt-2.5">
               {metric.l}
