@@ -7,7 +7,7 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { HomeAboutSection } from "@/components/HomeAboutSection";
 import { HomeMetricsStrip } from "@/components/HomeMetricsStrip";
-import { HomeFaqSection } from "@/components/HomeFaqSection";
+import { HomeHeroFaq } from "@/components/HomeHeroFaq";
 import { IndustriesSection } from "@/components/IndustriesSection";
 import { ProductsShowcase } from "@/components/ProductsShowcase";
 
@@ -122,26 +122,22 @@ function HeroCopy({ visible }: { visible: boolean }) {
       initial={false}
       animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
       transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-      className="hero-copy-block pointer-events-auto mx-auto max-w-3xl rounded-2xl px-5 py-7 text-center sm:px-8 sm:py-8"
+      className="hero-copy-plain pointer-events-auto w-full max-w-sm px-5 py-6 text-left sm:max-w-md sm:px-7 sm:py-8 lg:max-w-md"
     >
-      <span className="inline-flex items-center gap-2 rounded-full border border-primary/15 bg-white/50 px-3 py-1 text-[12px] font-semibold uppercase tracking-[0.25em] text-primary/80 backdrop-blur-sm">
+      <span className="inline-flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.25em] text-primary/75">
         <span className="h-1.5 w-1.5 rounded-full bg-secondary shadow-[0_0_8px_rgba(92,191,42,0.45)]" />
         Orbigreen Techsource
       </span>
-      <h1 className="mt-6 text-balance text-[clamp(2.5rem,6.5vw,5.75rem)] font-semibold leading-[0.98] tracking-[-0.03em] text-primary">
-        Industrial Sourcing{" "}
+      <h1 className="mt-5 text-balance text-[clamp(1.875rem,4.8vw,3.75rem)] font-semibold leading-[1.02] tracking-[-0.03em] text-primary sm:mt-6">
+        Driving Sustainable{" "}
         <span className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-transparent">
-          Excellence.
+          Industrial Solutions
         </span>
       </h1>
-      <p className="mt-5 text-[clamp(1.15rem,1.7vw,1.45rem)] font-medium tracking-tight text-primary/90">
-        Smart. Sustainable. Sourcing.
+      <p className="mt-4 max-w-xs text-pretty text-[clamp(1.05rem,1.5vw,1.3rem)] font-medium leading-snug tracking-tight text-primary/85">
+        Engineering-led sourcing for OEMs worldwide.
       </p>
-      <p className="mx-auto mt-4 max-w-xl text-pretty text-[16px] leading-relaxed text-primary/78 sm:text-[17px]">
-        Your single-window sourcing solution for industrial engineering machinery, parts, and services — delivering
-        sustainable supply solutions worldwide.
-      </p>
-      <div className="mt-8 flex flex-wrap items-center justify-center gap-3 sm:mt-9">
+      <div className="mt-7 flex flex-wrap items-center justify-start gap-3 sm:mt-8">
         <Link
           to="/services"
           className="hero-copy-btn gradient-border-cta rounded-full px-6 py-3 text-[14px] font-medium transition-all hover:translate-x-[-1px] hover:translate-y-[-1px]"
@@ -212,6 +208,8 @@ export default function HomePage() {
         <div className="sticky top-0 h-screen w-full overflow-hidden">
           <HeroFrameCanvas progressRef={progressRef} active={heroActive} />
 
+          <div className="pointer-events-none absolute inset-0 bg-white/20" aria-hidden />
+
           <motion.div
             style={{ opacity: overlayOpacity }}
             className="pointer-events-none absolute inset-0 bg-gradient-to-b from-section/50 via-section/20 to-section/55"
@@ -219,20 +217,28 @@ export default function HomePage() {
 
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_80%_at_50%_50%,transparent_55%,#F5F8F7_100%)]" />
 
-          <div className="absolute inset-0 flex items-center justify-center">
+          <div className="absolute inset-0 flex items-center justify-start px-5 sm:px-8 lg:px-12 xl:px-16">
             {phase === "hero" && (
               <>
                 <HeroCopy visible />
                 <ScrollHint />
               </>
             )}
-            {phase === "metrics" && <HomeFaqSection variant="hero" visible />}
+            {phase === "metrics" && (
+              <div className="flex h-full w-full items-center justify-center">
+                <HomeHeroFaq visible />
+              </div>
+            )}
             {phase === "workflow" && (
               <div className="flex h-full w-full items-center justify-center overflow-y-auto py-20 sm:py-16">
                 <Workflow />
               </div>
             )}
-            {phase === "closing" && <ClosingCTA visible />}
+            {phase === "closing" && (
+              <div className="flex h-full w-full items-center justify-center">
+                <ClosingCTA visible />
+              </div>
+            )}
           </div>
         </div>
       </section>

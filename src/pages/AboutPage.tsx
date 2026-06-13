@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { AnimatedStatValue } from "@/components/AnimatedStatValue";
-import productsAboutBanner from "@/assets/products-about-banner.webp";
+import aboutBanner from "@/assets/about-banner.png";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -78,6 +78,33 @@ const STATS = [
   { label: "Service offerings", value: "6" },
   { label: "Product categories", value: "10" },
   { label: "Sourcing markets", value: "4+" },
+];
+
+const COMPANY_OVERVIEW = [
+  {
+    title: "Who We Are",
+    items: [
+      "A future-driven company shaping engineering and sustainable innovation",
+      "Focused on delivering innovative, eco-friendly industrial solutions",
+      "Strong presence in India with deep customer and supplier connections",
+    ],
+  },
+  {
+    title: "Our Strengths",
+    items: [
+      "Expertise in Sales, Project management, Procurement, and site execution",
+      "Access to capable manufacturing partners with Manufacturing Cooperation agreements",
+      "Commitment to compliance with international standards ASME U, U2, R, PED",
+    ],
+  },
+  {
+    title: "Our Vision",
+    items: [
+      "Partnering with global technology leaders and OEMs",
+      "Bringing advanced and technology solutions to industry",
+      "Supporting the industrial sector with proven, sustainable technologies",
+    ],
+  },
 ];
 
 const fadeUp = {
@@ -287,106 +314,120 @@ function ProcessTimeline() {
   );
 }
 
+function CompanyOverviewSection() {
+  return (
+    <section className="relative border-t border-primary/10 bg-white py-16 lg:py-20">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-secondary/40 to-transparent" />
+      <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
+        <div className="grid gap-6 lg:grid-cols-3 lg:gap-8">
+          {COMPANY_OVERVIEW.map((block, i) => (
+            <motion.article
+              key={block.title}
+              custom={i}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-40px" }}
+              variants={fadeUp}
+              whileHover={{ y: -4 }}
+              className={`relative overflow-hidden rounded-[1.5rem] p-6 transition-all duration-500 sm:p-7 lg:p-8 ${
+                i === 0 ? "highlight-panel" : "glass-card-light hover:glass-card-hover"
+              }`}
+            >
+              {i === 0 && <div className="highlight-panel-grid absolute inset-0 opacity-40" aria-hidden />}
+              <div className="relative z-10">
+                <h2 className="text-[clamp(1.2rem,2vw,1.5rem)] font-semibold tracking-tight text-primary">
+                  {block.title}
+                </h2>
+                <ul className="mt-5 space-y-3.5">
+                  {block.items.map((item) => (
+                    <li key={item} className="flex gap-3 text-[14px] leading-relaxed text-primary/72 sm:text-[15px]">
+                      <span className="mt-0.5 shrink-0 font-bold text-secondary" aria-hidden>
+                        •
+                      </span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function AboutHero() {
   return (
     <section className="relative overflow-hidden border-b border-primary/10 bg-white">
-      <div className="pointer-events-none absolute inset-0" aria-hidden>
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 top-7 sm:top-10" aria-hidden>
         <img
-          src={productsAboutBanner}
+          src={aboutBanner}
           alt=""
-          className="h-full w-full object-cover object-[65%_center] sm:object-[right_center]"
+          className="h-full w-full object-cover object-[center_56%] sm:object-[right_56%]"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-white from-30% via-white/92 to-white/40 sm:from-35% lg:via-white/72 lg:to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/50 via-transparent to-white" />
+        <div className="absolute inset-0 bg-gradient-to-r from-white from-[30%] via-white/45 via-[48%] to-transparent sm:from-[32%] sm:via-white/40 lg:from-[34%] lg:via-white/30" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-white/25" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-[1280px] px-6 pb-10 pt-[5.75rem] lg:px-10 lg:pb-14 lg:pt-[6.25rem]">
-        <div className="grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-12">
+        <motion.div
+          initial={{ opacity: 0, y: 32 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease: EASE }}
+          className="max-w-2xl"
+        >
+          <SectionLabel>Who we are</SectionLabel>
+          <h1 className="mt-4 text-balance text-[clamp(2.25rem,5vw,3.75rem)] font-semibold leading-[1.05] tracking-tight text-primary">
+            About{" "}
+            <span className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-transparent">
+              Orbigreen Techsource
+            </span>
+          </h1>
+          <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-primary/75">
+            Integrated sourcing for industrial engineering — combining supplier networks, procurement, and quality
+            management to improve supply chain efficiency. We support OEMs worldwide with a single-window approach
+            from components to delivery.
+          </p>
+          <div className="global-presence-heading-line mt-6" />
           <motion.div
-            initial={{ opacity: 0, y: 32 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: EASE }}
+            transition={{ delay: 0.25, duration: 0.7, ease: EASE }}
+            className="mt-8 flex flex-wrap gap-3"
           >
-            <SectionLabel>Who we are</SectionLabel>
-            <h1 className="mt-4 text-balance text-[clamp(2.25rem,5vw,3.75rem)] font-semibold leading-[1.05] tracking-tight text-primary">
-              About{" "}
-              <span className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-transparent">
-                Orbigreen Techsource
-              </span>
-            </h1>
-            <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-primary/75">
-              Integrated sourcing for industrial engineering — combining supplier networks, procurement, and quality
-              management to improve supply chain efficiency. We support OEMs worldwide with a single-window approach
-              from components to delivery.
-            </p>
-            <div className="global-presence-heading-line mt-6" />
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.25, duration: 0.7, ease: EASE }}
-              className="mt-8 flex flex-wrap gap-3"
+            <Link
+              to="/contact"
+              className="gradient-border-cta rounded-full px-6 py-3 text-[13px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
             >
-              <Link
-                to="/contact"
-                className="gradient-border-cta rounded-full px-6 py-3 text-[13px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
-              >
-                Get in Touch
-              </Link>
-              <Link
-                to="/services"
-                className="glass-card-light rounded-full px-6 py-3 text-[13px] font-semibold text-primary hover:glass-card-hover"
-              >
-                Our Services
-              </Link>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.45, duration: 0.8 }}
-              className="mt-8 flex flex-wrap gap-2"
+              Get in Touch
+            </Link>
+            <Link
+              to="/services"
+              className="glass-card-light rounded-full px-6 py-3 text-[13px] font-semibold text-primary hover:glass-card-hover"
             >
-              {CAPABILITIES.map((cap, i) => (
-                <motion.span
-                  key={cap.t}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.5 + i * 0.05 }}
-                  className="global-hero-stat rounded-full px-3 py-1.5 text-[11px] font-semibold text-primary/80"
-                >
-                  {cap.t.split(" ")[0]}
-                </motion.span>
-              ))}
-            </motion.div>
+              Our Services
+            </Link>
           </motion.div>
-
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15, duration: 0.85, ease: EASE }}
-            className="grid grid-cols-2 gap-3 lg:max-w-md lg:justify-self-end"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.45, duration: 0.8 }}
+            className="mt-8 flex flex-wrap gap-2"
           >
-            {STATS.map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, scale: 0.94 }}
+            {CAPABILITIES.map((cap, i) => (
+              <motion.span
+                key={cap.t}
+                initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.2 + i * 0.08, duration: 0.55, ease: EASE }}
-                whileHover={{ y: -3 }}
-                className="global-hero-stat rounded-2xl px-4 py-5 text-center transition-all sm:px-5 sm:py-6"
+                transition={{ delay: 0.5 + i * 0.05 }}
+                className="global-hero-stat rounded-full px-3 py-1.5 text-[11px] font-semibold text-primary/80"
               >
-                <AnimatedStatValue
-                  value={stat.value}
-                  immediate
-                  delay={0.2 + i * 0.08}
-                  className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-[clamp(1.75rem,3.5vw,2.25rem)] font-semibold leading-none text-transparent"
-                />
-                <div className="mt-2 text-[10px] font-bold uppercase tracking-[0.2em] text-primary/55">
-                  {stat.label}
-                </div>
-              </motion.div>
+                {cap.t.split(" ")[0]}
+              </motion.span>
             ))}
           </motion.div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -399,6 +440,8 @@ export default function AboutPage() {
 
       <main className="relative">
         <AboutHero />
+
+        <CompanyOverviewSection />
 
         {/* Story + Partner */}
         <section className="relative border-t border-primary/10 py-16 lg:py-20">

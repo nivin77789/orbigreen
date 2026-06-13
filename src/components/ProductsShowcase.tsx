@@ -1,300 +1,111 @@
-import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { PRODUCTS, type Product } from "@/data/productsData";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
+const HOME_PRODUCTS_LIMIT = 4;
 
 type ProductsShowcaseProps = {
   variant?: "page" | "section";
   showHeader?: boolean;
 };
 
-function ProductsSectionBackground({ accent }: { accent: string }) {
+function ProductsSectionBackground() {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
       <div className="products-section-grid absolute inset-0 opacity-[0.35]" />
-      <motion.div
-        className="absolute -left-[20%] top-[10%] h-[50vh] w-[50vw] rounded-full blur-[100px]"
-        animate={{ backgroundColor: `${accent}22` }}
-        transition={{ duration: 0.9, ease: EASE }}
-      />
-      <motion.div
-        className="absolute -right-[15%] bottom-[5%] h-[45vh] w-[45vw] rounded-full blur-[90px]"
-        animate={{ backgroundColor: `${accent}18` }}
-        transition={{ duration: 0.9, ease: EASE }}
-      />
+      <div className="absolute -left-[20%] top-[10%] h-[50vh] w-[50vw] rounded-full bg-secondary/[0.08] blur-[100px]" />
+      <div className="absolute -right-[15%] bottom-[5%] h-[45vh] w-[45vw] rounded-full bg-primary/[0.06] blur-[90px]" />
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-secondary/40 to-transparent" />
     </div>
   );
 }
 
-function CarouselArrow({
-  direction,
-  onClick,
-  label,
-}: {
-  direction: "prev" | "next";
-  onClick: () => void;
-  label: string;
-}) {
-  return (
-    <motion.button
-      type="button"
-      onClick={onClick}
-      aria-label={label}
-      whileHover={{ scale: 1.06, x: direction === "prev" ? -2 : 2 }}
-      whileTap={{ scale: 0.94 }}
-      className={`products-carousel-arrow glass-card-light absolute top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full text-primary shadow-[0_8px_28px_-8px_rgba(11,95,126,0.22)] transition-all hover:glass-card-hover sm:h-12 sm:w-12 ${
-        direction === "prev" ? "left-0 sm:left-1" : "right-0 sm:right-1"
-      }`}
-    >
-      <svg
-        width="20"
-        height="20"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden
-        className={direction === "prev" ? "" : "rotate-180"}
-      >
-        <path d="M15 18l-6-6 6-6" />
-      </svg>
-    </motion.button>
-  );
-}
-
-function ProductSpotlight({
+function ProductCard({
   product,
   index,
-  showCatalogLink,
+  layout,
 }: {
   product: Product;
   index: number;
-  showCatalogLink: boolean;
+  layout: "horizontal" | "vertical";
 }) {
+  const isHorizontal = layout === "horizontal";
+
   return (
-    <motion.div
-      key={product.id}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.45, ease: EASE }}
-      className="grid items-center gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12"
+    <motion.article
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.5, delay: index * 0.04, ease: EASE }}
+      whileHover={{ y: -4 }}
+      className={`product-grid-card group overflow-hidden rounded-2xl border border-primary/10 bg-white/90 transition-shadow duration-300 hover:border-secondary/30 hover:shadow-[0_16px_40px_-16px_rgba(11,95,126,0.2)] ${
+        isHorizontal ? "flex items-stretch gap-0" : "flex flex-col"
+      }`}
     >
-      <div className="relative order-2 lg:order-1">
-        <motion.div
-          className="absolute -inset-6 rounded-[2.5rem] opacity-70 blur-3xl"
-          style={{ backgroundColor: product.accent }}
-          initial={{ opacity: 0, scale: 0.85 }}
-          animate={{ opacity: 0.28, scale: 1 }}
-          transition={{ duration: 0.8, ease: EASE }}
+      <div
+        className={`relative shrink-0 overflow-hidden ${
+          isHorizontal ? "w-[34%] min-w-[7.5rem] max-w-[9.5rem] sm:w-[32%] sm:max-w-[10.5rem]" : "aspect-[5/4] w-full"
+        }`}
+      >
+        <img
+          src={product.image}
+          alt={product.title}
+          loading="lazy"
+          decoding="async"
+          className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 ${
+            isHorizontal ? "min-h-full" : ""
+          }`}
         />
-        <motion.div
-          className="products-spotlight-frame relative overflow-hidden rounded-[1.75rem] p-1.5 sm:rounded-[2rem]"
-          initial={{ clipPath: "inset(8% 12% 8% 12% round 1.75rem)" }}
-          animate={{ clipPath: "inset(0% 0% 0% 0% round 1.75rem)" }}
-          transition={{ duration: 0.75, ease: EASE }}
-        >
-          <motion.img
-            src={product.image}
-            alt={product.title}
-            loading="lazy"
-            decoding="async"
-            className="aspect-[5/4] w-full rounded-[1.35rem] object-cover sm:aspect-[4/3] sm:rounded-[1.5rem]"
-            initial={{ scale: 1.12 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 1.1, ease: EASE }}
-          />
-          <motion.div
-            className="absolute inset-0 rounded-[1.35rem] sm:rounded-[1.5rem]"
-            style={{
-              background: `linear-gradient(135deg, transparent 40%, ${product.accent}33 100%)`,
-            }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6 }}
-          />
-          <motion.span
-            className="absolute left-5 top-5 rounded-full glass-nav px-3 py-1 text-[13px] font-bold tabular-nums tracking-[0.2em] text-primary"
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15, duration: 0.5, ease: EASE }}
-          >
-            {String(index + 1).padStart(2, "0")}
-          </motion.span>
-        </motion.div>
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `linear-gradient(135deg, transparent 35%, ${product.accent}28 100%)`,
+          }}
+        />
+        <span className="absolute left-3 top-3 rounded-full bg-white/90 px-2 py-0.5 text-[11px] font-bold tabular-nums tracking-wider text-primary shadow-sm">
+          {String(index + 1).padStart(2, "0")}
+        </span>
       </div>
 
-      <div className="order-1 px-1 lg:order-2 lg:px-2">
-        <motion.span
-          className="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.28em] text-secondary"
-          initial={{ opacity: 0, x: -16 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, ease: EASE }}
+      <div className={`flex min-w-0 flex-1 flex-col ${isHorizontal ? "justify-center px-3.5 py-3 sm:px-4 sm:py-3.5" : "p-4 sm:p-5"}`}>
+        <span
+          className="inline-flex w-fit items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-secondary sm:text-[11px]"
         >
-          <span
-            className="inline-block h-1.5 w-1.5 rounded-full"
-            style={{ backgroundColor: product.accent }}
-          />
+          <span className="h-1 w-1 rounded-full" style={{ backgroundColor: product.accent }} />
           {product.category}
-        </motion.span>
-        <motion.h3
-          className="mt-4 text-[clamp(2.15rem,4.8vw,3.75rem)] font-semibold leading-[1.02] tracking-tight text-primary"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.06, duration: 0.55, ease: EASE }}
+        </span>
+        <h3
+          className={`mt-1.5 font-semibold leading-tight text-primary ${
+            isHorizontal ? "text-[15px] sm:text-[16px]" : "text-[17px] sm:text-[18px]"
+          }`}
         >
           {product.title}
-        </motion.h3>
-        <motion.p
-          className="mt-5 max-w-md text-[17px] leading-relaxed text-primary/68"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.12, duration: 0.55, ease: EASE }}
+        </h3>
+        <p
+          className={`mt-1.5 line-clamp-2 leading-relaxed text-primary/65 ${
+            isHorizontal ? "text-[12px] sm:text-[13px]" : "text-[13px] sm:text-[14px]"
+          }`}
         >
           {product.description}
-        </motion.p>
-        <motion.div
-          className="mt-8 flex flex-wrap items-center gap-3"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.18, duration: 0.5, ease: EASE }}
+        </p>
+        <Link
+          to="/quotation"
+          className={`mt-3 inline-flex w-fit items-center gap-1.5 text-[12px] font-semibold text-primary transition-colors group-hover:text-secondary sm:text-[13px] ${
+            isHorizontal ? "mt-2" : "mt-4"
+          }`}
         >
-          <Link
-            to="/quotation"
-            className="gradient-border-cta inline-flex rounded-full px-6 py-3 text-[14px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
-          >
-            Request sourcing
-          </Link>
-          {showCatalogLink && (
-            <Link
-              to="/products"
-              className="gradient-border-cta-outline inline-flex rounded-full px-6 py-3 text-[14px] font-semibold transition-all hover:bg-white/15"
-            >
-              Explore catalog
-            </Link>
-          )}
-        </motion.div>
+          Request sourcing
+          <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
+            →
+          </span>
+        </Link>
       </div>
-    </motion.div>
+    </motion.article>
   );
 }
 
-function ProductRail({
-  activeIndex,
-  onSelect,
-  progress,
-  ringLayoutId,
-}: {
-  activeIndex: number;
-  onSelect: (index: number) => void;
-  progress: number;
-  ringLayoutId: string;
-}) {
-  return (
-    <div className="relative mt-10 lg:mt-12">
-      <div className="mb-4 flex items-center justify-between gap-4 px-1">
-        <span className="text-[12px] font-semibold uppercase tracking-[0.25em] text-primary/45">
-          Browse categories
-        </span>
-        <span className="text-[13px] font-bold tabular-nums tracking-widest text-primary/50">
-          {String(activeIndex + 1).padStart(2, "0")} / {String(PRODUCTS.length).padStart(2, "0")}
-        </span>
-      </div>
-
-      <div className="relative px-10 py-1 sm:px-12 lg:px-14">
-        <CarouselArrow
-          direction="prev"
-          onClick={() => onSelect((activeIndex - 1 + PRODUCTS.length) % PRODUCTS.length)}
-          label="Previous category"
-        />
-        <CarouselArrow
-          direction="next"
-          onClick={() => onSelect((activeIndex + 1) % PRODUCTS.length)}
-          label="Next category"
-        />
-
-        <div className="pointer-events-none absolute inset-y-0 left-10 z-10 w-6 bg-gradient-to-r from-white to-transparent sm:left-12 lg:left-14" />
-        <div className="pointer-events-none absolute inset-y-0 right-10 z-10 w-6 bg-gradient-to-l from-white to-transparent sm:right-12 lg:right-14" />
-
-        <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none sm:gap-3.5">
-          {PRODUCTS.map((product, index) => {
-            const isActive = index === activeIndex;
-            return (
-              <motion.button
-                key={product.id}
-                type="button"
-                onClick={() => onSelect(index)}
-                whileHover={{ y: isActive ? 0 : -4 }}
-                whileTap={{ scale: 0.98 }}
-                className={`group relative w-[min(42vw,168px)] shrink-0 overflow-hidden rounded-2xl text-left transition-shadow duration-500 sm:w-[min(28vw,190px)] lg:w-[min(14vw,210px)] ${
-                  isActive
-                    ? "shadow-[0_16px_48px_-12px_rgba(11,95,126,0.22)]"
-                    : "opacity-80 hover:opacity-100"
-                }`}
-              >
-                <div
-                  className={`relative aspect-[4/5] overflow-hidden rounded-2xl border transition-colors duration-500 ${
-                    isActive ? "border-secondary/50" : "border-primary/10 group-hover:border-primary/25"
-                  }`}
-                >
-                  <img
-                    src={product.image}
-                    alt={product.title}
-                    loading="lazy"
-                    decoding="async"
-                    className={`h-full w-full object-cover transition-transform duration-700 ${
-                      isActive ? "scale-105" : "scale-100 group-hover:scale-105"
-                    }`}
-                  />
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      background: isActive
-                        ? `linear-gradient(to top, ${product.accent}88 0%, transparent 62%)`
-                        : "linear-gradient(to top, rgba(11,95,126,0.55) 0%, transparent 55%)",
-                    }}
-                  />
-                  {isActive && (
-                    <motion.div
-                      layoutId={ringLayoutId}
-                      className="absolute inset-0 rounded-2xl ring-2 ring-secondary/60 ring-offset-2 ring-offset-section"
-                      transition={{ type: "spring", stiffness: 380, damping: 32 }}
-                    />
-                  )}
-                  <div className="absolute inset-x-0 bottom-0 p-3">
-                    <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/75">
-                      {product.category}
-                    </span>
-                    <p className="mt-0.5 text-[14px] font-semibold leading-tight text-white">{product.title}</p>
-                  </div>
-                </div>
-                {isActive && (
-                  <motion.div
-                    className="absolute -bottom-0.5 left-3 right-3 h-0.5 overflow-hidden rounded-full bg-primary/10"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                  >
-                    <motion.div
-                      className="h-full origin-left rounded-full bg-gradient-to-r from-secondary to-accent"
-                      style={{ scaleX: progress }}
-                    />
-                  </motion.div>
-                )}
-              </motion.button>
-            );
-          })}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function ProductsCarouselHeader({
+function ProductsHeader({
   showViewAllLink,
   scrollTriggered,
 }: {
@@ -348,51 +159,56 @@ function ProductsCarouselHeader({
   );
 }
 
-function ProductsCarousel({ variant, showHeader = true }: { variant: "page" | "section"; showHeader?: boolean }) {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [progress, setProgress] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const activeProduct = PRODUCTS[activeIndex];
+function ProductGrid({
+  products,
+  isSection,
+}: {
+  products: Product[];
+  isSection: boolean;
+}) {
+  return (
+    <>
+      <div className="mb-5 flex items-center justify-between gap-4 px-0.5">
+        <span className="text-[12px] font-semibold uppercase tracking-[0.25em] text-primary/45">
+          {isSection ? "Featured categories" : "All product categories"}
+        </span>
+        <span className="text-[13px] font-bold tabular-nums tracking-widest text-primary/50">
+          {isSection
+            ? `${String(products.length).padStart(2, "0")} of ${String(PRODUCTS.length).padStart(2, "0")}`
+            : `${String(PRODUCTS.length).padStart(2, "0")} categories`}
+        </span>
+      </div>
+
+      <div className="flex flex-col gap-3 md:hidden">
+        {products.map((product, index) => (
+          <ProductCard key={product.id} product={product} index={index} layout="horizontal" />
+        ))}
+      </div>
+
+      <div
+        className={`hidden gap-4 md:grid ${
+          isSection ? "md:grid-cols-2 lg:grid-cols-4" : "md:grid-cols-2 lg:hidden"
+        }`}
+      >
+        {products.map((product, index) => (
+          <ProductCard key={product.id} product={product} index={index} layout="vertical" />
+        ))}
+      </div>
+
+      {!isSection && (
+        <div className="hidden gap-4 lg:grid lg:grid-cols-5">
+          {products.map((product, index) => (
+            <ProductCard key={product.id} product={product} index={index} layout="vertical" />
+          ))}
+        </div>
+      )}
+    </>
+  );
+}
+
+export function ProductsShowcase({ variant = "page", showHeader = true }: ProductsShowcaseProps) {
   const isSection = variant === "section";
-
-  const goTo = useCallback((index: number) => {
-    setActiveIndex(index);
-    setProgress(0);
-  }, []);
-
-  const goNext = useCallback(() => {
-    setActiveIndex((current) => (current + 1) % PRODUCTS.length);
-    setProgress(0);
-  }, []);
-
-  const goPrev = useCallback(() => {
-    setActiveIndex((current) => (current - 1 + PRODUCTS.length) % PRODUCTS.length);
-    setProgress(0);
-  }, []);
-
-  useEffect(() => {
-    if (paused) return;
-
-    const duration = 5200;
-    const start = performance.now();
-    let frameId = 0;
-
-    const tick = (now: number) => {
-      const elapsed = now - start;
-      const nextProgress = Math.min(1, elapsed / duration);
-      setProgress(nextProgress);
-
-      if (nextProgress >= 1) {
-        goNext();
-        return;
-      }
-
-      frameId = requestAnimationFrame(tick);
-    };
-
-    frameId = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frameId);
-  }, [activeIndex, paused, goNext]);
+  const displayedProducts = isSection ? PRODUCTS.slice(0, HOME_PRODUCTS_LIMIT) : PRODUCTS;
 
   return (
     <section
@@ -400,51 +216,33 @@ function ProductsCarousel({ variant, showHeader = true }: { variant: "page" | "s
       className={`content-auto relative overflow-hidden bg-white py-20 lg:py-28 ${
         isSection ? "border-t border-primary/10" : ""
       }`}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocusCapture={() => setPaused(true)}
-      onBlurCapture={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
-          setPaused(false);
-        }
-      }}
     >
-      <ProductsSectionBackground accent={activeProduct.accent} />
+      <ProductsSectionBackground />
 
       <div className="relative z-10 mx-auto max-w-[1280px] px-6 lg:px-10">
-        {showHeader && (
-          <ProductsCarouselHeader showViewAllLink={isSection} scrollTriggered={isSection} />
-        )}
+        {showHeader && <ProductsHeader showViewAllLink={isSection} scrollTriggered={isSection} />}
 
-        <div
-          className={`relative px-10 sm:px-12 lg:px-14 ${
-            showHeader ? "mt-12 min-h-[420px] sm:min-h-[460px] lg:mt-14 lg:min-h-[400px]" : "min-h-[420px] sm:min-h-[460px] lg:min-h-[400px]"
-          }`}
-        >
-          <CarouselArrow direction="prev" onClick={goPrev} label="Previous product" />
-          <CarouselArrow direction="next" onClick={goNext} label="Next product" />
-
-          <AnimatePresence mode="wait">
-            <ProductSpotlight
-              key={activeProduct.id}
-              product={activeProduct}
-              index={activeIndex}
-              showCatalogLink={isSection}
-            />
-          </AnimatePresence>
+        <div className={showHeader ? "mt-10 lg:mt-12" : ""}>
+          <ProductGrid products={displayedProducts} isSection={isSection} />
         </div>
 
-        <ProductRail
-          activeIndex={activeIndex}
-          onSelect={goTo}
-          progress={progress}
-          ringLayoutId={isSection ? "home-product-active-ring" : "page-product-active-ring"}
-        />
+        {!isSection && (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.6, ease: EASE }}
+            className="mt-10 flex flex-wrap justify-center gap-3 lg:mt-12"
+          >
+            <Link
+              to="/quotation"
+              className="gradient-border-cta rounded-full px-6 py-3 text-[14px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
+            >
+              Request sourcing
+            </Link>
+          </motion.div>
+        )}
       </div>
     </section>
   );
-}
-
-export function ProductsShowcase({ variant = "page", showHeader = true }: ProductsShowcaseProps) {
-  return <ProductsCarousel variant={variant} showHeader={showHeader} />;
 }

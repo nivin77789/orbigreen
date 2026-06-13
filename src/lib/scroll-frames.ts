@@ -1,4 +1,4 @@
-/** Total frames in src/hero bg image frames/ */
+/** Total frames in src/new background image frames/ */
 export const FRAME_COUNT = 240;
 
 /** Scroll progress (0–1) → 1-based frame number, synced to storytelling beats. */
@@ -20,5 +20,5 @@ export function scrollProgressToFrame(progress: number): number {
 export function frameUrl(frameNumber: number): string {
   const n = Math.min(FRAME_COUNT, Math.max(1, frameNumber));
   const padded = String(n).padStart(3, "0");
-  return new URL(`../hero bg image frames/ezgif-frame-${padded}.png`, import.meta.url).href;
+  return new URL(`../new background image frames/ezgif-frame-${padded}.png`, import.meta.url).href;
 }
