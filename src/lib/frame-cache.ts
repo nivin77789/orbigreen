@@ -35,7 +35,7 @@ export function preloadFramesAround(frameNumber: number, radius = 4) {
 
 export function preloadInitialFrames() {
   preloadFramesAround(1, 6);
-  preloadFramesAround(46, 2);
+  preloadFramesAround(37, 2);
 }
 
 function loadFrame(frameNumber: number): Promise<void> {

@@ -5,6 +5,7 @@ import { HeroFrameCanvas } from "@/components/HeroFrameCanvas";
 import { useInView } from "@/hooks/useInView";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import { HomeAboutSection } from "@/components/HomeAboutSection";
 import { HomeMetricsStrip } from "@/components/HomeMetricsStrip";
 import { IndustriesSection } from "@/components/IndustriesSection";
 import { ProductsShowcase } from "@/components/ProductsShowcase";
@@ -13,7 +14,7 @@ import { AnimatedStatValue } from "@/components/AnimatedStatValue";
 function ScrollHint() {
   return (
     <div className="pointer-events-none absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3">
-      <span className="text-[10px] uppercase tracking-[0.3em] text-body/45">Scroll</span>
+      <span className="text-[12px] uppercase tracking-[0.3em] text-body/45">Scroll</span>
       <div className="h-10 w-px bg-gradient-to-b from-secondary to-transparent" />
     </div>
   );
@@ -59,19 +60,19 @@ function MetricsServices({ visible }: { visible: boolean }) {
       <div className="hero-scroll-panel rounded-[1.35rem] p-4 sm:rounded-2xl sm:p-5 lg:p-5">
         <div className="hero-scroll-panel__content grid grid-cols-1 gap-5 md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] md:items-center md:gap-0">
           <div className="hero-scroll-metrics flex flex-col items-center justify-center text-center md:min-h-[13rem] md:pr-5">
-            <span className="text-[9px] font-bold uppercase tracking-[0.26em] text-primary/55 sm:text-[10px]">
+            <span className="text-[11px] font-bold uppercase tracking-[0.26em] text-primary/55 sm:text-[12px]">
               By the Numbers
             </span>
-            <div className="mt-4 grid w-full max-w-[15rem] grid-cols-2 place-items-center gap-x-5 gap-y-5 sm:max-w-[16rem] sm:gap-x-6 sm:gap-y-6">
+            <div className="mt-4 grid w-full max-w-[16rem] grid-cols-2 place-items-center gap-x-5 gap-y-5 sm:max-w-[18rem] sm:gap-x-6 sm:gap-y-6">
               {metrics.map((m, i) => (
                 <div key={m.l} className="flex w-full flex-col items-center text-center">
                   <AnimatedStatValue
                     value={m.n}
                     immediate
                     delay={i * 0.1}
-                    className="text-[clamp(1.35rem,3.2vw,1.9rem)] font-semibold leading-none tracking-tight text-primary"
+                    className="text-[clamp(1.5rem,3.5vw,2.15rem)] font-semibold leading-none tracking-tight text-primary"
                   />
-                  <div className="mt-1 max-w-[6.5rem] text-[9px] font-semibold uppercase leading-snug tracking-[0.14em] text-primary/52 sm:text-[10px]">
+                  <div className="mt-1 max-w-[7rem] text-[11px] font-semibold uppercase leading-snug tracking-[0.14em] text-primary/52 sm:text-[12px]">
                     {m.l}
                   </div>
                 </div>
@@ -80,7 +81,7 @@ function MetricsServices({ visible }: { visible: boolean }) {
           </div>
 
           <div id="services" className="hero-scroll-panel__divider md:pl-5">
-            <span className="text-[9px] font-bold uppercase tracking-[0.26em] text-secondary sm:text-[10px]">
+            <span className="text-[11px] font-bold uppercase tracking-[0.26em] text-secondary sm:text-[12px]">
               Our Services
             </span>
             <div className="mt-3 flex flex-col gap-2">
@@ -91,10 +92,10 @@ function MetricsServices({ visible }: { visible: boolean }) {
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <div className="min-w-0 flex-1">
-                      <h4 className="text-[12px] font-semibold leading-snug tracking-tight text-primary sm:text-[13px]">
+                      <h4 className="text-[14px] font-semibold leading-snug tracking-tight text-primary sm:text-[15px]">
                         {s.t}
                       </h4>
-                      <p className="mt-0.5 line-clamp-2 text-[11px] leading-relaxed text-primary/62 sm:line-clamp-none sm:text-[12px]">
+                      <p className="mt-0.5 line-clamp-2 text-[13px] leading-relaxed text-primary/62 sm:line-clamp-none sm:text-[14px]">
                         {s.d}
                       </p>
                     </div>
@@ -153,8 +154,8 @@ function Workflow() {
           transition={{ duration: 0.75, ease: WORKFLOW_EASE }}
           className="text-center lg:text-left"
         >
-          <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-secondary">How We Work</span>
-          <h3 className="mt-4 text-balance text-[clamp(1.85rem,3.8vw,2.85rem)] font-semibold leading-[1.06] tracking-tight text-primary">
+          <span className="text-[12px] font-bold uppercase tracking-[0.32em] text-secondary">How We Work</span>
+          <h3 className="mt-4 text-balance text-[clamp(2rem,4vw,3.1rem)] font-semibold leading-[1.06] tracking-tight text-primary">
             A clear, engineered{" "}
             <span className="bg-gradient-to-br from-primary via-primary to-secondary bg-clip-text text-transparent">
               sourcing workflow.
@@ -186,16 +187,16 @@ function Workflow() {
               <div className="workflow-step-card__glow" aria-hidden />
               <div className="workflow-step-card__edge" aria-hidden />
               <div className="relative z-10 flex items-start justify-between gap-2">
-                <span className="workflow-step-card__index flex h-9 w-9 shrink-0 items-center justify-center rounded-[0.85rem] text-[11px] font-bold tabular-nums tracking-tight sm:h-10 sm:w-10 sm:text-[12px]">
+                <span className="workflow-step-card__index flex h-9 w-9 shrink-0 items-center justify-center rounded-[0.85rem] text-[13px] font-bold tabular-nums tracking-tight sm:h-10 sm:w-10 sm:text-[14px]">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <span className="workflow-step-card__connector hidden h-px flex-1 self-center sm:block" aria-hidden />
               </div>
               <div className="relative z-10 mt-3.5 flex flex-1 flex-col sm:mt-4">
-                <h4 className="text-[12px] font-semibold leading-snug tracking-tight text-primary sm:text-[14px]">
+                <h4 className="text-[14px] font-semibold leading-snug tracking-tight text-primary sm:text-[16px]">
                   {s.t}
                 </h4>
-                <p className="mt-2 text-[10px] leading-relaxed text-primary/72 sm:text-[11px]">{s.d}</p>
+                <p className="mt-2 text-[12px] leading-relaxed text-primary/72 sm:text-[14px]">{s.d}</p>
               </div>
             </motion.li>
           ))}
@@ -213,33 +214,33 @@ function HeroCopy({ visible }: { visible: boolean }) {
       transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
       className="hero-copy-block pointer-events-auto mx-auto max-w-3xl rounded-2xl px-5 py-7 text-center sm:px-8 sm:py-8"
     >
-      <span className="inline-flex items-center gap-2 rounded-full border border-primary/15 bg-white/50 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.25em] text-primary/80 backdrop-blur-sm">
+      <span className="inline-flex items-center gap-2 rounded-full border border-primary/15 bg-white/50 px-3 py-1 text-[12px] font-semibold uppercase tracking-[0.25em] text-primary/80 backdrop-blur-sm">
         <span className="h-1.5 w-1.5 rounded-full bg-secondary shadow-[0_0_8px_rgba(92,191,42,0.45)]" />
         Orbigreen Techsource
       </span>
-      <h1 className="mt-6 text-balance text-[clamp(2.25rem,6vw,5.25rem)] font-semibold leading-[0.98] tracking-[-0.03em] text-primary">
+      <h1 className="mt-6 text-balance text-[clamp(2.5rem,6.5vw,5.75rem)] font-semibold leading-[0.98] tracking-[-0.03em] text-primary">
         Industrial Sourcing{" "}
         <span className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-transparent">
           Excellence.
         </span>
       </h1>
-      <p className="mt-5 text-[clamp(1.05rem,1.5vw,1.3rem)] font-medium tracking-tight text-primary/90">
+      <p className="mt-5 text-[clamp(1.15rem,1.7vw,1.45rem)] font-medium tracking-tight text-primary/90">
         Smart. Sustainable. Sourcing.
       </p>
-      <p className="mx-auto mt-4 max-w-xl text-pretty text-[14px] leading-relaxed text-primary/78 sm:text-[15px]">
+      <p className="mx-auto mt-4 max-w-xl text-pretty text-[16px] leading-relaxed text-primary/78 sm:text-[17px]">
         Your single-window sourcing solution for industrial engineering machinery, parts, and services — delivering
         sustainable supply solutions worldwide.
       </p>
       <div className="mt-8 flex flex-wrap items-center justify-center gap-3 sm:mt-9">
         <Link
           to="/services"
-          className="hero-copy-btn gradient-border-cta rounded-full px-6 py-3 text-[13px] font-medium transition-all hover:translate-x-[-1px] hover:translate-y-[-1px]"
+          className="hero-copy-btn gradient-border-cta rounded-full px-6 py-3 text-[14px] font-medium transition-all hover:translate-x-[-1px] hover:translate-y-[-1px]"
         >
           Our Services
         </Link>
         <Link
           to="/contact"
-          className="hero-copy-btn hero-copy-btn--outline gradient-border-cta-outline rounded-full px-6 py-3 text-[13px] font-semibold transition-all hover:translate-x-[-1px] hover:translate-y-[-1px]"
+          className="hero-copy-btn hero-copy-btn--outline gradient-border-cta-outline rounded-full px-6 py-3 text-[14px] font-semibold transition-all hover:translate-x-[-1px] hover:translate-y-[-1px]"
         >
           Get in Touch
         </Link>
@@ -256,14 +257,14 @@ function ClosingCTA({ visible }: { visible: boolean }) {
       transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
       className="pointer-events-auto mx-auto max-w-3xl px-6 text-center"
     >
-      <h2 className="text-balance text-[clamp(2.25rem,5.5vw,4.5rem)] font-semibold leading-none tracking-[-0.03em] text-body">
+      <h2 className="text-balance text-[clamp(2.5rem,5.8vw,4.85rem)] font-semibold leading-none tracking-[-0.03em] text-body">
         Ready to Optimize
         <br />
         <span className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-transparent">
           Your Supply Chain?
         </span>
       </h2>
-      <p className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-body/70">
+      <p className="mx-auto mt-5 max-w-xl text-[17px] leading-relaxed text-body/70">
         Let's discuss how Orbigreen Techsource can streamline your sourcing and secure your procurement process.
       </p>
     </motion.div>
@@ -326,6 +327,7 @@ export default function HomePage() {
         </div>
       </section>
 
+      <HomeAboutSection />
       <HomeMetricsStrip />
       <ProductsShowcase variant="section" />
       <IndustriesSection />

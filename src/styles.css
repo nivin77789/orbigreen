@@ -877,7 +877,7 @@
   min-width: 1.65rem;
   height: 1.35rem;
   border-radius: 0.45rem;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;
   color: var(--primary);
@@ -1065,6 +1065,14 @@
 }
 
 .global-presence-grid {
+  background-image:
+    linear-gradient(rgba(11, 95, 126, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(11, 95, 126, 0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, black 15%, transparent 72%);
+}
+
+.home-about-section-grid {
   background-image:
     linear-gradient(rgba(11, 95, 126, 0.035) 1px, transparent 1px),
     linear-gradient(90deg, rgba(11, 95, 126, 0.035) 1px, transparent 1px);

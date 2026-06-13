@@ -30,14 +30,14 @@ export function IndustriesSection() {
             transition={{ duration: 0.7, ease: EASE }}
             className="max-w-xl"
           >
-            <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-secondary">Industries We Serve</span>
-            <h2 className="mt-3 text-[clamp(1.75rem,3vw,2.5rem)] font-semibold leading-[1.08] tracking-tight text-primary">
+            <span className="text-[12px] font-bold uppercase tracking-[0.3em] text-secondary">Industries We Serve</span>
+            <h2 className="mt-3 text-[clamp(1.9rem,3.2vw,2.75rem)] font-semibold leading-[1.08] tracking-tight text-primary">
               Sourcing across{" "}
               <span className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-transparent">
                 12 sectors
               </span>
             </h2>
-            <p className="mt-3 text-[15px] leading-relaxed text-primary/60">
+            <p className="mt-3 text-[17px] leading-relaxed text-primary/60">
               Qualified suppliers, quality assurance, and logistics for diverse manufacturing programs.
             </p>
             <div className="industries-heading-line mt-5" />
@@ -53,9 +53,9 @@ export function IndustriesSection() {
             <AnimatedStatValue
               value="12"
               delay={0.15}
-              className="block text-[clamp(2rem,4vw,2.75rem)] font-semibold leading-none tracking-tight text-primary"
+              className="block text-[clamp(2.15rem,4.2vw,3rem)] font-semibold leading-none tracking-tight text-primary"
             />
-            <span className="mt-1 block text-[10px] font-bold uppercase tracking-[0.22em] text-primary/55">
+            <span className="mt-1 block text-[12px] font-bold uppercase tracking-[0.22em] text-primary/55">
               Industrial Sectors
             </span>
           </motion.div>
@@ -84,10 +84,10 @@ export function IndustriesSection() {
                 </div>
 
                 <div className="min-w-0">
-                  <h3 className="text-[13px] font-semibold leading-tight tracking-tight text-primary sm:text-[14px]">
+                  <h3 className="text-[14px] font-semibold leading-tight tracking-tight text-primary sm:text-[15px]">
                     {industry.name}
                   </h3>
-                  <p className="industry-card__tagline mt-1 text-[11px] leading-snug text-primary/52 sm:text-[12px]">
+                  <p className="industry-card__tagline mt-1 text-[12px] leading-snug text-primary/52 sm:text-[13px]">
                     {industry.tagline}
                   </p>
                 </div>

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import globalNetworkMap from "@/assets/global-network-map.webp";
 import { GLOBAL_HUBS } from "@/data/globalHubsData";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -10,32 +9,8 @@ export function GlobalNetworkMap() {
   const activeHub = GLOBAL_HUBS.find((h) => h.id === activeId) ?? GLOBAL_HUBS[0];
 
   return (
-    <div className="flex flex-col gap-8 lg:gap-10">
+    <div>
       <motion.div
-        initial={{ opacity: 0, scale: 0.98 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, ease: EASE }}
-        className="global-map-frame relative overflow-hidden rounded-[1.75rem] border border-primary/10 bg-white p-3 shadow-[0_16px_56px_rgba(11,95,126,0.12)] sm:p-4"
-      >
-        <div className="global-map-frame__glow pointer-events-none absolute inset-0" aria-hidden />
-        <figure className="relative overflow-hidden rounded-[1.25rem]">
-          <motion.img
-            src={globalNetworkMap}
-            alt="Orbigreen global network map"
-            className="h-auto w-full object-contain"
-            loading="lazy"
-            decoding="async"
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.9, ease: EASE }}
-          />
-        </figure>
-      </motion.div>
-
-      <div>
-        <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -101,7 +76,6 @@ export function GlobalNetworkMap() {
             {activeHub.description}
           </motion.p>
         </AnimatePresence>
-      </div>
     </div>
   );
 }

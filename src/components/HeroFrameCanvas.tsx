@@ -5,7 +5,7 @@ import { usePageVisible } from "@/hooks/usePageVisible";
 
 /**
  * Sticky full-screen canvas playing the hero frame sequence from
- * src/new bg/, scrubbed by scroll progress.
+ * src/hero bg image frames/, scrubbed by scroll progress.
  */
 export function HeroFrameCanvas({
   progressRef,

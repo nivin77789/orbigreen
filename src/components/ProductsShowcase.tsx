@@ -119,7 +119,7 @@ function ProductSpotlight({
             transition={{ duration: 0.6 }}
           />
           <motion.span
-            className="absolute left-5 top-5 rounded-full glass-nav px-3 py-1 text-[11px] font-bold tabular-nums tracking-[0.2em] text-primary"
+            className="absolute left-5 top-5 rounded-full glass-nav px-3 py-1 text-[13px] font-bold tabular-nums tracking-[0.2em] text-primary"
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15, duration: 0.5, ease: EASE }}
@@ -131,7 +131,7 @@ function ProductSpotlight({
 
       <div className="order-1 px-1 lg:order-2 lg:px-2">
         <motion.span
-          className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.28em] text-secondary"
+          className="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.28em] text-secondary"
           initial={{ opacity: 0, x: -16 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, ease: EASE }}
@@ -143,7 +143,7 @@ function ProductSpotlight({
           {product.category}
         </motion.span>
         <motion.h3
-          className="mt-4 text-[clamp(2rem,4.5vw,3.5rem)] font-semibold leading-[1.02] tracking-tight text-primary"
+          className="mt-4 text-[clamp(2.15rem,4.8vw,3.75rem)] font-semibold leading-[1.02] tracking-tight text-primary"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.06, duration: 0.55, ease: EASE }}
@@ -151,7 +151,7 @@ function ProductSpotlight({
           {product.title}
         </motion.h3>
         <motion.p
-          className="mt-5 max-w-md text-[15px] leading-relaxed text-primary/68"
+          className="mt-5 max-w-md text-[17px] leading-relaxed text-primary/68"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.12, duration: 0.55, ease: EASE }}
@@ -166,14 +166,14 @@ function ProductSpotlight({
         >
           <Link
             to="/quotation"
-            className="gradient-border-cta inline-flex rounded-full px-6 py-3 text-[13px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
+            className="gradient-border-cta inline-flex rounded-full px-6 py-3 text-[14px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
           >
             Request sourcing
           </Link>
           {showCatalogLink && (
             <Link
               to="/products"
-              className="gradient-border-cta-outline inline-flex rounded-full px-6 py-3 text-[13px] font-semibold transition-all hover:bg-white/15"
+              className="gradient-border-cta-outline inline-flex rounded-full px-6 py-3 text-[14px] font-semibold transition-all hover:bg-white/15"
             >
               Explore catalog
             </Link>
@@ -198,10 +198,10 @@ function ProductRail({
   return (
     <div className="relative mt-10 lg:mt-12">
       <div className="mb-4 flex items-center justify-between gap-4 px-1">
-        <span className="text-[10px] font-semibold uppercase tracking-[0.25em] text-primary/45">
+        <span className="text-[12px] font-semibold uppercase tracking-[0.25em] text-primary/45">
           Browse categories
         </span>
-        <span className="text-[11px] font-bold tabular-nums tracking-widest text-primary/50">
+        <span className="text-[13px] font-bold tabular-nums tracking-widest text-primary/50">
           {String(activeIndex + 1).padStart(2, "0")} / {String(PRODUCTS.length).padStart(2, "0")}
         </span>
       </div>
@@ -267,10 +267,10 @@ function ProductRail({
                     />
                   )}
                   <div className="absolute inset-x-0 bottom-0 p-3">
-                    <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-white/75">
+                    <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/75">
                       {product.category}
                     </span>
-                    <p className="mt-0.5 text-[13px] font-semibold leading-tight text-white">{product.title}</p>
+                    <p className="mt-0.5 text-[14px] font-semibold leading-tight text-white">{product.title}</p>
                   </div>
                 </div>
                 {isActive && (
@@ -317,14 +317,14 @@ function ProductsCarouselHeader({
   return (
     <motion.div {...motionProps} className="flex flex-wrap items-end justify-between gap-6">
       <div className="max-w-2xl">
-        <span className="text-[10px] uppercase tracking-[0.3em] text-secondary">Our Products</span>
-        <h2 className="mt-3 text-balance text-[clamp(1.85rem,3.5vw,2.85rem)] font-semibold leading-[1.08] tracking-tight text-primary">
+        <span className="text-[12px] uppercase tracking-[0.3em] text-secondary">Our Products</span>
+        <h2 className="mt-3 text-balance text-[clamp(2rem,3.8vw,3rem)] font-semibold leading-[1.08] tracking-tight text-primary">
           Industrial components,{" "}
           <span className="bg-gradient-to-br from-primary via-primary to-secondary bg-clip-text text-transparent">
             sourced to spec
           </span>
         </h2>
-        <p className="mt-4 max-w-lg text-[14px] leading-relaxed text-primary/60">
+        <p className="mt-4 max-w-lg text-[16px] leading-relaxed text-primary/60">
           Precision-machined, fabricated, and assembled parts — qualified across global supply networks and
           delivered to your engineering standards.
         </p>
@@ -332,7 +332,7 @@ function ProductsCarouselHeader({
       {showViewAllLink && (
         <Link
           to="/products"
-          className="group glass-card-light inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[12px] font-semibold text-primary transition-all hover:glass-card-hover"
+          className="group glass-card-light inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[14px] font-semibold text-primary transition-all hover:glass-card-hover"
         >
           View all products
           <motion.span
