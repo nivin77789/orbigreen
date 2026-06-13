@@ -45,31 +45,35 @@ function RollingDigit({
   delay,
   started,
   tone,
+  immediate = false,
 }: {
   target: number;
   delay: number;
   started: boolean;
   tone: StatTone;
+  immediate?: boolean;
 }) {
   const toneClass = tone === "gradient" ? "animated-stat-tone--gradient" : "animated-stat-tone--solid";
+  const showTarget = started || immediate;
 
   return (
-    <span className="animated-stat-digit inline-block h-[1em] w-[0.62em] overflow-hidden align-baseline tabular-nums">
+    <span className="animated-stat-digit" aria-hidden="true">
       <motion.span
-        className="animated-stat-digit__stack flex flex-col"
-        initial={{ y: 0 }}
-        animate={started ? { y: `-${target}em` } : { y: 0 }}
-        transition={{
-          duration: 1.65,
-          delay,
-          ease: [0.16, 1, 0.3, 1],
-        }}
+        className="animated-stat-digit__stack"
+        initial={false}
+        animate={{ y: showTarget ? `-${target}em` : "0em" }}
+        transition={
+          immediate
+            ? { duration: 0 }
+            : {
+                duration: 1.65,
+                delay,
+                ease: [0.16, 1, 0.3, 1],
+              }
+        }
       >
         {Array.from({ length: 10 }, (_, digit) => (
-          <span
-            key={digit}
-            className={`animated-stat-digit__cell ${toneClass} flex h-[1em] items-center justify-center`}
-          >
+          <span key={digit} className={`animated-stat-digit__cell ${toneClass}`}>
             {digit}
           </span>
         ))}
@@ -124,11 +128,11 @@ export function AnimatedStatValue({ value, className, delay = 0, immediate = fal
   return (
     <span
       ref={ref}
-      className={`animated-stat-value inline-flex items-baseline tabular-nums ${layoutClass ?? ""}`}
+      className={`animated-stat-value inline-flex items-start tabular-nums ${layoutClass ?? ""}`}
       aria-label={value}
     >
       {parsed.prefix ? <span className={toneClass}>{parsed.prefix}</span> : null}
-      <span className="inline-flex items-baseline">
+      <span className="animated-stat-value__digits inline-flex items-start">
         {parsed.digits.map((digit, i) => (
           <RollingDigit
             key={`${value}-${i}`}
@@ -136,6 +140,7 @@ export function AnimatedStatValue({ value, className, delay = 0, immediate = fal
             delay={delay + i * 0.09}
             started={started}
             tone={tone}
+            immediate={immediate}
           />
         ))}
       </span>

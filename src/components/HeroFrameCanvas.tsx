@@ -84,9 +84,6 @@ export function HeroFrameCanvas({
         ctx.fillRect(0, 0, w, h);
         drawCover(img);
 
-        ctx.fillStyle = "rgba(255, 255, 255, 0.1)";
-        ctx.fillRect(0, 0, w, h);
-
         if (closingGlow) {
           const t = (p - 0.85) / 0.15;
           const cx = w / 2;
