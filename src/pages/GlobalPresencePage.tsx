@@ -5,7 +5,7 @@ import { Footer } from "@/components/Footer";
 import { GlobalNetworkMap } from "@/components/GlobalNetworkMap";
 import { AnimatedStatValue } from "@/components/AnimatedStatValue";
 import { NETWORK_CORRIDORS } from "@/data/globalHubsData";
-import globalNetworkBanner from "@/assets/global-network-banner.webp";
+import globalNetworkBanner from "@/assets/global-network-banner.png";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -58,7 +58,7 @@ function GlobalNetworkHero() {
         <img
           src={globalNetworkBanner}
           alt=""
-          className="h-full w-full object-cover object-[70%_center] sm:object-[right_center]"
+          className="h-full w-full object-cover object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-white from-30% via-white/92 to-white/45 sm:from-35% lg:via-white/75 lg:to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-b from-white/50 via-transparent to-white" />
