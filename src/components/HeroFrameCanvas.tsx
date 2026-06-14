@@ -51,7 +51,11 @@ export function HeroFrameCanvas({
       const scale = Math.max(w / iw, h / ih);
       const sw = iw * scale;
       const sh = ih * scale;
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = "high";
+      ctx.filter = "contrast(1.05) saturate(1.04)";
       ctx.drawImage(img, (w - sw) / 2, (h - sh) / 2, sw, sh);
+      ctx.filter = "none";
     };
 
     const draw = () => {
