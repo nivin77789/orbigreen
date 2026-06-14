@@ -20,5 +20,5 @@ export function scrollProgressToFrame(progress: number): number {
 export function frameUrl(frameNumber: number): string {
   const n = Math.min(FRAME_COUNT, Math.max(1, frameNumber));
   const padded = String(n).padStart(3, "0");
-  return new URL(`../new background image frames/ezgif-frame-${padded}.png`, import.meta.url).href;
+  return `/hero-bg-frames/ezgif-frame-${padded}.webp`;
 }

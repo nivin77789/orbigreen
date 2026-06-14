@@ -122,22 +122,22 @@ function HeroCopy({ visible }: { visible: boolean }) {
       initial={false}
       animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
       transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-      className="hero-copy-plain pointer-events-auto w-full max-w-sm px-5 py-6 text-left sm:max-w-md sm:px-7 sm:py-8 lg:max-w-md"
+      className="hero-copy-plain pointer-events-auto mx-auto flex w-full max-w-sm flex-col items-center px-5 py-6 text-center sm:max-w-md sm:px-7 sm:py-8 lg:max-w-lg"
     >
-      <span className="inline-flex items-center gap-2 text-[12px] lg:text-[13px] font-semibold uppercase tracking-[0.25em] text-primary/75">
+      <span className="inline-flex items-center gap-2 text-[12px] lg:text-[13px] font-semibold uppercase tracking-[0.25em] text-white">
         <span className="h-1.5 w-1.5 rounded-full bg-secondary shadow-[0_0_8px_rgba(92,191,42,0.45)]" />
         Orbigreen Techsource
       </span>
       <h1 className="mt-5 text-balance text-[clamp(1.875rem,4.8vw,3.75rem)] font-semibold leading-[1.02] tracking-[-0.03em] text-primary sm:mt-6">
         Driving Sustainable{" "}
-        <span className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-transparent">
+        <span className="text-white">
           Industrial Solutions
         </span>
       </h1>
-      <p className="mt-4 max-w-xs text-pretty text-[clamp(1.05rem,1.5vw,1.3rem)] font-medium leading-snug tracking-tight text-primary/85">
+      <p className="mt-4 max-w-md text-pretty text-[clamp(1.05rem,1.5vw,1.3rem)] font-medium leading-snug tracking-tight text-white">
         Engineering-led sourcing for OEMs worldwide.
       </p>
-      <div className="mt-7 flex flex-wrap items-center justify-start gap-3 sm:mt-8">
+      <div className="mt-7 flex flex-wrap items-center justify-center gap-3 sm:mt-8">
         <Link
           to="/services"
           className="hero-copy-btn gradient-border-cta rounded-full px-6 py-3 text-[14px] lg:text-[15px] font-medium transition-all hover:translate-x-[-1px] hover:translate-y-[-1px]"
@@ -217,7 +217,7 @@ export default function HomePage() {
 
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_80%_at_50%_50%,transparent_55%,#F5F8F7_100%)]" />
 
-          <div className="absolute inset-0 flex items-center justify-start px-5 sm:px-8 lg:px-12 xl:px-16">
+          <div className="absolute inset-0 flex items-center justify-center px-5 sm:px-8 lg:px-12 xl:px-16">
             {phase === "hero" && (
               <>
                 <HeroCopy visible />

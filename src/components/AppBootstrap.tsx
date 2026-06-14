@@ -1,7 +1,7 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { AnimatePresence } from "framer-motion";
 import { SiteLoader } from "@/components/SiteLoader";
-import { preloadAllFrames } from "@/lib/frame-cache";
+import { preloadEssentialFrames, preloadAllFrames } from "@/lib/frame-cache";
 
 const MIN_LOADER_MS = 1400;
 
@@ -21,7 +21,7 @@ export function AppBootstrap({ children }: AppBootstrapProps) {
         window.setTimeout(resolve, MIN_LOADER_MS);
       });
 
-      const preload = preloadAllFrames((loaded, total) => {
+      const preload = preloadEssentialFrames((loaded, total) => {
         if (!cancelled) {
           setProgress(Math.round((loaded / total) * 100));
         }
@@ -33,6 +33,7 @@ export function AppBootstrap({ children }: AppBootstrapProps) {
 
       setProgress(100);
       setReady(true);
+      void preloadAllFrames();
     };
 
     void run();

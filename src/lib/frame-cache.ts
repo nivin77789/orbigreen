@@ -34,7 +34,7 @@ export function preloadFramesAround(frameNumber: number, radius = 4) {
 }
 
 export function preloadInitialFrames() {
-  preloadFramesAround(1, 6);
+  preloadFramesAround(1, 4);
   preloadFramesAround(37, 2);
 }
 
@@ -70,6 +70,43 @@ function loadFrame(frameNumber: number): Promise<void> {
     img.src = frameUrl(n);
     frameCache.set(n, img);
   });
+}
+
+/** Frames loaded before the site is shown — sampled across the full sequence. */
+export function getEssentialFrameNumbers(): number[] {
+  const frames = new Set<number>([1, FRAME_COUNT, 37, 109, 205]);
+
+  for (let i = 1; i <= FRAME_COUNT; i += 5) {
+    frames.add(i);
+  }
+
+  return [...frames].sort((a, b) => a - b);
+}
+
+export async function preloadEssentialFrames(
+  onProgress?: (loaded: number, total: number) => void,
+  concurrency = 8,
+): Promise<void> {
+  const targets = getEssentialFrameNumbers();
+  const total = targets.length;
+  let loaded = 0;
+  let nextIndex = 0;
+
+  const report = () => onProgress?.(loaded, total);
+
+  const worker = async () => {
+    while (nextIndex < total) {
+      const index = nextIndex;
+      nextIndex += 1;
+      await loadFrame(targets[index]);
+      loaded += 1;
+      report();
+    }
+  };
+
+  const workers = Math.min(concurrency, total);
+  await Promise.all(Array.from({ length: workers }, () => worker()));
+  report();
 }
 
 export async function preloadAllFrames(

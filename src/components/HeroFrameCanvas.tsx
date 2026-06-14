@@ -4,8 +4,8 @@ import { scrollProgressToFrame } from "@/lib/scroll-frames";
 import { usePageVisible } from "@/hooks/usePageVisible";
 
 /**
- * Sticky full-screen canvas playing the hero frame sequence from
- * src/new background image frames/, scrubbed by scroll progress.
+ * Sticky full-screen canvas playing optimized WebP frames from
+ * public/hero-bg-frames/, scrubbed by scroll progress.
  */
 export function HeroFrameCanvas({
   progressRef,

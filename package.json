@@ -6,7 +6,8 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
-    "optimize-images": "node scripts/optimize-images.mjs"
+    "optimize-images": "node scripts/optimize-images.mjs",
+    "optimize-hero-frames": "node scripts/optimize-hero-frames.mjs"
   },
   "dependencies": {
     "framer-motion": "^12.40.0",
