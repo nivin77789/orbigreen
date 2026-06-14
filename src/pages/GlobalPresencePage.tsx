@@ -151,6 +151,21 @@ export default function GlobalPresencePage() {
         <section className="relative border-t border-primary/10 bg-section/50 py-14 lg:py-16">
           <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
             <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.7, ease: EASE }}
+              className="relative mb-10 overflow-hidden rounded-2xl border border-primary/10 bg-white shadow-[0_16px_48px_-24px_rgba(11,95,126,0.18)] sm:mb-12 sm:rounded-[1.75rem]"
+            >
+              <img
+                src={globalNetworkBanner}
+                alt=""
+                className="aspect-[21/9] w-full object-cover object-center sm:aspect-[2.35/1]"
+              />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-white/30 via-transparent to-white/10" />
+            </motion.div>
+
+            <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
