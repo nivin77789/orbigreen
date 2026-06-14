@@ -63,35 +63,35 @@ function ProductCard({
             background: `linear-gradient(135deg, transparent 35%, ${product.accent}28 100%)`,
           }}
         />
-        <span className="absolute left-3 top-3 rounded-full bg-white/90 px-2 py-0.5 text-[11px] font-bold tabular-nums tracking-wider text-primary shadow-sm">
+        <span className="absolute left-3 top-3 rounded-full bg-white/90 px-2 py-0.5 text-[11px] lg:text-[12px] font-bold tabular-nums tracking-wider text-primary shadow-sm">
           {String(index + 1).padStart(2, "0")}
         </span>
       </div>
 
       <div className={`flex min-w-0 flex-1 flex-col ${isHorizontal ? "justify-center px-3.5 py-3 sm:px-4 sm:py-3.5" : "p-4 sm:p-5"}`}>
         <span
-          className="inline-flex w-fit items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-secondary sm:text-[11px]"
+          className="inline-flex w-fit items-center gap-1.5 text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.22em] text-secondary sm:text-[11px] lg:text-[12px]"
         >
           <span className="h-1 w-1 rounded-full" style={{ backgroundColor: product.accent }} />
           {product.category}
         </span>
         <h3
           className={`mt-1.5 font-semibold leading-tight text-primary ${
-            isHorizontal ? "text-[15px] sm:text-[16px]" : "text-[17px] sm:text-[18px]"
+            isHorizontal ? "text-[15px] lg:text-[16px] sm:text-[16px] lg:text-[17px]" : "text-[17px] lg:text-[18px] sm:text-[18px] lg:text-[19px]"
           }`}
         >
           {product.title}
         </h3>
         <p
           className={`mt-1.5 line-clamp-2 leading-relaxed text-primary/65 ${
-            isHorizontal ? "text-[12px] sm:text-[13px]" : "text-[13px] sm:text-[14px]"
+            isHorizontal ? "text-[12px] lg:text-[13px] sm:text-[13px] lg:text-[14px]" : "text-[13px] lg:text-[14px] sm:text-[14px] lg:text-[15px]"
           }`}
         >
           {product.description}
         </p>
         <Link
           to="/quotation"
-          className={`mt-3 inline-flex w-fit items-center gap-1.5 text-[12px] font-semibold text-primary transition-colors group-hover:text-secondary sm:text-[13px] ${
+          className={`mt-3 inline-flex w-fit items-center gap-1.5 text-[12px] lg:text-[13px] font-semibold text-primary transition-colors group-hover:text-secondary sm:text-[13px] lg:text-[14px] ${
             isHorizontal ? "mt-2" : "mt-4"
           }`}
         >
@@ -128,14 +128,14 @@ function ProductsHeader({
   return (
     <motion.div {...motionProps} className="flex flex-wrap items-end justify-between gap-6">
       <div className="max-w-2xl">
-        <span className="text-[12px] uppercase tracking-[0.3em] text-secondary">Our Products</span>
+        <span className="text-[13px] lg:text-[15px] font-bold uppercase tracking-[0.3em] text-secondary">Our Products</span>
         <h2 className="mt-3 text-balance text-[clamp(2rem,3.8vw,3rem)] font-semibold leading-[1.08] tracking-tight text-primary">
           Industrial components,{" "}
           <span className="bg-gradient-to-br from-primary via-primary to-secondary bg-clip-text text-transparent">
             sourced to spec
           </span>
         </h2>
-        <p className="mt-4 max-w-lg text-[16px] leading-relaxed text-primary/60">
+        <p className="mt-4 max-w-lg text-[16px] lg:text-[17px] leading-relaxed text-primary/60">
           Precision-machined, fabricated, and assembled parts — qualified across global supply networks and
           delivered to your engineering standards.
         </p>
@@ -143,7 +143,7 @@ function ProductsHeader({
       {showViewAllLink && (
         <Link
           to="/products"
-          className="group glass-card-light inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[14px] font-semibold text-primary transition-all hover:glass-card-hover"
+          className="group glass-card-light inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[14px] lg:text-[15px] font-semibold text-primary transition-all hover:glass-card-hover"
         >
           View all products
           <motion.span
@@ -169,10 +169,10 @@ function ProductGrid({
   return (
     <>
       <div className="mb-5 flex items-center justify-between gap-4 px-0.5">
-        <span className="text-[12px] font-semibold uppercase tracking-[0.25em] text-primary/45">
+        <span className="text-[12px] lg:text-[13px] font-semibold uppercase tracking-[0.25em] text-primary/45">
           {isSection ? "Featured categories" : "All product categories"}
         </span>
-        <span className="text-[13px] font-bold tabular-nums tracking-widest text-primary/50">
+        <span className="text-[13px] lg:text-[14px] font-bold tabular-nums tracking-widest text-primary/50">
           {isSection
             ? `${String(products.length).padStart(2, "0")} of ${String(PRODUCTS.length).padStart(2, "0")}`
             : `${String(PRODUCTS.length).padStart(2, "0")} categories`}
@@ -236,7 +236,7 @@ export function ProductsShowcase({ variant = "page", showHeader = true }: Produc
           >
             <Link
               to="/quotation"
-              className="gradient-border-cta rounded-full px-6 py-3 text-[14px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
+              className="gradient-border-cta rounded-full px-6 py-3 text-[14px] lg:text-[15px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
             >
               Request sourcing
             </Link>

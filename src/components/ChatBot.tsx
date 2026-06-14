@@ -90,8 +90,8 @@ export function ChatBot() {
           >
             <div className="gradient-border-cta flex items-center justify-between px-4 py-3.5">
               <div>
-                <p className="text-[13px] font-semibold text-white">Orbigreen Assistant</p>
-                <p className="text-[10px] text-white/75">Typically replies instantly</p>
+                <p className="text-[13px] lg:text-[14px] font-semibold text-white">Orbigreen Assistant</p>
+                <p className="text-[10px] lg:text-[11px] text-white/75">Typically replies instantly</p>
               </div>
               <button
                 type="button"
@@ -109,7 +109,7 @@ export function ChatBot() {
               {messages.map((message) => (
                 <div
                   key={message.id}
-                  className={`max-w-[88%] rounded-2xl px-3.5 py-2.5 text-[13px] leading-relaxed ${
+                  className={`max-w-[88%] rounded-2xl px-3.5 py-2.5 text-[13px] lg:text-[14px] leading-relaxed ${
                     message.role === "bot"
                       ? "self-start rounded-bl-md bg-section text-primary"
                       : "self-end rounded-br-md bg-primary text-white"
@@ -126,7 +126,7 @@ export function ChatBot() {
                   key={reply}
                   type="button"
                   onClick={() => sendMessage(reply)}
-                  className="rounded-full border border-primary/12 bg-section px-3 py-1.5 text-[11px] font-medium text-primary/75 transition-colors hover:border-secondary/35 hover:text-primary"
+                  className="rounded-full border border-primary/12 bg-section px-3 py-1.5 text-[11px] lg:text-[12px] font-medium text-primary/75 transition-colors hover:border-secondary/35 hover:text-primary"
                 >
                   {reply}
                 </button>
@@ -144,7 +144,7 @@ export function ChatBot() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Type your question…"
-                className="min-w-0 flex-1 rounded-full border border-primary/12 bg-section px-3.5 py-2 text-[13px] text-primary outline-none transition-colors placeholder:text-primary/35 focus:border-secondary"
+                className="min-w-0 flex-1 rounded-full border border-primary/12 bg-section px-3.5 py-2 text-[13px] lg:text-[14px] text-primary outline-none transition-colors placeholder:text-primary/35 focus:border-secondary"
               />
               <button
                 type="submit"
@@ -164,7 +164,7 @@ export function ChatBot() {
             </form>
 
             <div className="border-t border-primary/8 px-4 py-2.5 text-center">
-              <Link to="/quotation" className="text-[11px] font-medium text-secondary transition-colors hover:text-primary">
+              <Link to="/quotation" className="text-[11px] lg:text-[12px] font-medium text-secondary transition-colors hover:text-primary">
                 Contact our team →
               </Link>
             </div>

@@ -15,9 +15,9 @@ const CATEGORIES = [
 ];
 
 const fieldClass =
-  "quotation-field mt-1.5 w-full rounded-xl border border-primary/10 bg-white/80 px-3 py-2.5 text-[14px] text-primary placeholder-primary/35 outline-none transition-all focus:border-secondary/50 focus:bg-white focus:shadow-[0_0_0_3px_rgba(92,191,42,0.12)]";
+  "quotation-field mt-1.5 w-full rounded-xl border border-primary/10 bg-white/80 px-3 py-2.5 text-[14px] lg:text-[15px] text-primary placeholder-primary/35 outline-none transition-all focus:border-secondary/50 focus:bg-white focus:shadow-[0_0_0_3px_rgba(92,191,42,0.12)]";
 
-const labelClass = "text-[10px] font-bold uppercase tracking-[0.18em] text-primary/50";
+const labelClass = "text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.18em] text-primary/50";
 
 export function QuotationForm() {
   const [sent, setSent] = useState(false);
@@ -42,8 +42,8 @@ export function QuotationForm() {
     >
       <div className="flex items-start justify-between gap-4 border-b border-primary/[0.07] pb-3.5">
         <div>
-          <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-secondary">Request Quotation</span>
-          <p className="mt-1 text-[13px] leading-snug text-primary/62 sm:text-[14px]">
+          <span className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.28em] text-secondary">Request Quotation</span>
+          <p className="mt-1 text-[13px] lg:text-[14px] leading-snug text-primary/62 sm:text-[14px] lg:text-[15px]">
             Share your requirement details and attach drawings, specifications, or reference images.
           </p>
         </div>
@@ -135,24 +135,24 @@ export function QuotationForm() {
             </svg>
           </div>
           <div className="min-w-0 flex-1">
-            <p className="text-[13px] font-semibold text-primary">
+            <p className="text-[13px] lg:text-[14px] font-semibold text-primary">
               {fileName || "Upload drawings, specs, or images"}
             </p>
-            <p className="text-[11px] text-primary/50">PDF, images, CAD files, ZIP — up to 25 MB each</p>
+            <p className="text-[11px] lg:text-[12px] text-primary/50">PDF, images, CAD files, ZIP — up to 25 MB each</p>
           </div>
-          <span className="quotation-upload__btn hidden shrink-0 rounded-full px-3 py-1.5 text-[11px] font-semibold sm:inline">
+          <span className="quotation-upload__btn hidden shrink-0 rounded-full px-3 py-1.5 text-[11px] lg:text-[12px] font-semibold sm:inline">
             Browse
           </span>
         </label>
       </div>
 
       <div className="mt-auto flex flex-col gap-3 border-t border-primary/[0.07] pt-3.5 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-[11px] leading-relaxed text-primary/50">
+        <p className="text-[11px] lg:text-[12px] leading-relaxed text-primary/50">
           Secure submission · Drawings reviewed by sourcing specialists
         </p>
         <button
           type="submit"
-          className={`gradient-border-cta inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-[13px] font-semibold transition-all sm:shrink-0 sm:px-7 ${
+          className={`gradient-border-cta inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-[13px] lg:text-[14px] font-semibold transition-all sm:shrink-0 sm:px-7 ${
             sent ? "opacity-90" : "hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
           }`}
         >

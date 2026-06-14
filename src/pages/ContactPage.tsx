@@ -17,20 +17,20 @@ export default function ContactPage() {
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             className="relative max-w-3xl"
           >
-            <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-secondary">Get in Touch</span>
+            <span className="text-[11px] lg:text-[12px] font-bold uppercase tracking-[0.3em] text-secondary">Get in Touch</span>
             <h1 className="mt-4 text-balance text-[clamp(2.5rem,5vw,4rem)] font-semibold leading-[1.05] tracking-tight text-primary">
               Contact{" "}
               <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
                 Orbigreen
               </span>
             </h1>
-            <p className="mt-6 max-w-xl text-pretty text-[17px] leading-relaxed text-primary/70">
+            <p className="mt-6 max-w-xl text-pretty text-[17px] lg:text-[18px] leading-relaxed text-primary/70">
               Reach our team for general enquiries, partnership discussions, or follow-up on an active sourcing
               program. For detailed quotes with attachments, use the quotation form.
             </p>
             <Link
               to="/quotation"
-              className="gradient-border-cta mt-8 inline-flex rounded-full px-6 py-3 text-[14px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
+              className="gradient-border-cta mt-8 inline-flex rounded-full px-6 py-3 text-[14px] lg:text-[15px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
             >
               Request Quotation with attachments →
             </Link>

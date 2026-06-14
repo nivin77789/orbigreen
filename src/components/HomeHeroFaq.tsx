@@ -56,7 +56,7 @@ function FaqRow({
           }`}
         >
           <p
-            className={`min-w-0 flex-1 font-semibold leading-snug text-primary text-[14px] sm:text-[17px] ${
+            className={`min-w-0 flex-1 font-semibold leading-snug text-primary text-[14px] lg:text-[15px] sm:text-[17px] lg:text-[18px] ${
               alignRight ? "text-left sm:text-right" : "text-left"
             }`}
           >
@@ -70,7 +70,7 @@ function FaqRow({
           >
             <Link
               to={item.href}
-              className={`hero-faq-link group inline-flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-[13px] font-bold sm:gap-2 sm:px-3.5 sm:py-1.5 sm:text-[15px] ${
+              className={`hero-faq-link group inline-flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-[13px] lg:text-[14px] font-bold sm:gap-2 sm:px-3.5 sm:py-1.5 sm:text-[15px] lg:text-[16px] ${
                 alignRight ? "flex-row-reverse" : ""
               }`}
             >

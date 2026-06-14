@@ -47,7 +47,7 @@ const SECTIONS = [
 
 function SectionLabel({ children }: { children: string }) {
   return (
-    <span className="text-[10px] uppercase tracking-[0.3em] text-secondary">{children}</span>
+    <span className="text-[10px] lg:text-[11px] uppercase tracking-[0.3em] text-secondary">{children}</span>
   );
 }
 
@@ -62,7 +62,7 @@ export default function ResourcesPage() {
           <h1 className="mt-4 text-balance text-[clamp(2.5rem,5vw,4rem)] font-semibold leading-[1.05] tracking-tight text-primary">
             Resources
           </h1>
-          <p className="mt-6 max-w-3xl text-pretty text-[16px] leading-relaxed text-primary/70">
+          <p className="mt-6 max-w-3xl text-pretty text-[16px] lg:text-[17px] leading-relaxed text-primary/70">
             Guides, insights, FAQs, and case studies to help procurement and engineering teams source with
             confidence.
           </p>
@@ -78,7 +78,7 @@ export default function ResourcesPage() {
                 <h2 className="text-[clamp(1.5rem,2.5vw,2rem)] font-semibold tracking-tight text-primary">
                   {section.label}
                 </h2>
-                <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-primary/65">{section.description}</p>
+                <p className="mt-3 max-w-2xl text-[15px] lg:text-[16px] leading-relaxed text-primary/65">{section.description}</p>
                 <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                   {section.items.map((item, i) => (
                     <div
@@ -86,14 +86,14 @@ export default function ResourcesPage() {
                       className="glass-card group flex flex-col justify-between rounded-2xl p-5 transition-all duration-500 ease-out hover:glass-card-hover"
                     >
                       <div>
-                        <span className="text-[10px] tabular-nums tracking-widest text-primary/35 transition-colors group-hover:text-secondary">
+                        <span className="text-[10px] lg:text-[11px] tabular-nums tracking-widest text-primary/35 transition-colors group-hover:text-secondary">
                           0{i + 1}
                         </span>
-                        <h3 className="mt-2 text-[15px] font-semibold leading-snug tracking-tight text-primary">
+                        <h3 className="mt-2 text-[15px] lg:text-[16px] font-semibold leading-snug tracking-tight text-primary">
                           {item}
                         </h3>
                       </div>
-                      <span className="mt-4 text-[11px] font-medium uppercase tracking-[0.2em] text-primary/40 transition-colors group-hover:text-secondary">
+                      <span className="mt-4 text-[11px] lg:text-[12px] font-medium uppercase tracking-[0.2em] text-primary/40 transition-colors group-hover:text-secondary">
                         Read more →
                       </span>
                     </div>
@@ -110,13 +110,13 @@ export default function ResourcesPage() {
             <h2 className="mt-4 text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold tracking-tight text-primary">
               Talk to an expert
             </h2>
-            <p className="mx-auto mt-5 max-w-2xl text-[15px] leading-relaxed text-primary/70">
+            <p className="mx-auto mt-5 max-w-2xl text-[15px] lg:text-[16px] leading-relaxed text-primary/70">
               Share your drawings, specs, or sourcing goals — we'll recommend the right sourcing, quality, and
               delivery approach.
             </p>
             <Link
               to="/contact"
-              className="gradient-border-cta mt-10 inline-flex rounded-full px-8 py-3.5 text-[14px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
+              className="gradient-border-cta mt-10 inline-flex rounded-full px-8 py-3.5 text-[14px] lg:text-[15px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
             >
               Discuss your requirement
             </Link>

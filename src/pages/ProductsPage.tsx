@@ -36,14 +36,14 @@ function ProductsHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: EASE }}
           >
-            <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-secondary">Product Catalog</span>
+            <span className="text-[11px] lg:text-[12px] font-bold uppercase tracking-[0.3em] text-secondary">Product Catalog</span>
             <h1 className="mt-4 text-balance text-[clamp(2.25rem,5vw,3.75rem)] font-semibold leading-[1.05] tracking-tight text-primary">
               Our{" "}
               <span className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-transparent">
                 Products
               </span>
             </h1>
-            <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-primary/75">
+            <p className="mt-6 max-w-xl text-[17px] lg:text-[18px] leading-relaxed text-primary/75">
               Precision-machined, fabricated, and assembled industrial components — qualified across global supply
               networks and delivered to your engineering standards.
             </p>
@@ -56,13 +56,13 @@ function ProductsHero() {
             >
               <Link
                 to="/quotation"
-                className="gradient-border-cta rounded-full px-6 py-3 text-[13px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
+                className="gradient-border-cta rounded-full px-6 py-3 text-[13px] lg:text-[14px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
               >
                 Request Quotation
               </Link>
               <Link
                 to="/services"
-                className="glass-card-light rounded-full px-6 py-3 text-[13px] font-semibold text-primary hover:glass-card-hover"
+                className="glass-card-light rounded-full px-6 py-3 text-[13px] lg:text-[14px] font-semibold text-primary hover:glass-card-hover"
               >
                 Our Services
               </Link>
@@ -79,7 +79,7 @@ function ProductsHero() {
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.5 + i * 0.05 }}
-                  className="global-hero-stat rounded-full px-3 py-1.5 text-[11px] font-semibold text-primary/80"
+                  className="global-hero-stat rounded-full px-3 py-1.5 text-[11px] lg:text-[12px] font-semibold text-primary/80"
                 >
                   {product.title.split(" ")[0]}
                 </motion.span>
@@ -108,7 +108,7 @@ function ProductsHero() {
                   delay={0.2 + i * 0.08}
                   className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-[clamp(1.75rem,3.5vw,2.25rem)] font-semibold leading-none text-transparent"
                 />
-                <div className="mt-2 text-[10px] font-bold uppercase tracking-[0.2em] text-primary/55">
+                <div className="mt-2 text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.2em] text-primary/55">
                   {stat.label}
                 </div>
               </motion.div>
@@ -137,17 +137,17 @@ export default function ProductsPage() {
             transition={{ duration: 0.8 }}
             className="glass-card-light mx-auto max-w-[1280px] rounded-3xl px-6 py-16 text-center lg:px-10"
           >
-            <span className="text-[10px] uppercase tracking-[0.3em] text-secondary">Get Started</span>
+            <span className="text-[10px] lg:text-[11px] uppercase tracking-[0.3em] text-secondary">Get Started</span>
             <h2 className="mt-4 text-balance text-[clamp(1.75rem,3vw,2.5rem)] font-semibold tracking-tight text-primary">
               Need a custom sourcing program?
             </h2>
-            <p className="mx-auto mt-5 max-w-2xl text-[15px] leading-relaxed text-primary/70">
+            <p className="mx-auto mt-5 max-w-2xl text-[15px] lg:text-[16px] leading-relaxed text-primary/70">
               Share your drawings, quantities, and delivery targets — we'll qualify suppliers and build a
               procurement plan around your product requirements.
             </p>
             <Link
               to="/quotation"
-              className="gradient-border-cta mt-10 inline-flex rounded-full px-8 py-3.5 text-[14px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
+              className="gradient-border-cta mt-10 inline-flex rounded-full px-8 py-3.5 text-[14px] lg:text-[15px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
             >
               Discuss your requirement
             </Link>

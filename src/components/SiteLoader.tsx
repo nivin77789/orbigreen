@@ -35,7 +35,7 @@ export function SiteLoader({ progress }: SiteLoaderProps) {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15, duration: 0.5 }}
-          className="text-[10px] font-bold uppercase tracking-[0.32em] text-primary/50"
+          className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.32em] text-primary/50"
         >
           Preparing experience
         </motion.p>
@@ -46,7 +46,7 @@ export function SiteLoader({ progress }: SiteLoaderProps) {
           transition={{ delay: 0.25, duration: 0.5 }}
           className="mt-8 w-full"
         >
-          <div className="mb-3 flex items-center justify-between text-[11px] font-semibold tabular-nums tracking-widest text-primary/45">
+          <div className="mb-3 flex items-center justify-between text-[11px] lg:text-[12px] font-semibold tabular-nums tracking-widest text-primary/45">
             <span>Loading assets</span>
             <span>{clamped}%</span>
           </div>

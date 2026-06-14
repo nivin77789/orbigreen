@@ -71,7 +71,7 @@ function GlobalNetworkHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: EASE }}
           >
-            <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-secondary">
+            <span className="text-[11px] lg:text-[12px] font-bold uppercase tracking-[0.3em] text-secondary">
               Global Network
             </span>
             <h1 className="mt-4 text-balance text-[clamp(2.25rem,5vw,3.75rem)] font-semibold leading-[1.05] tracking-tight text-primary">
@@ -80,7 +80,7 @@ function GlobalNetworkHero() {
                 & network
               </span>
             </h1>
-            <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-primary/75">
+            <p className="mt-6 max-w-xl text-[17px] lg:text-[18px] leading-relaxed text-primary/75">
               A single-window sourcing partner with on-the-ground presence across key manufacturing hubs and
               logistics corridors — connecting you to the right suppliers, anywhere in the world.
             </p>
@@ -93,13 +93,13 @@ function GlobalNetworkHero() {
             >
               <Link
                 to="/quotation"
-                className="gradient-border-cta rounded-full px-6 py-3 text-[13px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
+                className="gradient-border-cta rounded-full px-6 py-3 text-[13px] lg:text-[14px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
               >
                 Request Quotation
               </Link>
               <Link
                 to="/sourcing-markets"
-                className="glass-card-light rounded-full px-6 py-3 text-[13px] font-semibold text-primary hover:glass-card-hover"
+                className="glass-card-light rounded-full px-6 py-3 text-[13px] lg:text-[14px] font-semibold text-primary hover:glass-card-hover"
               >
                 Sourcing Markets
               </Link>
@@ -127,7 +127,7 @@ function GlobalNetworkHero() {
                   delay={0.2 + i * 0.08}
                   className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-[clamp(1.75rem,3.5vw,2.25rem)] font-semibold leading-none text-transparent"
                 />
-                <div className="mt-2 text-[10px] font-bold uppercase tracking-[0.2em] text-primary/55">
+                <div className="mt-2 text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.2em] text-primary/55">
                   {stat.label}
                 </div>
               </motion.div>
@@ -158,13 +158,13 @@ export default function GlobalPresencePage() {
               custom={0}
               className="mb-10 max-w-2xl"
             >
-              <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-secondary">
+              <span className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.28em] text-secondary">
                 Worldwide Footprint
               </span>
               <h2 className="mt-3 text-[clamp(1.65rem,3vw,2.35rem)] font-semibold tracking-tight text-primary">
                 India HQ at the center of your supply network
               </h2>
-              <p className="mt-3 text-[16px] leading-relaxed text-primary/65">
+              <p className="mt-3 text-[16px] lg:text-[17px] leading-relaxed text-primary/65">
                 Select a hub to explore its role in your sourcing program — from manufacturing and near-shore to
                 logistics and client partnerships.
               </p>
@@ -209,7 +209,7 @@ export default function GlobalPresencePage() {
                         className="bg-gradient-to-br from-primary via-primary to-secondary bg-clip-text text-[clamp(1.75rem,4vw,2.5rem)] font-semibold text-transparent"
                       />
                     </motion.div>
-                    <div className="mt-2 text-[10px] font-bold uppercase tracking-[0.2em] text-primary/60">
+                    <div className="mt-2 text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.2em] text-primary/60">
                       {stat.label}
                     </div>
                   </motion.div>
@@ -235,7 +235,7 @@ export default function GlobalPresencePage() {
               custom={0}
               className="mb-10 max-w-2xl"
             >
-              <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-secondary">
+              <span className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.28em] text-secondary">
                 Supply Corridors
               </span>
               <h2 className="mt-3 text-[clamp(1.65rem,3vw,2.35rem)] font-semibold tracking-tight text-primary">
@@ -254,16 +254,16 @@ export default function GlobalPresencePage() {
                   whileHover={{ y: -4 }}
                   className="glass-card-light relative overflow-hidden rounded-2xl p-6 transition-all hover:glass-card-hover lg:p-7"
                 >
-                  <span className="text-[11px] font-bold tabular-nums text-secondary/80">
+                  <span className="text-[11px] lg:text-[12px] font-bold tabular-nums text-secondary/80">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <h3 className="mt-3 text-[17px] font-semibold text-primary">{corridor.t}</h3>
-                  <p className="mt-2 text-[14px] leading-relaxed text-primary/65">{corridor.d}</p>
+                  <h3 className="mt-3 text-[17px] lg:text-[18px] font-semibold text-primary">{corridor.t}</h3>
+                  <p className="mt-2 text-[14px] lg:text-[15px] leading-relaxed text-primary/65">{corridor.d}</p>
                   <div className="mt-4 flex flex-wrap gap-2">
                     {corridor.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="rounded-full border border-primary/10 bg-white/80 px-3 py-1 text-[11px] font-semibold text-primary/70"
+                        className="rounded-full border border-primary/10 bg-white/80 px-3 py-1 text-[11px] lg:text-[12px] font-semibold text-primary/70"
                       >
                         {tag}
                       </span>
@@ -287,13 +287,13 @@ export default function GlobalPresencePage() {
                 custom={0}
                 className="lg:sticky lg:top-32"
               >
-                <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-secondary">
+                <span className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.28em] text-secondary">
                   Network Capabilities
                 </span>
                 <h2 className="mt-3 text-[clamp(1.65rem,3vw,2.35rem)] font-semibold tracking-tight text-primary">
                   How our network works for you
                 </h2>
-                <p className="mt-4 text-[16px] leading-relaxed text-primary/65">
+                <p className="mt-4 text-[16px] lg:text-[17px] leading-relaxed text-primary/65">
                   From supplier identification to final delivery — every stage is managed through one accountable
                   partner with global reach.
                 </p>
@@ -311,11 +311,11 @@ export default function GlobalPresencePage() {
                     whileHover={{ y: -3 }}
                     className="glass-card-light rounded-2xl p-6 transition-all hover:glass-card-hover"
                   >
-                    <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-secondary text-[12px] font-bold text-white">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-secondary text-[12px] lg:text-[13px] font-bold text-white">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <h3 className="mt-4 text-[16px] font-semibold text-primary">{item.t}</h3>
-                    <p className="mt-2 text-[14px] leading-relaxed text-primary/65">{item.d}</p>
+                    <h3 className="mt-4 text-[16px] lg:text-[17px] font-semibold text-primary">{item.t}</h3>
+                    <p className="mt-2 text-[14px] lg:text-[15px] leading-relaxed text-primary/65">{item.d}</p>
                   </motion.div>
                 ))}
               </div>
@@ -336,26 +336,26 @@ export default function GlobalPresencePage() {
             transition={{ duration: 0.75, ease: EASE }}
             className="relative z-10 mx-auto max-w-[1280px] px-6 text-center lg:px-10"
           >
-            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">Get Started</span>
+            <span className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.3em] text-secondary">Get Started</span>
             <h2 className="mt-4 text-balance text-[clamp(1.75rem,3.5vw,2.75rem)] font-semibold tracking-tight text-primary">
               Expand your supply base{" "}
               <span className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-transparent">
                 with confidence
               </span>
             </h2>
-            <p className="mx-auto mt-5 max-w-xl text-[16px] leading-relaxed text-primary/65">
+            <p className="mx-auto mt-5 max-w-xl text-[16px] lg:text-[17px] leading-relaxed text-primary/65">
               Tell us your target regions and product categories — we'll map the right network for your program.
             </p>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
               <Link
                 to="/quotation"
-                className="gradient-border-cta rounded-full px-7 py-3.5 text-[14px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
+                className="gradient-border-cta rounded-full px-7 py-3.5 text-[14px] lg:text-[15px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
               >
                 Request Quotation
               </Link>
               <Link
                 to="/contact"
-                className="glass-card-light rounded-full px-7 py-3.5 text-[14px] font-semibold text-primary hover:glass-card-hover"
+                className="glass-card-light rounded-full px-7 py-3.5 text-[14px] lg:text-[15px] font-semibold text-primary hover:glass-card-hover"
               >
                 Contact Us
               </Link>

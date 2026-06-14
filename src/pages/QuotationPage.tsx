@@ -94,7 +94,7 @@ export default function QuotationPage() {
               transition={{ duration: 0.8, ease: EASE }}
               className="flex w-full shrink-0 flex-col lg:max-w-[26rem] xl:max-w-[28rem]"
             >
-              <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-secondary sm:text-[11px]">
+              <span className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.32em] text-secondary sm:text-[11px] lg:text-[12px]">
                 Get a Quote
               </span>
               <h1 className="mt-2 text-balance text-[clamp(1.85rem,4vw,2.65rem)] font-semibold leading-[1.06] tracking-tight text-primary xl:text-[2.75rem]">
@@ -103,7 +103,7 @@ export default function QuotationPage() {
                   Quotation
                 </span>
               </h1>
-              <p className="mt-3 max-w-md text-[14px] leading-relaxed text-primary/68 sm:text-[15px]">
+              <p className="mt-3 max-w-md text-[14px] lg:text-[15px] leading-relaxed text-primary/68 sm:text-[15px] lg:text-[16px]">
                 Submit your sourcing requirement with drawings or specifications attached. Our team will review
                 and respond with supplier options, lead times, and commercial terms.
               </p>
@@ -122,10 +122,10 @@ export default function QuotationPage() {
                       {item.icon}
                     </div>
                     <div className="min-w-0">
-                      <p className="text-[12px] font-semibold tracking-tight text-primary sm:text-[13px]">
+                      <p className="text-[12px] lg:text-[13px] font-semibold tracking-tight text-primary sm:text-[13px] lg:text-[14px]">
                         {item.title}
                       </p>
-                      <p className="mt-0.5 text-[11px] leading-snug text-primary/58 sm:text-[12px]">
+                      <p className="mt-0.5 text-[11px] lg:text-[12px] leading-snug text-primary/58 sm:text-[12px] lg:text-[13px]">
                         {item.detail}
                       </p>
                     </div>
@@ -144,7 +144,7 @@ export default function QuotationPage() {
                 </a>
                 <div className="quotation-contact-chip quotation-contact-chip--static sm:col-span-2">
                   <span className="quotation-contact-chip__label">Office</span>
-                  <span className="quotation-contact-chip__value text-[12px] leading-snug">{OFFICE_ADDRESS}</span>
+                  <span className="quotation-contact-chip__value text-[12px] lg:text-[13px] leading-snug">{OFFICE_ADDRESS}</span>
                 </div>
               </div>
 

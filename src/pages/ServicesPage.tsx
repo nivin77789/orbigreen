@@ -51,7 +51,7 @@ function SectionLabel({ children }: { children: string }) {
       whileInView={{ opacity: 1, letterSpacing: "0.3em" }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className="inline-block text-[10px] uppercase tracking-[0.3em] text-secondary"
+      className="inline-block text-[10px] lg:text-[11px] uppercase tracking-[0.3em] text-secondary"
     >
       {children}
     </motion.span>
@@ -85,7 +85,7 @@ function ServicesHero() {
                 Services
               </span>
             </h1>
-            <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-primary/75">
+            <p className="mt-6 max-w-xl text-[17px] lg:text-[18px] leading-relaxed text-primary/75">
               Comprehensive industrial sourcing, engineering, and quality solutions designed to optimize your
               operations end to end.
             </p>
@@ -98,13 +98,13 @@ function ServicesHero() {
             >
               <Link
                 to="/quotation"
-                className="gradient-border-cta rounded-full px-6 py-3 text-[13px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
+                className="gradient-border-cta rounded-full px-6 py-3 text-[13px] lg:text-[14px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
               >
                 Request Quotation
               </Link>
               <Link
                 to="/sourcing-markets"
-                className="glass-card-light rounded-full px-6 py-3 text-[13px] font-semibold text-primary hover:glass-card-hover"
+                className="glass-card-light rounded-full px-6 py-3 text-[13px] lg:text-[14px] font-semibold text-primary hover:glass-card-hover"
               >
                 Explore Markets
               </Link>
@@ -121,7 +121,7 @@ function ServicesHero() {
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.5 + i * 0.06 }}
-                  className="global-hero-stat rounded-full px-3 py-1.5 text-[11px] font-semibold text-primary/80"
+                  className="global-hero-stat rounded-full px-3 py-1.5 text-[11px] lg:text-[12px] font-semibold text-primary/80"
                 >
                   {s.title.replace(/,.*/, "").replace(/\s*&.*$/, "").trim()}
                 </motion.span>
@@ -150,7 +150,7 @@ function ServicesHero() {
                   delay={0.2 + i * 0.08}
                   className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-[clamp(1.75rem,3.5vw,2.25rem)] font-semibold leading-none text-transparent"
                 />
-                <div className="mt-2 text-[10px] font-bold uppercase tracking-[0.2em] text-primary/55">
+                <div className="mt-2 text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.2em] text-primary/55">
                   {stat.label}
                 </div>
               </motion.div>
@@ -225,7 +225,7 @@ export default function ServicesPage() {
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.2 }}
-                        className="absolute left-5 top-5 rounded-full glass-nav px-3 py-1 text-[11px] font-semibold tabular-nums tracking-widest text-primary"
+                        className="absolute left-5 top-5 rounded-full glass-nav px-3 py-1 text-[11px] lg:text-[12px] font-semibold tabular-nums tracking-widest text-primary"
                       >
                         {String(i + 1).padStart(2, "0")}
                       </motion.span>
@@ -235,7 +235,7 @@ export default function ServicesPage() {
                       <h2 className="line-clamp-2 min-h-[3.5rem] text-[1.35rem] font-semibold leading-snug tracking-tight text-primary lg:min-h-[3.25rem] lg:text-[1.5rem]">
                         {service.title}
                       </h2>
-                      <p className="mt-3 line-clamp-3 min-h-[4.5rem] text-[14px] leading-relaxed text-primary/65 lg:min-h-[4.25rem]">
+                      <p className="mt-3 line-clamp-3 min-h-[4.5rem] text-[14px] lg:text-[15px] leading-relaxed text-primary/65 lg:min-h-[4.25rem]">
                         {service.shortDescription}
                       </p>
                       <ul className="mt-5 flex min-h-[7.5rem] flex-wrap content-start gap-2 lg:min-h-[6.5rem]">
@@ -246,7 +246,7 @@ export default function ServicesPage() {
                             whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.15 + j * 0.05, duration: 0.4 }}
-                            className="rounded-full border border-primary/10 bg-white/70 px-3.5 py-2 text-[12px] font-medium text-primary/80 backdrop-blur-sm transition-all duration-300 group-hover:border-secondary/30 group-hover:bg-white/90 group-hover:shadow-[0_4px_16px_rgba(92,191,42,0.1)]"
+                            className="rounded-full border border-primary/10 bg-white/70 px-3.5 py-2 text-[12px] lg:text-[13px] font-medium text-primary/80 backdrop-blur-sm transition-all duration-300 group-hover:border-secondary/30 group-hover:bg-white/90 group-hover:shadow-[0_4px_16px_rgba(92,191,42,0.1)]"
                           >
                             {item}
                           </motion.li>
@@ -254,7 +254,7 @@ export default function ServicesPage() {
                       </ul>
                       <Link
                         to={`/services/${service.slug}`}
-                        className="gradient-border-cta mt-auto inline-flex w-fit shrink-0 items-center gap-2 rounded-full px-5 py-2.5 text-[12px] font-semibold uppercase tracking-[0.15em] transition-all hover:shadow-[0_0_28px_-4px_rgba(92,191,42,0.45)]"
+                        className="gradient-border-cta mt-auto inline-flex w-fit shrink-0 items-center gap-2 rounded-full px-5 py-2.5 text-[12px] lg:text-[13px] font-semibold uppercase tracking-[0.15em] transition-all hover:shadow-[0_0_28px_-4px_rgba(92,191,42,0.45)]"
                       >
                         Learn More
                         <motion.span
@@ -306,7 +306,7 @@ export default function ServicesPage() {
                   >
                     {stat.n}
                   </motion.div>
-                  <div className="mt-1 text-[11px] uppercase tracking-[0.2em] text-primary/55">{stat.l}</div>
+                  <div className="mt-1 text-[11px] lg:text-[12px] uppercase tracking-[0.2em] text-primary/55">{stat.l}</div>
                 </motion.div>
               </Tilt3DCard>
             ))}
@@ -327,14 +327,14 @@ export default function ServicesPage() {
               <h2 className="mt-4 text-balance text-[clamp(1.75rem,3.5vw,2.75rem)] font-semibold tracking-tight text-primary">
                 Ready to optimize your sourcing operations?
               </h2>
-              <p className="mx-auto mt-5 max-w-2xl text-[15px] leading-relaxed text-primary/70">
+              <p className="mx-auto mt-5 max-w-2xl text-[15px] lg:text-[16px] leading-relaxed text-primary/70">
                 Tell us about your project requirements — we'll recommend the right combination of sourcing,
                 engineering, and quality services for your program.
               </p>
               <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
                 <Link
                   to="/quotation"
-                  className="gradient-border-cta mt-10 inline-flex rounded-full px-8 py-3.5 text-[14px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
+                  className="gradient-border-cta mt-10 inline-flex rounded-full px-8 py-3.5 text-[14px] lg:text-[15px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
                 >
                   Discuss your requirement
                 </Link>

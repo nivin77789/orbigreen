@@ -89,10 +89,10 @@ function MetricsBand() {
                 className="bg-gradient-to-br from-primary via-primary to-secondary bg-clip-text text-[clamp(2rem,4.5vw,3rem)] font-semibold leading-none tracking-tight text-transparent"
               />
             </motion.div>
-            <div className="mt-2 text-[12px] font-bold uppercase tracking-[0.22em] text-primary/70 sm:mt-2.5">
+            <div className="mt-2 text-[12px] lg:text-[13px] font-bold uppercase tracking-[0.22em] text-primary/70 sm:mt-2.5">
               {metric.l}
             </div>
-            <div className="mt-1 text-[12px] text-primary/40 opacity-0 transition-opacity duration-500 group-hover:opacity-100 sm:mt-1.5">
+            <div className="mt-1 text-[12px] lg:text-[13px] text-primary/40 opacity-0 transition-opacity duration-500 group-hover:opacity-100 sm:mt-1.5">
               {metric.hint}
             </div>
           </motion.div>
@@ -119,14 +119,14 @@ function HighlightTimeline() {
     >
       <div className="mb-5 flex items-end justify-between gap-4 px-1 sm:mb-6">
         <div>
-          <span className="text-[12px] font-bold uppercase tracking-[0.28em] text-secondary">
+          <span className="text-[12px] lg:text-[13px] font-bold uppercase tracking-[0.28em] text-secondary">
             Why Orbigreen
           </span>
           <h3 className="mt-2 text-[clamp(1.4rem,2.8vw,1.85rem)] font-semibold tracking-tight text-primary">
             Sourcing advantages that scale
           </h3>
         </div>
-        <span className="text-[13px] font-bold tabular-nums tracking-widest text-primary/40">
+        <span className="text-[13px] lg:text-[14px] font-bold tabular-nums tracking-widest text-primary/40">
           {String(activeIndex + 1).padStart(2, "0")} / 04
         </span>
       </div>
@@ -150,7 +150,7 @@ function HighlightTimeline() {
                 }`}
               >
                 <span
-                  className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-[14px] font-bold tabular-nums tracking-tight transition-colors duration-500 ${
+                  className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-[14px] lg:text-[15px] font-bold tabular-nums tracking-tight transition-colors duration-500 ${
                     isActive
                       ? "bg-gradient-to-br from-primary to-secondary text-white"
                       : "bg-primary/[0.06] text-primary/35 group-hover:text-secondary"
@@ -159,7 +159,7 @@ function HighlightTimeline() {
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <span
-                  className={`text-[14px] font-semibold leading-snug tracking-tight transition-colors duration-500 sm:text-[15px] ${
+                  className={`text-[14px] lg:text-[15px] font-semibold leading-snug tracking-tight transition-colors duration-500 sm:text-[15px] lg:text-[16px] ${
                     isActive ? "text-primary" : "text-primary/75"
                   }`}
                 >
@@ -194,7 +194,7 @@ function HighlightTimeline() {
             >
               <div>
                 <motion.span
-                  className="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.24em] text-secondary"
+                  className="inline-flex items-center gap-2 text-[12px] lg:text-[13px] font-bold uppercase tracking-[0.24em] text-secondary"
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.05, duration: 0.4, ease: EASE }}
@@ -205,7 +205,7 @@ function HighlightTimeline() {
                 <h4 className="mt-4 text-[clamp(1.45rem,3vw,2rem)] font-semibold leading-snug tracking-tight text-primary">
                   {HIGHLIGHTS[activeIndex].t}
                 </h4>
-                <p className="mt-4 max-w-md text-[16px] leading-relaxed text-primary/68 sm:text-[17px]">
+                <p className="mt-4 max-w-md text-[16px] lg:text-[17px] leading-relaxed text-primary/68 sm:text-[17px] lg:text-[18px]">
                   {HIGHLIGHTS[activeIndex].d}
                 </p>
               </div>
@@ -246,7 +246,7 @@ export function HomeMetricsStrip() {
           transition={{ duration: 0.7, ease: EASE }}
           className="mx-auto mb-8 max-w-2xl text-center sm:mb-10"
         >
-          <span className="text-[12px] uppercase tracking-[0.3em] text-secondary">By the Numbers</span>
+          <span className="text-[13px] lg:text-[15px] font-bold uppercase tracking-[0.3em] text-secondary">By the Numbers</span>
           <h2 className="mt-3 text-balance text-[clamp(1.9rem,3.8vw,2.85rem)] font-semibold leading-[1.08] tracking-tight text-primary">
             Proven scale.{" "}
             <span className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-transparent">

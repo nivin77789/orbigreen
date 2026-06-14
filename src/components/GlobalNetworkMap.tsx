@@ -17,7 +17,7 @@ export function GlobalNetworkMap() {
           transition={{ duration: 0.6, ease: EASE }}
           className="mb-5 text-center sm:mb-6"
         >
-          <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-secondary">Active Hubs</span>
+          <span className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.28em] text-secondary">Active Hubs</span>
           <h3 className="mt-2 text-[clamp(1.2rem,2vw,1.5rem)] font-semibold tracking-tight text-primary">
             Connected worldwide
           </h3>
@@ -50,10 +50,10 @@ export function GlobalNetworkMap() {
                   {hub.icon}
                 </span>
                 <span className="min-w-0">
-                  <span className="block text-[13px] font-semibold leading-snug text-primary sm:text-[14px]">
+                  <span className="block text-[13px] lg:text-[14px] font-semibold leading-snug text-primary sm:text-[14px] lg:text-[15px]">
                     {hub.label}
                   </span>
-                  <span className="mt-1 block text-[10px] font-bold uppercase tracking-[0.16em] text-secondary/90 sm:text-[11px]">
+                  <span className="mt-1 block text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.16em] text-secondary/90 sm:text-[11px] lg:text-[12px]">
                     {hub.region}
                   </span>
                 </span>
@@ -69,7 +69,7 @@ export function GlobalNetworkMap() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.35, ease: EASE }}
-            className="mx-auto mt-5 max-w-2xl rounded-2xl border border-primary/8 bg-white/80 px-5 py-4 text-center text-[13px] leading-relaxed text-primary/68 backdrop-blur-sm sm:mt-6 sm:text-[14px]"
+            className="mx-auto mt-5 max-w-2xl rounded-2xl border border-primary/8 bg-white/80 px-5 py-4 text-center text-[13px] lg:text-[14px] leading-relaxed text-primary/68 backdrop-blur-sm sm:mt-6 sm:text-[14px] lg:text-[15px]"
           >
             <span className="font-semibold text-primary">{activeHub.label}</span>
             {" — "}

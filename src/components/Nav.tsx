@@ -39,7 +39,7 @@ export function Nav() {
               <Link
                 key={item.label}
                 to={item.to}
-                className={`rounded-full px-3 py-1.5 text-[13px] font-semibold transition-all duration-500 ease-out hover:glass-card-hover xl:px-3.5 xl:text-[14px] ${
+                className={`rounded-full px-3 py-1.5 text-[13px] lg:text-[14px] font-semibold transition-all duration-500 ease-out hover:glass-card-hover xl:px-3.5 xl:text-[15px] ${
                   isActive ? "glass-card-hover text-primary" : "text-primary/85"
                 }`}
               >
@@ -52,7 +52,7 @@ export function Nav() {
         <div className="flex items-center gap-2">
           <Link
             to="/quotation"
-            className="gradient-border-cta hidden rounded-full px-5 py-2.5 text-[13px] font-semibold shadow-[0_4px_16px_rgba(11,95,126,0.18)] transition-all hover:shadow-[0_0_24px_-2px_rgba(92,191,42,0.45)] sm:inline-flex xl:text-[14px]"
+            className="gradient-border-cta hidden rounded-full px-5 py-2.5 text-[13px] lg:text-[14px] font-semibold shadow-[0_4px_16px_rgba(11,95,126,0.18)] transition-all hover:shadow-[0_0_24px_-2px_rgba(92,191,42,0.45)] sm:inline-flex xl:text-[15px]"
           >
             Request Quote
           </Link>
@@ -120,7 +120,7 @@ export function Nav() {
                       <Link
                         to={item.to}
                         onClick={() => setMenuOpen(false)}
-                        className={`block rounded-2xl px-4 py-3.5 text-[16px] font-semibold transition-all duration-300 hover:glass-card-hover ${
+                        className={`block rounded-2xl px-4 py-3.5 text-[16px] lg:text-[17px] font-semibold transition-all duration-300 hover:glass-card-hover ${
                           isActive ? "glass-card-hover text-primary" : "text-primary"
                         }`}
                       >
@@ -135,14 +135,14 @@ export function Nav() {
                 <Link
                   to="/quotation"
                   onClick={() => setMenuOpen(false)}
-                  className="gradient-border-cta flex w-full items-center justify-center rounded-2xl px-5 py-3.5 text-[15px] font-semibold"
+                  className="gradient-border-cta flex w-full items-center justify-center rounded-2xl px-5 py-3.5 text-[15px] lg:text-[16px] font-semibold"
                 >
                   Request Quotation
                 </Link>
                 <Link
                   to="/contact"
                   onClick={() => setMenuOpen(false)}
-                  className="glass-card-light flex w-full items-center justify-center rounded-2xl px-5 py-3 text-[14px] font-semibold text-primary"
+                  className="glass-card-light flex w-full items-center justify-center rounded-2xl px-5 py-3 text-[14px] lg:text-[15px] font-semibold text-primary"
                 >
                   Contact Us
                 </Link>

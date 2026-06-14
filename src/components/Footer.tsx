@@ -7,16 +7,16 @@ import { SERVICES } from "@/data/servicesData";
 export function Footer() {
   return (
     <footer id="footer" className="border-t border-primary/10 bg-white py-14">
-      <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-10 px-6 text-[14px] sm:grid-cols-2 sm:gap-x-12 sm:gap-y-10 lg:px-10">
+      <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-10 px-6 text-[14px] lg:text-[15px] sm:grid-cols-2 sm:gap-x-12 sm:gap-y-10 lg:px-10">
         <div>
           <BrandLogo variant="footer" />
           <div className="mt-5">
-            <h5 className="text-[11px] font-bold uppercase tracking-[0.25em] text-primary/50">Follow Us</h5>
+            <h5 className="text-[11px] lg:text-[12px] font-bold uppercase tracking-[0.25em] text-primary/50">Follow Us</h5>
             <SocialLinks className="mt-3" />
           </div>
         </div>
         <div>
-          <h5 className="text-[11px] font-bold uppercase tracking-[0.25em] text-primary/50">Reach</h5>
+          <h5 className="text-[11px] lg:text-[12px] font-bold uppercase tracking-[0.25em] text-primary/50">Reach</h5>
           <ul className="mt-4 space-y-2.5 text-primary/75">
             <li>
               <a href={`tel:${PHONE_TEL}`} className="transition-colors hover:text-primary">
@@ -32,7 +32,7 @@ export function Footer() {
           </ul>
         </div>
         <div>
-          <h5 className="text-[11px] font-bold uppercase tracking-[0.25em] text-primary/50">Quick Links</h5>
+          <h5 className="text-[11px] lg:text-[12px] font-bold uppercase tracking-[0.25em] text-primary/50">Quick Links</h5>
           <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2.5 text-primary/75">
             <li>
               <Link to="/" className="transition-colors hover:text-primary">
@@ -62,7 +62,7 @@ export function Footer() {
           </ul>
         </div>
         <div>
-          <h5 className="text-[11px] font-bold uppercase tracking-[0.25em] text-primary/50">Services</h5>
+          <h5 className="text-[11px] lg:text-[12px] font-bold uppercase tracking-[0.25em] text-primary/50">Services</h5>
           <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2.5 text-primary/75">
             {SERVICES.map((service) => (
               <li key={service.slug}>
@@ -74,7 +74,7 @@ export function Footer() {
           </ul>
         </div>
       </div>
-      <div className="mx-auto mt-12 max-w-[1280px] border-t border-primary/8 px-6 pt-6 text-[12px] text-primary/50 lg:px-10">
+      <div className="mx-auto mt-12 max-w-[1280px] border-t border-primary/8 px-6 pt-6 text-[12px] lg:text-[13px] text-primary/50 lg:px-10">
         © 2026 Orbigreen Techsource. All rights reserved.
       </div>
     </footer>

@@ -40,14 +40,14 @@ export function HomeAboutSection() {
             viewport={{ once: true, amount: 0.35 }}
             transition={{ duration: 0.75, ease: EASE }}
           >
-            <span className="text-[12px] font-bold uppercase tracking-[0.3em] text-secondary">Who we are</span>
+            <span className="text-[12px] lg:text-[13px] font-bold uppercase tracking-[0.3em] text-secondary">Who we are</span>
             <h2 className="mt-4 text-balance text-[clamp(2rem,4vw,3.1rem)] font-semibold leading-[1.08] tracking-tight text-primary">
               About{" "}
               <span className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-transparent">
                 Orbigreen Techsource
               </span>
             </h2>
-            <p className="mt-5 max-w-xl text-[17px] leading-relaxed text-primary/72 sm:text-[18px]">
+            <p className="mt-5 max-w-xl text-[17px] lg:text-[18px] leading-relaxed text-primary/72 sm:text-[18px] lg:text-[19px]">
               Integrated sourcing for industrial engineering — combining supplier networks, procurement, and quality
               management to improve supply chain efficiency. We support OEMs worldwide with a single-window approach
               from components to delivery.
@@ -56,13 +56,13 @@ export function HomeAboutSection() {
             <div className="mt-7 flex flex-wrap gap-3">
               <Link
                 to="/about"
-                className="gradient-border-cta rounded-full px-6 py-3 text-[14px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
+                className="gradient-border-cta rounded-full px-6 py-3 text-[14px] lg:text-[15px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
               >
                 Know More
               </Link>
               <Link
                 to="/contact"
-                className="glass-card-light rounded-full px-6 py-3 text-[14px] font-semibold text-primary hover:glass-card-hover"
+                className="glass-card-light rounded-full px-6 py-3 text-[14px] lg:text-[15px] font-semibold text-primary hover:glass-card-hover"
               >
                 Get in Touch
               </Link>
@@ -81,7 +81,7 @@ export function HomeAboutSection() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.2 + i * 0.05, duration: 0.45, ease: EASE }}
-                  className="global-hero-stat rounded-full px-3 py-1.5 text-[13px] font-semibold text-primary/80"
+                  className="global-hero-stat rounded-full px-3 py-1.5 text-[13px] lg:text-[14px] font-semibold text-primary/80"
                 >
                   {tag}
                 </motion.span>

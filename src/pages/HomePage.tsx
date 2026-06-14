@@ -14,7 +14,7 @@ import { ProductsShowcase } from "@/components/ProductsShowcase";
 function ScrollHint() {
   return (
     <div className="pointer-events-none absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3">
-      <span className="text-[12px] uppercase tracking-[0.3em] text-body/45">Scroll</span>
+      <span className="text-[12px] lg:text-[13px] uppercase tracking-[0.3em] text-body/45">Scroll</span>
       <div className="h-10 w-px bg-gradient-to-b from-secondary to-transparent" />
     </div>
   );
@@ -64,7 +64,7 @@ function Workflow() {
           transition={{ duration: 0.75, ease: WORKFLOW_EASE }}
           className="text-center lg:text-left"
         >
-          <span className="text-[12px] font-bold uppercase tracking-[0.32em] text-secondary">How We Work</span>
+          <span className="text-[12px] lg:text-[13px] font-bold uppercase tracking-[0.32em] text-secondary">How We Work</span>
           <h3 className="mt-4 text-balance text-[clamp(2rem,4vw,3.1rem)] font-semibold leading-[1.06] tracking-tight text-primary">
             A clear, engineered{" "}
             <span className="bg-gradient-to-br from-primary via-primary to-secondary bg-clip-text text-transparent">
@@ -97,16 +97,16 @@ function Workflow() {
               <div className="workflow-step-card__glow" aria-hidden />
               <div className="workflow-step-card__edge" aria-hidden />
               <div className="relative z-10 flex items-start justify-between gap-2">
-                <span className="workflow-step-card__index flex h-9 w-9 shrink-0 items-center justify-center rounded-[0.85rem] text-[13px] font-bold tabular-nums tracking-tight sm:h-10 sm:w-10 sm:text-[14px]">
+                <span className="workflow-step-card__index flex h-9 w-9 shrink-0 items-center justify-center rounded-[0.85rem] text-[13px] lg:text-[14px] font-bold tabular-nums tracking-tight sm:h-10 sm:w-10 sm:text-[14px] lg:text-[15px]">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <span className="workflow-step-card__connector hidden h-px flex-1 self-center sm:block" aria-hidden />
               </div>
               <div className="relative z-10 mt-3.5 flex flex-1 flex-col sm:mt-4">
-                <h4 className="text-[14px] font-semibold leading-snug tracking-tight text-primary sm:text-[16px]">
+                <h4 className="text-[14px] lg:text-[15px] font-semibold leading-snug tracking-tight text-primary sm:text-[16px] lg:text-[17px]">
                   {s.t}
                 </h4>
-                <p className="mt-2 text-[12px] leading-relaxed text-primary/72 sm:text-[14px]">{s.d}</p>
+                <p className="mt-2 text-[12px] lg:text-[13px] leading-relaxed text-primary/72 sm:text-[14px] lg:text-[15px]">{s.d}</p>
               </div>
             </motion.li>
           ))}
@@ -124,7 +124,7 @@ function HeroCopy({ visible }: { visible: boolean }) {
       transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
       className="hero-copy-plain pointer-events-auto w-full max-w-sm px-5 py-6 text-left sm:max-w-md sm:px-7 sm:py-8 lg:max-w-md"
     >
-      <span className="inline-flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.25em] text-primary/75">
+      <span className="inline-flex items-center gap-2 text-[12px] lg:text-[13px] font-semibold uppercase tracking-[0.25em] text-primary/75">
         <span className="h-1.5 w-1.5 rounded-full bg-secondary shadow-[0_0_8px_rgba(92,191,42,0.45)]" />
         Orbigreen Techsource
       </span>
@@ -140,13 +140,13 @@ function HeroCopy({ visible }: { visible: boolean }) {
       <div className="mt-7 flex flex-wrap items-center justify-start gap-3 sm:mt-8">
         <Link
           to="/services"
-          className="hero-copy-btn gradient-border-cta rounded-full px-6 py-3 text-[14px] font-medium transition-all hover:translate-x-[-1px] hover:translate-y-[-1px]"
+          className="hero-copy-btn gradient-border-cta rounded-full px-6 py-3 text-[14px] lg:text-[15px] font-medium transition-all hover:translate-x-[-1px] hover:translate-y-[-1px]"
         >
           Our Services
         </Link>
         <Link
           to="/contact"
-          className="hero-copy-btn hero-copy-btn--outline gradient-border-cta-outline rounded-full px-6 py-3 text-[14px] font-semibold transition-all hover:translate-x-[-1px] hover:translate-y-[-1px]"
+          className="hero-copy-btn hero-copy-btn--outline gradient-border-cta-outline rounded-full px-6 py-3 text-[14px] lg:text-[15px] font-semibold transition-all hover:translate-x-[-1px] hover:translate-y-[-1px]"
         >
           Get in Touch
         </Link>
@@ -170,7 +170,7 @@ function ClosingCTA({ visible }: { visible: boolean }) {
           Your Supply Chain?
         </span>
       </h2>
-      <p className="mx-auto mt-5 max-w-xl text-[17px] leading-relaxed text-body/70">
+      <p className="mx-auto mt-5 max-w-xl text-[17px] lg:text-[18px] leading-relaxed text-body/70">
         Let's discuss how Orbigreen Techsource can streamline your sourcing and secure your procurement process.
       </p>
     </motion.div>

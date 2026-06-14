@@ -123,7 +123,7 @@ function SectionLabel({ children }: { children: string }) {
       whileInView={{ opacity: 1, letterSpacing: "0.3em" }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, ease: EASE }}
-      className="inline-block text-[10px] uppercase tracking-[0.3em] text-secondary"
+      className="inline-block text-[10px] lg:text-[11px] uppercase tracking-[0.3em] text-secondary"
     >
       {children}
     </motion.span>
@@ -162,7 +162,7 @@ function StatsBand() {
                 className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-[clamp(1.35rem,3vw,2rem)] font-semibold leading-none tracking-tight text-transparent"
               />
             </motion.div>
-            <div className="mt-2 text-[10px] font-bold uppercase tracking-[0.2em] text-primary/65">{stat.label}</div>
+            <div className="mt-2 text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.2em] text-primary/65">{stat.label}</div>
           </motion.div>
         ))}
       </div>
@@ -201,7 +201,7 @@ function ValuesExplorer() {
               }`}
             >
               <span
-                className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-[13px] font-bold tabular-nums transition-colors duration-500 ${
+                className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-[13px] lg:text-[14px] font-bold tabular-nums transition-colors duration-500 ${
                   isActive
                     ? "bg-gradient-to-br from-primary to-secondary text-white"
                     : "bg-primary/[0.06] text-primary/35 group-hover:text-secondary"
@@ -210,7 +210,7 @@ function ValuesExplorer() {
                 {String(i + 1).padStart(2, "0")}
               </span>
               <span
-                className={`text-[14px] font-semibold leading-snug tracking-tight ${
+                className={`text-[14px] lg:text-[15px] font-semibold leading-snug tracking-tight ${
                   isActive ? "text-primary" : "text-primary/75"
                 }`}
               >
@@ -246,14 +246,14 @@ function ValuesExplorer() {
             transition={{ duration: 0.45, ease: EASE }}
             className="relative z-10"
           >
-            <span className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.24em] text-secondary">
+            <span className="inline-flex items-center gap-2 text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.24em] text-secondary">
               <span className="h-1.5 w-1.5 rounded-full bg-secondary" />
               Core value
             </span>
             <h3 className="mt-4 text-[clamp(1.35rem,2.5vw,1.85rem)] font-semibold leading-snug tracking-tight text-primary">
               {VALUES[activeIndex].t}
             </h3>
-            <p className="mt-4 text-[14px] leading-relaxed text-primary/68 sm:text-[15px]">
+            <p className="mt-4 text-[14px] lg:text-[15px] leading-relaxed text-primary/68 sm:text-[15px] lg:text-[16px]">
               {VALUES[activeIndex].d}
             </p>
           </motion.div>
@@ -281,13 +281,13 @@ function ProcessTimeline() {
           >
             <div className="relative z-10 flex items-center gap-4 lg:flex-col lg:items-center lg:gap-3">
               <motion.div
-                className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-secondary text-[15px] font-bold tabular-nums text-white shadow-[0_8px_24px_-8px_rgba(11,95,126,0.45)]"
+                className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-secondary text-[15px] lg:text-[16px] font-bold tabular-nums text-white shadow-[0_8px_24px_-8px_rgba(11,95,126,0.45)]"
                 whileHover={{ scale: 1.06, rotate: -2 }}
                 transition={{ type: "spring", stiffness: 400, damping: 22 }}
               >
                 {step.n}
               </motion.div>
-              <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-secondary lg:text-center">
+              <span className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.22em] text-secondary lg:text-center">
                 Step {step.n}
               </span>
             </div>
@@ -296,7 +296,7 @@ function ProcessTimeline() {
               <h3 className="text-[clamp(1.2rem,2vw,1.55rem)] font-semibold tracking-tight text-primary">
                 {step.t}
               </h3>
-              <p className="mt-3 max-w-2xl text-[14px] leading-relaxed text-primary/65 sm:text-[15px]">
+              <p className="mt-3 max-w-2xl text-[14px] lg:text-[15px] leading-relaxed text-primary/65 sm:text-[15px] lg:text-[16px]">
                 {step.d}
               </p>
               <motion.div
@@ -340,7 +340,7 @@ function CompanyOverviewSection() {
                 </h2>
                 <ul className="mt-5 space-y-3.5">
                   {block.items.map((item) => (
-                    <li key={item} className="flex gap-3 text-[14px] leading-relaxed text-primary/72 sm:text-[15px]">
+                    <li key={item} className="flex gap-3 text-[14px] lg:text-[15px] leading-relaxed text-primary/72 sm:text-[15px] lg:text-[16px]">
                       <span className="mt-0.5 shrink-0 font-bold text-secondary" aria-hidden>
                         •
                       </span>
@@ -384,7 +384,7 @@ function AboutHero() {
               Orbigreen Techsource
             </span>
           </h1>
-          <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-primary/75">
+          <p className="mt-6 max-w-xl text-[17px] lg:text-[18px] leading-relaxed text-primary/75">
             Integrated sourcing for industrial engineering — combining supplier networks, procurement, and quality
             management to improve supply chain efficiency. We support OEMs worldwide with a single-window approach
             from components to delivery.
@@ -398,13 +398,13 @@ function AboutHero() {
           >
             <Link
               to="/contact"
-              className="gradient-border-cta rounded-full px-6 py-3 text-[13px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
+              className="gradient-border-cta rounded-full px-6 py-3 text-[13px] lg:text-[14px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
             >
               Get in Touch
             </Link>
             <Link
               to="/services"
-              className="glass-card-light rounded-full px-6 py-3 text-[13px] font-semibold text-primary hover:glass-card-hover"
+              className="glass-card-light rounded-full px-6 py-3 text-[13px] lg:text-[14px] font-semibold text-primary hover:glass-card-hover"
             >
               Our Services
             </Link>
@@ -421,7 +421,7 @@ function AboutHero() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.5 + i * 0.05 }}
-                className="global-hero-stat rounded-full px-3 py-1.5 text-[11px] font-semibold text-primary/80"
+                className="global-hero-stat rounded-full px-3 py-1.5 text-[11px] lg:text-[12px] font-semibold text-primary/80"
               >
                 {cap.t.split(" ")[0]}
               </motion.span>
@@ -462,12 +462,12 @@ export default function AboutPage() {
                   Why we exist
                 </h2>
                 <div className="mt-6 space-y-4">
-                  <p className="text-[15px] leading-relaxed text-primary/70">
+                  <p className="text-[15px] lg:text-[16px] leading-relaxed text-primary/70">
                     We were built on a simple idea: industrial companies need one partner for the full complexity of
                     global sourcing — from drawing intake and supplier identification to quality assurance and on-time
                     delivery — without managing multiple vendors alone.
                   </p>
-                  <p className="text-[15px] leading-relaxed text-primary/70">
+                  <p className="text-[15px] lg:text-[16px] leading-relaxed text-primary/70">
                     We operate as a global sourcing partner, not a manufacturer. Our network manages your supply chain
                     with visibility and predictability.
                   </p>
@@ -488,11 +488,11 @@ export default function AboutPage() {
                 People, technology, and supplier ecosystems — managed end to end.
               </h2>
               <div className="mt-6 space-y-4">
-                <p className="text-[15px] leading-relaxed text-primary/70">
+                <p className="text-[15px] lg:text-[16px] leading-relaxed text-primary/70">
                   Our approach enables better visibility, scalability, and operational predictability across procurement
                   and supply chain operations. We work as an extension of your team.
                 </p>
-                <p className="text-[15px] leading-relaxed text-primary/70">
+                <p className="text-[15px] lg:text-[16px] leading-relaxed text-primary/70">
                   By centralizing sourcing, quality, and logistics through a single partner, you reduce complexity,
                   mitigate supplier risk, and free internal teams to focus on core product development.
                 </p>
@@ -532,8 +532,8 @@ export default function AboutPage() {
                   <span className="text-[clamp(1.25rem,2vw,1.75rem)] font-semibold tabular-nums leading-none text-primary/25 transition-colors duration-500 group-hover:text-secondary">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <h3 className="mt-3 text-[16px] font-semibold tracking-tight text-primary">{item.t}</h3>
-                  <p className="mt-2 text-[13px] leading-relaxed text-primary/65">{item.d}</p>
+                  <h3 className="mt-3 text-[16px] lg:text-[17px] font-semibold tracking-tight text-primary">{item.t}</h3>
+                  <p className="mt-2 text-[13px] lg:text-[14px] leading-relaxed text-primary/65">{item.d}</p>
                 </motion.div>
               ))}
             </div>
@@ -602,12 +602,12 @@ export default function AboutPage() {
             <h2 className="mx-auto mt-4 max-w-2xl text-balance text-[clamp(1.75rem,3.5vw,2.75rem)] font-semibold tracking-tight text-primary">
               Discover how our integrated sourcing approach can transform your supply chain
             </h2>
-            <p className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-primary/65">
+            <p className="mx-auto mt-5 max-w-xl text-[15px] lg:text-[16px] leading-relaxed text-primary/65">
               Better visibility, lower risk, and a single partner you can rely on — from first quote to final delivery.
             </p>
             <Link
               to="/contact"
-              className="gradient-border-cta mt-10 inline-flex rounded-full px-8 py-3.5 text-[14px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
+              className="gradient-border-cta mt-10 inline-flex rounded-full px-8 py-3.5 text-[14px] lg:text-[15px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
             >
               Get in Touch
             </Link>
