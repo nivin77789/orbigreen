@@ -8,8 +8,8 @@ const NAV = [
   { label: "About", to: "/about" },
   { label: "Services", to: "/services" },
   { label: "Products", to: "/products" },
-  { label: "Global Network", to: "/global-presence" },
-  { label: "Sourcing Markets", to: "/sourcing-markets" },
+  { label: "Get in Touch", to: "/global-presence" },
+  { label: "Blog", to: "/blog" },
 ];
 
 export function Nav() {

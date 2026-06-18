@@ -45,8 +45,13 @@ export function Footer() {
               </Link>
             </li>
             <li>
+              <Link to="/blog" className="transition-colors hover:text-primary">
+                Blog
+              </Link>
+            </li>
+            <li>
               <Link to="/global-presence" className="transition-colors hover:text-primary">
-                Global Network
+                Get in Touch
               </Link>
             </li>
             <li>

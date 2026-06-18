@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
-import { AnimatedStatValue } from "@/components/AnimatedStatValue";
 import aboutBanner from "@/assets/about-banner.png";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -73,13 +72,6 @@ const PROCESS = [
   },
 ];
 
-const STATS = [
-  { label: "Core capabilities", value: "5" },
-  { label: "Service offerings", value: "6" },
-  { label: "Product categories", value: "10" },
-  { label: "Sourcing markets", value: "4+" },
-];
-
 const COMPANY_OVERVIEW = [
   {
     title: "Who We Are",
@@ -127,51 +119,6 @@ function SectionLabel({ children }: { children: string }) {
     >
       {children}
     </motion.span>
-  );
-}
-
-function StatsBand() {
-  return (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.35 }}
-      className="metrics-band relative w-full overflow-hidden rounded-[1.5rem] sm:rounded-[1.75rem]"
-    >
-      <div className="grid grid-cols-2 lg:grid-cols-4">
-        {STATS.map((stat, i) => (
-          <motion.div
-            key={stat.label}
-            variants={fadeUp}
-            custom={i}
-            className="group relative px-4 py-6 text-center sm:px-5 sm:py-7 lg:px-6 lg:py-8"
-          >
-            {i > 0 && (
-              <span
-                className="absolute left-0 top-1/2 hidden h-10 w-px -translate-y-1/2 bg-gradient-to-b from-transparent via-primary/15 to-transparent lg:block"
-                aria-hidden
-              />
-            )}
-            <motion.div
-              whileHover={{ scale: 1.04 }}
-              transition={{ type: "spring", stiffness: 400, damping: 24 }}
-            >
-              <AnimatedStatValue
-                value={stat.value}
-                delay={i * 0.1}
-                className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-[clamp(1.35rem,3vw,2rem)] font-semibold leading-none tracking-tight text-transparent"
-              />
-            </motion.div>
-            <div className="mt-2 text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.2em] text-primary/65">{stat.label}</div>
-          </motion.div>
-        ))}
-      </div>
-      <motion.div
-        className="metrics-band-shine absolute inset-x-0 top-0 h-px"
-        animate={{ opacity: [0.4, 0.9, 0.4] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-      />
-    </motion.div>
   );
 }
 
@@ -364,10 +311,10 @@ function AboutHero() {
         <img
           src={aboutBanner}
           alt=""
-          className="h-full w-full object-cover object-[center_56%] sm:object-[right_56%]"
+          className="h-full w-full object-cover object-[center_56%] brightness-[0.9] saturate-[1.4] contrast-[1.1] sm:object-[right_56%]"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-white from-[30%] via-white/45 via-[48%] to-transparent sm:from-[32%] sm:via-white/40 lg:from-[34%] lg:via-white/30" />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-white/25" />
+        <div className="absolute inset-0 bg-gradient-to-r from-white from-[30%] via-white/30 via-[48%] to-transparent sm:from-[32%] sm:via-white/25 lg:from-[34%] lg:via-white/15" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-transparent to-white/20" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-[1280px] px-6 pb-10 pt-[5.75rem] lg:px-10 lg:pb-14 lg:pt-[6.25rem]">
@@ -537,13 +484,6 @@ export default function AboutPage() {
                 </motion.div>
               ))}
             </div>
-          </div>
-        </section>
-
-        {/* Stats */}
-        <section className="border-t border-primary/10 py-14 lg:py-16">
-          <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
-            <StatsBand />
           </div>
         </section>
 

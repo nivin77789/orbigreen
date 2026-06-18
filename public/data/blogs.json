@@ -1,0 +1,47 @@
+[
+  {
+    "id": "blog-001",
+    "slug": "global-sourcing-cost-vs-landed-cost",
+    "title": "Global Sourcing: Cheap Unit Cost vs True Landed Cost",
+    "excerpt": "Why procurement teams should evaluate freight, duties, quality fallout, and lead-time risk — not just piece price.",
+    "content": "Many sourcing programs start with a simple question: who can supply this part at the lowest unit price? On paper, that approach looks efficient. In practice, the lowest quote rarely equals the lowest total cost.\n\nLanded cost includes freight, insurance, customs duties, inspection, rework, inventory carrying cost, and the operational burden of managing distant suppliers. A part that saves 8% on FOB price can still increase total program cost if quality escapes or logistics delays production.\n\nOrbigreen Techsource helps OEMs compare suppliers on engineering fit, manufacturing capability, and delivery reliability — not price alone. We model scenarios across regions, align quality plans early, and coordinate logistics so procurement decisions reflect real business impact.\n\nIf you are rebalancing supply between India, China, Turkey, or Southeast Asia, start with a landed-cost framework before locking long-term awards.",
+    "author": "Orbigreen Editorial",
+    "category": "Sourcing Insights",
+    "coverImage": "/blog-covers/global-network-banner.png",
+    "tags": ["Global Sourcing", "Procurement", "Cost"],
+    "published": true,
+    "createdAt": "2026-05-12T09:00:00.000Z",
+    "updatedAt": "2026-05-12T09:00:00.000Z",
+    "publishedAt": "2026-05-12T09:00:00.000Z"
+  },
+  {
+    "id": "blog-002",
+    "slug": "supplier-quality-ppap-readiness",
+    "title": "Supplier Quality & PPAP: What OEMs Should Verify Early",
+    "excerpt": "A practical checklist for PPAP readiness, process controls, and inspection planning before production release.",
+    "content": "Quality issues discovered after tooling transfer are expensive to fix. PPAP and supplier quality planning should begin during supplier selection — not after the first shipment.\n\nKey verification areas include process capability, control plans, measurement systems, material traceability, and corrective-action discipline. For castings, forgings, and machined parts, dimensional stability and heat-treatment records matter as much as final inspection reports.\n\nOur quality and inspection services support desktop audits, on-site reviews, in-process checks, and pre-shipment verification. We align documentation with customer standards and close gaps before parts reach your line.\n\nStrong supplier quality is not a gate at the end of sourcing — it is a continuous program managed across engineering, procurement, and operations.",
+    "author": "Orbigreen Editorial",
+    "category": "Quality",
+    "coverImage": "/blog-covers/about-banner.png",
+    "tags": ["Quality", "PPAP", "Inspection"],
+    "published": true,
+    "createdAt": "2026-05-20T10:30:00.000Z",
+    "updatedAt": "2026-05-20T10:30:00.000Z",
+    "publishedAt": "2026-05-20T10:30:00.000Z"
+  },
+  {
+    "id": "blog-003",
+    "slug": "engineering-led-sourcing-for-oems",
+    "title": "Engineering-Led Sourcing for OEM Product Programs",
+    "excerpt": "How technical evaluation, DFM input, and supplier coordination accelerate new product introduction.",
+    "content": "Industrial sourcing succeeds when engineering and procurement work from the same technical baseline. Drawings, tolerances, material specs, and process requirements must be validated before commercial awards.\n\nEngineering-led sourcing reduces redesign cycles, prevents unmanufacturable proposals, and improves supplier accountability. It is especially critical for assemblies, pressure equipment, and precision-machined components where small specification gaps create major field risk.\n\nOrbigreen supports OEM teams with supplier identification, technical reviews, manufacturing cooperation agreements, and program execution through delivery. We act as a single window — from component sourcing to site support when required.\n\nFor new product launches, invest early in supplier engineering alignment. It protects schedule, cost, and brand reputation over the full product lifecycle.",
+    "author": "Orbigreen Editorial",
+    "category": "Engineering",
+    "coverImage": "/blog-covers/products-banner.webp",
+    "tags": ["Engineering", "OEM", "NPI"],
+    "published": true,
+    "createdAt": "2026-06-01T08:15:00.000Z",
+    "updatedAt": "2026-06-01T08:15:00.000Z",
+    "publishedAt": "2026-06-01T08:15:00.000Z"
+  }
+]

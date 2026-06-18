@@ -1,27 +1,17 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import { ContactForm } from "@/components/ContactForm";
+import { QuotationForm } from "@/components/QuotationForm";
 import { GlobalNetworkMap } from "@/components/GlobalNetworkMap";
-import { AnimatedStatValue } from "@/components/AnimatedStatValue";
 import { NETWORK_CORRIDORS } from "@/data/globalHubsData";
 import globalNetworkBanner from "@/assets/global-network-banner.png";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-const HERO_STATS = [
-  { value: "8", label: "Global hubs" },
-  { value: "4+", label: "Sourcing markets" },
-  { value: "500+", label: "Suppliers" },
-  { value: "50+", label: "Clients worldwide" },
-];
-
-const NETWORK_STATS = [
-  { value: "15+", label: "Years experience" },
-  { value: "100%", label: "Quality focus" },
-  { value: "500+", label: "Projects delivered" },
-  { value: "24/7", label: "Program visibility" },
-];
+type FormMode = "contact" | "quotation";
 
 const PRESENCE = [
   {
@@ -51,87 +41,71 @@ const fadeUp = {
   }),
 };
 
-function GlobalNetworkHero() {
-  return (
-    <section className="relative overflow-hidden border-b border-primary/10">
-      <div className="pointer-events-none absolute inset-0" aria-hidden>
-        <img
-          src={globalNetworkBanner}
-          alt=""
-          className="h-full w-full object-cover object-center"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-white from-30% via-white/92 to-white/45 sm:from-35% lg:via-white/75 lg:to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/50 via-transparent to-white" />
-      </div>
+function GetInTouchHero() {
+  const [formMode, setFormMode] = useState<FormMode>("contact");
 
-      <div className="relative z-10 mx-auto max-w-[1280px] px-6 pb-10 pt-[5.75rem] lg:px-10 lg:pb-14 lg:pt-[6.25rem]">
-        <div className="grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-12">
+  return (
+    <section className="relative overflow-hidden border-b border-primary/10 bg-white">
+      <div className="relative z-10 mx-auto max-w-[1280px] px-5 pb-8 pt-[5.25rem] sm:px-6 lg:px-10 lg:pb-12 lg:pt-[5.75rem]">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-start lg:gap-10 xl:gap-12">
           <motion.div
-            initial={{ opacity: 0, y: 32 }}
+            initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: EASE }}
+            transition={{ duration: 0.85, ease: EASE }}
+            className="max-w-xl lg:pt-2"
           >
             <span className="text-[11px] lg:text-[12px] font-bold uppercase tracking-[0.3em] text-secondary">
-              Global Network
+              Get in Touch
             </span>
-            <h1 className="mt-4 text-balance text-[clamp(2.25rem,5vw,3.75rem)] font-semibold leading-[1.05] tracking-tight text-primary">
+            <h1 className="mt-3 text-balance text-[clamp(1.85rem,4.2vw,3rem)] font-semibold leading-[1.08] tracking-tight text-primary">
               Our global presence{" "}
               <span className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-transparent">
                 & network
               </span>
             </h1>
-            <p className="mt-6 max-w-xl text-[17px] lg:text-[18px] leading-relaxed text-primary/75">
-              A single-window sourcing partner with on-the-ground presence across key manufacturing hubs and
-              logistics corridors — connecting you to the right suppliers, anywhere in the world.
-            </p>
-            <div className="global-presence-heading-line mt-6" />
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.25, duration: 0.7, ease: EASE }}
-              className="mt-8 flex flex-wrap gap-3"
-            >
-              <Link
-                to="/quotation"
-                className="gradient-border-cta rounded-full px-6 py-3 text-[13px] lg:text-[14px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
+            <div className="global-presence-heading-line mt-5" />
+
+            <div className="mt-6 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
+              <button
+                type="button"
+                onClick={() => setFormMode("contact")}
+                aria-pressed={formMode === "contact"}
+                className={`w-full rounded-full px-6 py-3 text-[13px] lg:text-[14px] font-semibold transition-all sm:w-auto ${
+                  formMode === "contact"
+                    ? "gradient-border-cta shadow-[0_0_28px_-4px_rgba(92,191,42,0.4)]"
+                    : "glass-card-light text-primary hover:glass-card-hover"
+                }`}
+              >
+                Contact Us
+              </button>
+              <button
+                type="button"
+                onClick={() => setFormMode("quotation")}
+                aria-pressed={formMode === "quotation"}
+                className={`w-full rounded-full px-6 py-3 text-[13px] lg:text-[14px] font-semibold transition-all sm:w-auto ${
+                  formMode === "quotation"
+                    ? "gradient-border-cta shadow-[0_0_28px_-4px_rgba(92,191,42,0.4)]"
+                    : "glass-card-light text-primary hover:glass-card-hover"
+                }`}
               >
                 Request Quotation
-              </Link>
-              <Link
-                to="/sourcing-markets"
-                className="glass-card-light rounded-full px-6 py-3 text-[13px] lg:text-[14px] font-semibold text-primary hover:glass-card-hover"
-              >
-                Sourcing Markets
-              </Link>
-            </motion.div>
+              </button>
+            </div>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15, duration: 0.85, ease: EASE }}
-            className="grid grid-cols-2 gap-3 lg:max-w-md lg:justify-self-end"
+            transition={{ delay: 0.08, duration: 0.85, ease: EASE }}
+            className="min-w-0 lg:sticky lg:top-28"
           >
-            {HERO_STATS.map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, scale: 0.94 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.2 + i * 0.08, duration: 0.55, ease: EASE }}
-                whileHover={{ y: -3 }}
-                className="global-hero-stat rounded-2xl px-4 py-5 text-center transition-all sm:px-5 sm:py-6"
-              >
-                <AnimatedStatValue
-                  value={stat.value}
-                  immediate
-                  delay={0.2 + i * 0.08}
-                  className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-[clamp(1.75rem,3.5vw,2.25rem)] font-semibold leading-none text-transparent"
-                />
-                <div className="mt-2 text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.2em] text-primary/55">
-                  {stat.label}
-                </div>
-              </motion.div>
-            ))}
+            <AnimatePresence mode="wait">
+              {formMode === "contact" ? (
+                <ContactForm key="contact" compact />
+              ) : (
+                <QuotationForm key="quotation" compact />
+              )}
+            </AnimatePresence>
           </motion.div>
         </div>
       </div>
@@ -145,7 +119,7 @@ export default function GlobalPresencePage() {
       <Nav />
 
       <main>
-        <GlobalNetworkHero />
+        <GetInTouchHero />
 
         {/* Map + hubs */}
         <section className="relative border-t border-primary/10 bg-section/50 py-14 lg:py-16">
@@ -185,57 +159,6 @@ export default function GlobalPresencePage() {
               </p>
             </motion.div>
             <GlobalNetworkMap />
-          </div>
-        </section>
-
-        {/* Stats band */}
-        <section className="border-t border-primary/10 bg-white py-14 lg:py-16">
-          <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.35 }}
-              className="metrics-band relative overflow-hidden rounded-[1.5rem]"
-            >
-              <div className="grid grid-cols-2 lg:grid-cols-4">
-                {NETWORK_STATS.map((stat, i) => (
-                  <motion.div
-                    key={stat.label}
-                    variants={fadeUp}
-                    custom={i}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                    className="group relative px-4 py-7 text-center sm:px-6 sm:py-8"
-                  >
-                    {i > 0 && (
-                      <span
-                        className="absolute left-0 top-1/2 hidden h-10 w-px -translate-y-1/2 bg-gradient-to-b from-transparent via-primary/15 to-transparent lg:block"
-                        aria-hidden
-                      />
-                    )}
-                    <motion.div
-                      whileHover={{ scale: 1.04 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 24 }}
-                    >
-                      <AnimatedStatValue
-                        value={stat.value}
-                        delay={i * 0.1}
-                        className="bg-gradient-to-br from-primary via-primary to-secondary bg-clip-text text-[clamp(1.75rem,4vw,2.5rem)] font-semibold text-transparent"
-                      />
-                    </motion.div>
-                    <div className="mt-2 text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.2em] text-primary/60">
-                      {stat.label}
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-              <motion.div
-                className="metrics-band-shine absolute inset-x-0 top-0 h-px"
-                animate={{ opacity: [0.4, 0.9, 0.4] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              />
-            </motion.div>
           </div>
         </section>
 

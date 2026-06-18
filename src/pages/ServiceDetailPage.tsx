@@ -2,6 +2,7 @@ import { Link, Navigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import { ServiceGrid } from "@/components/ServicesShowcase";
 import { getServiceBySlug, SERVICES } from "@/data/servicesData";
 
 const fadeUp = {
@@ -69,10 +70,10 @@ export default function ServiceDetailPage() {
                   Get in Touch
                 </Link>
                 <Link
-                  to="/sourcing-markets"
+                  to="/global-presence"
                   className="glass-card-light rounded-full px-6 py-3 text-[13px] lg:text-[14px] font-semibold text-primary transition-all hover:glass-card-hover"
                 >
-                  Explore Markets
+                  Get in Touch
                 </Link>
               </div>
             </motion.div>
@@ -176,31 +177,7 @@ export default function ServiceDetailPage() {
               </h2>
             </motion.div>
 
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {otherServices.map((item, i) => (
-                <motion.div
-                  key={item.slug}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  variants={fadeUp}
-                  custom={i}
-                >
-                  <Link
-                    to={`/services/${item.slug}`}
-                    className="glass-card-light group block rounded-2xl p-5 transition-all duration-500 hover:glass-card-hover"
-                  >
-                    <span className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.22em] text-primary/40 transition-colors group-hover:text-secondary">
-                      {item.title.split(" ")[0]}
-                    </span>
-                    <h3 className="mt-2 text-[15px] lg:text-[16px] font-semibold leading-snug text-primary">{item.title}</h3>
-                    <p className="mt-2 line-clamp-2 text-[12px] lg:text-[13px] leading-relaxed text-primary/60">
-                      {item.shortDescription}
-                    </p>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
+            <ServiceGrid services={otherServices} isSection={false} />
           </div>
         </section>
 

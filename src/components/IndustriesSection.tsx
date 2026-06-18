@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { INDUSTRIES } from "@/data/industriesData";
-import { AnimatedStatValue } from "@/components/AnimatedStatValue";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -22,7 +21,7 @@ export function IndustriesSection() {
       <IndustriesBackground />
 
       <div className="relative z-10 mx-auto max-w-[1280px] px-6 lg:px-10">
-        <div className="mb-10 flex flex-col gap-6 sm:mb-12 lg:flex-row lg:items-end lg:justify-between">
+        <div className="mb-10 sm:mb-12">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -41,23 +40,6 @@ export function IndustriesSection() {
               Qualified suppliers, quality assurance, and logistics for diverse manufacturing programs.
             </p>
             <div className="industries-heading-line mt-5" />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.92 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
-            className="industries-stat-pill shrink-0 self-start lg:self-auto"
-          >
-            <AnimatedStatValue
-              value="12"
-              delay={0.15}
-              className="block text-[clamp(2.15rem,4.2vw,3rem)] font-semibold leading-none tracking-tight text-primary"
-            />
-            <span className="mt-1 block text-[12px] lg:text-[13px] font-bold uppercase tracking-[0.22em] text-primary/55">
-              Industrial Sectors
-            </span>
           </motion.div>
         </div>
 

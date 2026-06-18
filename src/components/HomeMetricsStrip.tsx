@@ -1,15 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { AnimatedStatValue } from "@/components/AnimatedStatValue";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
-
-const METRICS = [
-  { n: "500+", l: "Projects", hint: "Delivered worldwide" },
-  { n: "50+", l: "Global Clients", hint: "Across industries" },
-  { n: "15+", l: "Years", hint: "Sourcing expertise" },
-  { n: "100%", l: "Quality Focus", hint: "Commitment to spec" },
-];
 
 const HIGHLIGHTS = [
   {
@@ -48,62 +40,6 @@ function MetricsBackground() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_75%_65%_at_50%_45%,transparent_35%,var(--section-bg)_100%)]" />
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-secondary/45 to-transparent" />
     </div>
-  );
-}
-
-function MetricsBand() {
-  return (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.4 }}
-      className="metrics-band relative w-full overflow-hidden rounded-[1.5rem] sm:rounded-[1.75rem]"
-    >
-      <div className="grid grid-cols-2 lg:grid-cols-4">
-        {METRICS.map((metric, i) => (
-          <motion.div
-            key={metric.l}
-            variants={fadeUp}
-            custom={i}
-            className="metrics-band-item group relative px-4 py-6 text-center sm:px-5 sm:py-7 lg:px-6 lg:py-8"
-          >
-            {i > 0 && (
-              <span
-                className="absolute left-0 top-1/2 hidden h-10 w-px -translate-y-1/2 bg-gradient-to-b from-transparent via-primary/15 to-transparent lg:block"
-                aria-hidden
-              />
-            )}
-            {i % 2 === 1 && (
-              <span
-                className="absolute left-0 top-4 h-px w-full bg-gradient-to-r from-transparent via-primary/10 to-transparent lg:hidden"
-                aria-hidden
-              />
-            )}
-            <motion.div
-              whileHover={{ scale: 1.04 }}
-              transition={{ type: "spring", stiffness: 400, damping: 24 }}
-            >
-              <AnimatedStatValue
-                value={metric.n}
-                delay={i * 0.1}
-                className="bg-gradient-to-br from-primary via-primary to-secondary bg-clip-text text-[clamp(2rem,4.5vw,3rem)] font-semibold leading-none tracking-tight text-transparent"
-              />
-            </motion.div>
-            <div className="mt-2 text-[12px] lg:text-[13px] font-bold uppercase tracking-[0.22em] text-primary/70 sm:mt-2.5">
-              {metric.l}
-            </div>
-            <div className="mt-1 text-[12px] lg:text-[13px] text-primary/40 opacity-0 transition-opacity duration-500 group-hover:opacity-100 sm:mt-1.5">
-              {metric.hint}
-            </div>
-          </motion.div>
-        ))}
-      </div>
-      <motion.div
-        className="metrics-band-shine absolute inset-x-0 top-0 h-px"
-        animate={{ opacity: [0.4, 0.9, 0.4] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-      />
-    </motion.div>
   );
 }
 
@@ -239,27 +175,7 @@ export function HomeMetricsStrip() {
       <MetricsBackground />
 
       <div className="relative z-10 w-full max-w-[1140px] px-5 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.35 }}
-          transition={{ duration: 0.7, ease: EASE }}
-          className="mx-auto mb-8 max-w-2xl text-center sm:mb-10"
-        >
-          <span className="text-[13px] lg:text-[15px] font-bold uppercase tracking-[0.3em] text-secondary">By the Numbers</span>
-          <h2 className="mt-3 text-balance text-[clamp(1.9rem,3.8vw,2.85rem)] font-semibold leading-[1.08] tracking-tight text-primary">
-            Proven scale.{" "}
-            <span className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-transparent">
-              Measured impact.
-            </span>
-          </h2>
-        </motion.div>
-
-        <MetricsBand />
-
-        <div className="mt-8 sm:mt-10 lg:mt-12">
-          <HighlightTimeline />
-        </div>
+        <HighlightTimeline />
       </div>
     </section>
   );

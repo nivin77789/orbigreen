@@ -1,10 +1,8 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { EMAIL, OFFICE_ADDRESS, PHONE_DISPLAY, PHONE_TEL } from "@/lib/constants";
+import { ContactForm } from "@/components/ContactForm";
 
 export function ContactSection() {
-  const [sent, setSent] = useState(false);
-
   return (
     <section id="contact" className="content-auto relative border-t border-primary/10 bg-white py-28">
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-secondary/50 to-transparent" />
@@ -45,39 +43,7 @@ export function ContactSection() {
             Request Quotation →
           </Link>
         </div>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            setSent(true);
-            setTimeout(() => setSent(false), 2800);
-          }}
-          className="flex flex-col gap-4 rounded-2xl border border-primary/10 bg-section p-8 shadow-sm"
-        >
-          <label className="text-[11px] lg:text-[12px] font-bold uppercase tracking-[0.25em] text-primary/50">Quick contact</label>
-          <input
-            required
-            placeholder="Full name"
-            className="border-b border-primary/15 bg-transparent py-3 text-[16px] lg:text-[17px] text-primary placeholder-primary/35 outline-none transition-colors focus:border-secondary"
-          />
-          <input
-            required
-            type="email"
-            placeholder="Work email"
-            className="border-b border-primary/15 bg-transparent py-3 text-[16px] lg:text-[17px] text-primary placeholder-primary/35 outline-none transition-colors focus:border-secondary"
-          />
-          <textarea
-            required
-            rows={4}
-            placeholder="Tell us about your sourcing requirement"
-            className="resize-none border-b border-primary/15 bg-transparent py-3 text-[16px] lg:text-[17px] text-primary placeholder-primary/35 outline-none transition-colors focus:border-secondary"
-          />
-          <button
-            type="submit"
-            className="gradient-border-cta group mt-4 inline-flex items-center justify-center gap-2 self-start rounded-full px-7 py-3 text-[14px] lg:text-[15px] font-medium transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
-          >
-            <span>{sent ? "Sent" : "Send message"}</span>
-          </button>
-        </form>
+        <ContactForm />
       </div>
     </section>
   );
