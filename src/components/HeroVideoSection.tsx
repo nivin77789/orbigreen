@@ -2,9 +2,9 @@ import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import bannerVideo from "@/banner.mp4";
+import { HERO_BG } from "@/lib/constants";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
-const VIDEO_DURATION_SEC = 2;
 
 function ScrollHint() {
   return (
@@ -22,53 +22,32 @@ export function HeroVideoSection() {
     const video = videoRef.current;
     if (!video) return;
 
-    let paused = false;
-
-    const pauseAtEnd = () => {
-      if (paused || video.currentTime < VIDEO_DURATION_SEC) return;
-      paused = true;
-      video.pause();
-      video.currentTime = VIDEO_DURATION_SEC;
-    };
-
     const start = async () => {
-      video.currentTime = 0;
       try {
         await video.play();
       } catch {
-        video.pause();
-        video.currentTime = VIDEO_DURATION_SEC;
+        /* autoplay blocked */
       }
     };
 
-    video.addEventListener("timeupdate", pauseAtEnd);
     void start();
-
-    return () => {
-      video.removeEventListener("timeupdate", pauseAtEnd);
-    };
   }, []);
 
   return (
-    <section id="hero" className="relative h-screen w-full overflow-hidden bg-primary">
+    <section id="hero" className="relative h-screen w-full overflow-hidden" style={{ backgroundColor: HERO_BG }}>
       <video
         ref={videoRef}
         src={bannerVideo}
         className="absolute inset-0 h-full w-full object-cover"
         muted
         playsInline
+        loop
+        autoPlay
         preload="auto"
         aria-hidden
       />
 
-      <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-primary/45 via-primary/25 to-[#F5F8F7]/80"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_90%_at_50%_40%,transparent_35%,rgba(7,63,82,0.35)_100%)]"
-        aria-hidden
-      />
+      <div className="hero-surface-overlay pointer-events-none absolute inset-0" aria-hidden />
 
       <div className="relative z-10 flex h-full items-center justify-center px-5 sm:px-8 lg:px-12 xl:px-16">
         <motion.div

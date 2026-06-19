@@ -9,6 +9,7 @@ import { HomeHelpSection } from "@/components/HomeHelpSection";
 import { IndustriesSection } from "@/components/IndustriesSection";
 import { ProductsShowcase } from "@/components/ProductsShowcase";
 import { HomeWorkflow } from "@/components/HomeWorkflow";
+import { HERO_BG } from "@/lib/constants";
 
 function ClosingCTA({ visible }: { visible: boolean }) {
   return (
@@ -61,18 +62,16 @@ export default function HomePage() {
 
       <HeroVideoSection />
 
-      <section ref={trackRef} className="relative h-[400vh]">
-        <div className="sticky top-0 h-screen w-full overflow-hidden">
+      <section ref={trackRef} className="relative h-[400vh]" style={{ backgroundColor: HERO_BG }}>
+        <div className="sticky top-0 h-screen w-full overflow-hidden" style={{ backgroundColor: HERO_BG }}>
           <HeroFrameCanvas progressRef={progressRef} active={heroActive} />
 
-          <div className="pointer-events-none absolute inset-0 bg-white/10" aria-hidden />
+          <div className="hero-surface-overlay pointer-events-none absolute inset-0" aria-hidden />
 
           <motion.div
             style={{ opacity: overlayOpacity }}
-            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-section/35 via-section/12 to-section/40"
+            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-primary/20 via-transparent to-primary/30"
           />
-
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_80%_at_50%_50%,transparent_62%,#F5F8F7_100%)]" />
 
           <div className="absolute inset-0 flex items-center justify-center px-5 sm:px-8 lg:px-12 xl:px-16">
             {phase === "workflow" && (

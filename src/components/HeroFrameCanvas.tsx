@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { getFrameImage, preloadFramesAround, preloadInitialFrames } from "@/lib/frame-cache";
+import { HERO_BG } from "@/lib/constants";
 import { scrollProgressToFrame } from "@/lib/scroll-frames";
 import { usePageVisible } from "@/hooks/usePageVisible";
 
@@ -84,7 +85,7 @@ export function HeroFrameCanvas({
 
       const img = getFrameImage(frameNumber);
       if (img?.complete && img.naturalWidth > 0) {
-        ctx.fillStyle = "#F5F8F7";
+        ctx.fillStyle = HERO_BG;
         ctx.fillRect(0, 0, w, h);
         drawCover(img);
 
@@ -95,7 +96,7 @@ export function HeroFrameCanvas({
           const bloom = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(w, h) * 0.55);
           bloom.addColorStop(0, `rgba(92, 191, 42, ${0.2 * t})`);
           bloom.addColorStop(0.45, `rgba(11, 95, 126, ${0.1 * t})`);
-          bloom.addColorStop(1, "rgba(245, 248, 247, 0)");
+          bloom.addColorStop(1, "rgba(11, 95, 126, 0)");
           ctx.fillStyle = bloom;
           ctx.fillRect(0, 0, w, h);
         }
@@ -118,7 +119,7 @@ export function HeroFrameCanvas({
     <canvas
       ref={canvasRef}
       className="absolute inset-0 h-full w-full"
-      style={{ background: "#F5F8F7" }}
+      style={{ background: HERO_BG }}
     />
   );
 }
