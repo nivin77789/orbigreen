@@ -86,7 +86,7 @@ export default function ServicesPage() {
               Get Started
             </SectionLabel>
             <h2 className="mt-4 text-balance text-[clamp(1.75rem,3.5vw,2.75rem)] font-semibold tracking-tight text-primary">
-              Ready to optimize your sourcing operations!
+              Optimize your sourcing operations
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-[15px] lg:text-[16px] leading-relaxed text-primary/70">
               Tell us about your project requirements — we'll recommend the right combination of sourcing,
