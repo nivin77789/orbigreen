@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 import Lenis from "lenis";
 import "lenis/dist/lenis.css";
-import { scrollToTarget, setLenis } from "@/lib/lenis";
+import { setLenis } from "@/lib/lenis";
+
+const NAV_OFFSET = -76;
 
 export function SmoothScroll() {
   useEffect(() => {
@@ -9,40 +11,33 @@ export function SmoothScroll() {
     if (prefersReducedMotion) return;
 
     const lenis = new Lenis({
-      duration: 1.1,
+      lerp: 0.09,
+      duration: 1.15,
       easing: (t) => Math.min(1, 1.001 - 2 ** (-10 * t)),
       smoothWheel: true,
-      wheelMultiplier: 0.9,
+      syncTouch: true,
+      syncTouchLerp: 0.08,
+      wheelMultiplier: 0.95,
       touchMultiplier: 1.15,
+      autoRaf: true,
+      autoResize: true,
+      stopInertiaOnNavigate: true,
+      anchors: { offset: NAV_OFFSET },
     });
 
     setLenis(lenis);
     document.documentElement.classList.add("lenis-enabled");
 
-    const onAnchorClick = (event: MouseEvent) => {
-      const anchor = (event.target as Element | null)?.closest('a[href^="#"]');
-      if (!(anchor instanceof HTMLAnchorElement)) return;
-
-      const hash = anchor.getAttribute("href");
-      if (!hash || hash === "#") return;
-
-      event.preventDefault();
-      scrollToTarget(hash, { offset: -72 });
-      window.history.pushState(null, "", hash);
+    const onResize = () => {
+      lenis.resize();
     };
 
-    document.addEventListener("click", onAnchorClick);
-
-    let frameId = 0;
-    const onFrame = (time: number) => {
-      lenis.raf(time);
-      frameId = requestAnimationFrame(onFrame);
-    };
-    frameId = requestAnimationFrame(onFrame);
+    window.addEventListener("resize", onResize, { passive: true });
+    window.addEventListener("orientationchange", onResize, { passive: true });
 
     return () => {
-      document.removeEventListener("click", onAnchorClick);
-      cancelAnimationFrame(frameId);
+      window.removeEventListener("resize", onResize);
+      window.removeEventListener("orientationchange", onResize);
       lenis.destroy();
       setLenis(null);
       document.documentElement.classList.remove("lenis-enabled");

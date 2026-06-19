@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { SectionLabel } from "@/components/SectionLabel";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 
@@ -45,11 +46,6 @@ const SECTIONS = [
   },
 ];
 
-function SectionLabel({ children }: { children: string }) {
-  return (
-    <span className="text-[10px] lg:text-[11px] uppercase tracking-[0.3em] text-secondary">{children}</span>
-  );
-}
 
 export default function ResourcesPage() {
   return (

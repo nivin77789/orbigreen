@@ -15,7 +15,7 @@ export function BrandLogo({ variant = "nav", onClick }: BrandLogoProps) {
   const isLoader = variant === "loader";
 
   const logoHeight = isNav
-    ? "h-11 md:h-12"
+    ? "h-9 w-auto sm:h-10 xl:h-11 2xl:h-12"
     : isLoader
       ? "h-16 md:h-20"
       : "h-14 md:h-16";

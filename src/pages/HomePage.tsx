@@ -8,7 +8,7 @@ import { Footer } from "@/components/Footer";
 import { HomeHelpSection } from "@/components/HomeHelpSection";
 import { IndustriesSection } from "@/components/IndustriesSection";
 import { ProductsShowcase } from "@/components/ProductsShowcase";
-import { HomeWorkflow } from "@/components/HomeWorkflow";
+import { HomeWorkflow, workflowStepFromScroll, WORKFLOW_SCROLL_END } from "@/components/HomeWorkflow";
 import { HERO_BG } from "@/lib/constants";
 
 function ClosingCTA({ visible }: { visible: boolean }) {
@@ -38,6 +38,7 @@ export default function HomePage() {
   const progressRef = useRef(0);
   const heroActive = useInView(trackRef, "120px");
   const [phase, setPhase] = useState<"workflow" | "closing">("workflow");
+  const [workflowStep, setWorkflowStep] = useState(0);
 
   const { scrollYProgress } = useScroll({
     target: trackRef,
@@ -46,13 +47,18 @@ export default function HomePage() {
 
   useMotionValueEvent(scrollYProgress, "change", (v) => {
     progressRef.current = v;
-    const next = v < 0.72 ? "workflow" : "closing";
+    const next = v < WORKFLOW_SCROLL_END ? "workflow" : "closing";
     setPhase((p) => (p === next ? p : next));
+
+    if (v < WORKFLOW_SCROLL_END) {
+      const step = workflowStepFromScroll(v);
+      setWorkflowStep((current) => (current === step ? current : step));
+    }
   });
 
   const overlayOpacity = useTransform(
     scrollYProgress,
-    [0, 0.72, 1],
+    [0, WORKFLOW_SCROLL_END, 1],
     [0.08, 0.24, 0.1],
   );
 
@@ -75,8 +81,11 @@ export default function HomePage() {
 
           <div className="absolute inset-0 flex items-center justify-center px-5 sm:px-8 lg:px-12 xl:px-16">
             {phase === "workflow" && (
-              <div className="flex h-full w-full items-center justify-center overflow-y-auto py-20 sm:py-16">
-                <HomeWorkflow />
+              <div className="flex h-full w-full items-center justify-center overflow-hidden py-12 sm:py-14">
+                <HomeWorkflow
+                  activeStep={workflowStep}
+                  onStepSelect={setWorkflowStep}
+                />
               </div>
             )}
             {phase === "closing" && (

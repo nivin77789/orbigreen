@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { SectionLabel } from "@/components/SectionLabel";
 import { GLOBAL_HUBS } from "@/data/globalHubsData";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -17,7 +18,7 @@ export function GlobalNetworkMap() {
           transition={{ duration: 0.6, ease: EASE }}
           className="mb-5 text-center sm:mb-6"
         >
-          <span className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.28em] text-secondary">Active Hubs</span>
+          <SectionLabel>Active Hubs</SectionLabel>
           <h3 className="mt-2 text-[clamp(1.2rem,2vw,1.5rem)] font-semibold tracking-tight text-primary">
             Connected worldwide
           </h3>

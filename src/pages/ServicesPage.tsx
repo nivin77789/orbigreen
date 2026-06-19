@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { SectionLabel } from "@/components/SectionLabel";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { ServicesShowcase } from "@/components/ServicesShowcase";
@@ -7,19 +8,6 @@ import servicesBanner from "@/assets/services-banner.webp";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-function SectionLabel({ children }: { children: string }) {
-  return (
-    <motion.span
-      initial={{ opacity: 0, letterSpacing: "0.5em" }}
-      whileInView={{ opacity: 1, letterSpacing: "0.3em" }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8, ease: EASE }}
-      className="inline-block text-[10px] lg:text-[11px] uppercase tracking-[0.3em] text-secondary"
-    >
-      {children}
-    </motion.span>
-  );
-}
 
 function ServicesHero() {
   return (
@@ -41,7 +29,7 @@ function ServicesHero() {
           transition={{ duration: 0.9, ease: EASE }}
           className="max-w-2xl"
         >
-          <SectionLabel>What We Offer</SectionLabel>
+          <SectionLabel animated>What We Offer</SectionLabel>
           <h1 className="mt-3 text-balance text-[clamp(1.85rem,4vw,2.75rem)] font-semibold leading-[1.08] tracking-tight text-primary">
             Our{" "}
             <span className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-transparent">
@@ -95,7 +83,7 @@ export default function ServicesPage() {
             transition={{ duration: 0.8, ease: EASE }}
             className="glass-card-light mx-auto max-w-[1280px] rounded-3xl px-6 py-16 text-center lg:px-10"
           >
-            <SectionLabel>Get Started</SectionLabel>
+            <SectionLabel animated>Get Started</SectionLabel>
             <h2 className="mt-4 text-balance text-[clamp(1.75rem,3.5vw,2.75rem)] font-semibold tracking-tight text-primary">
               Ready to optimize your sourcing operations?
             </h2>

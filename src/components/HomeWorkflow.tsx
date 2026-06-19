@@ -1,5 +1,6 @@
-import { useState, type ReactNode } from "react";
-import { motion } from "framer-motion";
+import { type ReactNode } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { SectionLabel } from "@/components/SectionLabel";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -94,15 +95,33 @@ const WORKFLOW_STEPS: { t: string; d: string; icon: ReactNode }[] = [
   },
 ];
 
-export function HomeWorkflow() {
-  const [activeStep, setActiveStep] = useState(0);
+const WORKFLOW_STEP_COUNT = WORKFLOW_STEPS.length;
+
+export const WORKFLOW_SCROLL_END = 0.72;
+
+export function workflowStepFromScroll(progress: number) {
+  if (progress >= WORKFLOW_SCROLL_END) return WORKFLOW_STEP_COUNT - 1;
+  return Math.min(
+    WORKFLOW_STEP_COUNT - 1,
+    Math.floor((progress / WORKFLOW_SCROLL_END) * WORKFLOW_STEP_COUNT),
+  );
+}
+
+type HomeWorkflowProps = {
+  activeStep: number;
+  onStepSelect?: (index: number) => void;
+};
+
+export function HomeWorkflow({ activeStep, onStepSelect }: HomeWorkflowProps) {
+  const safeStep = Math.min(WORKFLOW_STEP_COUNT - 1, Math.max(0, activeStep));
+  const active = WORKFLOW_STEPS[safeStep];
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 28 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.85, ease: EASE }}
-      className="home-workflow pointer-events-auto mx-auto w-full max-w-[1180px] px-5 sm:px-6 lg:px-8"
+      className="home-workflow home-workflow--hero pointer-events-auto mx-auto w-full max-w-[1240px] px-4 sm:px-6 lg:px-8"
     >
       <motion.header
         initial={{ opacity: 0, y: 16 }}
@@ -110,90 +129,70 @@ export function HomeWorkflow() {
         transition={{ duration: 0.7, ease: EASE }}
         className="home-workflow__header mx-auto max-w-2xl text-center"
       >
-        <span className="text-[11px] font-bold uppercase tracking-[0.32em] text-secondary sm:text-[12px] lg:text-[13px]">
-          How We Work
-        </span>
-        <h3 className="mt-3 text-balance text-[clamp(1.65rem,3.6vw,2.65rem)] font-semibold leading-[1.08] tracking-tight text-primary">
+        <SectionLabel tone="white">How We Work</SectionLabel>
+        <h3 className="mt-3 text-balance text-[clamp(1.55rem,3.4vw,2.5rem)] font-semibold leading-[1.08] tracking-tight text-white">
           A clear, engineered{" "}
-          <span className="bg-gradient-to-br from-primary via-primary to-secondary bg-clip-text text-transparent">
-            sourcing workflow.
-          </span>
+          <span className="text-white/95">sourcing workflow.</span>
         </h3>
         <div className="home-workflow__heading-line mx-auto mt-4" aria-hidden />
       </motion.header>
 
-      <div className="home-workflow__rail mt-7 hidden sm:block" aria-hidden>
-        <div className="home-workflow__rail-track">
-          <motion.div
-            className="home-workflow__rail-fill"
-            animate={{ scaleX: (activeStep + 1) / WORKFLOW_STEPS.length }}
-            transition={{ duration: 0.45, ease: EASE }}
-          />
-        </div>
-        <ol className="home-workflow__rail-nodes">
-          {WORKFLOW_STEPS.map((step, i) => {
-            const isActive = i <= activeStep;
-            const isCurrent = i === activeStep;
-            return (
-              <li key={step.t}>
-                <button
-                  type="button"
-                  className={`home-workflow__rail-node ${isActive ? "home-workflow__rail-node--active" : ""} ${
-                    isCurrent ? "home-workflow__rail-node--current" : ""
-                  }`}
-                  onMouseEnter={() => setActiveStep(i)}
-                  onFocus={() => setActiveStep(i)}
-                  aria-label={`Step ${i + 1}: ${step.t}`}
-                >
-                  {String(i + 1).padStart(2, "0")}
-                </button>
-              </li>
-            );
-          })}
-        </ol>
-      </div>
-
-      <ol className="home-workflow__grid mt-6 sm:mt-7">
+      <ol className="home-workflow-chevron-flow mt-5 sm:mt-6" aria-label="Sourcing workflow steps">
         {WORKFLOW_STEPS.map((step, i) => {
-          const isActive = i === activeStep;
+          const isActive = i === safeStep;
+          const isPast = i < safeStep;
+
           return (
             <motion.li
               key={step.t}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.08 + i * 0.06, ease: EASE }}
-              onMouseEnter={() => setActiveStep(i)}
-              onFocus={() => setActiveStep(i)}
-              className="list-none"
+              transition={{ duration: 0.5, delay: 0.06 + i * 0.05, ease: EASE }}
+              className="home-workflow-chevron-item list-none"
             >
-              <motion.article
-                whileHover={{ y: -4 }}
-                transition={{ type: "spring", stiffness: 420, damping: 28 }}
-                className={`home-workflow__card group ${isActive ? "home-workflow__card--active" : ""}`}
+              <button
+                type="button"
+                className={`home-workflow-chevron group ${isActive ? "is-active" : ""} ${isPast ? "is-past" : ""}`}
+                onMouseEnter={() => onStepSelect?.(i)}
+                onFocus={() => onStepSelect?.(i)}
+                onClick={() => onStepSelect?.(i)}
+                aria-current={isActive ? "step" : undefined}
+                aria-label={`Step ${i + 1}: ${step.t}`}
               >
-                <span className="home-workflow__card-watermark" aria-hidden>
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span className="home-workflow__card-shine" aria-hidden />
-
-                <div className="relative z-10 flex h-full flex-col">
-                  <div className="flex items-start justify-between gap-3">
-                    <span className="home-workflow__card-icon">{step.icon}</span>
-                    <span className="home-workflow__card-index">{String(i + 1).padStart(2, "0")}</span>
-                  </div>
-
-                  <h4 className="mt-3 text-[14px] font-semibold leading-snug tracking-tight text-primary sm:text-[15px] lg:text-[16px]">
-                    {step.t}
-                  </h4>
-                  <p className="mt-2 flex-1 text-[12px] leading-relaxed text-primary/68 sm:text-[13px] lg:text-[14px]">
-                    {step.d}
-                  </p>
-                </div>
-              </motion.article>
+                <span className="home-workflow-chevron__sheen" aria-hidden />
+                <span className="home-workflow-chevron__index">{String(i + 1).padStart(2, "0")}</span>
+                <span className="home-workflow-chevron__icon">{step.icon}</span>
+                <span className="home-workflow-chevron__title">{step.t}</span>
+              </button>
             </motion.li>
           );
         })}
       </ol>
+
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={safeStep}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.35, ease: EASE }}
+          className="home-workflow-chevron-detail mt-4 sm:mt-5"
+          role="region"
+          aria-live="polite"
+          aria-label={`Step ${safeStep + 1} details`}
+        >
+          <div className="home-workflow-chevron-detail__inner">
+            <span className="home-workflow-chevron-detail__icon">{active.icon}</span>
+            <div className="min-w-0 flex-1">
+              <p className="home-workflow-chevron-detail__step">
+                Step {String(safeStep + 1).padStart(2, "0")}
+              </p>
+              <h4 className="home-workflow-chevron-detail__title">{active.t}</h4>
+              <p className="home-workflow-chevron-detail__copy">{active.d}</p>
+            </div>
+          </div>
+        </motion.div>
+      </AnimatePresence>
     </motion.div>
   );
 }

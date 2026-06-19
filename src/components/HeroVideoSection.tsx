@@ -6,15 +6,6 @@ import { HERO_BG } from "@/lib/constants";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-function ScrollHint() {
-  return (
-    <div className="pointer-events-none absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3">
-      <span className="text-[12px] uppercase tracking-[0.3em] text-white/55 lg:text-[13px]">Scroll</span>
-      <div className="h-10 w-px bg-gradient-to-b from-secondary to-transparent" />
-    </div>
-  );
-}
-
 export function HeroVideoSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -56,10 +47,10 @@ export function HeroVideoSection() {
           transition={{ duration: 0.9, ease: EASE }}
           className="hero-copy-plain pointer-events-auto mx-auto flex w-full max-w-sm flex-col items-center px-5 py-6 text-center sm:max-w-md sm:px-7 sm:py-8 lg:max-w-lg"
         >
-          <span className="inline-flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.25em] text-white/90 lg:text-[13px]">
-            <span className="h-1.5 w-1.5 rounded-full bg-secondary shadow-[0_0_8px_rgba(92,191,42,0.55)]" />
+          <p className="hero-banner-kicker inline-flex items-center gap-2.5 text-white">
+            <span className="h-2 w-2 shrink-0 rounded-full bg-secondary shadow-[0_0_10px_rgba(92,191,42,0.65)]" />
             Orbigreen Techsource
-          </span>
+          </p>
           <h1 className="mt-5 text-balance text-[clamp(1.875rem,4.8vw,3.75rem)] font-semibold leading-[1.02] tracking-[-0.03em] text-white sm:mt-6">
             Driving Sustainable{" "}
             <span>Industrial Solutions</span>
@@ -82,8 +73,6 @@ export function HeroVideoSection() {
             </Link>
           </div>
         </motion.div>
-
-        <ScrollHint />
       </div>
     </section>
   );

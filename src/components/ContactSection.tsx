@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { EMAIL, OFFICE_ADDRESS, PHONE_DISPLAY, PHONE_TEL } from "@/lib/constants";
+import { SectionLabel } from "@/components/SectionLabel";
 import { ContactForm } from "@/components/ContactForm";
 
 export function ContactSection() {
@@ -8,7 +9,7 @@ export function ContactSection() {
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-secondary/50 to-transparent" />
       <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-16 px-6 lg:grid-cols-2 lg:px-10">
         <div>
-          <span className="text-[11px] lg:text-[12px] font-bold uppercase tracking-[0.3em] text-secondary">Contact Us Today</span>
+          <SectionLabel>Contact Us Today</SectionLabel>
           <h3 className="mt-4 text-[clamp(2rem,3.5vw,3rem)] font-semibold leading-[1.05] tracking-tight text-primary">
             Let's build your
             <br />
@@ -16,7 +17,9 @@ export function ContactSection() {
           </h3>
           <dl className="mt-10 space-y-6">
             <div>
-              <dt className="text-[11px] lg:text-[12px] font-bold uppercase tracking-[0.25em] text-primary/50">Phone</dt>
+              <dt>
+                <SectionLabel tone="muted">Phone</SectionLabel>
+              </dt>
               <dd className="mt-1">
                 <a href={`tel:${PHONE_TEL}`} className="text-[17px] lg:text-[18px] font-medium text-primary hover:text-secondary">
                   {PHONE_DISPLAY}
@@ -24,7 +27,9 @@ export function ContactSection() {
               </dd>
             </div>
             <div>
-              <dt className="text-[11px] lg:text-[12px] font-bold uppercase tracking-[0.25em] text-primary/50">Email</dt>
+              <dt>
+                <SectionLabel tone="muted">Email</SectionLabel>
+              </dt>
               <dd className="mt-1">
                 <a href={`mailto:${EMAIL}`} className="text-[17px] lg:text-[18px] font-medium text-primary hover:text-secondary">
                   {EMAIL}
@@ -32,7 +37,9 @@ export function ContactSection() {
               </dd>
             </div>
             <div>
-              <dt className="text-[11px] lg:text-[12px] font-bold uppercase tracking-[0.25em] text-primary/50">Office</dt>
+              <dt>
+                <SectionLabel tone="muted">Office</SectionLabel>
+              </dt>
               <dd className="mt-1 max-w-xs text-[15px] lg:text-[16px] leading-relaxed text-primary/70">{OFFICE_ADDRESS}</dd>
             </div>
           </dl>

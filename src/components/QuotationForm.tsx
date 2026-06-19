@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { SectionLabel } from "@/components/SectionLabel";
 import { motion } from "framer-motion";
 
 const CATEGORIES = [
@@ -51,7 +52,7 @@ export function QuotationForm({ compact = false }: QuotationFormProps) {
     >
       {!compact && (
         <div className="border-b border-primary/[0.07] pb-2.5">
-          <span className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.28em] text-secondary">Request Quotation</span>
+          <SectionLabel>Request Quotation</SectionLabel>
         </div>
       )}
 

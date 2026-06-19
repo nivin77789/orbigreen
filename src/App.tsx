@@ -5,7 +5,7 @@ import { AppBootstrap } from "@/components/AppBootstrap";
 import { PageLoader } from "@/components/PageLoader";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { BlogProvider } from "@/context/BlogContext";
-import { getLenis, scrollToTarget } from "@/lib/lenis";
+import { resizeLenis, scrollToTarget, scrollToTop } from "@/lib/lenis";
 
 const HomePage = lazy(() => import("@/pages/HomePage"));
 const AboutPage = lazy(() => import("@/pages/AboutPage"));
@@ -28,17 +28,15 @@ function ScrollToHash() {
 
   useEffect(() => {
     if (hash) {
-      requestAnimationFrame(() => scrollToTarget(hash, { offset: -72 }));
+      requestAnimationFrame(() => {
+        resizeLenis();
+        scrollToTarget(hash, { offset: -76 });
+      });
       return;
     }
 
-    const lenis = getLenis();
-    if (lenis) {
-      lenis.scrollTo(0, { immediate: true });
-      return;
-    }
-
-    window.scrollTo(0, 0);
+    resizeLenis();
+    scrollToTop(true);
   }, [pathname, hash]);
 
   return null;

@@ -1,6 +1,7 @@
 import { useMemo, useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { SectionLabel } from "@/components/SectionLabel";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { useBlogs } from "@/context/BlogContext";
@@ -23,7 +24,7 @@ const EMPTY_FORM: BlogPostInput = {
 const fieldClass =
   "mt-1.5 w-full rounded-xl border border-primary/10 bg-white/90 px-3.5 py-2.5 text-[14px] lg:text-[15px] text-primary outline-none transition-all focus:border-secondary/50 focus:bg-white focus:shadow-[0_0_0_3px_rgba(92,191,42,0.12)]";
 
-const labelClass = "text-[11px] lg:text-[12px] font-bold uppercase tracking-[0.18em] text-primary/50";
+const labelClass = "section-label text-primary/50";
 
 function formatDate(value?: string) {
   if (!value) return "—";
@@ -65,9 +66,7 @@ function AdminLogin({ onLogin }: { onLogin: (password: string) => boolean }) {
 
   return (
     <div className="mx-auto flex min-h-[60vh] max-w-md flex-col justify-center px-6 py-20">
-      <span className="text-[12px] lg:text-[13px] font-bold uppercase tracking-[0.28em] text-secondary">
-        Admin
-      </span>
+      <SectionLabel>Admin</SectionLabel>
       <h1 className="mt-3 text-[clamp(1.75rem,3vw,2.25rem)] font-semibold tracking-tight text-primary">
         Blog management
       </h1>
@@ -319,9 +318,7 @@ export default function AdminBlogPage() {
           <div className="mx-auto max-w-[1100px] px-6 pb-20 lg:px-10">
             <div className="flex flex-wrap items-end justify-between gap-4">
               <div>
-                <span className="text-[12px] lg:text-[13px] font-bold uppercase tracking-[0.28em] text-secondary">
-                  Admin
-                </span>
+                <SectionLabel>Admin</SectionLabel>
                 <h1 className="mt-3 text-[clamp(1.9rem,3.5vw,2.75rem)] font-semibold tracking-tight text-primary">
                   Manage blog articles
                 </h1>

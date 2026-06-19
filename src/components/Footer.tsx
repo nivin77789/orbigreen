@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { SectionLabel } from "@/components/SectionLabel";
 import { SocialLinks } from "@/components/SocialLinks";
 import { BrandLogo } from "@/components/BrandLogo";
 import { EMAIL, OFFICE_ADDRESS, PHONE_DISPLAY, PHONE_TEL } from "@/lib/constants";
@@ -11,12 +12,12 @@ export function Footer() {
         <div>
           <BrandLogo variant="footer" />
           <div className="mt-5">
-            <h5 className="text-[11px] lg:text-[12px] font-bold uppercase tracking-[0.25em] text-primary/50">Follow Us</h5>
+            <SectionLabel as="h5" tone="muted">Follow Us</SectionLabel>
             <SocialLinks className="mt-3" />
           </div>
         </div>
         <div>
-          <h5 className="text-[11px] lg:text-[12px] font-bold uppercase tracking-[0.25em] text-primary/50">Reach</h5>
+          <SectionLabel as="h5" tone="muted">Reach</SectionLabel>
           <ul className="mt-4 space-y-2.5 text-primary/75">
             <li>
               <a href={`tel:${PHONE_TEL}`} className="transition-colors hover:text-primary">
@@ -32,7 +33,7 @@ export function Footer() {
           </ul>
         </div>
         <div>
-          <h5 className="text-[11px] lg:text-[12px] font-bold uppercase tracking-[0.25em] text-primary/50">Quick Links</h5>
+          <SectionLabel as="h5" tone="muted">Quick Links</SectionLabel>
           <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2.5 text-primary/75">
             <li>
               <Link to="/" className="transition-colors hover:text-primary">
@@ -67,7 +68,7 @@ export function Footer() {
           </ul>
         </div>
         <div>
-          <h5 className="text-[11px] lg:text-[12px] font-bold uppercase tracking-[0.25em] text-primary/50">Services</h5>
+          <SectionLabel as="h5" tone="muted">Services</SectionLabel>
           <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2.5 text-primary/75">
             {SERVICES.map((service) => (
               <li key={service.slug}>

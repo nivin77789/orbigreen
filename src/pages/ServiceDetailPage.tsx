@@ -1,5 +1,6 @@
 import { Link, Navigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
+import { SectionLabel } from "@/components/SectionLabel";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { ServiceGrid } from "@/components/ServicesShowcase";
@@ -53,9 +54,7 @@ export default function ServiceDetailPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             >
-              <span className="text-[10px] lg:text-[11px] uppercase tracking-[0.3em] text-secondary">
-                Service {String(currentIndex + 1).padStart(2, "0")}
-              </span>
+              <SectionLabel>Service {String(currentIndex + 1).padStart(2, "0")}</SectionLabel>
               <h1 className="mt-4 text-balance text-[clamp(2.25rem,4.5vw,3.5rem)] font-semibold leading-[1.05] tracking-tight text-primary">
                 {service.title}
               </h1>
@@ -111,7 +110,7 @@ export default function ServiceDetailPage() {
               custom={0}
               className="max-w-3xl"
             >
-              <span className="text-[10px] lg:text-[11px] uppercase tracking-[0.3em] text-secondary">Overview</span>
+              <SectionLabel>Overview</SectionLabel>
               <h2 className="mt-4 text-[clamp(1.75rem,3vw,2.5rem)] font-semibold leading-snug tracking-tight text-primary">
                 {service.sectionTitle}
               </h2>
@@ -171,7 +170,7 @@ export default function ServiceDetailPage() {
               transition={{ duration: 0.8 }}
               className="mb-10"
             >
-              <span className="text-[10px] lg:text-[11px] uppercase tracking-[0.3em] text-secondary">More Services</span>
+              <SectionLabel>More Services</SectionLabel>
               <h2 className="mt-3 text-[clamp(1.5rem,2.5vw,2rem)] font-semibold tracking-tight text-primary">
                 Explore our other capabilities
               </h2>
@@ -189,7 +188,7 @@ export default function ServiceDetailPage() {
             transition={{ duration: 0.8 }}
             className="glass-card-light mx-auto max-w-[1280px] rounded-3xl px-6 py-16 text-center lg:px-10"
           >
-            <span className="text-[10px] lg:text-[11px] uppercase tracking-[0.3em] text-secondary">Get Started</span>
+            <SectionLabel>Get Started</SectionLabel>
             <h2 className="mt-4 text-balance text-[clamp(1.75rem,3vw,2.5rem)] font-semibold tracking-tight text-primary">
               Ready to discuss {service.title.toLowerCase()}?
             </h2>

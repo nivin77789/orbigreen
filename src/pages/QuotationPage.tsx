@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { SectionLabel } from "@/components/SectionLabel";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { QuotationForm } from "@/components/QuotationForm";
@@ -94,9 +95,7 @@ export default function QuotationPage() {
               transition={{ duration: 0.8, ease: EASE }}
               className="flex w-full shrink-0 flex-col lg:max-w-[26rem] xl:max-w-[28rem]"
             >
-              <span className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.32em] text-secondary sm:text-[11px] lg:text-[12px]">
-                Get a Quote
-              </span>
+              <SectionLabel>Get a Quote</SectionLabel>
               <h1 className="mt-2 text-balance text-[clamp(1.85rem,4vw,2.65rem)] font-semibold leading-[1.06] tracking-tight text-primary xl:text-[2.75rem]">
                 Request a{" "}
                 <span className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-transparent">

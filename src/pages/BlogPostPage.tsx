@@ -1,5 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
+import { SectionLabel } from "@/components/SectionLabel";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { useBlogs } from "@/context/BlogContext";
@@ -81,9 +82,7 @@ export default function BlogPostPage() {
                 transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                 className="mt-6"
               >
-                <span className="text-[12px] lg:text-[13px] font-bold uppercase tracking-[0.24em] text-secondary">
-                  {post.category}
-                </span>
+                <SectionLabel>{post.category}</SectionLabel>
                 <h1 className="mt-4 text-balance text-[clamp(2rem,4.5vw,3.25rem)] font-semibold leading-[1.08] tracking-tight text-primary">
                   {post.title}
                 </h1>

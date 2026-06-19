@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { SectionLabel } from "@/components/SectionLabel";
 import { motion } from "framer-motion";
 
 type ContactFormProps = {
@@ -28,14 +29,14 @@ export function ContactForm({ compact = false }: ContactFormProps) {
     >
       {compact && (
         <div className="border-b border-primary/[0.07] pb-3">
-          <span className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.28em] text-secondary">Contact Us</span>
+          <SectionLabel>Contact Us</SectionLabel>
           <p className="mt-1 text-[13px] lg:text-[14px] leading-snug text-primary/62">
             Send a quick message — our team will respond within one business day.
           </p>
         </div>
       )}
       {!compact && (
-        <label className="text-[11px] lg:text-[12px] font-bold uppercase tracking-[0.25em] text-primary/50">Quick contact</label>
+        <SectionLabel tone="muted">Quick contact</SectionLabel>
       )}
       <input
         required

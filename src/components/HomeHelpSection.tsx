@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { SectionLabel } from "@/components/SectionLabel";
 import { HOME_FAQ } from "@/data/faqData";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -80,9 +81,7 @@ export function HomeHelpSection() {
           transition={{ duration: 0.7, ease: EASE }}
           className="mx-auto max-w-2xl text-center"
         >
-          <span className="text-[12px] lg:text-[13px] font-bold uppercase tracking-[0.3em] text-secondary">
-            How can we help?
-          </span>
+          <SectionLabel>How can we help?</SectionLabel>
           <h2 className="mt-3 text-balance text-[clamp(1.85rem,3.6vw,2.75rem)] font-semibold leading-[1.08] tracking-tight text-primary">
             Find the right support path in seconds.
           </h2>

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { SectionLabel } from "@/components/SectionLabel";
 import { motion } from "framer-motion";
 import productsAboutBanner from "@/assets/products-about-banner.webp";
 
@@ -40,7 +41,7 @@ export function HomeAboutSection() {
             viewport={{ once: true, amount: 0.35 }}
             transition={{ duration: 0.75, ease: EASE }}
           >
-            <span className="text-[12px] lg:text-[13px] font-bold uppercase tracking-[0.3em] text-secondary">Who we are</span>
+            <SectionLabel>Who we are</SectionLabel>
             <h2 className="mt-4 text-balance text-[clamp(2rem,4vw,3.1rem)] font-semibold leading-[1.08] tracking-tight text-primary">
               About{" "}
               <span className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-transparent">

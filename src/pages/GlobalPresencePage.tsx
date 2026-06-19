@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { ContactForm } from "@/components/ContactForm";
 import { QuotationForm } from "@/components/QuotationForm";
 import { GlobalNetworkMap } from "@/components/GlobalNetworkMap";
+import { SectionLabel } from "@/components/SectionLabel";
 import { NETWORK_CORRIDORS } from "@/data/globalHubsData";
 import globalNetworkMap from "@/assets/global-network-map.png";
 
@@ -54,9 +55,7 @@ function GetInTouchHero() {
             transition={{ duration: 0.85, ease: EASE }}
             className="max-w-xl lg:pt-2"
           >
-            <span className="text-[11px] lg:text-[12px] font-bold uppercase tracking-[0.3em] text-secondary">
-              Get in Touch
-            </span>
+            <SectionLabel>Get in Touch</SectionLabel>
             <h1 className="mt-3 text-balance text-[clamp(1.85rem,4.2vw,3rem)] font-semibold leading-[1.08] tracking-tight text-primary">
               Our global presence{" "}
               <span className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-transparent">
@@ -146,9 +145,7 @@ export default function GlobalPresencePage() {
               custom={0}
               className="mb-10 max-w-2xl"
             >
-              <span className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.28em] text-secondary">
-                Worldwide Footprint
-              </span>
+              <SectionLabel>Worldwide Footprint</SectionLabel>
               <h2 className="mt-3 text-[clamp(1.65rem,3vw,2.35rem)] font-semibold tracking-tight text-primary">
                 Four active hubs. One coordinated network.
               </h2>
@@ -172,9 +169,7 @@ export default function GlobalPresencePage() {
               custom={0}
               className="mb-10 max-w-2xl"
             >
-              <span className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.28em] text-secondary">
-                Supply Corridors
-              </span>
+              <SectionLabel>Supply Corridors</SectionLabel>
               <h2 className="mt-3 text-[clamp(1.65rem,3vw,2.35rem)] font-semibold tracking-tight text-primary">
                 Four corridors. One coordinated network.
               </h2>
@@ -224,9 +219,7 @@ export default function GlobalPresencePage() {
                 custom={0}
                 className="lg:sticky lg:top-32"
               >
-                <span className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.28em] text-secondary">
-                  Network Capabilities
-                </span>
+                <SectionLabel>Network Capabilities</SectionLabel>
                 <h2 className="mt-3 text-[clamp(1.65rem,3vw,2.35rem)] font-semibold tracking-tight text-primary">
                   How our network works for you
                 </h2>
@@ -273,7 +266,7 @@ export default function GlobalPresencePage() {
             transition={{ duration: 0.75, ease: EASE }}
             className="relative z-10 mx-auto max-w-[1280px] px-6 text-center lg:px-10"
           >
-            <span className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.3em] text-secondary">Get Started</span>
+            <SectionLabel>Get Started</SectionLabel>
             <h2 className="mt-4 text-balance text-[clamp(1.75rem,3.5vw,2.75rem)] font-semibold tracking-tight text-primary">
               Expand your supply base{" "}
               <span className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-transparent">

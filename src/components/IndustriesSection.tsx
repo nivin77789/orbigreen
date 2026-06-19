@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { SectionLabel } from "@/components/SectionLabel";
 import { INDUSTRIES } from "@/data/industriesData";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -29,7 +30,7 @@ export function IndustriesSection() {
             transition={{ duration: 0.7, ease: EASE }}
             className="max-w-xl"
           >
-            <span className="text-[13px] lg:text-[15px] font-bold uppercase tracking-[0.3em] text-secondary">Industries We Serve</span>
+            <SectionLabel>Industries We Serve</SectionLabel>
             <h2 className="mt-3 text-[clamp(1.9rem,3.2vw,2.75rem)] font-semibold leading-[1.08] tracking-tight text-primary">
               Sourcing across{" "}
               <span className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-transparent">

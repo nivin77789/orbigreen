@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { SectionLabel } from "@/components/SectionLabel";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { ProductsShowcase } from "@/components/ProductsShowcase";
@@ -27,7 +28,7 @@ function ProductsHero() {
           transition={{ duration: 0.9, ease: EASE }}
           className="max-w-2xl"
         >
-            <span className="text-[11px] lg:text-[12px] font-bold uppercase tracking-[0.3em] text-secondary">Product Catalog</span>
+            <SectionLabel>Product Catalog</SectionLabel>
             <h1 className="mt-3 text-balance text-[clamp(1.85rem,4vw,2.75rem)] font-semibold leading-[1.08] tracking-tight text-primary">
               Our{" "}
               <span className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-transparent">
@@ -81,7 +82,7 @@ export default function ProductsPage() {
             transition={{ duration: 0.8 }}
             className="glass-card-light mx-auto max-w-[1280px] rounded-3xl px-6 py-16 text-center lg:px-10"
           >
-            <span className="text-[10px] lg:text-[11px] uppercase tracking-[0.3em] text-secondary">Get Started</span>
+            <SectionLabel>Get Started</SectionLabel>
             <h2 className="mt-4 text-balance text-[clamp(1.75rem,3vw,2.5rem)] font-semibold tracking-tight text-primary">
               Need a custom sourcing program?
             </h2>

@@ -28,18 +28,20 @@ export function Nav() {
   }, [menuOpen]);
 
   return (
-    <header className="fixed top-0 z-50 w-full px-4 pt-3 lg:px-8">
-      <div className="glass-nav relative mx-auto flex h-[68px] max-w-[1400px] items-center justify-between gap-3 rounded-full px-4 lg:px-6">
-        <BrandLogo variant="nav" onClick={() => setMenuOpen(false)} />
+    <header className="fixed top-0 z-50 w-full max-w-[100vw] px-3 pt-2.5 sm:px-4 sm:pt-3 xl:px-8">
+      <div className="glass-nav relative mx-auto flex h-[60px] min-w-0 max-w-[1400px] items-center justify-between gap-2 overflow-hidden rounded-full px-3 sm:h-[64px] sm:gap-3 sm:px-4 xl:h-[68px] xl:px-6">
+        <div className="min-w-0 shrink-0">
+          <BrandLogo variant="nav" onClick={() => setMenuOpen(false)} />
+        </div>
 
-        <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-0.5 lg:flex">
+        <nav className="absolute left-1/2 hidden min-w-0 max-w-[calc(100%-16rem)] -translate-x-1/2 items-center gap-0 xl:flex 2xl:max-w-[calc(100%-18rem)]">
           {NAV.map((item) => {
             const isActive = item.to === "/" ? pathname === "/" : pathname.startsWith(item.to);
             return (
               <Link
                 key={item.label}
                 to={item.to}
-                className={`rounded-full px-3 py-1.5 text-[13px] lg:text-[14px] font-semibold transition-all duration-500 ease-out hover:glass-card-hover xl:px-3.5 xl:text-[15px] ${
+                className={`whitespace-nowrap rounded-full px-2 py-1.5 text-[11px] font-semibold transition-all duration-500 ease-out hover:glass-card-hover 2xl:px-3 2xl:text-[13px] ${
                   isActive ? "glass-card-hover text-primary" : "text-primary/85"
                 }`}
               >
@@ -49,12 +51,13 @@ export function Nav() {
           })}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
           <Link
             to="/quotation"
-            className="gradient-border-cta hidden rounded-full px-5 py-2.5 text-[13px] lg:text-[14px] font-semibold shadow-[0_4px_16px_rgba(11,95,126,0.18)] transition-all hover:shadow-[0_0_24px_-2px_rgba(92,191,42,0.45)] sm:inline-flex xl:text-[15px]"
+            className="gradient-border-cta hidden rounded-full px-3.5 py-2 text-[11px] font-semibold shadow-[0_4px_16px_rgba(11,95,126,0.18)] transition-all hover:shadow-[0_0_24px_-2px_rgba(92,191,42,0.45)] sm:inline-flex sm:px-4 sm:py-2.5 sm:text-[12px] xl:px-5 xl:text-[13px]"
           >
-            Request Quote
+            <span className="xl:hidden">Quote</span>
+            <span className="hidden xl:inline">Request Quote</span>
           </Link>
 
           <button
@@ -62,7 +65,7 @@ export function Nav() {
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen((open) => !open)}
-            className="glass-card-light relative flex h-10 w-10 items-center justify-center rounded-full text-primary transition-all hover:glass-card-hover lg:hidden"
+            className="glass-card-light relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-primary transition-all hover:glass-card-hover xl:hidden sm:h-10 sm:w-10"
           >
             <span className="sr-only">{menuOpen ? "Close menu" : "Open menu"}</span>
             <span className="relative h-3.5 w-4">
@@ -96,7 +99,7 @@ export function Nav() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.25 }}
-              className="fixed inset-0 top-[5rem] bg-primary/20 backdrop-blur-[2px] lg:hidden"
+              className="fixed inset-0 top-[4.25rem] bg-primary/20 backdrop-blur-[2px] sm:top-[4.75rem] xl:hidden"
               onClick={() => setMenuOpen(false)}
             />
 
@@ -105,7 +108,7 @@ export function Nav() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -8, scale: 0.98 }}
               transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="glass-card-light absolute left-4 right-4 top-[calc(5rem+0.5rem)] mx-auto max-w-[1400px] overflow-hidden rounded-3xl p-3 lg:hidden"
+              className="glass-card-light absolute left-3 right-3 top-[calc(4.25rem+0.5rem)] mx-auto max-w-[1400px] overflow-hidden rounded-3xl p-3 sm:left-4 sm:right-4 sm:top-[calc(4.75rem+0.5rem)] xl:hidden"
             >
               <ul className="grid grid-cols-2 gap-1">
                 {NAV.map((item, i) => {

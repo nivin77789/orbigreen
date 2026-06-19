@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { SectionLabel } from "@/components/SectionLabel";
 import { motion, AnimatePresence } from "framer-motion";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -55,9 +56,7 @@ function HighlightTimeline() {
     >
       <div className="mb-5 flex items-end justify-between gap-4 px-1 sm:mb-6">
         <div>
-          <span className="text-[12px] lg:text-[13px] font-bold uppercase tracking-[0.28em] text-secondary">
-            Why Orbigreen
-          </span>
+          <SectionLabel>Why Orbigreen</SectionLabel>
           <h3 className="mt-2 text-[clamp(1.4rem,2.8vw,1.85rem)] font-semibold tracking-tight text-primary">
             Sourcing advantages that scale
           </h3>
@@ -129,15 +128,16 @@ function HighlightTimeline() {
               className="relative z-10 flex h-full flex-col justify-between"
             >
               <div>
-                <motion.span
-                  className="inline-flex items-center gap-2 text-[12px] lg:text-[13px] font-bold uppercase tracking-[0.24em] text-secondary"
+                <motion.div
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.05, duration: 0.4, ease: EASE }}
                 >
-                  <span className="h-1.5 w-1.5 rounded-full bg-secondary" />
-                  Advantage {String(activeIndex + 1).padStart(2, "0")}
-                </motion.span>
+                  <SectionLabel className="inline-flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-secondary" />
+                    Advantage {String(activeIndex + 1).padStart(2, "0")}
+                  </SectionLabel>
+                </motion.div>
                 <h4 className="mt-4 text-[clamp(1.45rem,3vw,2rem)] font-semibold leading-snug tracking-tight text-primary">
                   {HIGHLIGHTS[activeIndex].t}
                 </h4>

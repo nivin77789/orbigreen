@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
+import { SectionLabel } from "@/components/SectionLabel";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import aboutBanner from "@/assets/about-banner.png";
@@ -108,19 +109,6 @@ const fadeUp = {
   }),
 };
 
-function SectionLabel({ children }: { children: string }) {
-  return (
-    <motion.span
-      initial={{ opacity: 0, letterSpacing: "0.15em" }}
-      whileInView={{ opacity: 1, letterSpacing: "0.3em" }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8, ease: EASE }}
-      className="inline-block text-[10px] lg:text-[11px] uppercase tracking-[0.3em] text-secondary"
-    >
-      {children}
-    </motion.span>
-  );
-}
 
 function ValuesExplorer() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -193,10 +181,10 @@ function ValuesExplorer() {
             transition={{ duration: 0.45, ease: EASE }}
             className="relative z-10"
           >
-            <span className="inline-flex items-center gap-2 text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.24em] text-secondary">
+            <SectionLabel className="inline-flex items-center gap-2">
               <span className="h-1.5 w-1.5 rounded-full bg-secondary" />
               Core value
-            </span>
+            </SectionLabel>
             <h3 className="mt-4 text-[clamp(1.35rem,2.5vw,1.85rem)] font-semibold leading-snug tracking-tight text-primary">
               {VALUES[activeIndex].t}
             </h3>
@@ -234,9 +222,7 @@ function ProcessTimeline() {
               >
                 {step.n}
               </motion.div>
-              <span className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.22em] text-secondary lg:text-center">
-                Step {step.n}
-              </span>
+              <SectionLabel className="lg:text-center">Step {step.n}</SectionLabel>
             </div>
 
             <div>
@@ -324,7 +310,7 @@ function AboutHero() {
           transition={{ duration: 0.9, ease: EASE }}
           className="max-w-2xl"
         >
-          <SectionLabel>Who we are</SectionLabel>
+          <SectionLabel animated>Who we are</SectionLabel>
           <h1 className="mt-4 text-balance text-[clamp(2.25rem,5vw,3.75rem)] font-semibold leading-[1.05] tracking-tight text-primary">
             About{" "}
             <span className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-transparent">
@@ -404,7 +390,7 @@ export default function AboutPage() {
             >
               <div className="highlight-panel-grid absolute inset-0 opacity-40" aria-hidden />
               <div className="relative z-10">
-                <SectionLabel>Our Story</SectionLabel>
+                <SectionLabel animated>Our Story</SectionLabel>
                 <h2 className="mt-3 text-[clamp(1.5rem,2.5vw,2rem)] font-semibold tracking-tight text-primary">
                   Why we exist
                 </h2>
@@ -430,7 +416,7 @@ export default function AboutPage() {
               variants={fadeUp}
               className="glass-card-light relative overflow-hidden rounded-[1.5rem] p-7 transition-all duration-500 hover:glass-card-hover lg:p-9"
             >
-              <SectionLabel>A Global Sourcing Partner</SectionLabel>
+              <SectionLabel animated>A Global Sourcing Partner</SectionLabel>
               <h2 className="mt-3 text-[clamp(1.35rem,2.2vw,1.85rem)] font-semibold leading-snug tracking-tight text-primary">
                 People, technology, and supplier ecosystems — managed end to end.
               </h2>
@@ -458,7 +444,7 @@ export default function AboutPage() {
               transition={{ duration: 0.8, ease: EASE }}
               className="mb-10 max-w-2xl"
             >
-              <SectionLabel>What we deliver</SectionLabel>
+              <SectionLabel animated>What we deliver</SectionLabel>
               <h2 className="mt-3 text-[clamp(1.5rem,2.5vw,2.25rem)] font-semibold tracking-tight text-primary">
                 Core capabilities across your supply chain
               </h2>
@@ -497,7 +483,7 @@ export default function AboutPage() {
               transition={{ duration: 0.8, ease: EASE }}
               className="mb-10 max-w-2xl"
             >
-              <SectionLabel>Our Values</SectionLabel>
+              <SectionLabel animated>Our Values</SectionLabel>
               <h2 className="mt-3 text-[clamp(1.5rem,2.5vw,2.25rem)] font-semibold tracking-tight text-primary">
                 The principles that guide how we work every day
               </h2>
@@ -518,7 +504,7 @@ export default function AboutPage() {
               transition={{ duration: 0.8, ease: EASE }}
               className="mb-10 max-w-2xl"
             >
-              <SectionLabel>How We Work With You</SectionLabel>
+              <SectionLabel animated>How We Work With You</SectionLabel>
               <h2 className="mt-3 text-[clamp(1.5rem,2.5vw,2.25rem)] font-semibold tracking-tight text-primary">
                 A collaborative, transparent process from first contact to final delivery
               </h2>
@@ -538,7 +524,7 @@ export default function AboutPage() {
             transition={{ duration: 0.9, ease: EASE }}
             className="relative mx-auto max-w-[1280px] px-6 text-center lg:px-10"
           >
-            <SectionLabel>Partner With Us</SectionLabel>
+            <SectionLabel animated>Partner With Us</SectionLabel>
             <h2 className="mx-auto mt-4 max-w-2xl text-balance text-[clamp(1.75rem,3.5vw,2.75rem)] font-semibold tracking-tight text-primary">
               Discover how our integrated sourcing approach can transform your supply chain
             </h2>
