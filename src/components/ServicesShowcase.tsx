@@ -11,10 +11,6 @@ type ServicesShowcaseProps = {
   services?: ServiceDetail[];
 };
 
-function serviceLabel(service: ServiceDetail) {
-  return service.title.replace(/,.*/, "").replace(/\s*&.*$/, "").trim();
-}
-
 function ServicesSectionBackground() {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
@@ -74,12 +70,8 @@ export function ServiceCard({
       </div>
 
       <div className={`flex min-w-0 flex-1 flex-col ${isHorizontal ? "justify-center px-3.5 py-3 sm:px-4 sm:py-3.5" : "p-4 sm:p-5"}`}>
-        <SectionLabel className="inline-flex w-fit items-center gap-1.5">
-          <span className="h-1 w-1 rounded-full" style={{ backgroundColor: service.accent }} />
-          {serviceLabel(service)}
-        </SectionLabel>
         <h3
-          className={`mt-1.5 font-semibold leading-tight text-primary ${
+          className={`font-semibold leading-tight text-primary ${
             isHorizontal ? "text-[16px] lg:text-[17px] sm:text-[17px] lg:text-[18px]" : "text-[18px] lg:text-[19px] sm:text-[19px] lg:text-[20px]"
           }`}
         >
@@ -133,10 +125,7 @@ function ServicesHeader({
       <div className="max-w-2xl">
         <SectionLabel>Our Services</SectionLabel>
         <h2 className="mt-3 text-balance text-[clamp(2.2rem,4.1vw,3.35rem)] font-semibold leading-[1.08] tracking-tight text-primary">
-          End-to-end support across{" "}
-          <span className="bg-gradient-to-br from-primary via-primary to-secondary bg-clip-text text-transparent">
-            your supply chain
-          </span>
+          End-to-end support across your supply chain
         </h2>
         <p className="mt-4 max-w-lg text-[16px] lg:text-[17px] leading-relaxed text-primary/60">
           Sourcing, engineering, quality, logistics, and on-site support — delivered through one accountable

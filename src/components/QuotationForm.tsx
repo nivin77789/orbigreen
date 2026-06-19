@@ -10,7 +10,7 @@ const CATEGORIES = [
   "Fasteners & Transmission",
   "Engineering Services",
   "Global Sourcing",
-  "Transport & Logistics",
+  "Logistics",
   "Site Installation",
   "Other",
 ];

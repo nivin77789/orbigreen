@@ -29,12 +29,11 @@ function ServicesHero() {
           transition={{ duration: 0.9, ease: EASE }}
           className="max-w-2xl"
         >
-          <SectionLabel animated>What We Offer</SectionLabel>
+          <SectionLabel animated tone="primary">
+            What We Offer
+          </SectionLabel>
           <h1 className="mt-3 text-balance text-[clamp(1.85rem,4vw,2.75rem)] font-semibold leading-[1.08] tracking-tight text-primary">
-            Our{" "}
-            <span className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-transparent">
-              Services
-            </span>
+            Our Services
           </h1>
           <p className="mt-4 max-w-xl text-[16px] lg:text-[17px] leading-relaxed text-primary/75">
             Comprehensive industrial sourcing, engineering, and quality solutions designed to optimize your
@@ -83,7 +82,9 @@ export default function ServicesPage() {
             transition={{ duration: 0.8, ease: EASE }}
             className="glass-card-light mx-auto max-w-[1280px] rounded-3xl px-6 py-16 text-center lg:px-10"
           >
-            <SectionLabel animated>Get Started</SectionLabel>
+            <SectionLabel animated tone="primary">
+              Get Started
+            </SectionLabel>
             <h2 className="mt-4 text-balance text-[clamp(1.75rem,3.5vw,2.75rem)] font-semibold tracking-tight text-primary">
               Ready to optimize your sourcing operations?
             </h2>

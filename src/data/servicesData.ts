@@ -139,7 +139,7 @@ export const SERVICES: ServiceDetail[] = [
   },
   {
     slug: "transport-logistics",
-    title: "Transport & Logistics",
+    title: "Logistics",
     shortDescription:
       "End-to-end freight coordination, customs clearance, and on-time delivery across global supply routes.",
     image: imgLogistics,
