@@ -29,9 +29,9 @@ const SECTIONS = [
     description:
       "Fast answers to common questions about global sourcing, inspections, and working models.",
     items: [
-      "What is global sourcing?",
+      "What is global sourcing!",
       "Agent vs buying office",
-      "When do you need factory audits?",
+      "When do you need factory audits!",
     ],
   },
   {
@@ -102,7 +102,7 @@ export default function ResourcesPage() {
 
         <section className="border-t border-primary/10 bg-white py-24">
           <div className="mx-auto max-w-[1280px] px-6 text-center lg:px-10">
-            <SectionLabel>Need help?</SectionLabel>
+            <SectionLabel>Need help!</SectionLabel>
             <h2 className="mt-4 text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold tracking-tight text-primary">
               Talk to an expert
             </h2>

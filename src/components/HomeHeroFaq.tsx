@@ -116,7 +116,7 @@ export function HomeHeroFaq({ visible = true }: { visible?: boolean }) {
         className="shrink-0 text-center"
       >
         <h3 className="text-[clamp(1.5rem,3.4vw,2.25rem)] font-bold leading-snug tracking-tight text-primary">
-          How can we help?
+          How can we help!
         </h3>
       </motion.div>
 

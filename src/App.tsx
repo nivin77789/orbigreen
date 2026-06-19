@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { MotionConfig } from "framer-motion";
 import { AppBootstrap } from "@/components/AppBootstrap";
 import { PageLoader } from "@/components/PageLoader";
-import { SmoothScroll } from "@/components/SmoothScroll";
+import { SmoothScrollProvider } from "@/components/SmoothScroll";
 import { BlogProvider } from "@/context/BlogContext";
 import { resizeLenis, scrollToTarget, scrollToTop } from "@/lib/lenis";
 
@@ -27,16 +27,18 @@ function ScrollToHash() {
   const { pathname, hash } = useLocation();
 
   useEffect(() => {
-    if (hash) {
-      requestAnimationFrame(() => {
-        resizeLenis();
-        scrollToTarget(hash, { offset: -76 });
-      });
-      return;
-    }
+    const frame = requestAnimationFrame(() => {
+      resizeLenis();
 
-    resizeLenis();
-    scrollToTop(true);
+      if (hash) {
+        scrollToTarget(hash, { offset: -76, immediate: false });
+        return;
+      }
+
+      scrollToTop(false);
+    });
+
+    return () => cancelAnimationFrame(frame);
   }, [pathname, hash]);
 
   return null;
@@ -48,27 +50,28 @@ export default function App() {
       <MotionConfig reducedMotion="user" transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}>
         <BlogProvider>
           <BrowserRouter>
-            <SmoothScroll />
-            <ScrollToHash />
-            <Suspense fallback={<PageLoader />}>
-              <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/about" element={<AboutPage />} />
-                <Route path="/resources" element={<ResourcesPage />} />
-                <Route path="/products" element={<ProductsPage />} />
-                <Route path="/services" element={<ServicesPage />} />
-                <Route path="/services/:slug" element={<ServiceDetailPage />} />
-                <Route path="/contact" element={<ContactPage />} />
-                <Route path="/quotation" element={<QuotationPage />} />
-                <Route path="/global-presence" element={<GlobalPresencePage />} />
-                <Route path="/blog" element={<BlogPage />} />
-                <Route path="/blog/:slug" element={<BlogPostPage />} />
-                <Route path="/admin/blog" element={<AdminBlogPage />} />
-              </Routes>
-            </Suspense>
-            <Suspense fallback={null}>
-              <ChatBot />
-            </Suspense>
+            <SmoothScrollProvider>
+              <ScrollToHash />
+              <Suspense fallback={<PageLoader />}>
+                <Routes>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/about" element={<AboutPage />} />
+                  <Route path="/resources" element={<ResourcesPage />} />
+                  <Route path="/products" element={<ProductsPage />} />
+                  <Route path="/services" element={<ServicesPage />} />
+                  <Route path="/services/:slug" element={<ServiceDetailPage />} />
+                  <Route path="/contact" element={<ContactPage />} />
+                  <Route path="/quotation" element={<QuotationPage />} />
+                  <Route path="/global-presence" element={<GlobalPresencePage />} />
+                  <Route path="/blog" element={<BlogPage />} />
+                  <Route path="/blog/:slug" element={<BlogPostPage />} />
+                  <Route path="/admin/blog" element={<AdminBlogPage />} />
+                </Routes>
+              </Suspense>
+              <Suspense fallback={null}>
+                <ChatBot />
+              </Suspense>
+            </SmoothScrollProvider>
           </BrowserRouter>
         </BlogProvider>
       </MotionConfig>

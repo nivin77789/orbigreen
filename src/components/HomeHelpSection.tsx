@@ -81,7 +81,7 @@ export function HomeHelpSection() {
           transition={{ duration: 0.7, ease: EASE }}
           className="mx-auto max-w-2xl text-center"
         >
-          <SectionLabel>How can we help?</SectionLabel>
+          <SectionLabel>How can we help!</SectionLabel>
           <h2 className="mt-3 text-balance text-[clamp(1.85rem,3.6vw,2.75rem)] font-semibold leading-[1.08] tracking-tight text-primary">
             Find the right support path in seconds.
           </h2>

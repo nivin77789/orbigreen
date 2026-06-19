@@ -16,7 +16,7 @@ export function resizeLenis() {
   lenisInstance?.resize();
 }
 
-export function scrollToTop(immediate = true) {
+export function scrollToTop(immediate = false) {
   const lenis = getLenis();
   if (lenis) {
     lenis.scrollTo(0, { immediate });

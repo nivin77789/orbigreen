@@ -190,7 +190,7 @@ export default function ServiceDetailPage() {
           >
             <SectionLabel>Get Started</SectionLabel>
             <h2 className="mt-4 text-balance text-[clamp(1.75rem,3vw,2.5rem)] font-semibold tracking-tight text-primary">
-              Ready to discuss {service.title.toLowerCase()}?
+              Ready to discuss {service.title.toLowerCase()}!
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-[15px] lg:text-[16px] leading-relaxed text-primary/70">
               Tell us about your program requirements and our team will recommend the right approach for your

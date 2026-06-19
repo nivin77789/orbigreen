@@ -37,7 +37,7 @@ function getBotReply(input: string) {
   }
 
   if (normalized.includes("hello") || normalized.includes("hi")) {
-    return "Hello! How can we help with your industrial sourcing needs today?";
+    return "Hello! How can we help with your industrial sourcing needs today!";
   }
 
   if (normalized.includes("product")) {

@@ -302,7 +302,7 @@ export default function AdminBlogPage() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!window.confirm("Delete this article? This cannot be undone.")) return;
+    if (!window.confirm("Delete this article! This cannot be undone.")) return;
     await removePost(id);
     if (editingId === id) closeEditor();
   };

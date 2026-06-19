@@ -39,7 +39,7 @@ export const SERVICES: ServiceDetail[] = [
       "Supplier evaluation",
       "Sourcing transformation",
     ],
-    partnerTitle: "Why Partner With Us?",
+    partnerTitle: "Why Partner With Us!",
     partnerDescription:
       "Our team brings decades of combined experience across multi-national industries, deploying data-backed methodologies to uncover hidden value in your supply chain and procurement structures.",
     quote:

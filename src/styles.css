@@ -42,11 +42,11 @@
   html.lenis body {
     height: auto;
   }
+  html.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
   html.lenis-enabled {
     scroll-behavior: auto;
-  }
-  html.lenis-enabled.lenis-smooth {
-    scroll-behavior: auto !important;
   }
   body {
     overflow-x: clip;

@@ -142,7 +142,7 @@ export default function BlogPage() {
         <section className="border-t border-primary/10 py-14">
           <div className="mx-auto max-w-[1280px] px-6 text-center lg:px-10">
             <p className="text-[15px] lg:text-[16px] text-primary/65">
-              Need sourcing support for your program?{" "}
+              Need sourcing support for your program!{" "}
               <Link to="/quotation" className="font-semibold text-primary transition-colors hover:text-secondary">
                 Request a quotation
               </Link>
