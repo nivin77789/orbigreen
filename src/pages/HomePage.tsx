@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import { HeroFrameCanvas } from "@/components/HeroFrameCanvas";
 import { HeroVideoSection } from "@/components/HeroVideoSection";
+import { ServicesMarquee } from "@/components/ServicesMarquee";
 import { useInView } from "@/hooks/useInView";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
@@ -67,6 +68,7 @@ export default function HomePage() {
       <Nav />
 
       <HeroVideoSection />
+      <ServicesMarquee />
 
       <section ref={trackRef} className="relative h-[400vh]" style={{ backgroundColor: HERO_BG }}>
         <div className="sticky top-0 h-screen w-full overflow-hidden" style={{ backgroundColor: HERO_BG }}>
@@ -76,7 +78,7 @@ export default function HomePage() {
 
           <motion.div
             style={{ opacity: overlayOpacity }}
-            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-primary/20 via-transparent to-primary/30"
+            className="hero-scroll-tint pointer-events-none absolute inset-0"
           />
 
           <div className="absolute inset-0 flex items-center justify-center px-5 sm:px-8 lg:px-12 xl:px-16">

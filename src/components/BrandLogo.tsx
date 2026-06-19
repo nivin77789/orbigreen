@@ -52,17 +52,31 @@ export function BrandLogo({ variant = "nav", onClick }: BrandLogoProps) {
         <motion.span
           className="relative block"
           initial={{ opacity: 0, x: -12, scale: 0.92 }}
-          animate={{ opacity: 1, x: 0, scale: 1 }}
-          transition={{ duration: 0.75, ease: EASE }}
-          whileHover={{ scale: 1.05, y: -1 }}
+          animate={{ opacity: 1, x: 0, scale: 1, y: [0, -2.5, 0] }}
+          transition={{
+            opacity: { duration: 0.75, ease: EASE },
+            x: { duration: 0.75, ease: EASE },
+            scale: { duration: 0.75, ease: EASE },
+            y: { duration: 3.2, repeat: Infinity, ease: "easeInOut", delay: 0.75 },
+          }}
+          whileHover={{ scale: 1.06, y: -3, rotate: -1.5 }}
           whileTap={{ scale: 0.97 }}
         >
           <span
             aria-hidden
             className="pointer-events-none absolute inset-0 overflow-hidden rounded-lg"
           >
-            <span className="nav-logo-shine absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-white/45 to-transparent" />
+            <span className="nav-logo-shine absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-white/50 to-transparent" />
           </span>
+          <motion.span
+            aria-hidden
+            className="pointer-events-none absolute -inset-1 rounded-xl border border-secondary/25"
+            animate={{
+              opacity: [0.15, 0.45, 0.15],
+              scale: [0.98, 1.04, 0.98],
+            }}
+            transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
+          />
           {image}
         </motion.span>
       </Link>

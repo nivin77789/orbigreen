@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { getFrameImage, preloadFramesAround, preloadInitialFrames } from "@/lib/frame-cache";
-import { HERO_BG } from "@/lib/constants";
+import { HERO_BG, HERO_BG_RGB } from "@/lib/constants";
 import { scrollProgressToFrame } from "@/lib/scroll-frames";
 import { usePageVisible } from "@/hooks/usePageVisible";
 
@@ -95,8 +95,8 @@ export function HeroFrameCanvas({
           const cy = h / 2;
           const bloom = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(w, h) * 0.55);
           bloom.addColorStop(0, `rgba(92, 191, 42, ${0.2 * t})`);
-          bloom.addColorStop(0.45, `rgba(11, 95, 126, ${0.1 * t})`);
-          bloom.addColorStop(1, "rgba(11, 95, 126, 0)");
+          bloom.addColorStop(0.45, `rgba(${HERO_BG_RGB}, ${0.1 * t})`);
+          bloom.addColorStop(1, `rgba(${HERO_BG_RGB}, 0)`);
           ctx.fillStyle = bloom;
           ctx.fillRect(0, 0, w, h);
         }

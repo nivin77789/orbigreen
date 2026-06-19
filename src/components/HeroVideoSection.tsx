@@ -51,9 +51,9 @@ export function HeroVideoSection() {
             <span className="h-2 w-2 shrink-0 rounded-full bg-secondary shadow-[0_0_10px_rgba(92,191,42,0.65)]" />
             Orbigreen Techsource
           </p>
-          <h1 className="mt-5 text-balance text-[clamp(1.875rem,4.8vw,3.75rem)] font-semibold leading-[1.02] tracking-[-0.03em] text-white sm:mt-6">
-            Driving Sustainable{" "}
-            <span>Industrial Solutions</span>
+          <h1 className="mt-5 text-[clamp(1.45rem,3.4vw,2.65rem)] font-semibold leading-[1.1] tracking-[-0.03em] text-white sm:mt-6">
+            <span className="block">Driving Sustainable</span>
+            <span className="block">Industrial Solutions</span>
           </h1>
           <p className="mt-4 max-w-md text-pretty text-[clamp(1.05rem,1.5vw,1.3rem)] font-medium leading-snug tracking-tight text-white/92">
             Engineering-led sourcing for OEMs worldwide.
