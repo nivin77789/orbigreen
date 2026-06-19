@@ -7,7 +7,7 @@ import { ContactForm } from "@/components/ContactForm";
 import { QuotationForm } from "@/components/QuotationForm";
 import { GlobalNetworkMap } from "@/components/GlobalNetworkMap";
 import { NETWORK_CORRIDORS } from "@/data/globalHubsData";
-import globalNetworkBanner from "@/assets/global-network-banner.png";
+import globalNetworkMap from "@/assets/global-network-map.png";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -129,14 +129,13 @@ export default function GlobalPresencePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.7, ease: EASE }}
-              className="relative mb-10 overflow-hidden rounded-2xl border border-primary/10 bg-white shadow-[0_16px_48px_-24px_rgba(11,95,126,0.18)] sm:mb-12 sm:rounded-[1.75rem]"
+              className="relative mb-10 overflow-hidden rounded-2xl border border-primary/10 bg-white p-3 shadow-[0_16px_48px_-24px_rgba(11,95,126,0.18)] sm:mb-12 sm:rounded-[1.75rem] sm:p-4 lg:p-5"
             >
               <img
-                src={globalNetworkBanner}
-                alt=""
-                className="aspect-[21/9] w-full object-cover object-center sm:aspect-[2.35/1]"
+                src={globalNetworkMap}
+                alt="Orbigreen global network map with active hubs in North America, South America, EMEA, and Asia Pacific"
+                className="aspect-[16/9] w-full rounded-xl object-contain object-center"
               />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-white/30 via-transparent to-white/10" />
             </motion.div>
 
             <motion.div
@@ -151,7 +150,7 @@ export default function GlobalPresencePage() {
                 Worldwide Footprint
               </span>
               <h2 className="mt-3 text-[clamp(1.65rem,3vw,2.35rem)] font-semibold tracking-tight text-primary">
-                India HQ at the center of your supply network
+                Four active hubs. One coordinated network.
               </h2>
               <p className="mt-3 text-[16px] lg:text-[17px] leading-relaxed text-primary/65">
                 Select a hub to explore its role in your sourcing program — from manufacturing and near-shore to
@@ -177,11 +176,11 @@ export default function GlobalPresencePage() {
                 Supply Corridors
               </span>
               <h2 className="mt-3 text-[clamp(1.65rem,3vw,2.35rem)] font-semibold tracking-tight text-primary">
-                Three corridors. One coordinated network.
+                Four corridors. One coordinated network.
               </h2>
             </motion.div>
 
-            <div className="grid gap-4 lg:grid-cols-3">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {NETWORK_CORRIDORS.map((corridor, i) => (
                 <motion.div
                   key={corridor.t}

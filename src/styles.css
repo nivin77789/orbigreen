@@ -169,6 +169,30 @@
   }
 }
 
+@keyframes nav-logo-shine {
+  from {
+    transform: translateX(-130%) skewX(-14deg);
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  to {
+    transform: translateX(230%) skewX(-14deg);
+    opacity: 0;
+  }
+}
+
+.nav-logo-shine {
+  transform: translateX(-130%) skewX(-14deg);
+  opacity: 0;
+}
+
+.group:hover .nav-logo-shine,
+.group:focus-visible .nav-logo-shine {
+  animation: nav-logo-shine 0.75s ease-out;
+}
+
 @keyframes home-stats-gradient {
   0%,
   100% {
@@ -408,7 +432,7 @@
   animation: home-stats-orb-3 18s ease-in-out infinite;
 }
 
-.workflow-heading-line {
+.home-workflow__heading-line {
   width: 3.5rem;
   height: 3px;
   border-radius: 999px;
@@ -416,100 +440,475 @@
   box-shadow: 0 0 16px rgba(92, 191, 42, 0.35);
 }
 
-.workflow-step-card {
+.home-workflow__rail {
+  position: relative;
+  padding-inline: 0.5rem;
+}
+
+.home-workflow__rail-track {
+  position: absolute;
+  left: 1.25rem;
+  right: 1.25rem;
+  top: 50%;
+  height: 3px;
+  transform: translateY(-50%);
+  border-radius: 999px;
+  background: rgba(11, 95, 126, 0.1);
+  overflow: hidden;
+}
+
+.home-workflow__rail-fill {
+  height: 100%;
+  width: 100%;
+  transform-origin: left center;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+  box-shadow: 0 0 18px rgba(92, 191, 42, 0.35);
+}
+
+.home-workflow__rail-nodes {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.home-workflow__rail-node {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-inline: auto;
+  border-radius: 999px;
+  border: 2px solid rgba(11, 95, 126, 0.14);
+  background: rgba(255, 255, 255, 0.92);
+  color: rgba(11, 95, 126, 0.45);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition:
+    border-color 0.35s ease,
+    color 0.35s ease,
+    background 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.35s ease;
+}
+
+.home-workflow__rail-node--active {
+  border-color: rgba(92, 191, 42, 0.55);
+  color: var(--primary);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(232, 246, 238, 0.92));
+}
+
+.home-workflow__rail-node--current {
+  border-color: transparent;
+  color: #fff;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  box-shadow:
+    0 0 0 5px rgba(92, 191, 42, 0.12),
+    0 10px 24px -8px rgba(11, 95, 126, 0.35);
+  transform: scale(1.08);
+}
+
+.home-workflow__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 640px) {
+  .home-workflow__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .home-workflow__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+}
+
+.home-workflow__card {
   position: relative;
   isolation: isolate;
-  background: rgba(255, 255, 255, 0.42);
-  border: 1px solid rgba(255, 255, 255, 0.38);
+  overflow: hidden;
+  min-height: 9.5rem;
+  border-radius: 1.25rem;
+  padding: 1rem 1.05rem 1.1rem;
+  background:
+    linear-gradient(155deg, rgba(255, 255, 255, 0.92), rgba(245, 250, 247, 0.72)) padding-box,
+    linear-gradient(135deg, rgba(11, 95, 126, 0.16), rgba(92, 191, 42, 0.28), rgba(255, 255, 255, 0.5)) border-box;
+  border: 1px solid transparent;
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.45) inset,
-    0 12px 32px -14px rgba(11, 95, 126, 0.12),
-    0 4px 12px -4px rgba(0, 0, 0, 0.04);
+    0 1px 0 rgba(255, 255, 255, 0.65) inset,
+    0 16px 40px -22px rgba(11, 95, 126, 0.22);
   backdrop-filter: blur(16px) saturate(160%);
   -webkit-backdrop-filter: blur(16px) saturate(160%);
   transition:
-    background 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.workflow-step-card:hover {
-  background: rgba(255, 255, 255, 0.52);
-  border-color: rgba(255, 255, 255, 0.48);
+.home-workflow__card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.home-workflow__card--active,
+.home-workflow__card:hover,
+.home-workflow__card:focus-within {
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.55) inset,
-    0 18px 44px -14px rgba(11, 95, 126, 0.16),
-    0 8px 24px -8px rgba(92, 191, 42, 0.1);
+    0 1px 0 rgba(255, 255, 255, 0.75) inset,
+    0 22px 48px -20px rgba(11, 95, 126, 0.28),
+    0 0 0 1px rgba(92, 191, 42, 0.12);
 }
 
-.workflow-step-card__sheen {
+.home-workflow__card--active::before,
+.home-workflow__card:hover::before,
+.home-workflow__card:focus-within::before {
+  opacity: 1;
+}
+
+.home-workflow__card-watermark {
+  pointer-events: none;
+  position: absolute;
+  right: 0.35rem;
+  bottom: -0.85rem;
+  font-size: clamp(3.5rem, 8vw, 4.75rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: rgba(11, 95, 126, 0.06);
+  transition: color 0.35s ease;
+}
+
+.home-workflow__card--active .home-workflow__card-watermark,
+.home-workflow__card:hover .home-workflow__card-watermark {
+  color: rgba(92, 191, 42, 0.1);
+}
+
+.home-workflow__card-shine {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.42), transparent 42%);
+  opacity: 0.55;
+}
+
+.home-workflow__card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: 0.85rem;
+  background: linear-gradient(145deg, rgba(11, 95, 126, 0.08), rgba(92, 191, 42, 0.12));
+  color: var(--primary);
+  transition:
+    background 0.35s ease,
+    color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.home-workflow__card-icon svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.home-workflow__card--active .home-workflow__card-icon,
+.home-workflow__card:hover .home-workflow__card-icon {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #fff;
+  box-shadow: 0 8px 20px -10px rgba(11, 95, 126, 0.45);
+}
+
+.home-workflow__card-index {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: rgba(92, 191, 42, 0.85);
+}
+
+.home-workflow__card--active .home-workflow__card-index,
+.home-workflow__card:hover .home-workflow__card-index {
+  color: var(--primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-workflow__rail-fill,
+  .home-workflow__card,
+  .home-workflow__rail-node {
+    transition: none;
+  }
+}
+
+.home-help-section {
+  border-top: 1px solid rgba(11, 95, 126, 0.08);
+}
+
+.home-help-section__grid {
+  background-image:
+    linear-gradient(rgba(11, 95, 126, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(11, 95, 126, 0.04) 1px, transparent 1px);
+  background-size: 46px 46px;
+  mask-image: linear-gradient(to bottom, transparent, black 16%, black 82%, transparent);
+}
+
+.home-help-section__wash {
+  background:
+    radial-gradient(circle at 18% 18%, rgba(92, 191, 42, 0.12), transparent 30%),
+    radial-gradient(circle at 82% 28%, rgba(11, 95, 126, 0.1), transparent 28%),
+    linear-gradient(180deg, #fff 0%, rgba(244, 247, 248, 0.68) 48%, #fff 100%);
+}
+
+.home-help-zigzag {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.home-help-zigzag::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: 2px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(11, 95, 126, 0.14) 10%,
+    rgba(92, 191, 42, 0.5) 50%,
+    rgba(11, 95, 126, 0.14) 90%,
+    transparent
+  );
+  pointer-events: none;
+}
+
+.home-help-zigzag-row {
+  position: relative;
+  width: 100%;
+}
+
+.home-help-zigzag-row--left {
+  padding-right: 8%;
+}
+
+.home-help-zigzag-row--right {
+  padding-left: 8%;
+}
+
+.home-help-card {
+  isolation: isolate;
+  width: 100%;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.78)) padding-box,
+    linear-gradient(135deg, rgba(92, 191, 42, 0.38), rgba(11, 95, 126, 0.14), rgba(255, 255, 255, 0.72)) border-box;
+  border: 1px solid transparent;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.92) inset,
+    0 10px 28px -18px rgba(11, 95, 126, 0.2);
+  backdrop-filter: blur(14px) saturate(165%);
+  -webkit-backdrop-filter: blur(14px) saturate(165%);
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.home-help-card:hover,
+.home-help-card--active {
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.84)) padding-box,
+    linear-gradient(135deg, rgba(92, 191, 42, 0.62), rgba(11, 95, 126, 0.22), rgba(255, 255, 255, 0.78)) border-box;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.95) inset,
+    0 16px 36px -18px rgba(11, 95, 126, 0.24),
+    0 8px 22px -14px rgba(92, 191, 42, 0.28);
+}
+
+.home-help-card__shine {
   pointer-events: none;
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: linear-gradient(
-    128deg,
-    rgba(255, 255, 255, 0.28) 0%,
-    rgba(255, 255, 255, 0.08) 28%,
-    transparent 52%
-  );
-  opacity: 0.5;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.45), transparent 42%);
+  opacity: 0.55;
 }
 
-.workflow-step-card__glow {
-  display: none;
-}
-
-.workflow-step-card__edge {
-  pointer-events: none;
-  position: absolute;
-  inset: auto 12% 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(11, 95, 126, 0.12) 50%, transparent);
-  opacity: 0.8;
-}
-
-.workflow-step-card__index {
-  position: relative;
-  background: rgba(255, 255, 255, 0.45);
-  color: var(--primary);
-  border: 1px solid rgba(255, 255, 255, 0.42);
-  box-shadow: 0 2px 8px -4px rgba(11, 95, 126, 0.15);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  transition:
-    background 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-    color 0.45s ease,
-    border-color 0.45s ease,
-    box-shadow 0.45s ease;
-}
-
-.workflow-step-card:hover .workflow-step-card__index {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+.home-help-card__index {
+  display: inline-flex;
+  height: 1.75rem;
+  width: 1.75rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.03em;
   color: #fff;
+  background: linear-gradient(135deg, #073f52 0%, var(--primary) 52%, var(--secondary) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  box-shadow: 0 6px 16px -10px rgba(11, 95, 126, 0.45);
+}
+
+.home-help-card__link {
+  color: var(--primary);
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(11, 95, 126, 0.1);
+  white-space: nowrap;
+  transition:
+    color 0.3s ease,
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.home-help-card:hover .home-help-card__link,
+.home-help-card--active .home-help-card__link {
+  color: #fff;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
   border-color: transparent;
-  box-shadow: 0 6px 18px -4px rgba(11, 95, 126, 0.3);
+  box-shadow: 0 10px 22px -12px rgba(11, 95, 126, 0.32);
 }
 
-.workflow-step-card__connector {
-  background: linear-gradient(90deg, rgba(11, 95, 126, 0.15), rgba(92, 191, 42, 0.3), transparent);
-  opacity: 0.7;
+@media (min-width: 768px) {
+  .home-help-zigzag-row--left {
+    padding-right: 14%;
+  }
+
+  .home-help-zigzag-row--right {
+    padding-left: 14%;
+  }
 }
 
-@media (max-width: 768px) {
-  .workflow-step-card {
-    background: rgba(255, 255, 255, 0.48);
-    backdrop-filter: blur(12px) saturate(150%);
-    -webkit-backdrop-filter: blur(12px) saturate(150%);
+@media (min-width: 1024px) {
+  .home-help-zigzag {
+    gap: 0.5rem;
+  }
+
+  .home-help-zigzag-row--left {
+    padding-right: 18%;
+  }
+
+  .home-help-zigzag-row--right {
+    padding-left: 18%;
+  }
+}
+
+@media (max-width: 639px) {
+  .home-help-zigzag::before {
+    display: none;
+  }
+
+  .home-help-zigzag-row--left,
+  .home-help-zigzag-row--right {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .home-help-card__inner {
+    gap: 0.5rem;
+  }
+
+  .home-help-card__link-label {
+    display: none;
+  }
+
+  .home-help-card__link {
+    padding-inline: 0.65rem;
+  }
+}
+
+@media (min-width: 640px) {
+  .home-help-card__link-label {
+    display: inline;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .workflow-step-card,
-  .workflow-step-card__sheen,
-  .workflow-step-card__glow,
-  .workflow-step-card__index {
+  .home-help-card,
+  .home-help-card__link {
     transition: none;
+  }
+}
+
+.media-gallery-section {
+  position: relative;
+  isolation: isolate;
+}
+
+.media-gallery-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 14% 16%, rgba(92, 191, 42, 0.1), transparent 28%),
+    radial-gradient(circle at 86% 8%, rgba(11, 95, 126, 0.08), transparent 30%);
+  pointer-events: none;
+}
+
+.media-gallery-grid {
+  grid-template-columns: 1fr;
+}
+
+.media-gallery-card {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.45) inset,
+    0 22px 52px -28px rgba(11, 95, 126, 0.35);
+}
+
+.media-gallery-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.26), transparent 35%);
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+@media (min-width: 768px) {
+  .media-gallery-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .media-gallery-card:nth-child(1) {
+    grid-column: span 3;
+    min-height: 240px;
+  }
+
+  .media-gallery-card:nth-child(2) {
+    grid-column: span 3;
+    min-height: 240px;
+  }
+
+  .media-gallery-card:nth-child(3),
+  .media-gallery-card:nth-child(4),
+  .media-gallery-card:nth-child(5) {
+    grid-column: span 2;
+    min-height: 200px;
   }
 }
 

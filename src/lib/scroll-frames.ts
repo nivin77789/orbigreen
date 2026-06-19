@@ -1,4 +1,4 @@
-/** Total frames in src/latest bg frames/ */
+/** Total frames in src/latestbg/ */
 export const FRAME_COUNT = 240;
 
 /** Scroll progress (0–1) → 1-based frame number, synced to storytelling beats. */

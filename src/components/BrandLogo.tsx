@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import logo from "../logo.png";
 import { COMPANY_NAME } from "@/lib/constants";
+
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 type BrandLogoProps = {
   variant?: "nav" | "footer" | "loader";
@@ -17,7 +20,7 @@ export function BrandLogo({ variant = "nav", onClick }: BrandLogoProps) {
       ? "h-16 md:h-20"
       : "h-14 md:h-16";
 
-  const content = (
+  const image = (
     <img
       src={logo}
       alt={COMPANY_NAME}
@@ -26,12 +29,49 @@ export function BrandLogo({ variant = "nav", onClick }: BrandLogoProps) {
   );
 
   if (variant === "loader") {
-    return content;
+    return image;
+  }
+
+  if (isNav) {
+    return (
+      <Link
+        to="/"
+        onClick={onClick}
+        className="group relative inline-flex shrink-0 items-center overflow-visible"
+        aria-label={`${COMPANY_NAME} home`}
+      >
+        <motion.span
+          aria-hidden
+          className="pointer-events-none absolute -inset-2 rounded-2xl bg-gradient-to-br from-primary/20 via-secondary/25 to-accent/20 blur-md"
+          animate={{
+            opacity: [0.35, 0.7, 0.35],
+            scale: [0.94, 1.06, 0.94],
+          }}
+          transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.span
+          className="relative block"
+          initial={{ opacity: 0, x: -12, scale: 0.92 }}
+          animate={{ opacity: 1, x: 0, scale: 1 }}
+          transition={{ duration: 0.75, ease: EASE }}
+          whileHover={{ scale: 1.05, y: -1 }}
+          whileTap={{ scale: 0.97 }}
+        >
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-0 overflow-hidden rounded-lg"
+          >
+            <span className="nav-logo-shine absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-white/45 to-transparent" />
+          </span>
+          {image}
+        </motion.span>
+      </Link>
+    );
   }
 
   return (
     <Link to="/" onClick={onClick} className="inline-flex shrink-0 transition-opacity hover:opacity-90">
-      {content}
+      {image}
     </Link>
   );
 }

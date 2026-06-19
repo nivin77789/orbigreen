@@ -77,7 +77,7 @@ function ProductCard({
         </span>
         <h3
           className={`mt-1.5 font-semibold leading-tight text-primary ${
-            isHorizontal ? "text-[15px] lg:text-[16px] sm:text-[16px] lg:text-[17px]" : "text-[17px] lg:text-[18px] sm:text-[18px] lg:text-[19px]"
+            isHorizontal ? "text-[16px] lg:text-[17px] sm:text-[17px] lg:text-[18px]" : "text-[18px] lg:text-[19px] sm:text-[19px] lg:text-[20px]"
           }`}
         >
           {product.title}
@@ -128,8 +128,8 @@ function ProductsHeader({
   return (
     <motion.div {...motionProps} className="flex flex-wrap items-end justify-between gap-6">
       <div className="max-w-2xl">
-        <span className="text-[13px] lg:text-[15px] font-bold uppercase tracking-[0.3em] text-secondary">Our Products</span>
-        <h2 className="mt-3 text-balance text-[clamp(2rem,3.8vw,3rem)] font-semibold leading-[1.08] tracking-tight text-primary">
+        <span className="text-[14px] lg:text-[16px] font-bold uppercase tracking-[0.3em] text-secondary">Our Products</span>
+        <h2 className="mt-3 text-balance text-[clamp(2.2rem,4.1vw,3.35rem)] font-semibold leading-[1.08] tracking-tight text-primary">
           Industrial components,{" "}
           <span className="bg-gradient-to-br from-primary via-primary to-secondary bg-clip-text text-transparent">
             sourced to spec
@@ -168,14 +168,9 @@ function ProductGrid({
 }) {
   return (
     <>
-      <div className="mb-5 flex items-center justify-between gap-4 px-0.5">
-        <span className="text-[12px] lg:text-[13px] font-semibold uppercase tracking-[0.25em] text-primary/45">
-          {isSection ? "Featured categories" : "All product categories"}
-        </span>
-        <span className="text-[13px] lg:text-[14px] font-bold tabular-nums tracking-widest text-primary/50">
-          {isSection
-            ? `${String(products.length).padStart(2, "0")} of ${String(PRODUCTS.length).padStart(2, "0")}`
-            : `${String(PRODUCTS.length).padStart(2, "0")} categories`}
+      <div className="mb-5 px-0.5">
+        <span className="text-[14px] lg:text-[15px] font-semibold uppercase tracking-[0.22em] text-primary/55">
+          Our products
         </span>
       </div>
 

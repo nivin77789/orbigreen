@@ -27,6 +27,15 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 2,
+    title: "Forging",
+    category: "Metal Forming",
+    description:
+      "Closed-die, open-die, and precision forgings for industrial, automotive, and heavy-engineering applications.",
+    image: imgCastings,
+    accent: "#0B5F7E",
+  },
+  {
+    id: 3,
     title: "Machining",
     category: "Precision",
     description: "CNC and precision machining for tight-tolerance components.",
@@ -34,7 +43,7 @@ export const PRODUCTS: Product[] = [
     accent: "#0B5F7E",
   },
   {
-    id: 3,
+    id: 4,
     title: "Fabrication",
     category: "Structural",
     description: "Custom metal fabrication for structural and industrial use.",
@@ -42,7 +51,7 @@ export const PRODUCTS: Product[] = [
     accent: "#8DD128",
   },
   {
-    id: 4,
+    id: 5,
     title: "Pressure Vessels",
     category: "Tanks",
     description:
@@ -51,7 +60,7 @@ export const PRODUCTS: Product[] = [
     accent: "#0B5F7E",
   },
   {
-    id: 5,
+    id: 6,
     title: "Stamping Parts",
     category: "Assemblies",
     description: "Stamped metal parts and assemblies for high-volume production.",
@@ -59,7 +68,7 @@ export const PRODUCTS: Product[] = [
     accent: "#5CBF2A",
   },
   {
-    id: 6,
+    id: 7,
     title: "Proprietary Machines",
     category: "Custom",
     description: "Custom machinery and specialized components for unique manufacturing needs.",
@@ -67,7 +76,7 @@ export const PRODUCTS: Product[] = [
     accent: "#8DD128",
   },
   {
-    id: 7,
+    id: 8,
     title: "Fasteners",
     category: "Fixings",
     description: "Industrial fasteners and fixing solutions for assembly and construction.",
@@ -75,21 +84,12 @@ export const PRODUCTS: Product[] = [
     accent: "#0B5F7E",
   },
   {
-    id: 8,
+    id: 9,
     title: "Transmission & Gears",
     category: "Powertrain",
     description: "Transmission systems, gears, and power transmission components.",
     image: imgTransmission,
     accent: "#5CBF2A",
-  },
-  {
-    id: 9,
-    title: "Forging",
-    category: "Metal Forming",
-    description:
-      "Closed-die, open-die, and precision forgings for industrial, automotive, and heavy-engineering applications.",
-    image: imgCastings,
-    accent: "#0B5F7E",
   },
   {
     id: 10,

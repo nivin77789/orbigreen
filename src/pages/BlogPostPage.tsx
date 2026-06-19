@@ -43,7 +43,7 @@ export default function BlogPostPage() {
             to="/blog"
             className="gradient-border-cta mt-8 inline-flex rounded-full px-6 py-3 text-[14px] lg:text-[15px] font-semibold"
           >
-            Back to Blog
+            Back to Media
           </Link>
         </main>
         <Footer />
@@ -72,7 +72,7 @@ export default function BlogPostPage() {
                 to="/blog"
                 className="inline-flex items-center gap-1.5 text-[13px] lg:text-[14px] font-semibold text-primary/60 transition-colors hover:text-primary"
               >
-                ← Back to Blog
+                ← Back to Media
               </Link>
 
               <motion.div

@@ -46,7 +46,7 @@ export function Footer() {
             </li>
             <li>
               <Link to="/blog" className="transition-colors hover:text-primary">
-                Blog
+                Media
               </Link>
             </li>
             <li>

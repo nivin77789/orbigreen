@@ -38,6 +38,6 @@ export const HOME_FAQ: FaqItem[] = [
   {
     question: "Not sure where to start?",
     cta: "Talk to an Expert",
-    href: "/contact",
+    href: "/global-presence",
   },
 ];

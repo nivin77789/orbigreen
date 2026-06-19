@@ -9,7 +9,7 @@ const NAV = [
   { label: "Products", to: "/products" },
   { label: "Services", to: "/services" },
   { label: "Get in Touch", to: "/global-presence" },
-  { label: "Blog", to: "/blog" },
+  { label: "Media", to: "/blog" },
 ];
 
 export function Nav() {

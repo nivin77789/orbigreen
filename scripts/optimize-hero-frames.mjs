@@ -3,12 +3,12 @@ import path from "node:path";
 import sharp from "sharp";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
-const SOURCE_DIR = path.join(ROOT, "src/latest bg frames");
+const SOURCE_DIR = path.join(ROOT, "src/latestbg");
 const OUTPUT_DIR = path.join(ROOT, "public/hero-bg-frames");
 
 const MAX_WIDTH = 1024;
-const QUALITY = 74;
-const TARGET_TOTAL_MB = 4.6;
+const QUALITY = 75;
+const TARGET_TOTAL_MB = 5;
 
 async function optimizeFrame(input, output) {
   return sharp(input)
@@ -18,7 +18,13 @@ async function optimizeFrame(input, output) {
       withoutEnlargement: true,
       kernel: sharp.kernel.lanczos3,
     })
-    .sharpen({ sigma: 0.7, m1: 0.5, m2: 0.35, x1: 2, y2: 10, y3: 20 })
+    .modulate({
+      brightness: 1.06,
+      saturation: 0.97,
+    })
+    .linear(1.03, 8)
+    .gamma(1.04)
+    .sharpen({ sigma: 0.95, m1: 0.58, m2: 0.4, x1: 2, y2: 10, y3: 20 })
     .webp({
       quality: QUALITY,
       effort: 6,

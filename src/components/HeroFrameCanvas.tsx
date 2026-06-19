@@ -53,7 +53,7 @@ export function HeroFrameCanvas({
       const sh = ih * scale;
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = "high";
-      ctx.filter = "contrast(1.05) saturate(1.04)";
+      ctx.filter = "brightness(1.04) contrast(1.08) saturate(1.02)";
       ctx.drawImage(img, (w - sw) / 2, (h - sh) / 2, sw, sh);
       ctx.filter = "none";
     };
