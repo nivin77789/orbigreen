@@ -1,42 +1,32 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import bannerVideo from "@/banner.mp4";
 import { HERO_BG } from "@/lib/constants";
+import { useAutoplayVideo } from "@/hooks/useAutoplayVideo";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 export function HeroVideoSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const start = async () => {
-      try {
-        await video.play();
-      } catch {
-        /* autoplay blocked */
-      }
-    };
-
-    void start();
-  }, []);
+  useAutoplayVideo(videoRef);
 
   return (
     <section id="hero" className="relative h-screen w-full overflow-hidden" style={{ backgroundColor: HERO_BG }}>
       <video
         ref={videoRef}
-        src={bannerVideo}
-        className="absolute inset-0 h-full w-full object-cover"
+        className="hero-banner-video absolute inset-0 h-full w-full object-cover"
         muted
         playsInline
-        loop
         autoPlay
+        loop
         preload="auto"
+        disablePictureInPicture
+        disableRemotePlayback
         aria-hidden
-      />
+      >
+        <source src={bannerVideo} type="video/mp4" />
+      </video>
 
       <div className="hero-surface-overlay pointer-events-none absolute inset-0" aria-hidden />
 

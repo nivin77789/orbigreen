@@ -16,7 +16,7 @@ export function GlobalNetworkSection() {
           transition={{ duration: 0.7, ease: EASE }}
           className="mx-auto mb-8 max-w-2xl text-center lg:mb-10"
         >
-          <SectionLabel as="h2">Active Hubs</SectionLabel>
+          <SectionLabel as="h5">Active Hubs</SectionLabel>
         </motion.div>
 
         <motion.div

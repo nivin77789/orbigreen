@@ -450,6 +450,12 @@
     radial-gradient(120% 90% at 50% 40%, transparent 35%, rgba(var(--hero-bg-dark-rgb), 0.18) 100%);
 }
 
+.hero-banner-video {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  object-position: center;
+}
+
 .hero-scroll-tint {
   background: linear-gradient(
     to bottom,
