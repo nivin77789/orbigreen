@@ -152,7 +152,9 @@ export function HomeWorkflow({ activeStep, onStepSelect }: HomeWorkflowProps) {
         <SectionLabel tone="white">How We Work</SectionLabel>
         <h3 className="home-workflow__title mt-2 text-balance font-semibold tracking-tight text-white">
           A clear, engineered{" "}
-          <span className="text-white/95">sourcing workflow.</span>
+          <span className="bg-gradient-to-r from-white via-white to-secondary bg-clip-text text-transparent">
+            sourcing workflow.
+          </span>
         </h3>
         <div className="home-workflow__heading-line mx-auto mt-3" aria-hidden />
       </motion.header>
