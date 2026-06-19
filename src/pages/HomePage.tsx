@@ -20,14 +20,12 @@ function ClosingCTA({ visible }: { visible: boolean }) {
       transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
       className="pointer-events-auto mx-auto max-w-3xl px-6 text-center"
     >
-      <h2 className="text-balance text-[clamp(2.5rem,5.8vw,4.85rem)] font-semibold leading-none tracking-[-0.03em] text-body">
+      <h2 className="text-balance text-[clamp(1.75rem,4vw,3rem)] font-semibold leading-[1.05] tracking-[-0.03em] text-white">
         Ready to Optimize
         <br />
-        <span className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-transparent">
-          Your Supply Chain?
-        </span>
+        Your Supply Chain!
       </h2>
-      <p className="mx-auto mt-5 max-w-xl text-[17px] lg:text-[18px] leading-relaxed text-body/70">
+      <p className="mx-auto mt-5 max-w-xl text-[15px] font-bold leading-relaxed text-white/92 sm:text-[16px] lg:text-[17px]">
         Let's discuss how Orbigreen Techsource can streamline your sourcing and secure your procurement process.
       </p>
     </motion.div>
@@ -83,7 +81,7 @@ export default function HomePage() {
 
           <div className="absolute inset-0 flex items-center justify-center px-5 sm:px-8 lg:px-12 xl:px-16">
             {phase === "workflow" && (
-              <div className="flex h-full w-full items-center justify-center overflow-hidden py-12 sm:py-14">
+              <div className="home-workflow-stage flex h-full w-full items-center justify-center overflow-hidden py-6 sm:py-8 lg:py-10">
                 <HomeWorkflow
                   activeStep={workflowStep}
                   onStepSelect={setWorkflowStep}

@@ -1,4 +1,4 @@
-import { type ReactNode } from "react";
+import { type ReactNode, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { SectionLabel } from "@/components/SectionLabel";
 
@@ -115,84 +115,196 @@ type HomeWorkflowProps = {
 export function HomeWorkflow({ activeStep, onStepSelect }: HomeWorkflowProps) {
   const safeStep = Math.min(WORKFLOW_STEP_COUNT - 1, Math.max(0, activeStep));
   const active = WORKFLOW_STEPS[safeStep];
+  const progressPct = ((safeStep + 1) / WORKFLOW_STEP_COUNT) * 100;
+  const flowRef = useRef<HTMLOListElement>(null);
+  const stepRefs = useRef<(HTMLLIElement | null)[]>([]);
+
+  useEffect(() => {
+    const flow = flowRef.current;
+    const step = stepRefs.current[safeStep];
+    if (!flow || !step) return;
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const flowRect = flow.getBoundingClientRect();
+    const stepRect = step.getBoundingClientRect();
+    const targetLeft =
+      flow.scrollLeft + (stepRect.left - flowRect.left) - (flowRect.width - stepRect.width) / 2;
+
+    flow.scrollTo({
+      left: Math.max(0, targetLeft),
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+    });
+  }, [safeStep]);
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 28 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.85, ease: EASE }}
-      className="home-workflow home-workflow--hero pointer-events-auto mx-auto w-full max-w-[1240px] px-4 sm:px-6 lg:px-8"
+      transition={{ duration: 0.75, ease: EASE }}
+      className="home-workflow home-workflow--hero pointer-events-auto mx-auto w-full max-w-[1120px] px-3 sm:px-5 lg:px-6"
     >
       <motion.header
-        initial={{ opacity: 0, y: 16 }}
+        initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: EASE }}
-        className="home-workflow__header mx-auto max-w-2xl text-center"
+        transition={{ duration: 0.6, ease: EASE }}
+        className="home-workflow__header mx-auto max-w-xl text-center"
       >
         <SectionLabel tone="white">How We Work</SectionLabel>
-        <h3 className="mt-3 text-balance text-[clamp(1.55rem,3.4vw,2.5rem)] font-semibold leading-[1.08] tracking-tight text-white">
+        <h3 className="home-workflow__title mt-2 text-balance font-semibold tracking-tight text-white">
           A clear, engineered{" "}
           <span className="text-white/95">sourcing workflow.</span>
         </h3>
-        <div className="home-workflow__heading-line mx-auto mt-4" aria-hidden />
+        <div className="home-workflow__heading-line mx-auto mt-3" aria-hidden />
       </motion.header>
 
-      <ol className="home-workflow-chevron-flow mt-5 sm:mt-6" aria-label="Sourcing workflow steps">
-        {WORKFLOW_STEPS.map((step, i) => {
-          const isActive = i === safeStep;
-          const isPast = i < safeStep;
-
-          return (
-            <motion.li
-              key={step.t}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.06 + i * 0.05, ease: EASE }}
-              className="home-workflow-chevron-item list-none"
-            >
-              <button
-                type="button"
-                className={`home-workflow-chevron group ${isActive ? "is-active" : ""} ${isPast ? "is-past" : ""}`}
-                onMouseEnter={() => onStepSelect?.(i)}
-                onFocus={() => onStepSelect?.(i)}
-                onClick={() => onStepSelect?.(i)}
-                aria-current={isActive ? "step" : undefined}
-                aria-label={`Step ${i + 1}: ${step.t}`}
-              >
-                <span className="home-workflow-chevron__sheen" aria-hidden />
-                <span className="home-workflow-chevron__index">{String(i + 1).padStart(2, "0")}</span>
-                <span className="home-workflow-chevron__icon">{step.icon}</span>
-                <span className="home-workflow-chevron__title">{step.t}</span>
-              </button>
-            </motion.li>
-          );
-        })}
-      </ol>
-
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={safeStep}
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
-          transition={{ duration: 0.35, ease: EASE }}
-          className="home-workflow-chevron-detail mt-4 sm:mt-5"
-          role="region"
-          aria-live="polite"
-          aria-label={`Step ${safeStep + 1} details`}
+      <div className="home-workflow__stack mt-4 sm:mt-5">
+        <div
+          className="home-workflow-progress"
+          role="group"
+          aria-label={`Workflow progress: step ${safeStep + 1} of ${WORKFLOW_STEP_COUNT}`}
         >
-          <div className="home-workflow-chevron-detail__inner">
-            <span className="home-workflow-chevron-detail__icon">{active.icon}</span>
-            <div className="min-w-0 flex-1">
-              <p className="home-workflow-chevron-detail__step">
-                Step {String(safeStep + 1).padStart(2, "0")}
-              </p>
-              <h4 className="home-workflow-chevron-detail__title">{active.t}</h4>
-              <p className="home-workflow-chevron-detail__copy">{active.d}</p>
-            </div>
+          <div className="home-workflow-progress__meta">
+            <span>
+              Step {String(safeStep + 1).padStart(2, "0")}{" "}
+              <span className="home-workflow-progress__of">of {WORKFLOW_STEP_COUNT}</span>
+            </span>
+            <span className="home-workflow-progress__pct">{Math.round(progressPct)}%</span>
           </div>
-        </motion.div>
-      </AnimatePresence>
+          <div className="home-workflow-progress__track">
+            <motion.div
+              className="home-workflow-progress__fill"
+              initial={false}
+              animate={{ width: `${progressPct}%` }}
+              transition={{ duration: 0.5, ease: EASE }}
+            />
+          </div>
+          <div className="home-workflow-progress__dots">
+            {WORKFLOW_STEPS.map((step, i) => {
+              const isActive = i === safeStep;
+              const isPast = i < safeStep;
+              return (
+                <button
+                  key={step.t}
+                  type="button"
+                  className={`home-workflow-progress__dot${isActive ? " is-active" : ""}${isPast ? " is-past" : ""}`}
+                  onClick={() => onStepSelect?.(i)}
+                  aria-label={`Go to step ${i + 1}: ${step.t}`}
+                  aria-current={isActive ? "step" : undefined}
+                />
+              );
+            })}
+          </div>
+        </div>
+
+        <ol
+          ref={flowRef}
+          className="home-workflow-chevron-flow"
+          aria-label="Sourcing workflow steps"
+        >
+          {WORKFLOW_STEPS.map((step, i) => {
+            const isActive = i === safeStep;
+            const isPast = i < safeStep;
+
+            return (
+              <motion.li
+                key={step.t}
+                ref={(el) => {
+                  stepRefs.current[i] = el;
+                }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.04 + i * 0.04, ease: EASE }}
+                className="home-workflow-chevron-item list-none"
+              >
+                <motion.button
+                  type="button"
+                  className={`home-workflow-chevron group ${isActive ? "is-active" : ""} ${isPast ? "is-past" : ""}`}
+                  onMouseEnter={() => onStepSelect?.(i)}
+                  onFocus={() => onStepSelect?.(i)}
+                  onClick={() => onStepSelect?.(i)}
+                  aria-current={isActive ? "step" : undefined}
+                  aria-label={`Step ${i + 1}: ${step.t}`}
+                  animate={{
+                    scale: isActive ? 1.02 : 1,
+                    opacity: isActive || isPast ? 1 : 0.72,
+                  }}
+                  transition={{ type: "spring", stiffness: 460, damping: 32 }}
+                  whileTap={{ scale: 0.99 }}
+                >
+                  {isActive && (
+                    <motion.span
+                      layoutId="workflow-active-ring"
+                      className="home-workflow-chevron__ring"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                  <span className="home-workflow-chevron__sheen" aria-hidden />
+                  <span className="home-workflow-chevron__top">
+                    <span className="home-workflow-chevron__index">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="home-workflow-chevron__icon">{step.icon}</span>
+                  </span>
+                  <span className="home-workflow-chevron__title">{step.t}</span>
+                </motion.button>
+              </motion.li>
+            );
+          })}
+        </ol>
+
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={safeStep}
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.38, ease: EASE }}
+            className="home-workflow-chevron-detail"
+            role="region"
+            aria-live="polite"
+            aria-label={`Step ${safeStep + 1} details`}
+          >
+            <span className="home-workflow-chevron-detail__glow" aria-hidden />
+            <span className="home-workflow-chevron-detail__accent" aria-hidden />
+
+            <div className="home-workflow-chevron-detail__inner">
+              <motion.span
+                className="home-workflow-chevron-detail__icon"
+                initial={{ rotate: -8, scale: 0.85, opacity: 0 }}
+                animate={{ rotate: 0, scale: 1, opacity: 1 }}
+                transition={{ type: "spring", stiffness: 380, damping: 24, delay: 0.04 }}
+              >
+                {active.icon}
+              </motion.span>
+
+              <div className="home-workflow-chevron-detail__copy-block min-w-0 flex-1">
+                <motion.p
+                  className="home-workflow-chevron-detail__step"
+                  initial={{ opacity: 0, x: -8 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3, delay: 0.06, ease: EASE }}
+                >
+                  Step {String(safeStep + 1).padStart(2, "0")}
+                </motion.p>
+                <motion.h4
+                  className="home-workflow-chevron-detail__title"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35, delay: 0.1, ease: EASE }}
+                >
+                  {active.t}
+                </motion.h4>
+                <motion.p
+                  className="home-workflow-chevron-detail__copy"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35, delay: 0.14, ease: EASE }}
+                >
+                  {active.d}
+                </motion.p>
+              </div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
     </motion.div>
   );
 }
