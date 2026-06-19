@@ -3,7 +3,7 @@ import path from "node:path";
 import sharp from "sharp";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
-const SOURCE_DIR = path.join(ROOT, "src/new background image frames");
+const SOURCE_DIR = path.join(ROOT, "src/latest bg frames");
 const OUTPUT_DIR = path.join(ROOT, "public/hero-bg-frames");
 
 const MAX_WIDTH = 1024;

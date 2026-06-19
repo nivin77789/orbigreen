@@ -139,16 +139,16 @@ function HeroCopy({ visible }: { visible: boolean }) {
       </p>
       <div className="mt-7 flex flex-wrap items-center justify-center gap-3 sm:mt-8">
         <Link
-          to="/services"
+          to="/products"
           className="hero-copy-btn gradient-border-cta rounded-full px-6 py-3 text-[14px] lg:text-[15px] font-medium transition-all hover:translate-x-[-1px] hover:translate-y-[-1px]"
         >
-          Our Services
+          Our Products
         </Link>
         <Link
-          to="/contact"
+          to="/services"
           className="hero-copy-btn hero-copy-btn--outline gradient-border-cta-outline rounded-full px-6 py-3 text-[14px] lg:text-[15px] font-semibold transition-all hover:translate-x-[-1px] hover:translate-y-[-1px]"
         >
-          Get in Touch
+          Our Services
         </Link>
       </div>
     </motion.div>
