@@ -1,3 +1,4 @@
+import { type CSSProperties } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { PRODUCTS, type Product } from "@/data/productsData";
@@ -21,81 +22,48 @@ function ProductsSectionBackground() {
   );
 }
 
-function ProductCard({
-  product,
-  index,
-  layout,
-}: {
-  product: Product;
-  index: number;
-  layout: "horizontal" | "vertical";
-}) {
-  const isHorizontal = layout === "horizontal";
-
+function ProductCard({ product, index }: { product: Product; index: number }) {
   return (
-    <motion.article
+    <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.5, delay: index * 0.04, ease: EASE }}
-      whileHover={{ y: -4 }}
-      className={`product-grid-card group overflow-hidden rounded-2xl border border-primary/10 bg-white/90 transition-shadow duration-300 hover:border-secondary/30 hover:shadow-[0_16px_40px_-16px_rgba(11,95,126,0.2)] ${
-        isHorizontal ? "flex items-stretch gap-0" : "flex flex-col"
-      }`}
+      whileHover={{ y: -6 }}
+      className="h-full"
     >
-      <div
-        className={`relative shrink-0 overflow-hidden ${
-          isHorizontal ? "w-[34%] min-w-[7.5rem] max-w-[9.5rem] sm:w-[32%] sm:max-w-[10.5rem]" : "aspect-[5/4] w-full"
-        }`}
+      <Link
+        to={`/products/${product.slug}`}
+        className="product-card group h-full w-full text-left"
+        style={{ "--product-accent": product.accent } as CSSProperties}
+        aria-label={`Know more about ${product.title}`}
       >
-        <img
-          src={product.image}
-          alt={product.title}
-          loading="lazy"
-          decoding="async"
-          className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 ${
-            isHorizontal ? "min-h-full" : ""
-          }`}
-        />
-        <div
-          className="absolute inset-0"
-          style={{
-            background: `linear-gradient(135deg, transparent 35%, ${product.accent}28 100%)`,
-          }}
-        />
-        <span className="absolute left-3 top-3 rounded-full bg-white/90 px-2 py-0.5 text-[11px] lg:text-[12px] font-bold tabular-nums tracking-wider text-primary shadow-sm">
-          {String(index + 1).padStart(2, "0")}
-        </span>
-      </div>
+        <span className="product-card__accent" aria-hidden />
+        <span className="product-card__sheen" aria-hidden />
+        <div className="product-card__media">
+          <img
+            src={product.image}
+            alt={product.title}
+            loading="lazy"
+            decoding="async"
+            className="product-card__image"
+          />
+          <div className="product-card__overlay" aria-hidden />
+          <span className="product-card__index">{String(index + 1).padStart(2, "0")}</span>
+        </div>
 
-      <div className={`flex min-w-0 flex-1 flex-col ${isHorizontal ? "justify-center px-3.5 py-3 sm:px-4 sm:py-3.5" : "p-4 sm:p-5"}`}>
-        <h3
-          className={`font-semibold leading-tight text-primary ${
-            isHorizontal ? "text-[16px] lg:text-[17px] sm:text-[17px] lg:text-[18px]" : "text-[18px] lg:text-[19px] sm:text-[19px] lg:text-[20px]"
-          }`}
-        >
-          {product.title}
-        </h3>
-        <p
-          className={`mt-1.5 line-clamp-2 leading-relaxed text-primary/65 ${
-            isHorizontal ? "text-[12px] lg:text-[13px] sm:text-[13px] lg:text-[14px]" : "text-[13px] lg:text-[14px] sm:text-[14px] lg:text-[15px]"
-          }`}
-        >
-          {product.description}
-        </p>
-        <Link
-          to="/quotation"
-          className={`mt-3 inline-flex w-fit items-center gap-1.5 text-[12px] lg:text-[13px] font-semibold text-primary transition-colors group-hover:text-secondary sm:text-[13px] lg:text-[14px] ${
-            isHorizontal ? "mt-2" : "mt-4"
-          }`}
-        >
-          Request sourcing
-          <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
-            →
+        <div className="product-card__body">
+          <h3 className="product-card__title">{product.title}</h3>
+          <p className="product-card__desc">{product.description}</p>
+          <span className="product-card__cta">
+            Know More
+            <span className="product-card__cta-arrow" aria-hidden>
+              →
+            </span>
           </span>
-        </Link>
-      </div>
-    </motion.article>
+        </div>
+      </Link>
+    </motion.div>
   );
 }
 
@@ -125,7 +93,7 @@ function ProductsHeader({
         <h2 className="text-balance text-[clamp(2.2rem,4.1vw,3.35rem)] font-semibold leading-[1.08] tracking-tight text-primary">
           Industrial components, sourced to spec
         </h2>
-        <p className="mt-4 max-w-lg text-[16px] lg:text-[17px] leading-relaxed text-primary/60">
+        <p className="mt-4 max-w-lg text-[16px] leading-relaxed text-primary/60 lg:text-[17px]">
           Precision-machined, fabricated, and assembled parts — qualified across global supply networks and
           delivered to your engineering standards.
         </p>
@@ -133,7 +101,7 @@ function ProductsHeader({
       {showViewAllLink && (
         <Link
           to="/products"
-          className="group glass-card-light inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[14px] lg:text-[15px] font-semibold text-primary transition-all hover:glass-card-hover"
+          className="group glass-card-light inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[14px] font-semibold text-primary transition-all hover:glass-card-hover lg:text-[15px]"
         >
           View all products
           <motion.span
@@ -151,43 +119,25 @@ function ProductsHeader({
 
 function ProductGrid({
   products,
-  isSection,
+  columnsClass,
 }: {
   products: Product[];
-  isSection: boolean;
+  columnsClass: string;
 }) {
   return (
-    <>
-      <div className="flex flex-col gap-3 md:hidden">
-        {products.map((product, index) => (
-          <ProductCard key={product.id} product={product} index={index} layout="horizontal" />
-        ))}
-      </div>
-
-      <div
-        className={`hidden gap-4 md:grid ${
-          isSection ? "md:grid-cols-2 lg:grid-cols-4" : "md:grid-cols-2 lg:hidden"
-        }`}
-      >
-        {products.map((product, index) => (
-          <ProductCard key={product.id} product={product} index={index} layout="vertical" />
-        ))}
-      </div>
-
-      {!isSection && (
-        <div className="hidden gap-4 lg:grid lg:grid-cols-5">
-          {products.map((product, index) => (
-            <ProductCard key={product.id} product={product} index={index} layout="vertical" />
-          ))}
-        </div>
-      )}
-    </>
+    <div className={`product-grid ${columnsClass}`}>
+      {products.map((product, index) => (
+        <ProductCard key={product.id} product={product} index={index} />
+      ))}
+    </div>
   );
 }
 
 export function ProductsShowcase({ variant = "page", showHeader = true }: ProductsShowcaseProps) {
   const isSection = variant === "section";
   const displayedProducts = isSection ? PRODUCTS.slice(0, HOME_PRODUCTS_LIMIT) : PRODUCTS;
+
+  const gridColumns = isSection ? "product-grid--section" : "product-grid--page";
 
   return (
     <section
@@ -202,7 +152,7 @@ export function ProductsShowcase({ variant = "page", showHeader = true }: Produc
         {showHeader && <ProductsHeader showViewAllLink={isSection} scrollTriggered={isSection} />}
 
         <div className={showHeader ? "mt-10 lg:mt-12" : ""}>
-          <ProductGrid products={displayedProducts} isSection={isSection} />
+          <ProductGrid products={displayedProducts} columnsClass={gridColumns} />
         </div>
 
         {!isSection && (
@@ -215,7 +165,7 @@ export function ProductsShowcase({ variant = "page", showHeader = true }: Produc
           >
             <Link
               to="/quotation"
-              className="gradient-border-cta rounded-full px-6 py-3 text-[14px] lg:text-[15px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
+              className="gradient-border-cta rounded-full px-6 py-3 text-[14px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)] lg:text-[15px]"
             >
               Request sourcing
             </Link>

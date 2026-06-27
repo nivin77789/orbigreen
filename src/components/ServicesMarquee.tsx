@@ -30,7 +30,7 @@ export function ServicesMarquee() {
   const loop = [...SERVICES, ...SERVICES];
 
   return (
-    <section className="services-marquee" aria-label="Our services">
+    <section className="services-marquee" aria-label="Services">
       <div className="services-marquee__blend" aria-hidden />
 
       <div className="services-marquee__viewport">

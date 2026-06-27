@@ -236,10 +236,10 @@ function AboutHero() {
         <img
           src={aboutBanner}
           alt=""
-          className="h-full w-full object-cover object-[center_56%] brightness-[0.9] saturate-[1.4] contrast-[1.1] sm:object-[right_56%]"
+          className="h-full w-full object-cover object-[right_center]"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-white from-[30%] via-white/30 via-[48%] to-transparent sm:from-[32%] sm:via-white/25 lg:from-[34%] lg:via-white/15" />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-transparent to-white/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-white from-[42%] via-white/75 via-[58%] to-transparent sm:from-[38%] sm:via-white/55 lg:from-[34%] lg:via-white/35" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-white/25" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-[1280px] px-6 pb-10 pt-[5.75rem] lg:px-10 lg:pb-14 lg:pt-[6.25rem]">
@@ -277,7 +277,7 @@ function AboutHero() {
               to="/services"
               className="glass-card-light rounded-full px-6 py-3 text-[13px] lg:text-[14px] font-semibold text-primary hover:glass-card-hover"
             >
-              Our Services
+              Services
             </Link>
           </motion.div>
         </motion.div>

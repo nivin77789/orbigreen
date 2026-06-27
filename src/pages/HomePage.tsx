@@ -24,9 +24,6 @@ function ClosingCTA({ visible }: { visible: boolean }) {
         <br />
         Your Supply Chain!
       </h2>
-      <p className="mx-auto mt-5 max-w-xl text-[15px] font-bold leading-relaxed text-white/92 sm:text-[16px] lg:text-[17px]">
-        Let's discuss how Orbigreen Techsource can streamline your sourcing and secure your procurement process.
-      </p>
     </motion.div>
   );
 }

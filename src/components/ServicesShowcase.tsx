@@ -123,7 +123,7 @@ function ServicesHeader({
   return (
     <motion.div {...motionProps} className="flex flex-wrap items-end justify-between gap-6">
       <div className="max-w-2xl">
-        <SectionLabel>Our Services</SectionLabel>
+        <SectionLabel>Services</SectionLabel>
         <h2 className="mt-3 text-balance text-[clamp(2.2rem,4.1vw,3.35rem)] font-semibold leading-[1.08] tracking-tight text-primary">
           End-to-end support across your supply chain
         </h2>

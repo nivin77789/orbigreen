@@ -51,7 +51,7 @@ function ProductsHero() {
                 to="/services"
                 className="glass-card-light rounded-full px-6 py-3 text-[13px] lg:text-[14px] font-semibold text-primary hover:glass-card-hover"
               >
-                Our Services
+                Services
               </Link>
             </motion.div>
         </motion.div>
