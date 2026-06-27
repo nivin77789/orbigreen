@@ -53,23 +53,33 @@ const VALUES = [
 const PROCESS = [
   {
     n: "01",
-    t: "Requirement Analysis",
-    d: "Review technical specifications, drawings, material requirements, compliance standards, delivery schedules, and project objectives to define the sourcing strategy.",
+    t: "Technical Requirement Analysis",
+    d: "Review engineering drawings, material specifications, standards, and project deliverables to establish complete technical and commercial requirements.",
   },
   {
     n: "02",
-    t: "Supplier Qualification",
-    d: "Identify, evaluate, and qualify manufacturing partners based on technical capability, capacity, certifications, quality systems, and commercial suitability.",
+    t: "Supplier Qualification & Selection",
+    d: "Identify and evaluate manufacturing partners based on technical capability, production capacity, quality systems, certifications, and delivery performance.",
   },
   {
     n: "03",
-    t: "Execution & Quality Control",
-    d: "Manage procurement, production follow-up, inspection activities, documentation, and quality assurance to ensure full compliance with project requirements.",
+    t: "Strategic Sourcing & Commercial Evaluation",
+    d: "Manage RFQ/RFP processes, perform technical-commercial bid analysis, and optimize total landed cost while ensuring compliance with project requirements.",
   },
   {
     n: "04",
-    t: "Logistics & Delivery",
-    d: "Coordinate packaging, shipment, customs documentation, and delivery management to ensure timely, traceable, and efficient project execution.",
+    t: "Production Planning & Execution Control",
+    d: "Finalize manufacturing schedules, inspection and test plans, and milestone-based production activities to ensure seamless project execution.",
+  },
+  {
+    n: "05",
+    t: "QA & QC",
+    d: "Execute stage-wise quality surveillance, in-process inspections, final acceptance testing, and documentation review to ensure full compliance with specifications and standards.",
+  },
+  {
+    n: "06",
+    t: "Logistics & Delivery Assurance",
+    d: "Coordinate packaging, export/import documentation, and delivery management to ensure timely, traceable, and compliant shipments.",
   },
 ];
 
