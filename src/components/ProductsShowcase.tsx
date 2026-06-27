@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { SectionLabel } from "@/components/SectionLabel";
 import { PRODUCTS, type Product } from "@/data/productsData";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -70,12 +69,8 @@ function ProductCard({
       </div>
 
       <div className={`flex min-w-0 flex-1 flex-col ${isHorizontal ? "justify-center px-3.5 py-3 sm:px-4 sm:py-3.5" : "p-4 sm:p-5"}`}>
-        <SectionLabel className="inline-flex w-fit items-center gap-1.5">
-          <span className="h-1 w-1 rounded-full" style={{ backgroundColor: product.accent }} />
-          {product.category}
-        </SectionLabel>
         <h3
-          className={`mt-1.5 font-semibold leading-tight text-primary ${
+          className={`font-semibold leading-tight text-primary ${
             isHorizontal ? "text-[16px] lg:text-[17px] sm:text-[17px] lg:text-[18px]" : "text-[18px] lg:text-[19px] sm:text-[19px] lg:text-[20px]"
           }`}
         >
@@ -127,12 +122,8 @@ function ProductsHeader({
   return (
     <motion.div {...motionProps} className="flex flex-wrap items-end justify-between gap-6">
       <div className="max-w-2xl">
-        <SectionLabel>Product categories</SectionLabel>
-        <h2 className="mt-3 text-balance text-[clamp(2.2rem,4.1vw,3.35rem)] font-semibold leading-[1.08] tracking-tight text-primary">
-          Industrial components,{" "}
-          <span className="bg-gradient-to-br from-primary via-primary to-secondary bg-clip-text text-transparent">
-            sourced to spec
-          </span>
+        <h2 className="text-balance text-[clamp(2.2rem,4.1vw,3.35rem)] font-semibold leading-[1.08] tracking-tight text-primary">
+          Industrial components, sourced to spec
         </h2>
         <p className="mt-4 max-w-lg text-[16px] lg:text-[17px] leading-relaxed text-primary/60">
           Precision-machined, fabricated, and assembled parts — qualified across global supply networks and
@@ -167,10 +158,6 @@ function ProductGrid({
 }) {
   return (
     <>
-      <div className="mb-5 px-0.5">
-        <SectionLabel tone="muted">Product categories</SectionLabel>
-      </div>
-
       <div className="flex flex-col gap-3 md:hidden">
         {products.map((product, index) => (
           <ProductCard key={product.id} product={product} index={index} layout="horizontal" />
