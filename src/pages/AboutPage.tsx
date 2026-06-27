@@ -10,93 +10,66 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 
 const CAPABILITIES = [
   {
-    t: "Supplier Sourcing",
-    d: "Global network of vetted industrial suppliers and strategic partnerships across multiple regions.",
+    t: "Supplier Identification & Qualification",
+    d: "Finding and evaluating capable manufacturing partners based on technical, quality, and commercial requirements.",
   },
   {
-    t: "Quality Management",
-    d: "Rigorous quality control, inspections, and compliance at every stage of the supply chain.",
+    t: "Quality Assurance",
+    d: "Managing inspections, audits, and compliance processes to ensure consistent product quality.",
   },
   {
     t: "Engineering Coordination",
-    d: "Technical expertise across manufacturing domains from design to production.",
+    d: "Supporting technical reviews, supplier communication, and manufacturing alignment from specification to production.",
   },
   {
-    t: "Procurement",
-    d: "Streamlined procurement processes and strategic sourcing for cost efficiency.",
+    t: "Strategic Procurement",
+    d: "Driving competitive sourcing, supplier engagement, and cost-effective procurement execution.",
   },
   {
     t: "Delivery Management",
-    d: "On-time logistics, shipping coordination, and end-to-end supply chain management.",
+    d: "Coordinating production schedules, logistics, and deliveries to ensure reliable project execution.",
   },
 ];
 
 const VALUES = [
   {
-    t: "Results-Driven",
-    d: "We focus on measurable outcomes — cost savings, lead time reduction, and quality improvement for every engagement.",
+    t: "Accountability",
+    d: "We take ownership from supplier selection through final delivery. Clear communication and reliable execution underpin every project.",
   },
   {
-    t: "Global Mindset",
-    d: "We think and operate across borders, connecting you with the right suppliers and solutions wherever they are.",
+    t: "Quality First",
+    d: "Quality is built into every stage of the sourcing process. We prioritize compliance, consistency, and long-term supplier performance.",
   },
   {
-    t: "Integrity & Transparency",
-    d: "We build long-term relationships on trust, clear communication, and ethical practices in every transaction.",
+    t: "Transparency",
+    d: "We provide clear visibility into sourcing activities, supplier progress, and delivery commitments. Our clients make decisions with confidence, not assumptions.",
   },
   {
-    t: "Agility",
-    d: "We adapt quickly to changing requirements, market conditions, and your evolving business needs.",
+    t: "Partnership",
+    d: "We work as an extension of our clients' teams, aligning with their objectives and challenges. Success is measured by the value we create together.",
   },
 ];
 
 const PROCESS = [
   {
     n: "01",
-    t: "Understand & Plan",
-    d: "We start by understanding your requirements, volumes, quality standards, and timelines. From there we define scope, identify risks, and agree on a clear plan.",
+    t: "Requirement Analysis",
+    d: "Review technical specifications, drawings, material requirements, compliance standards, delivery schedules, and project objectives to define the sourcing strategy.",
   },
   {
     n: "02",
-    t: "Source & Qualify",
-    d: "We tap our global network to source and qualify suppliers, run technical and commercial evaluations, and recommend the best fit for your project.",
+    t: "Supplier Qualification",
+    d: "Identify, evaluate, and qualify manufacturing partners based on technical capability, capacity, certifications, quality systems, and commercial suitability.",
   },
   {
     n: "03",
-    t: "Execute & Assure Quality",
-    d: "We coordinate production, manage quality inspections and audits, and keep you updated at every stage so you stay in control without the operational burden.",
+    t: "Execution & Quality Control",
+    d: "Manage procurement, production follow-up, inspection activities, documentation, and quality assurance to ensure full compliance with project requirements.",
   },
   {
     n: "04",
-    t: "Deliver & Support",
-    d: "We manage logistics and delivery to your door, and support installation and commissioning when needed. Our relationship continues with ongoing supply and continuous improvement.",
-  },
-];
-
-const COMPANY_OVERVIEW = [
-  {
-    title: "Who We Are",
-    items: [
-      "A future-driven company shaping engineering and sustainable innovation",
-      "Focused on delivering innovative, eco-friendly industrial solutions",
-      "Strong presence in India with deep customer and supplier connections",
-    ],
-  },
-  {
-    title: "Our Strengths",
-    items: [
-      "Expertise in Sales, Project management, Procurement, and site execution",
-      "Access to capable manufacturing partners with Manufacturing Cooperation agreements",
-      "Commitment to compliance with international standards ASME U, U2, R, PED",
-    ],
-  },
-  {
-    title: "Our Vision",
-    items: [
-      "Partnering with global technology leaders and OEMs",
-      "Bringing advanced and technology solutions to industry",
-      "Supporting the industrial sector with proven, sustainable technologies",
-    ],
+    t: "Logistics & Delivery",
+    d: "Coordinate packaging, shipment, customs documentation, and delivery management to ensure timely, traceable, and efficient project execution.",
   },
 ];
 
@@ -108,7 +81,6 @@ const fadeUp = {
     transition: { duration: 0.65, delay: i * 0.07, ease: EASE },
   }),
 };
-
 
 function ValuesExplorer() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -247,49 +219,6 @@ function ProcessTimeline() {
   );
 }
 
-function CompanyOverviewSection() {
-  return (
-    <section className="relative border-t border-primary/10 bg-white py-16 lg:py-20">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-secondary/40 to-transparent" />
-      <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
-        <div className="grid gap-6 lg:grid-cols-3 lg:gap-8">
-          {COMPANY_OVERVIEW.map((block, i) => (
-            <motion.article
-              key={block.title}
-              custom={i}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-40px" }}
-              variants={fadeUp}
-              whileHover={{ y: -4 }}
-              className={`relative overflow-hidden rounded-[1.5rem] p-6 transition-all duration-500 sm:p-7 lg:p-8 ${
-                i === 0 ? "highlight-panel" : "glass-card-light hover:glass-card-hover"
-              }`}
-            >
-              {i === 0 && <div className="highlight-panel-grid absolute inset-0 opacity-40" aria-hidden />}
-              <div className="relative z-10">
-                <h2 className="text-[clamp(1.2rem,2vw,1.5rem)] font-semibold tracking-tight text-primary">
-                  {block.title}
-                </h2>
-                <ul className="mt-5 space-y-3.5">
-                  {block.items.map((item) => (
-                    <li key={item} className="flex gap-3 text-[14px] lg:text-[15px] leading-relaxed text-primary/72 sm:text-[15px] lg:text-[16px]">
-                      <span className="mt-0.5 shrink-0 font-bold text-secondary" aria-hidden>
-                        •
-                      </span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </motion.article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function AboutHero() {
   return (
     <section className="relative overflow-hidden border-b border-primary/10 bg-white">
@@ -310,14 +239,13 @@ function AboutHero() {
           transition={{ duration: 0.9, ease: EASE }}
           className="max-w-2xl"
         >
-          <SectionLabel animated>Who we are</SectionLabel>
-          <h1 className="mt-4 text-balance text-[clamp(2.25rem,5vw,3.75rem)] font-semibold leading-[1.05] tracking-tight text-primary">
+          <h1 className="mt-4 whitespace-nowrap text-[clamp(1.45rem,3.6vw,3.75rem)] font-semibold leading-[1.05] tracking-tight text-primary">
             About{" "}
             <span className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-transparent">
               Orbigreen Techsource
             </span>
           </h1>
-          <p className="mt-6 max-w-xl text-[17px] lg:text-[18px] leading-relaxed text-primary/75">
+          <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-primary/75 lg:text-[18px]">
             Integrated sourcing for industrial engineering — combining supplier networks, procurement, and quality
             management to improve supply chain efficiency. We support OEMs worldwide with a single-window approach
             from components to delivery.
@@ -342,24 +270,6 @@ function AboutHero() {
               Our Services
             </Link>
           </motion.div>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.45, duration: 0.8 }}
-            className="mt-8 flex flex-wrap gap-2"
-          >
-            {CAPABILITIES.map((cap, i) => (
-              <motion.span
-                key={cap.t}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.5 + i * 0.05 }}
-                className="global-hero-stat rounded-full px-3 py-1.5 text-[11px] lg:text-[12px] font-semibold text-primary/80"
-              >
-                {cap.t.split(" ")[0]}
-              </motion.span>
-            ))}
-          </motion.div>
         </motion.div>
       </div>
     </section>
@@ -374,9 +284,6 @@ export default function AboutPage() {
       <main className="relative">
         <AboutHero />
 
-        <CompanyOverviewSection />
-
-        {/* Story + Partner */}
         <section className="relative border-t border-primary/10 py-16 lg:py-20">
           <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-secondary/40 to-transparent" />
           <div className="mx-auto grid max-w-[1280px] gap-6 px-6 lg:grid-cols-2 lg:gap-8 lg:px-10">
@@ -392,17 +299,17 @@ export default function AboutPage() {
               <div className="relative z-10">
                 <SectionLabel animated>Our Story</SectionLabel>
                 <h2 className="mt-3 text-[clamp(1.5rem,2.5vw,2rem)] font-semibold tracking-tight text-primary">
-                  Why we exist
+                  End-to-End Industrial Sourcing Excellence
                 </h2>
                 <div className="mt-6 space-y-4">
                   <p className="text-[15px] lg:text-[16px] leading-relaxed text-primary/70">
-                    We were built on a simple idea: industrial companies need one partner for the full complexity of
-                    global sourcing — from drawing intake and supplier identification to quality assurance and on-time
-                    delivery — without managing multiple vendors alone.
+                    We help industrial companies source globally with confidence by managing the complete sourcing
+                    journey — from technical requirements and supplier qualification to quality assurance and delivery.
                   </p>
                   <p className="text-[15px] lg:text-[16px] leading-relaxed text-primary/70">
-                    We operate as a global sourcing partner, not a manufacturer. Our network manages your supply chain
-                    with visibility and predictability.
+                    Through a trusted global network of manufacturing partners, we provide reliable sourcing solutions
+                    with the visibility, accountability, and execution required to build resilient and cost-effective
+                    supply chains.
                   </p>
                 </div>
               </div>
@@ -422,19 +329,18 @@ export default function AboutPage() {
               </h2>
               <div className="mt-6 space-y-4">
                 <p className="text-[15px] lg:text-[16px] leading-relaxed text-primary/70">
-                  Our approach enables better visibility, scalability, and operational predictability across procurement
-                  and supply chain operations. We work as an extension of your team.
+                  We act as an extension of your team, providing the visibility, control, and predictability needed to
+                  manage sourcing and supply chain operations effectively.
                 </p>
                 <p className="text-[15px] lg:text-[16px] leading-relaxed text-primary/70">
-                  By centralizing sourcing, quality, and logistics through a single partner, you reduce complexity,
-                  mitigate supplier risk, and free internal teams to focus on core product development.
+                  By integrating sourcing, quality assurance, and logistics through a single partner, we reduce
+                  complexity, mitigate supplier risk, and enable your teams to focus on strategic priorities.
                 </p>
               </div>
             </motion.article>
           </div>
         </section>
 
-        {/* Capabilities */}
         <section className="py-16 lg:py-20">
           <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
             <motion.div
@@ -444,9 +350,9 @@ export default function AboutPage() {
               transition={{ duration: 0.8, ease: EASE }}
               className="mb-10 max-w-2xl"
             >
-              <SectionLabel animated>What we deliver</SectionLabel>
+              <SectionLabel animated>What We Deliver</SectionLabel>
               <h2 className="mt-3 text-[clamp(1.5rem,2.5vw,2.25rem)] font-semibold tracking-tight text-primary">
-                Core capabilities across your supply chain
+                Core capabilities across the sourcing lifecycle
               </h2>
             </motion.div>
 
@@ -473,7 +379,6 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Values */}
         <section className="py-16 lg:py-20">
           <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
             <motion.div
@@ -485,7 +390,7 @@ export default function AboutPage() {
             >
               <SectionLabel animated>Our Values</SectionLabel>
               <h2 className="mt-3 text-[clamp(1.5rem,2.5vw,2.25rem)] font-semibold tracking-tight text-primary">
-                The principles that guide how we work every day
+                The principles that guide every sourcing decision and client engagement.
               </h2>
             </motion.div>
 
@@ -493,7 +398,6 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Process */}
         <section className="relative border-t border-primary/10 bg-white py-16 lg:py-20">
           <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-secondary/40 to-transparent" />
           <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
@@ -504,9 +408,8 @@ export default function AboutPage() {
               transition={{ duration: 0.8, ease: EASE }}
               className="mb-10 max-w-2xl"
             >
-              <SectionLabel animated>How We Work With You</SectionLabel>
-              <h2 className="mt-3 text-[clamp(1.5rem,2.5vw,2.25rem)] font-semibold tracking-tight text-primary">
-                A collaborative, transparent process from first contact to final delivery
+              <h2 className="text-[clamp(1.5rem,2.5vw,2.25rem)] font-semibold tracking-tight text-primary">
+                How We Work
               </h2>
             </motion.div>
 
@@ -514,30 +417,77 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="relative border-t border-primary/10 py-28">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_50%,rgba(92,191,42,0.06),transparent)]" />
-          <motion.div
-            initial={{ opacity: 0, y: 32 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.9, ease: EASE }}
-            className="relative mx-auto max-w-[1280px] px-6 text-center lg:px-10"
-          >
-            <SectionLabel animated>Partner With Us</SectionLabel>
-            <h2 className="mx-auto mt-4 max-w-2xl text-balance text-[clamp(1.75rem,3.5vw,2.75rem)] font-semibold tracking-tight text-primary">
-              Discover how our integrated sourcing approach can transform your supply chain
-            </h2>
-            <p className="mx-auto mt-5 max-w-xl text-[15px] lg:text-[16px] leading-relaxed text-primary/65">
-              Better visibility, lower risk, and a single partner you can rely on — from first quote to final delivery.
-            </p>
-            <Link
-              to="/contact"
-              className="gradient-border-cta mt-10 inline-flex rounded-full px-8 py-3.5 text-[14px] lg:text-[15px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
+        <section className="relative border-t border-primary/10 bg-white py-16 lg:py-24">
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-secondary/40 to-transparent" />
+          <div className="relative mx-auto max-w-[1280px] px-6 lg:px-10">
+            <motion.div
+              initial={{ opacity: 0, y: 32 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.85, ease: EASE }}
+              className="about-sourcing-banner relative overflow-hidden rounded-[1.75rem]"
             >
-              Get in Touch
-            </Link>
-          </motion.div>
+              <div className="about-sourcing-banner__grid pointer-events-none absolute inset-0" aria-hidden />
+              <div className="about-sourcing-banner__glow about-sourcing-banner__glow--left pointer-events-none absolute" aria-hidden />
+              <div className="about-sourcing-banner__glow about-sourcing-banner__glow--right pointer-events-none absolute" aria-hidden />
+              <div className="about-sourcing-banner__line pointer-events-none absolute inset-x-0 top-0" aria-hidden />
+
+              <div className="relative z-10 grid gap-8 p-7 sm:p-9 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center lg:gap-12 lg:p-11 xl:p-12">
+                <div>
+                  <p className="about-sourcing-banner__eyebrow text-[11px] font-bold uppercase tracking-[0.28em] text-white/55 sm:text-[12px]">
+                    Partner with confidence
+                  </p>
+                  <h2 className="mt-4 text-balance text-[clamp(1.85rem,3.8vw,3rem)] font-semibold leading-[1.06] tracking-[-0.03em] text-white">
+                    Reliable Sourcing{" "}
+                    <span className="bg-gradient-to-r from-secondary via-[#7fd44a] to-white bg-clip-text text-transparent">
+                      Starts Here
+                    </span>
+                  </h2>
+                  <div className="about-sourcing-banner__accent mt-5" aria-hidden />
+                </div>
+
+                <div>
+                  <p className="text-[15px] leading-relaxed text-white/78 sm:text-[16px] lg:text-[17px] lg:leading-[1.65]">
+                    A single partner for supplier qualification, quality assurance, procurement, and delivery —
+                    managed with transparency and accountability.
+                  </p>
+                  <ul className="about-sourcing-pillars mt-6 flex flex-wrap gap-2 sm:mt-7">
+                    {["Supplier qualification", "Quality assurance", "Procurement", "Delivery"].map((item) => (
+                      <li key={item}>
+                        <span className="about-sourcing-pillar inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[11px] font-semibold text-white/92 sm:px-3.5 sm:py-2 sm:text-[12px]">
+                          <span className="about-sourcing-pillar__dot h-1.5 w-1.5 shrink-0 rounded-full" aria-hidden />
+                          {item}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.75, delay: 0.12, ease: EASE }}
+              className="about-sourcing-quote relative mx-auto mt-8 max-w-2xl rounded-[1.5rem] p-7 text-center sm:mt-10 sm:p-8"
+            >
+              <div className="about-sourcing-quote__connector pointer-events-none absolute left-1/2 top-0 hidden h-8 w-px -translate-x-1/2 -translate-y-full sm:block" aria-hidden />
+              <h3 className="text-[clamp(1.25rem,2.5vw,1.65rem)] font-semibold tracking-tight text-primary">
+                Need a Tailored Sourcing Solution!
+              </h3>
+              <p className="mx-auto mt-4 max-w-lg text-[15px] leading-relaxed text-primary/65 lg:text-[16px]">
+                Share your specifications, quantities, and delivery requirements, and we&apos;ll identify qualified
+                suppliers and develop a sourcing plan aligned with your project goals.
+              </p>
+              <Link
+                to="/quotation"
+                className="gradient-border-cta mt-8 inline-flex rounded-full px-8 py-3.5 text-[14px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)] lg:text-[15px]"
+              >
+                Request Quotation
+              </Link>
+            </motion.div>
+          </div>
         </section>
       </main>
 

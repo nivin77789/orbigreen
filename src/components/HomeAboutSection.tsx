@@ -43,10 +43,7 @@ export function HomeAboutSection() {
           >
             <SectionLabel>Who we are</SectionLabel>
             <h2 className="mt-4 text-balance text-[clamp(2rem,4vw,3.1rem)] font-semibold leading-[1.08] tracking-tight text-primary">
-              About{" "}
-              <span className="bg-gradient-to-br from-primary to-secondary bg-clip-text text-transparent">
-                Orbigreen Techsource
-              </span>
+              About Us
             </h2>
             <p className="mt-5 max-w-xl text-[17px] lg:text-[18px] leading-relaxed text-primary/72 sm:text-[18px] lg:text-[19px]">
               Integrated sourcing for industrial engineering — combining supplier networks, procurement, and quality

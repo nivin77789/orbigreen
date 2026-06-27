@@ -127,7 +127,7 @@ function ProductsHeader({
   return (
     <motion.div {...motionProps} className="flex flex-wrap items-end justify-between gap-6">
       <div className="max-w-2xl">
-        <SectionLabel>Our Products</SectionLabel>
+        <SectionLabel>Product categories</SectionLabel>
         <h2 className="mt-3 text-balance text-[clamp(2.2rem,4.1vw,3.35rem)] font-semibold leading-[1.08] tracking-tight text-primary">
           Industrial components,{" "}
           <span className="bg-gradient-to-br from-primary via-primary to-secondary bg-clip-text text-transparent">
@@ -168,7 +168,7 @@ function ProductGrid({
   return (
     <>
       <div className="mb-5 px-0.5">
-        <SectionLabel tone="muted">Our products</SectionLabel>
+        <SectionLabel tone="muted">Product categories</SectionLabel>
       </div>
 
       <div className="flex flex-col gap-3 md:hidden">

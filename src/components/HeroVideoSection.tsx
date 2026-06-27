@@ -45,21 +45,18 @@ export function HeroVideoSection() {
             <span className="block">Driving Sustainable</span>
             <span className="block">Industrial Solutions</span>
           </h1>
-          <p className="mt-4 max-w-md text-pretty text-[clamp(1.05rem,1.5vw,1.3rem)] font-medium leading-snug tracking-tight text-white/92">
-            Engineering-led sourcing for OEMs worldwide.
-          </p>
           <div className="mt-7 flex flex-wrap items-center justify-center gap-3 sm:mt-8">
             <Link
               to="/products"
-              className="hero-copy-btn gradient-border-cta rounded-full px-6 py-3 text-[14px] font-medium transition-all hover:translate-x-[-1px] hover:translate-y-[-1px] lg:text-[15px]"
+              className="hero-copy-btn gradient-border-cta rounded-full px-6 py-3 text-[14px] font-semibold transition-all hover:translate-x-[-1px] hover:translate-y-[-1px] lg:text-[15px]"
             >
-              Our Products
+              Product Categories
             </Link>
             <Link
               to="/services"
               className="hero-copy-btn hero-copy-btn--outline gradient-border-cta-outline rounded-full px-6 py-3 text-[14px] font-semibold transition-all hover:translate-x-[-1px] hover:translate-y-[-1px] lg:text-[15px]"
             >
-              Our Services
+              Services
             </Link>
           </div>
         </motion.div>

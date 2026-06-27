@@ -8,7 +8,6 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { HomeHelpSection } from "@/components/HomeHelpSection";
 import { IndustriesSection } from "@/components/IndustriesSection";
-import { ProductsShowcase } from "@/components/ProductsShowcase";
 import { HomeWorkflow, workflowStepFromScroll, WORKFLOW_SCROLL_END } from "@/components/HomeWorkflow";
 import { HERO_BG } from "@/lib/constants";
 
@@ -98,7 +97,6 @@ export default function HomePage() {
       </section>
 
       <HomeHelpSection />
-      <ProductsShowcase variant="section" />
       <IndustriesSection />
       <Footer />
     </div>

@@ -20,18 +20,6 @@ const stroke = {
 
 export const INDUSTRIES: IndustryItem[] = [
   {
-    name: "Automotive",
-    tagline: "Chassis, powertrain & stamped parts",
-    icon: (
-      <svg {...stroke}>
-        <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" />
-        <circle cx="7" cy="17" r="2" />
-        <path d="M9 17h6" />
-        <circle cx="17" cy="17" r="2" />
-      </svg>
-    ),
-  },
-  {
     name: "Oil & Gas",
     tagline: "Pressure vessels, skids & piping",
     icon: (
@@ -50,24 +38,51 @@ export const INDUSTRIES: IndustryItem[] = [
     ),
   },
   {
-    name: "White Goods",
-    tagline: "Stamped housings & appliance parts",
+    name: "Pulp And Paper",
+    tagline: "Pulp mills, paper machinery & rolls",
     icon: (
       <svg {...stroke}>
-        <rect x="5" y="2" width="14" height="20" rx="2" />
-        <path d="M5 10h14" />
-        <path d="M9 6h.01" />
-        <path d="M9 14h6" />
-        <path d="M9 18h4" />
+        <path d="M6 3h12v18H6z" />
+        <path d="M6 8h12" />
+        <path d="M6 13h12" />
+        <path d="M6 18h12" />
+        <path d="M9 3v18" />
       </svg>
     ),
   },
   {
-    name: "Aerospace",
-    tagline: "Traceable machining & fabrication",
+    name: "Chemical Industry",
+    tagline: "Reactors, vessels & process equipment",
     icon: (
       <svg {...stroke}>
-        <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z" />
+        <path d="M10 2v6l-4 9a2 2 0 0 0 1.8 3h8.4a2 2 0 0 0 1.8-3l-4-9V2" />
+        <path d="M8.5 2h7" />
+        <path d="M7 16h10" />
+      </svg>
+    ),
+  },
+  {
+    name: "Textile",
+    tagline: "Spinning, weaving & processing machinery",
+    icon: (
+      <svg {...stroke}>
+        <circle cx="6" cy="6" r="3" />
+        <circle cx="18" cy="6" r="3" />
+        <circle cx="12" cy="18" r="3" />
+        <path d="M8.5 8.5 10.5 15.5" />
+        <path d="M15.5 15.5 17.5 8.5" />
+        <path d="M9 6h6" />
+      </svg>
+    ),
+  },
+  {
+    name: "Effluent Treatment Plant",
+    tagline: "Water treatment skids & filtration systems",
+    icon: (
+      <svg {...stroke}>
+        <path d="M12 2c-3 4-6 6-6 10a6 6 0 0 0 12 0c0-4-3-6-6-10z" />
+        <path d="M8 22h8" />
+        <path d="M10 18h4" />
       </svg>
     ),
   },
@@ -136,24 +151,6 @@ export const INDUSTRIES: IndustryItem[] = [
         <path d="m3.47 12.53 5 5" />
         <path d="m13 3 6 6" />
         <path d="m8 8 8 8" />
-      </svg>
-    ),
-  },
-  {
-    name: "Electronics",
-    tagline: "Enclosures, brackets & housings",
-    icon: (
-      <svg {...stroke}>
-        <rect x="4" y="4" width="16" height="16" rx="2" />
-        <rect x="9" y="9" width="6" height="6" />
-        <path d="M9 2v2" />
-        <path d="M15 2v2" />
-        <path d="M9 20v2" />
-        <path d="M15 20v2" />
-        <path d="M2 9h2" />
-        <path d="M2 15h2" />
-        <path d="M20 9h2" />
-        <path d="M20 15h2" />
       </svg>
     ),
   },

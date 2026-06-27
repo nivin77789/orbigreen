@@ -17,7 +17,7 @@ export function Footer() {
           </div>
         </div>
         <div>
-          <SectionLabel as="h5" tone="muted">Reach</SectionLabel>
+          <SectionLabel as="h5" tone="muted">Contact Us</SectionLabel>
           <ul className="mt-4 space-y-2.5 text-primary/75">
             <li>
               <a href={`tel:${PHONE_TEL}`} className="transition-colors hover:text-primary">
@@ -42,7 +42,7 @@ export function Footer() {
             </li>
             <li>
               <Link to="/about" className="transition-colors hover:text-primary">
-                About
+                About Us
               </Link>
             </li>
             <li>
