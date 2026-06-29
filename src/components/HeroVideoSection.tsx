@@ -12,7 +12,18 @@ export function HeroVideoSection() {
   useAutoplayVideo(videoRef);
 
   return (
-    <section id="hero" className="relative h-screen w-full overflow-hidden" style={{ backgroundColor: HERO_BG }}>
+    <section id="hero" className="hero-banner relative h-screen w-full overflow-hidden" style={{ backgroundColor: HERO_BG }}>
+      <div className="hero-sky-bg" aria-hidden>
+        <div className="hero-sky-bg__atmosphere" />
+        <div className="hero-sky-clouds">
+          <span className="hero-sky-cloud hero-sky-cloud--1" />
+          <span className="hero-sky-cloud hero-sky-cloud--2" />
+          <span className="hero-sky-cloud hero-sky-cloud--3" />
+          <span className="hero-sky-cloud hero-sky-cloud--4" />
+          <span className="hero-sky-cloud hero-sky-cloud--5" />
+        </div>
+      </div>
+
       <video
         ref={videoRef}
         className="hero-banner-video absolute inset-0 h-full w-full object-cover"
@@ -20,13 +31,19 @@ export function HeroVideoSection() {
         playsInline
         autoPlay
         loop
-        preload="auto"
+        preload="metadata"
         disablePictureInPicture
         disableRemotePlayback
         aria-hidden
       >
         <source src={bannerVideo} type="video/mp4" />
       </video>
+
+      <div className="hero-sky-clouds hero-sky-clouds--front" aria-hidden>
+        <span className="hero-sky-cloud hero-sky-cloud--1" />
+        <span className="hero-sky-cloud hero-sky-cloud--2" />
+        <span className="hero-sky-cloud hero-sky-cloud--3" />
+      </div>
 
       <div className="hero-surface-overlay pointer-events-none absolute inset-0" aria-hidden />
 

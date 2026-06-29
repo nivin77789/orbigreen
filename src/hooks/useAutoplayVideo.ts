@@ -1,4 +1,5 @@
 import { useEffect, type RefObject } from "react";
+import { useInView } from "@/hooks/useInView";
 
 function configureForIos(video: HTMLVideoElement) {
   video.muted = true;
@@ -22,10 +23,18 @@ async function tryPlay(video: HTMLVideoElement) {
   }
 }
 
-export function useAutoplayVideo(ref: RefObject<HTMLVideoElement | null>) {
+type UseAutoplayVideoOptions = {
+  /** When false, playback is paused to save CPU/GPU. */
+  enabled?: boolean;
+};
+
+export function useAutoplayVideo(
+  ref: RefObject<HTMLVideoElement | null>,
+  { enabled = true }: UseAutoplayVideoOptions = {},
+) {
   useEffect(() => {
     const video = ref.current;
-    if (!video) return;
+    if (!video || !enabled) return;
 
     configureForIos(video);
 
@@ -37,33 +46,48 @@ export function useAutoplayVideo(ref: RefObject<HTMLVideoElement | null>) {
 
     video.addEventListener("loadeddata", play);
     video.addEventListener("canplay", play);
-    video.addEventListener("canplaythrough", play);
 
     const onVisibility = () => {
       if (document.visibilityState === "visible") play();
     };
 
     const onPageShow = () => play();
-
     const onGesture = () => play();
 
     document.addEventListener("visibilitychange", onVisibility);
     window.addEventListener("pageshow", onPageShow);
     window.addEventListener("orientationchange", play);
     window.addEventListener("touchstart", onGesture, { passive: true });
-    window.addEventListener("touchend", onGesture, { passive: true });
     window.addEventListener("click", onGesture, { passive: true });
 
     return () => {
       video.removeEventListener("loadeddata", play);
       video.removeEventListener("canplay", play);
-      video.removeEventListener("canplaythrough", play);
       document.removeEventListener("visibilitychange", onVisibility);
       window.removeEventListener("pageshow", onPageShow);
       window.removeEventListener("orientationchange", play);
       window.removeEventListener("touchstart", onGesture);
-      window.removeEventListener("touchend", onGesture);
       window.removeEventListener("click", onGesture);
     };
-  }, [ref]);
+  }, [ref, enabled]);
+}
+
+export function useLazyAutoplayVideo(
+  ref: RefObject<HTMLVideoElement | null>,
+  containerRef: RefObject<HTMLElement | null>,
+  rootMargin = "240px",
+) {
+  const inView = useInView(containerRef, rootMargin);
+  useAutoplayVideo(ref, { enabled: inView });
+
+  useEffect(() => {
+    const video = ref.current;
+    if (!video) return;
+
+    if (!inView && !video.paused) {
+      video.pause();
+    }
+  }, [inView, ref]);
+
+  return inView;
 }

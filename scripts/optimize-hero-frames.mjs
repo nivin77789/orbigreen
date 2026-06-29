@@ -6,8 +6,8 @@ const ROOT = path.resolve(import.meta.dirname, "..");
 const SOURCE_DIR = path.join(ROOT, "src/latestbg");
 const OUTPUT_DIR = path.join(ROOT, "public/hero-bg-frames");
 
-const MAX_WIDTH = 1024;
-const QUALITY = 75;
+const MAX_WIDTH = 896;
+const QUALITY = 68;
 const TARGET_TOTAL_MB = 5;
 
 async function optimizeFrame(input, output) {

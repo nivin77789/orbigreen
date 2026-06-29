@@ -1,7 +1,7 @@
 import { useEffect, useState, type RefObject } from "react";
 
 export function useInView<T extends Element>(ref: RefObject<T | null>, rootMargin = "120px") {
-  const [inView, setInView] = useState(true);
+  const [inView, setInView] = useState(false);
 
   useEffect(() => {
     const element = ref.current;

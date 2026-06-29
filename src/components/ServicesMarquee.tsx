@@ -1,4 +1,4 @@
-import { type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { Link } from "react-router-dom";
 import { SERVICES, type ServiceDetail } from "@/data/servicesData";
 
@@ -27,10 +27,29 @@ function MarqueeItem({ service }: { service: ServiceDetail }) {
 }
 
 export function ServicesMarquee() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [active, setActive] = useState(true);
   const loop = [...SERVICES, ...SERVICES];
 
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setActive(entry.isIntersecting),
+      { rootMargin: "120px 0px", threshold: 0 },
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="services-marquee" aria-label="Services">
+    <section
+      ref={sectionRef}
+      className={`services-marquee${active ? "" : " services-marquee--paused"}`}
+      aria-label="Services"
+    >
       <div className="services-marquee__blend" aria-hidden />
 
       <div className="services-marquee__viewport">

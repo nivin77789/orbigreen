@@ -1,16 +1,20 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import globalNetworkVideo from "@/assets/global-network-video.mp4";
-import { useAutoplayVideo } from "@/hooks/useAutoplayVideo";
+import { useLazyAutoplayVideo } from "@/hooks/useAutoplayVideo";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 export function GlobalNetworkSection() {
+  const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  useAutoplayVideo(videoRef);
+  const inView = useLazyAutoplayVideo(videoRef, sectionRef, "320px");
 
   return (
-    <section className="global-network-section border-t border-primary/10 bg-section/50">
+    <section
+      ref={sectionRef}
+      className="global-network-section border-t border-primary/10 bg-section/50"
+    >
       <div className="mx-auto max-w-[1280px] px-5 py-14 sm:px-6 lg:px-10 lg:py-16">
         <motion.div
           initial={{ opacity: 0, y: 24, scale: 0.985 }}
@@ -27,12 +31,12 @@ export function GlobalNetworkSection() {
             playsInline
             autoPlay
             loop
-            preload="auto"
+            preload="none"
             disablePictureInPicture
             disableRemotePlayback
             aria-label="Orbigreen global supply network visualization"
           >
-            <source src={globalNetworkVideo} type="video/mp4" />
+            {inView ? <source src={globalNetworkVideo} type="video/mp4" /> : null}
           </video>
         </motion.div>
       </div>

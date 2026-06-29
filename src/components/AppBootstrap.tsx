@@ -1,19 +1,25 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { AnimatePresence } from "framer-motion";
 import { SiteLoader } from "@/components/SiteLoader";
-import { preloadEssentialFrames, preloadAllFrames } from "@/lib/frame-cache";
+import { preloadEssentialFrames } from "@/lib/frame-cache";
 
-const MIN_LOADER_MS = 1400;
+const MIN_LOADER_MS = 320;
+const FAST_BOOT_KEY = "orbigreen_boot_ready";
 
 type AppBootstrapProps = {
   children: ReactNode;
 };
 
 export function AppBootstrap({ children }: AppBootstrapProps) {
-  const [ready, setReady] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const [ready, setReady] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return sessionStorage.getItem(FAST_BOOT_KEY) === "1";
+  });
+  const [progress, setProgress] = useState(ready ? 100 : 0);
 
   useEffect(() => {
+    if (ready) return;
+
     let cancelled = false;
 
     const run = async () => {
@@ -31,9 +37,9 @@ export function AppBootstrap({ children }: AppBootstrapProps) {
 
       if (cancelled) return;
 
+      sessionStorage.setItem(FAST_BOOT_KEY, "1");
       setProgress(100);
       setReady(true);
-      void preloadAllFrames();
     };
 
     void run();
@@ -41,7 +47,7 @@ export function AppBootstrap({ children }: AppBootstrapProps) {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [ready]);
 
   return (
     <>

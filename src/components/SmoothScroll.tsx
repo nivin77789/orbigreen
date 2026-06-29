@@ -1,24 +1,9 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { ReactLenis, useLenis } from "lenis/react";
 import "lenis/dist/lenis.css";
 import { setLenis } from "@/lib/lenis";
 
 const NAV_OFFSET = -76;
-
-const LENIS_OPTIONS = {
-  lerp: 0.075,
-  duration: 1.2,
-  easing: (t: number) => Math.min(1, 1.001 - 2 ** (-10 * t)),
-  smoothWheel: true,
-  syncTouch: true,
-  syncTouchLerp: 0.075,
-  wheelMultiplier: 0.92,
-  touchMultiplier: 1.12,
-  autoRaf: true,
-  autoResize: true,
-  stopInertiaOnNavigate: true,
-  anchors: { offset: NAV_OFFSET },
-};
 
 function LenisRegistry() {
   const lenis = useLenis();
@@ -43,6 +28,25 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
       : !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
   );
 
+  const lenisOptions = useMemo(() => {
+    const isCoarsePointer =
+      typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches;
+
+    return {
+      lerp: isCoarsePointer ? 0.12 : 0.095,
+      duration: 1.05,
+      easing: (t: number) => Math.min(1, 1.001 - 2 ** (-10 * t)),
+      smoothWheel: true,
+      syncTouch: false,
+      wheelMultiplier: 0.98,
+      touchMultiplier: 1,
+      autoRaf: true,
+      autoResize: true,
+      stopInertiaOnNavigate: true,
+      anchors: { offset: NAV_OFFSET },
+    };
+  }, []);
+
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
     const onChange = () => setEnabled(!media.matches);
@@ -54,7 +58,7 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
   if (!enabled) return children;
 
   return (
-    <ReactLenis root options={LENIS_OPTIONS}>
+    <ReactLenis root options={lenisOptions}>
       <LenisRegistry />
       {children}
     </ReactLenis>

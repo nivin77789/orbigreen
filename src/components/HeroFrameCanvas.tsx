@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { getFrameImage, preloadFramesAround, preloadInitialFrames } from "@/lib/frame-cache";
+import { getFrameImage, preloadFramesAround, preloadInitialFrames, preloadRemainingFramesOnIdle } from "@/lib/frame-cache";
 import { HERO_BG, HERO_BG_RGB } from "@/lib/constants";
 import { scrollProgressToFrame } from "@/lib/scroll-frames";
 import { usePageVisible } from "@/hooks/usePageVisible";
@@ -23,18 +23,24 @@ export function HeroFrameCanvas({
   const shouldDraw = active && pageVisible;
 
   useEffect(() => {
-    const canvas = canvasRef.current!;
-    const ctx = canvas.getContext("2d")!;
+    if (!active) return;
+    preloadInitialFrames();
+    return preloadRemainingFramesOnIdle(2);
+  }, [active]);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas || !shouldDraw) return;
+
+    const ctx = canvas.getContext("2d", { alpha: false, desynchronized: true })!;
     let w = 0;
     let h = 0;
     let dpr = 1;
-    let active = true;
-
-    preloadInitialFrames();
+    let running = true;
 
     const resize = () => {
       const isMobile = window.innerWidth < 768;
-      dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1.15 : 1.5);
+      dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1 : 1.25);
       w = canvas.clientWidth;
       h = canvas.clientHeight;
       canvas.width = w * dpr;
@@ -43,7 +49,7 @@ export function HeroFrameCanvas({
       lastFrameRef.current = -1;
     };
     resize();
-    window.addEventListener("resize", resize);
+    window.addEventListener("resize", resize, { passive: true });
 
     const drawCover = (img: HTMLImageElement) => {
       const iw = img.naturalWidth;
@@ -53,29 +59,22 @@ export function HeroFrameCanvas({
       const sw = iw * scale;
       const sh = ih * scale;
       ctx.imageSmoothingEnabled = true;
-      ctx.imageSmoothingQuality = "high";
-      ctx.filter = "brightness(1.04) contrast(1.08) saturate(1.02)";
+      ctx.imageSmoothingQuality = window.innerWidth < 768 ? "low" : "medium";
       ctx.drawImage(img, (w - sw) / 2, (h - sh) / 2, sw, sh);
-      ctx.filter = "none";
     };
 
     const draw = () => {
-      if (!active) return;
-
-      if (!shouldDraw) {
-        rafRef.current = requestAnimationFrame(draw);
-        return;
-      }
+      if (!running) return;
 
       const p = Math.min(1, Math.max(0, progressRef.current));
       const frameNumber = scrollProgressToFrame(p);
       const frameIndex = frameNumber - 1;
       const closingGlow = p > 0.85;
-      const progressChanged = Math.abs(p - lastProgressRef.current) > 0.0005;
+      const progressChanged = Math.abs(p - lastProgressRef.current) > 0.0008;
       lastProgressRef.current = p;
 
       if (progressChanged) {
-        preloadFramesAround(frameNumber, 4);
+        preloadFramesAround(frameNumber, 2);
       }
 
       if (!closingGlow && frameIndex === lastFrameRef.current && !progressChanged) {
@@ -109,7 +108,7 @@ export function HeroFrameCanvas({
 
     rafRef.current = requestAnimationFrame(draw);
     return () => {
-      active = false;
+      running = false;
       cancelAnimationFrame(rafRef.current);
       window.removeEventListener("resize", resize);
     };
@@ -118,7 +117,7 @@ export function HeroFrameCanvas({
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 h-full w-full"
+      className="hero-frame-canvas absolute inset-0 h-full w-full"
       style={{ background: HERO_BG }}
     />
   );

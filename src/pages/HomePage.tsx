@@ -1,15 +1,31 @@
-import { useRef, useState } from "react";
-import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
+import { lazy, Suspense, useCallback, useRef, useState } from "react";
+import { motion } from "framer-motion";
 import { HeroFrameCanvas } from "@/components/HeroFrameCanvas";
 import { HeroVideoSection } from "@/components/HeroVideoSection";
 import { ServicesMarquee } from "@/components/ServicesMarquee";
 import { useInView } from "@/hooks/useInView";
+import { useScrollSectionProgress } from "@/hooks/useScrollSectionProgress";
 import { Nav } from "@/components/Nav";
-import { Footer } from "@/components/Footer";
-import { HomeHelpSection } from "@/components/HomeHelpSection";
-import { IndustriesSection } from "@/components/IndustriesSection";
 import { HomeWorkflow, workflowStepFromScroll, WORKFLOW_SCROLL_END } from "@/components/HomeWorkflow";
 import { HERO_BG } from "@/lib/constants";
+
+const HomeHelpSection = lazy(() =>
+  import("@/components/HomeHelpSection").then((module) => ({ default: module.HomeHelpSection })),
+);
+const IndustriesSection = lazy(() =>
+  import("@/components/IndustriesSection").then((module) => ({ default: module.IndustriesSection })),
+);
+const Footer = lazy(() => import("@/components/Footer").then((module) => ({ default: module.Footer })));
+
+function interpolateOpacity(progress: number) {
+  if (progress <= WORKFLOW_SCROLL_END) {
+    const t = progress / WORKFLOW_SCROLL_END;
+    return 0.08 + t * (0.24 - 0.08);
+  }
+
+  const t = (progress - WORKFLOW_SCROLL_END) / (1 - WORKFLOW_SCROLL_END);
+  return 0.24 + t * (0.1 - 0.24);
+}
 
 function ClosingCTA({ visible }: { visible: boolean }) {
   return (
@@ -30,32 +46,29 @@ function ClosingCTA({ visible }: { visible: boolean }) {
 
 export default function HomePage() {
   const trackRef = useRef<HTMLDivElement>(null);
+  const tintRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef(0);
-  const heroActive = useInView(trackRef, "120px");
+  const heroActive = useInView(trackRef, "200px");
   const [phase, setPhase] = useState<"workflow" | "closing">("workflow");
   const [workflowStep, setWorkflowStep] = useState(0);
 
-  const { scrollYProgress } = useScroll({
-    target: trackRef,
-    offset: ["start start", "end end"],
-  });
+  const handleScrollProgress = useCallback((progress: number) => {
+    progressRef.current = progress;
 
-  useMotionValueEvent(scrollYProgress, "change", (v) => {
-    progressRef.current = v;
-    const next = v < WORKFLOW_SCROLL_END ? "workflow" : "closing";
-    setPhase((p) => (p === next ? p : next));
+    if (tintRef.current) {
+      tintRef.current.style.opacity = String(interpolateOpacity(progress));
+    }
 
-    if (v < WORKFLOW_SCROLL_END) {
-      const step = workflowStepFromScroll(v);
+    const next = progress < WORKFLOW_SCROLL_END ? "workflow" : "closing";
+    setPhase((current) => (current === next ? current : next));
+
+    if (progress < WORKFLOW_SCROLL_END) {
+      const step = workflowStepFromScroll(progress);
       setWorkflowStep((current) => (current === step ? current : step));
     }
-  });
+  }, []);
 
-  const overlayOpacity = useTransform(
-    scrollYProgress,
-    [0, WORKFLOW_SCROLL_END, 1],
-    [0.08, 0.24, 0.1],
-  );
+  useScrollSectionProgress(trackRef, handleScrollProgress);
 
   return (
     <div id="top" className="relative bg-section text-body">
@@ -64,24 +77,22 @@ export default function HomePage() {
       <HeroVideoSection />
       <ServicesMarquee />
 
-      <section ref={trackRef} className="relative h-[400vh]" style={{ backgroundColor: HERO_BG }}>
-        <div className="sticky top-0 h-screen w-full overflow-hidden" style={{ backgroundColor: HERO_BG }}>
+      <section ref={trackRef} className="home-scroll-track relative h-[400vh]" style={{ backgroundColor: HERO_BG }}>
+        <div className="home-scroll-stage sticky top-0 h-screen w-full overflow-hidden" style={{ backgroundColor: HERO_BG }}>
           <HeroFrameCanvas progressRef={progressRef} active={heroActive} />
 
           <div className="hero-surface-overlay pointer-events-none absolute inset-0" aria-hidden />
 
-          <motion.div
-            style={{ opacity: overlayOpacity }}
+          <div
+            ref={tintRef}
+            style={{ opacity: 0.08 }}
             className="hero-scroll-tint pointer-events-none absolute inset-0"
           />
 
           <div className="absolute inset-0 flex items-center justify-center px-5 sm:px-8 lg:px-12 xl:px-16">
             {phase === "workflow" && (
               <div className="home-workflow-stage flex h-full w-full items-center justify-center overflow-hidden py-6 sm:py-8 lg:py-10">
-                <HomeWorkflow
-                  activeStep={workflowStep}
-                  onStepSelect={setWorkflowStep}
-                />
+                <HomeWorkflow activeStep={workflowStep} onStepSelect={setWorkflowStep} />
               </div>
             )}
             {phase === "closing" && (
@@ -93,9 +104,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      <HomeHelpSection />
-      <IndustriesSection />
-      <Footer />
+      <Suspense fallback={null}>
+        <HomeHelpSection />
+        <IndustriesSection />
+        <Footer />
+      </Suspense>
     </div>
   );
 }

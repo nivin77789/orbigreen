@@ -72,12 +72,18 @@ function loadFrame(frameNumber: number): Promise<void> {
   });
 }
 
-/** Frames loaded before the site is shown — sampled across the full sequence. */
+/** Minimal frames needed before first paint — story beats + immediate neighbors. */
 export function getEssentialFrameNumbers(): number[] {
-  const frames = new Set<number>([1, FRAME_COUNT, 37, 109, 205]);
+  const anchors = [1, 37, 109, 205, FRAME_COUNT];
+  const frames = new Set<number>();
 
-  for (let i = 1; i <= FRAME_COUNT; i += 5) {
-    frames.add(i);
+  for (const anchor of anchors) {
+    for (let offset = -2; offset <= 2; offset += 1) {
+      const target = anchor + offset;
+      if (target >= 1 && target <= FRAME_COUNT) {
+        frames.add(target);
+      }
+    }
   }
 
   return [...frames].sort((a, b) => a - b);
@@ -85,7 +91,7 @@ export function getEssentialFrameNumbers(): number[] {
 
 export async function preloadEssentialFrames(
   onProgress?: (loaded: number, total: number) => void,
-  concurrency = 8,
+  concurrency = 6,
 ): Promise<void> {
   const targets = getEssentialFrameNumbers();
   const total = targets.length;
@@ -109,27 +115,42 @@ export async function preloadEssentialFrames(
   report();
 }
 
-export async function preloadAllFrames(
-  onProgress?: (loaded: number, total: number) => void,
-  concurrency = 10,
-): Promise<void> {
-  const total = FRAME_COUNT;
-  let loaded = 0;
-  let nextIndex = 0;
+/** Warm remaining frames when the browser is idle (homepage scroll section only). */
+export function preloadRemainingFramesOnIdle(concurrency = 2) {
+  if (typeof window === "undefined") return () => {};
 
-  const report = () => onProgress?.(loaded, total);
+  const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+  if (connection?.saveData) return () => {};
 
-  const worker = async () => {
-    while (nextIndex < total) {
-      const index = nextIndex;
-      nextIndex += 1;
-      await loadFrame(index + 1);
-      loaded += 1;
-      report();
-    }
+  let cancelled = false;
+  const essential = new Set(getEssentialFrameNumbers());
+  const idleTargets = Array.from({ length: FRAME_COUNT }, (_, index) => index + 1).filter(
+    (frameNumber) => !essential.has(frameNumber),
+  );
+
+  const run = async () => {
+    let nextIndex = 0;
+
+    const worker = async () => {
+      while (!cancelled && nextIndex < idleTargets.length) {
+        const index = nextIndex;
+        nextIndex += 1;
+        await loadFrame(idleTargets[index]);
+      }
+    };
+
+    await Promise.all(Array.from({ length: Math.min(concurrency, 4) }, () => worker()));
   };
 
-  const workers = Math.min(concurrency, total);
-  await Promise.all(Array.from({ length: workers }, () => worker()));
-  report();
+  const idleId = window.requestIdleCallback(
+    () => {
+      void run();
+    },
+    { timeout: 8000 },
+  );
+
+  return () => {
+    cancelled = true;
+    window.cancelIdleCallback(idleId);
+  };
 }
