@@ -22,30 +22,6 @@ export type ServiceDetail = {
 
 export const SERVICES: ServiceDetail[] = [
   {
-    slug: "consultancy-advisory",
-    title: "Business Coaching, Consultancy & Advisory",
-    shortDescription:
-      "Strategic guidance to strengthen sourcing, procurement, and supply chain performance.",
-    image: imgConsultancy,
-    accent: "#5CBF2A",
-    sectionTitle: "Practical Expertise for Better Business Decisions",
-    overview:
-      "We help businesses improve sourcing, procurement, and supply chain performance through practical coaching and strategic advisory. Whether you're establishing procurement processes, evaluating suppliers, optimizing costs, or scaling operations, we provide objective guidance backed by industry experience.",
-    focusLabel: "Key Focus Areas",
-    items: [
-      "Business & procurement coaching",
-      "Supply chain strategy",
-      "Supplier evaluation & qualification",
-      "Strategic sourcing",
-      "Cost optimization",
-      "Process improvement",
-    ],
-    partnerTitle: "Why Partner With Us?",
-    partnerDescription:
-      "We combine commercial insight with practical execution to help businesses make informed sourcing decisions, reduce operational risk, and build resilient supply chains. Our approach is collaborative, transparent, and focused on delivering measurable business outcomes. Our experts combine hands-on industry experience with proven methodologies to develop internal capabilities, improve supplier performance, reduce total cost of ownership, and enhance supply chain resilience.",
-    quote: "Developing procurement capabilities. Delivering supply chain excellence.",
-  },
-  {
     slug: "global-sourcing",
     title: "Global Sourcing",
     shortDescription: "Strategic Supplier Access. Global Manufacturing Reach.",
@@ -169,6 +145,30 @@ export const SERVICES: ServiceDetail[] = [
     partnerDescription:
       "Working with a global network of logistics providers, we manage transportation, documentation, and delivery milestones to reduce transit risks and improve supply chain visibility. Our structured logistics approach ensures reliable execution from supplier dispatch to final destination.",
     quote: "Delivering supply chains with precision, compliance, and complete logistical control.",
+  },
+  {
+    slug: "consultancy-advisory",
+    title: "Business Coaching, Consultancy & Advisory",
+    shortDescription:
+      "Strategic guidance to strengthen sourcing, procurement, and supply chain performance.",
+    image: imgConsultancy,
+    accent: "#5CBF2A",
+    sectionTitle: "Practical Expertise for Better Business Decisions",
+    overview:
+      "We help businesses improve sourcing, procurement, and supply chain performance through practical coaching and strategic advisory. Whether you're establishing procurement processes, evaluating suppliers, optimizing costs, or scaling operations, we provide objective guidance backed by industry experience.",
+    focusLabel: "Key Focus Areas",
+    items: [
+      "Business & procurement coaching",
+      "Supply chain strategy",
+      "Supplier evaluation & qualification",
+      "Strategic sourcing",
+      "Cost optimization",
+      "Process improvement",
+    ],
+    partnerTitle: "Why Partner With Us?",
+    partnerDescription:
+      "We combine commercial insight with practical execution to help businesses make informed sourcing decisions, reduce operational risk, and build resilient supply chains. Our approach is collaborative, transparent, and focused on delivering measurable business outcomes. Our experts combine hands-on industry experience with proven methodologies to develop internal capabilities, improve supplier performance, reduce total cost of ownership, and enhance supply chain resilience.",
+    quote: "Developing procurement capabilities. Delivering supply chain excellence.",
   },
 ];
 

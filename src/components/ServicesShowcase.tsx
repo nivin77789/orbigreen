@@ -34,69 +34,58 @@ export function ServiceCard({
   const isHorizontal = layout === "horizontal";
 
   return (
-    <motion.article
+    <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.5, delay: index * 0.04, ease: EASE }}
       whileHover={{ y: -4 }}
-      className={`product-grid-card group overflow-hidden rounded-2xl border border-primary/10 bg-white/90 transition-shadow duration-300 hover:border-secondary/30 hover:shadow-[0_16px_40px_-16px_rgba(11,95,126,0.2)] ${
-        isHorizontal ? "flex items-stretch gap-0" : "flex flex-col"
-      }`}
+      className="h-full"
     >
-      <div
-        className={`relative shrink-0 overflow-hidden ${
-          isHorizontal ? "w-[34%] min-w-[7.5rem] max-w-[9.5rem] sm:w-[32%] sm:max-w-[10.5rem]" : "aspect-[5/4] w-full"
+      <Link
+        to={`/services/${service.slug}`}
+        className={`product-grid-card group block h-full overflow-hidden rounded-2xl border border-primary/10 bg-white/90 transition-shadow duration-300 hover:border-secondary/30 hover:shadow-[0_16px_40px_-16px_rgba(11,95,126,0.2)] ${
+          isHorizontal ? "flex items-stretch gap-0" : "flex flex-col"
         }`}
+        aria-label={`Learn more about ${service.title}`}
       >
-        <img
-          src={service.image}
-          alt={service.title}
-          loading="lazy"
-          decoding="async"
-          className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 ${
-            isHorizontal ? "min-h-full" : ""
-          }`}
-        />
         <div
-          className="absolute inset-0"
-          style={{
-            background: `linear-gradient(135deg, transparent 35%, ${service.accent}28 100%)`,
-          }}
-        />
-        <span className="absolute left-3 top-3 rounded-full bg-white/90 px-2 py-0.5 text-[11px] lg:text-[12px] font-bold tabular-nums tracking-wider text-primary shadow-sm">
-          {String(index + 1).padStart(2, "0")}
-        </span>
-      </div>
-
-      <div className={`flex min-w-0 flex-1 flex-col ${isHorizontal ? "justify-center px-3.5 py-3 sm:px-4 sm:py-3.5" : "p-4 sm:p-5"}`}>
-        <h3
-          className={`font-semibold leading-tight text-primary ${
-            isHorizontal ? "text-[16px] lg:text-[17px] sm:text-[17px] lg:text-[18px]" : "text-[18px] lg:text-[19px] sm:text-[19px] lg:text-[20px]"
+          className={`relative shrink-0 overflow-hidden ${
+            isHorizontal ? "w-[34%] min-w-[7.5rem] max-w-[9.5rem] sm:w-[32%] sm:max-w-[10.5rem]" : "aspect-[5/4] w-full"
           }`}
         >
-          {service.title}
-        </h3>
-        <p
-          className={`mt-1.5 line-clamp-2 leading-relaxed text-primary/65 ${
-            isHorizontal ? "text-[12px] lg:text-[13px] sm:text-[13px] lg:text-[14px]" : "text-[13px] lg:text-[14px] sm:text-[14px] lg:text-[15px]"
-          }`}
-        >
-          {service.shortDescription}
-        </p>
-        <Link
-          to={`/services/${service.slug}`}
-          className={`mt-3 inline-flex w-fit items-center gap-1.5 text-[12px] lg:text-[13px] font-semibold text-primary transition-colors group-hover:text-secondary sm:text-[13px] lg:text-[14px] ${
-            isHorizontal ? "mt-2" : "mt-4"
-          }`}
-        >
-          Learn more
-          <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
-            →
+          <img
+            src={service.image}
+            alt=""
+            loading="lazy"
+            decoding="async"
+            className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 ${
+              isHorizontal ? "min-h-full" : ""
+            }`}
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background: `linear-gradient(135deg, transparent 35%, ${service.accent}28 100%)`,
+            }}
+          />
+          <span className="absolute left-3 top-3 rounded-full bg-white/90 px-2 py-0.5 text-[11px] font-bold tabular-nums tracking-wider text-primary shadow-sm lg:text-[12px]">
+            {String(index + 1).padStart(2, "0")}
           </span>
-        </Link>
-      </div>
-    </motion.article>
+        </div>
+
+        <div className={`flex min-w-0 flex-1 flex-col ${isHorizontal ? "justify-center px-3.5 py-3 sm:px-4 sm:py-3.5" : "p-4 sm:p-5"}`}>
+          <h3 className="text-[1rem] font-semibold leading-tight text-primary lg:text-[1.0625rem]">{service.title}</h3>
+          <p className="body-copy mt-1.5 line-clamp-2 text-primary/65">{service.shortDescription}</p>
+          <span className={`mt-3 inline-flex w-fit items-center gap-1.5 text-[0.8125rem] font-semibold text-primary transition-colors group-hover:text-secondary lg:text-[0.875rem] ${isHorizontal ? "mt-2" : "mt-3"}`}>
+            Learn more
+            <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
+              →
+            </span>
+          </span>
+        </div>
+      </Link>
+    </motion.div>
   );
 }
 
@@ -121,13 +110,13 @@ function ServicesHeader({
       };
 
   return (
-    <motion.div {...motionProps} className="flex flex-wrap items-end justify-between gap-6">
+    <motion.div {...motionProps} className="flex flex-wrap items-end justify-between gap-4">
       <div className="max-w-2xl">
         <SectionLabel>Services</SectionLabel>
-        <h2 className="mt-3 text-balance text-[clamp(2.2rem,4.1vw,3.35rem)] font-semibold leading-[1.08] tracking-tight text-primary">
+        <h2 className="section-heading mt-2 text-balance text-primary">
           End-to-end support across your supply chain
         </h2>
-        <p className="mt-4 max-w-lg text-[16px] lg:text-[17px] leading-relaxed text-primary/60">
+        <p className="lead-copy mt-3 max-w-lg text-primary/60">
           Sourcing, engineering, quality, logistics, and on-site support — delivered through one accountable
           partner with global reach.
         </p>
@@ -135,7 +124,7 @@ function ServicesHeader({
       {showViewAllLink && (
         <Link
           to="/services"
-          className="group glass-card-light inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[14px] lg:text-[15px] font-semibold text-primary transition-all hover:glass-card-hover"
+          className="group glass-card-light inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[0.875rem] font-semibold text-primary transition-all hover:glass-card-hover"
         >
           View all services
           <motion.span
@@ -160,7 +149,7 @@ export function ServiceGrid({
 }) {
   return (
     <>
-      <div className="mb-5 px-0.5">
+      <div className="mb-4 px-0.5">
         <SectionLabel tone="muted">{isSection ? "Featured services" : "Services we offer"}</SectionLabel>
       </div>
 
@@ -193,7 +182,7 @@ export function ServicesShowcase({
   return (
     <section
       id={isSection ? "services" : undefined}
-      className={`content-auto relative overflow-hidden bg-white py-20 lg:py-28 ${
+      className={`content-auto section-spacing relative overflow-hidden bg-white ${
         isSection ? "border-t border-primary/10" : ""
       }`}
     >
@@ -202,7 +191,7 @@ export function ServicesShowcase({
       <div className="relative z-10 mx-auto max-w-[1280px] px-6 lg:px-10">
         {showHeader && <ServicesHeader showViewAllLink={isSection} scrollTriggered={isSection} />}
 
-        <div className={showHeader ? "mt-10 lg:mt-12" : ""}>
+        <div className={showHeader ? "mt-8 lg:mt-9" : ""}>
           <ServiceGrid services={services} isSection={isSection} />
         </div>
 
@@ -212,11 +201,11 @@ export function ServicesShowcase({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2, duration: 0.6, ease: EASE }}
-            className="mt-10 flex flex-wrap justify-center gap-3 lg:mt-12"
+            className="mt-8 flex flex-wrap justify-center gap-3 lg:mt-9"
           >
             <Link
               to="/quotation"
-              className="gradient-border-cta rounded-full px-6 py-3 text-[14px] lg:text-[15px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
+              className="gradient-border-cta rounded-full px-6 py-3 text-[0.875rem] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
             >
               Request quotation
             </Link>

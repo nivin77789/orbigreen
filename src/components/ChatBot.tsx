@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { CONTACT_SUMMARY } from "@/lib/constants";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -20,8 +21,7 @@ const BOT_RESPONSES: Record<string, string> = {
     "We offer training, consultancy & advisory, global sourcing, engineering services, quality & inspection, site & installation, and transport & logistics.",
   "sourcing markets":
     "We source across China, Vietnam, India, and Turkey with on-the-ground teams for supplier qualification, audits, and delivery management.",
-  "contact details":
-    "Phone: +91 99718 63450 · Email: info@orbigreen.com · Office: SCO 26, First Floor, Saraswati Vihar, Dhakoli, Zirakpur, Punjab – 160104, India.",
+  "contact details": CONTACT_SUMMARY,
   "get a quote":
     "Submit your requirement on our Request Quotation page — you can attach drawings, specs, and reference files for a detailed commercial proposal.",
 };

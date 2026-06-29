@@ -100,7 +100,7 @@ export default function ServiceDetailPage() {
           </div>
         </section>
 
-        <section className="border-t border-primary/10 bg-white py-20">
+        <section className="border-t border-primary/10 bg-white section-spacing">
           <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
             <motion.div
               initial="hidden"
@@ -111,13 +111,11 @@ export default function ServiceDetailPage() {
               className="max-w-3xl"
             >
               <SectionLabel>Overview</SectionLabel>
-              <h2 className="mt-4 text-[clamp(1.75rem,3vw,2.5rem)] font-semibold leading-snug tracking-tight text-primary">
-                {service.sectionTitle}
-              </h2>
-              <p className="mt-6 text-[16px] lg:text-[17px] leading-relaxed text-primary/70">{service.overview}</p>
+              <h2 className="section-heading mt-3 text-primary">{service.sectionTitle}</h2>
+              <p className="lead-copy mt-4 text-primary/70">{service.overview}</p>
             </motion.div>
 
-            <div className="mt-14 grid gap-8 lg:grid-cols-2">
+            <div className="mt-10 grid gap-6 lg:grid-cols-2">
               <motion.div
                 initial="hidden"
                 whileInView="visible"
@@ -161,7 +159,7 @@ export default function ServiceDetailPage() {
           </div>
         </section>
 
-        <section className="py-20">
+        <section className="section-spacing">
           <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -180,7 +178,7 @@ export default function ServiceDetailPage() {
           </div>
         </section>
 
-        <section className="pb-28">
+        <section className="pb-16">
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}

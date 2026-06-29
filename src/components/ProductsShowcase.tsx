@@ -142,7 +142,7 @@ export function ProductsShowcase({ variant = "page", showHeader = true }: Produc
   return (
     <section
       id={isSection ? "products" : undefined}
-      className={`content-auto relative overflow-hidden bg-white py-20 lg:py-28 ${
+      className={`content-auto section-spacing relative overflow-hidden bg-white ${
         isSection ? "border-t border-primary/10" : ""
       }`}
     >

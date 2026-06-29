@@ -31,11 +31,11 @@
     scroll-padding-top: 5rem;
     overflow-x: clip;
     background: var(--section-bg);
-    font-size: 17px;
+    font-size: 16px;
   }
   @media (min-width: 1024px) {
     html {
-      font-size: 20px;
+      font-size: 17px;
     }
   }
   html.lenis,
@@ -1176,7 +1176,7 @@
 
 .hero-sky-clouds--front {
   z-index: 1;
-  opacity: 0.42;
+  opacity: 0.28;
   mix-blend-mode: soft-light;
   pointer-events: none;
 }
@@ -1344,16 +1344,22 @@
 }
 
 .hero-banner-video {
-  position: relative;
+  position: absolute;
+  inset: 0;
   z-index: 1;
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
   object-position: center;
-  opacity: 0.94;
 }
 
 .hero-banner .hero-surface-overlay {
   z-index: 2;
+}
+
+.hero-banner__content {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
 }
 
 .home-scroll-track {
@@ -1508,16 +1514,65 @@
 
 .section-label {
   display: inline-block;
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
   font-weight: 800;
   line-height: 1.25;
-  letter-spacing: 0.28em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
 }
 
 @media (min-width: 1024px) {
   .section-label {
+    font-size: 0.8125rem;
+    letter-spacing: 0.24em;
+  }
+}
+
+.page-heading {
+  font-size: clamp(1.75rem, 3.6vw, 2.75rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.section-heading {
+  font-size: clamp(1.45rem, 2.8vw, 2.15rem);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+
+.lead-copy {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+}
+
+@media (min-width: 1024px) {
+  .lead-copy {
+    font-size: 1rem;
+  }
+}
+
+.body-copy {
+  font-size: 0.875rem;
+  line-height: 1.65;
+}
+
+@media (min-width: 1024px) {
+  .body-copy {
     font-size: 0.9375rem;
+  }
+}
+
+.section-spacing {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+@media (min-width: 1024px) {
+  .section-spacing {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
   }
 }
 

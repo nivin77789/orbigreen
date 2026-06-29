@@ -36,9 +36,7 @@ function ClosingCTA({ visible }: { visible: boolean }) {
       className="pointer-events-auto mx-auto max-w-3xl px-6 text-center"
     >
       <h2 className="text-balance text-[clamp(1.75rem,4vw,3rem)] font-semibold leading-[1.05] tracking-[-0.03em] text-white">
-        Ready to Optimize
-        <br />
-        Your Supply Chain!
+        Ready to Optimize Your Supply Chain!
       </h2>
     </motion.div>
   );

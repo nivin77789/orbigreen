@@ -50,39 +50,6 @@ const VALUES = [
   },
 ];
 
-const PROCESS = [
-  {
-    n: "01",
-    t: "Technical Requirement Analysis",
-    d: "Review engineering drawings, material specifications, standards, and project deliverables to establish complete technical and commercial requirements.",
-  },
-  {
-    n: "02",
-    t: "Supplier Qualification & Selection",
-    d: "Identify and evaluate manufacturing partners based on technical capability, production capacity, quality systems, certifications, and delivery performance.",
-  },
-  {
-    n: "03",
-    t: "Strategic Sourcing & Commercial Evaluation",
-    d: "Manage RFQ/RFP processes, perform technical-commercial bid analysis, and optimize total landed cost while ensuring compliance with project requirements.",
-  },
-  {
-    n: "04",
-    t: "Production Planning & Execution Control",
-    d: "Finalize manufacturing schedules, inspection and test plans, and milestone-based production activities to ensure seamless project execution.",
-  },
-  {
-    n: "05",
-    t: "QA & QC",
-    d: "Execute stage-wise quality surveillance, in-process inspections, final acceptance testing, and documentation review to ensure full compliance with specifications and standards.",
-  },
-  {
-    n: "06",
-    t: "Logistics & Delivery Assurance",
-    d: "Coordinate packaging, export/import documentation, and delivery management to ensure timely, traceable, and compliant shipments.",
-  },
-];
-
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
   visible: (i: number) => ({
@@ -180,55 +147,6 @@ function ValuesExplorer() {
   );
 }
 
-function ProcessTimeline() {
-  return (
-    <div className="relative">
-      <div className="absolute bottom-4 left-[1.65rem] top-4 hidden w-px bg-gradient-to-b from-secondary/50 via-primary/15 to-transparent lg:block" />
-
-      <div className="space-y-5">
-        {PROCESS.map((step, i) => (
-          <motion.article
-            key={step.n}
-            custom={i}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
-            variants={fadeUp}
-            className="glass-card-light group relative grid gap-5 rounded-3xl p-6 transition-all duration-500 ease-out hover:glass-card-hover sm:p-7 lg:grid-cols-[auto_1fr] lg:items-start lg:gap-8 lg:p-8"
-          >
-            <div className="relative z-10 flex items-center gap-4 lg:flex-col lg:items-center lg:gap-3">
-              <motion.div
-                className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-secondary text-[15px] lg:text-[16px] font-bold tabular-nums text-white shadow-[0_8px_24px_-8px_rgba(11,95,126,0.45)]"
-                whileHover={{ scale: 1.06, rotate: -2 }}
-                transition={{ type: "spring", stiffness: 400, damping: 22 }}
-              >
-                {step.n}
-              </motion.div>
-              <SectionLabel className="lg:text-center">Step {step.n}</SectionLabel>
-            </div>
-
-            <div>
-              <h3 className="text-[clamp(1.2rem,2vw,1.55rem)] font-semibold tracking-tight text-primary">
-                {step.t}
-              </h3>
-              <p className="mt-3 max-w-2xl text-[14px] lg:text-[15px] leading-relaxed text-primary/65 sm:text-[15px] lg:text-[16px]">
-                {step.d}
-              </p>
-              <motion.div
-                className="mt-5 h-0.5 max-w-[120px] origin-left rounded-full bg-gradient-to-r from-secondary to-accent"
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.15, ease: EASE }}
-              />
-            </div>
-          </motion.article>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 function AboutHero() {
   return (
     <section className="relative overflow-hidden border-b border-primary/10 bg-white">
@@ -294,7 +212,7 @@ export default function AboutPage() {
       <main className="relative">
         <AboutHero />
 
-        <section className="relative border-t border-primary/10 py-16 lg:py-20">
+        <section className="relative border-t border-primary/10 section-spacing">
           <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-secondary/40 to-transparent" />
           <div className="mx-auto grid max-w-[1280px] gap-6 px-6 lg:grid-cols-2 lg:gap-8 lg:px-10">
             <motion.article
@@ -351,14 +269,14 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section className="py-16 lg:py-20">
+        <section className="section-spacing">
           <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: EASE }}
-              className="mb-10 max-w-2xl"
+              className="mb-8 max-w-2xl"
             >
               <SectionLabel animated>What We Deliver</SectionLabel>
               <h2 className="mt-3 text-[clamp(1.5rem,2.5vw,2.25rem)] font-semibold tracking-tight text-primary">
@@ -389,14 +307,14 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section className="py-16 lg:py-20">
+        <section className="section-spacing">
           <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: EASE }}
-              className="mb-10 max-w-2xl"
+              className="mb-8 max-w-2xl"
             >
               <SectionLabel animated>Our Values</SectionLabel>
               <h2 className="mt-3 text-[clamp(1.5rem,2.5vw,2.25rem)] font-semibold tracking-tight text-primary">
@@ -408,26 +326,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section className="relative border-t border-primary/10 bg-white py-16 lg:py-20">
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-secondary/40 to-transparent" />
-          <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: EASE }}
-              className="mb-10 max-w-2xl"
-            >
-              <h2 className="text-[clamp(1.5rem,2.5vw,2.25rem)] font-semibold tracking-tight text-primary">
-                How We Work
-              </h2>
-            </motion.div>
-
-            <ProcessTimeline />
-          </div>
-        </section>
-
-        <section className="relative border-t border-primary/10 bg-white py-16 lg:py-24">
+        <section className="relative border-t border-primary/10 bg-white section-spacing">
           <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-secondary/40 to-transparent" />
           <div className="relative mx-auto max-w-[1280px] px-6 lg:px-10">
             <motion.div
@@ -447,10 +346,10 @@ export default function AboutPage() {
                   <p className="about-sourcing-banner__eyebrow text-[11px] font-bold uppercase tracking-[0.28em] text-white/55 sm:text-[12px]">
                     Partner with confidence
                   </p>
-                  <h2 className="mt-4 text-balance text-[clamp(1.85rem,3.8vw,3rem)] font-semibold leading-[1.06] tracking-[-0.03em] text-white">
-                    Reliable Sourcing{" "}
+                  <h2 className="section-heading mt-3 text-balance text-white">
+                    Reliable sourcing{" "}
                     <span className="bg-gradient-to-r from-secondary via-[#7fd44a] to-white bg-clip-text text-transparent">
-                      Starts Here
+                      starts here
                     </span>
                   </h2>
                   <div className="about-sourcing-banner__accent mt-5" aria-hidden />

@@ -1,29 +1,24 @@
 import { Link } from "react-router-dom";
-import { EMAIL, OFFICE_ADDRESS, PHONE_DISPLAY, PHONE_TEL } from "@/lib/constants";
+import { EMAIL, OFFICE_ADDRESS } from "@/lib/constants";
+import { ContactPhones } from "@/components/ContactPhones";
 import { SectionLabel } from "@/components/SectionLabel";
 import { ContactForm } from "@/components/ContactForm";
 
 export function ContactSection() {
   return (
-    <section id="contact" className="content-auto relative border-t border-primary/10 bg-white py-28">
+    <section id="contact" className="content-auto section-spacing relative border-t border-primary/10 bg-white">
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-secondary/50 to-transparent" />
       <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-16 px-6 lg:grid-cols-2 lg:px-10">
         <div>
           <SectionLabel>Contact Us Today</SectionLabel>
-          <h3 className="mt-4 text-[clamp(2rem,3.5vw,3rem)] font-semibold leading-[1.05] tracking-tight text-primary">
-            Let's build your
-            <br />
-            supply advantage.
-          </h3>
+          <h3 className="section-heading mt-3 text-primary">Let&apos;s build your supply advantage.</h3>
           <dl className="mt-10 space-y-6">
             <div>
               <dt>
                 <SectionLabel tone="muted">Phone</SectionLabel>
               </dt>
               <dd className="mt-1">
-                <a href={`tel:${PHONE_TEL}`} className="text-[17px] lg:text-[18px] font-medium text-primary hover:text-secondary">
-                  {PHONE_DISPLAY}
-                </a>
+                <ContactPhones className="text-[17px] lg:text-[18px] font-medium text-primary" />
               </dd>
             </div>
             <div>

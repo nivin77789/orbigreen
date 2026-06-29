@@ -17,7 +17,7 @@ function IndustriesBackground() {
 
 export function IndustriesSection() {
   return (
-    <section className="relative overflow-hidden border-t border-primary/10 bg-white py-16 sm:py-20 lg:py-20">
+    <section className="relative overflow-hidden border-t border-primary/10 bg-white section-spacing">
       <IndustriesBackground />
 
       <div className="relative z-10 mx-auto max-w-[1280px] px-6 lg:px-10">

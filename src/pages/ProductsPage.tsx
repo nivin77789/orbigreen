@@ -27,10 +27,8 @@ function ProductsHero() {
           transition={{ duration: 0.9, ease: EASE }}
           className="max-w-2xl"
         >
-            <h1 className="text-balance text-[clamp(1.85rem,4vw,2.75rem)] font-semibold leading-[1.08] tracking-tight text-primary">
-              Our Products
-            </h1>
-            <p className="mt-4 max-w-xl text-[16px] lg:text-[17px] leading-relaxed text-primary/75">
+            <h1 className="page-heading text-balance text-primary">Product Categories</h1>
+            <p className="lead-copy mt-3 max-w-xl text-primary/75">
               Precision-machined, fabricated, and assembled industrial components — qualified across global supply
               networks and delivered to your engineering standards.
             </p>
@@ -69,7 +67,7 @@ export default function ProductsPage() {
         <ProductsHero />
         <ProductsShowcase variant="page" showHeader={false} />
 
-        <section className="relative px-6 pb-28 lg:px-10">
+        <section className="relative px-6 pb-16 lg:px-10 lg:pb-20">
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}

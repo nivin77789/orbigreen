@@ -3,9 +3,17 @@ export const HERO_BG = "#34A4BF";
 export const HERO_BG_RGB = "52, 164, 191";
 export const HERO_BG_DARK_RGB = "26, 125, 148";
 export const TAGLINE = "Smart. Sustainable. Sourcing.";
-export const PHONE_DISPLAY = "+91 99718 63450";
-export const PHONE_TEL = "+919971863450";
+
+export const PHONES = [
+  { display: "+91 99718 63450", tel: "+919971863450" },
+  { display: "+91 99991 03781", tel: "+919999103781" },
+] as const;
+
+export const PHONE_DISPLAY = PHONES.map((phone) => phone.display).join(" | ");
+export const PHONE_TEL = PHONES[0].tel;
 export const PHONE_WHATSAPP = "919971863450";
-export const EMAIL = "info@orbigreen.com";
+export const EMAIL = "info@orbigreentech.com";
 export const OFFICE_ADDRESS =
-  "SCO 26, First Floor, Saraswati Vihar, Dhakoli, Zirakpur, Punjab – 160104, India";
+  "SCO 26, First Floor, Saraswati Vihar, Dhakoli, Zirakpur, District SAS Nagar, Pin Code: 140603, Punjab, India";
+
+export const CONTACT_SUMMARY = `Phone: ${PHONE_DISPLAY} · Email: ${EMAIL} · Office: ${OFFICE_ADDRESS}.`;

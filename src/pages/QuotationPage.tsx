@@ -3,7 +3,8 @@ import { SectionLabel } from "@/components/SectionLabel";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { QuotationForm } from "@/components/QuotationForm";
-import { EMAIL, OFFICE_ADDRESS, PHONE_DISPLAY, PHONE_TEL } from "@/lib/constants";
+import { EMAIL, OFFICE_ADDRESS } from "@/lib/constants";
+import { ContactPhones } from "@/components/ContactPhones";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -133,10 +134,12 @@ export default function QuotationPage() {
               </div>
 
               <div className="mt-5 grid gap-2 sm:grid-cols-2 lg:mt-6">
-                <a href={`tel:${PHONE_TEL}`} className="quotation-contact-chip group">
+                <div className="quotation-contact-chip quotation-contact-chip--static">
                   <span className="quotation-contact-chip__label">Phone</span>
-                  <span className="quotation-contact-chip__value">{PHONE_DISPLAY}</span>
-                </a>
+                  <span className="quotation-contact-chip__value">
+                    <ContactPhones linkClassName="hover:text-secondary" />
+                  </span>
+                </div>
                 <a href={`mailto:${EMAIL}`} className="quotation-contact-chip group">
                   <span className="quotation-contact-chip__label">Email</span>
                   <span className="quotation-contact-chip__value truncate">{EMAIL}</span>

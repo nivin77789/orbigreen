@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import { SectionLabel } from "@/components/SectionLabel";
 import { SocialLinks } from "@/components/SocialLinks";
 import { BrandLogo } from "@/components/BrandLogo";
-import { EMAIL, OFFICE_ADDRESS, PHONE_DISPLAY, PHONE_TEL } from "@/lib/constants";
+import { EMAIL, OFFICE_ADDRESS } from "@/lib/constants";
+import { ContactPhones } from "@/components/ContactPhones";
 import { SERVICES } from "@/data/servicesData";
 
 export function Footer() {
@@ -20,9 +21,7 @@ export function Footer() {
           <SectionLabel as="h5" tone="muted">Contact Us</SectionLabel>
           <ul className="mt-4 space-y-2.5 text-primary/75">
             <li>
-              <a href={`tel:${PHONE_TEL}`} className="transition-colors hover:text-primary">
-                {PHONE_DISPLAY}
-              </a>
+              <ContactPhones linkClassName="transition-colors hover:text-primary" />
             </li>
             <li>
               <a href={`mailto:${EMAIL}`} className="transition-colors hover:text-primary">

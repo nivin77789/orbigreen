@@ -63,7 +63,7 @@ export default function BlogPage() {
           </motion.div>
         </section>
 
-        <section className="media-gallery-section border-t border-primary/10 bg-white py-10 lg:py-12">
+        <section className="media-gallery-section border-t border-primary/10 bg-white py-8 lg:py-10">
           <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -72,12 +72,7 @@ export default function BlogPage() {
               transition={{ duration: 0.65, ease: EASE }}
               className="mb-6 sm:mb-8"
             >
-              <h2 className="text-balance text-[clamp(2.5rem,5.5vw,4.25rem)] font-semibold leading-[1.02] tracking-tight text-primary">
-                Gallery
-              </h2>
-              <p className="mt-3 max-w-2xl text-[15px] lg:text-[16px] leading-relaxed text-primary/65">
-                Industrial sourcing in action — capabilities, supplier programs, and quality workflows.
-              </p>
+              <h2 className="section-heading text-balance text-primary">Gallery</h2>
             </motion.div>
 
             <div className="media-gallery-grid grid gap-4">

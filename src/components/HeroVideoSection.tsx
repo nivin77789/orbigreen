@@ -47,7 +47,7 @@ export function HeroVideoSection() {
 
       <div className="hero-surface-overlay pointer-events-none absolute inset-0" aria-hidden />
 
-      <div className="relative z-10 flex h-full items-center justify-center px-5 sm:px-8 lg:px-12 xl:px-16">
+      <div className="hero-banner__content flex items-center justify-center px-5 sm:px-8 lg:px-12 xl:px-16">
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
@@ -59,8 +59,7 @@ export function HeroVideoSection() {
             Orbigreen Techsource
           </p>
           <h1 className="mt-5 text-[clamp(1.45rem,3.4vw,2.65rem)] font-semibold leading-[1.1] tracking-[-0.03em] text-white sm:mt-6">
-            <span className="block">Driving Sustainable</span>
-            <span className="block">Industrial Solutions</span>
+            Driving Sustainable Industrial Solutions
           </h1>
           <div className="mt-7 flex flex-wrap items-center justify-center gap-3 sm:mt-8">
             <Link
