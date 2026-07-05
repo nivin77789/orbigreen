@@ -76,7 +76,7 @@ export default function ProductsPage() {
             className="glass-card-light mx-auto max-w-[1280px] rounded-3xl px-6 py-16 text-center lg:px-10"
           >
             <h2 className="text-balance text-[clamp(1.75rem,3vw,2.5rem)] font-semibold tracking-tight text-primary">
-              Need a custom sourcing program!
+              Need a customized sourcing program
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-[15px] lg:text-[16px] leading-relaxed text-primary/70">
               Share your drawings, quantities, and delivery targets — we'll qualify suppliers and build a
