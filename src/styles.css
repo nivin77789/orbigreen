@@ -1374,6 +1374,7 @@
 
 .hero-frame-canvas {
   contain: strict;
+  pointer-events: none;
   transform: translateZ(0);
 }
 
@@ -1604,7 +1605,7 @@
 }
 
 .home-workflow-stage {
-  max-height: calc(100vh - 5.5rem);
+  max-height: calc(100dvh - 5.5rem);
 }
 
 .home-workflow-segments {

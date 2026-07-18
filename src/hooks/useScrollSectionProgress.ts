@@ -39,8 +39,11 @@ export function useScrollSectionProgress(
     if (lenis) {
       lenis.on("scroll", schedule);
     }
+
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", schedule, { passive: true });
+    window.addEventListener("touchmove", schedule, { passive: true });
+    window.addEventListener("touchend", schedule, { passive: true });
 
     schedule();
 
@@ -49,6 +52,8 @@ export function useScrollSectionProgress(
       lenis?.off("scroll", schedule);
       window.removeEventListener("scroll", schedule);
       window.removeEventListener("resize", schedule);
+      window.removeEventListener("touchmove", schedule);
+      window.removeEventListener("touchend", schedule);
     };
   }, [trackRef, onProgress]);
 }

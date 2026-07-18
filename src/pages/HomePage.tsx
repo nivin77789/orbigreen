@@ -94,7 +94,7 @@ export default function HomePage() {
       <ServicesMarquee />
 
       <section ref={trackRef} className="home-scroll-track relative h-[400vh]" style={{ backgroundColor: HERO_BG }}>
-        <div className="home-scroll-stage sticky top-0 h-screen w-full overflow-hidden" style={{ backgroundColor: HERO_BG }}>
+        <div className="home-scroll-stage sticky top-0 z-[1] h-[100dvh] w-full overflow-hidden" style={{ backgroundColor: HERO_BG }}>
           <HeroFrameCanvas progressRef={progressRef} active={heroActive} />
 
           <div className="hero-surface-overlay pointer-events-none absolute inset-0" aria-hidden />
@@ -105,7 +105,7 @@ export default function HomePage() {
             className="hero-scroll-tint pointer-events-none absolute inset-0"
           />
 
-          <div className="absolute inset-0 flex items-center justify-center px-5 sm:px-8 lg:px-12 xl:px-16">
+          <div className="absolute inset-0 z-[2] flex items-center justify-center px-5 sm:px-8 lg:px-12 xl:px-16">
             {phase === "workflow" && (
               <div className="home-workflow-stage flex h-full w-full items-center justify-center overflow-hidden py-6 sm:py-8 lg:py-10">
                 <HomeWorkflow activeStep={workflowStep} onStepSelect={setWorkflowStep} />

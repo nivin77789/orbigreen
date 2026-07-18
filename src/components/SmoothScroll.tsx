@@ -21,19 +21,27 @@ function LenisRegistry() {
   return null;
 }
 
+function shouldEnableLenis() {
+  if (typeof window === "undefined") return false;
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    return false;
+  }
+
+  // Native touch scrolling is more reliable on phones/tablets for forms and sticky sections.
+  if (window.matchMedia("(pointer: coarse)").matches) {
+    return false;
+  }
+
+  return true;
+}
+
 export function SmoothScrollProvider({ children }: { children: ReactNode }) {
-  const [enabled, setEnabled] = useState(() =>
-    typeof window === "undefined"
-      ? true
-      : !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
-  );
+  const [enabled, setEnabled] = useState(shouldEnableLenis);
 
-  const lenisOptions = useMemo(() => {
-    const isCoarsePointer =
-      typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches;
-
-    return {
-      lerp: isCoarsePointer ? 0.12 : 0.095,
+  const lenisOptions = useMemo(
+    () => ({
+      lerp: 0.095,
       duration: 1.05,
       easing: (t: number) => Math.min(1, 1.001 - 2 ** (-10 * t)),
       smoothWheel: true,
@@ -44,15 +52,26 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
       autoResize: true,
       stopInertiaOnNavigate: true,
       anchors: { offset: NAV_OFFSET },
-    };
-  }, []);
+    }),
+    [],
+  );
 
   useEffect(() => {
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const onChange = () => setEnabled(!media.matches);
-    onChange();
-    media.addEventListener("change", onChange);
-    return () => media.removeEventListener("change", onChange);
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const coarsePointer = window.matchMedia("(pointer: coarse)");
+
+    const update = () => {
+      setEnabled(shouldEnableLenis());
+    };
+
+    update();
+    reducedMotion.addEventListener("change", update);
+    coarsePointer.addEventListener("change", update);
+
+    return () => {
+      reducedMotion.removeEventListener("change", update);
+      coarsePointer.removeEventListener("change", update);
+    };
   }, []);
 
   if (!enabled) return children;

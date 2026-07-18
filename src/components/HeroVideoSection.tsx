@@ -12,7 +12,7 @@ export function HeroVideoSection() {
   useAutoplayVideo(videoRef);
 
   return (
-    <section id="hero" className="hero-banner relative h-screen w-full overflow-hidden" style={{ backgroundColor: HERO_BG }}>
+    <section id="hero" className="hero-banner relative min-h-[100dvh] w-full overflow-hidden" style={{ backgroundColor: HERO_BG }}>
       <div className="hero-sky-bg" aria-hidden>
         <div className="hero-sky-bg__atmosphere" />
         <div className="hero-sky-clouds">

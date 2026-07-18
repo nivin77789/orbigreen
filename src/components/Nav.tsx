@@ -28,7 +28,7 @@ export function Nav() {
   }, [menuOpen]);
 
   return (
-    <header className="fixed top-0 z-50 w-full max-w-[100vw] px-3 pt-2.5 sm:px-4 sm:pt-3 xl:px-8">
+    <header className="fixed top-0 z-[100] w-full max-w-[100vw] px-3 pt-2.5 sm:px-4 sm:pt-3 xl:px-8">
       <div className="glass-nav relative mx-auto flex h-[60px] min-w-0 max-w-[1400px] items-center justify-between gap-1.5 overflow-hidden rounded-full px-2.5 sm:h-[64px] sm:gap-2 sm:px-3 md:gap-2.5 md:px-3.5 lg:px-4 xl:h-[68px] xl:px-6">
         <div className="min-w-0 shrink-0">
           <BrandLogo variant="nav" onClick={() => setMenuOpen(false)} />
@@ -54,9 +54,10 @@ export function Nav() {
         <div className="flex shrink-0 items-center gap-1 sm:gap-1.5 md:gap-2">
           <Link
             to="/quotation"
-            className="gradient-border-cta hidden rounded-full px-2.5 py-1.5 text-[0.625rem] font-semibold leading-none shadow-[0_4px_16px_rgba(11,95,126,0.18)] transition-all hover:shadow-[0_0_24px_-2px_rgba(92,191,42,0.45)] sm:inline-flex sm:px-3 sm:py-2 sm:text-[0.6875rem] md:px-3 md:py-2 lg:px-3.5 lg:py-2.5 lg:text-[0.75rem] xl:px-5 xl:py-2.5 xl:text-[13px]"
+            className="gradient-border-cta inline-flex shrink-0 rounded-full px-2 py-1.5 text-[0.625rem] font-semibold leading-none shadow-[0_4px_16px_rgba(11,95,126,0.18)] transition-all hover:shadow-[0_0_24px_-2px_rgba(92,191,42,0.45)] sm:px-3 sm:py-2 sm:text-[0.6875rem] md:px-3 md:py-2 lg:px-3.5 lg:py-2.5 lg:text-[0.75rem] xl:px-5 xl:py-2.5 xl:text-[13px]"
           >
-            <span className="xl:hidden">Quote</span>
+            <span className="md:hidden">Quote</span>
+            <span className="hidden md:inline xl:hidden">Quote</span>
             <span className="hidden xl:inline">Request Quote</span>
           </Link>
 
@@ -99,7 +100,7 @@ export function Nav() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.25 }}
-              className="fixed inset-0 top-[4.25rem] bg-primary/20 backdrop-blur-[2px] sm:top-[4.75rem] md:hidden"
+              className="fixed inset-0 top-[4.25rem] z-[90] bg-primary/20 backdrop-blur-[2px] sm:top-[4.75rem] md:hidden"
               onClick={() => setMenuOpen(false)}
             />
 
@@ -108,7 +109,7 @@ export function Nav() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -8, scale: 0.98 }}
               transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="glass-card-light absolute left-3 right-3 top-[calc(4.25rem+0.5rem)] mx-auto max-w-[1400px] overflow-hidden rounded-3xl p-3 sm:left-4 sm:right-4 sm:top-[calc(4.75rem+0.5rem)] md:hidden"
+              className="glass-card-light fixed left-3 right-3 top-[calc(4.25rem+0.5rem)] z-[95] mx-auto max-w-[1400px] overflow-hidden rounded-3xl p-3 sm:left-4 sm:right-4 sm:top-[calc(4.75rem+0.5rem)] md:hidden"
             >
               <ul className="grid grid-cols-2 gap-1">
                 {NAV.map((item, i) => {

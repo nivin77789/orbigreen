@@ -28,21 +28,22 @@ export function QuotationForm({ compact = false }: QuotationFormProps) {
   const fileRef = useRef<HTMLInputElement>(null);
 
   const fieldClass = compact
-    ? "quotation-field w-full rounded-xl border border-primary/10 bg-white/80 px-3 py-2 text-[14px] text-primary placeholder-primary/40 outline-none transition-all focus:border-secondary/50 focus:bg-white focus:shadow-[0_0_0_3px_rgba(92,191,42,0.12)] disabled:opacity-60"
-    : "quotation-field w-full rounded-xl border border-primary/10 bg-white/80 px-3 py-2.5 text-[14px] text-primary placeholder-primary/35 outline-none transition-all focus:border-secondary/50 focus:bg-white focus:shadow-[0_0_0_3px_rgba(92,191,42,0.12)] disabled:opacity-60 lg:text-[15px]";
+    ? "quotation-field w-full rounded-xl border border-primary/10 bg-white/80 px-3 py-2.5 text-[16px] text-primary placeholder-primary/40 outline-none transition-all focus:border-secondary/50 focus:bg-white focus:shadow-[0_0_0_3px_rgba(92,191,42,0.12)] disabled:opacity-60 sm:py-2 sm:text-[14px]"
+    : "quotation-field w-full rounded-xl border border-primary/10 bg-white/80 px-3 py-2.5 text-[16px] text-primary placeholder-primary/35 outline-none transition-all focus:border-secondary/50 focus:bg-white focus:shadow-[0_0_0_3px_rgba(92,191,42,0.12)] disabled:opacity-60 sm:text-[14px] lg:text-[15px]";
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const form = event.currentTarget;
     setSubmitting(true);
     setError("");
 
     try {
-      await submitWebsiteForm(event.currentTarget, {
+      await submitWebsiteForm(form, {
         subject: "[Orbigreen] New quotation request",
         fileInput: fileRef.current,
       });
       setSent(true);
-      event.currentTarget.reset();
+      form.reset();
       setFileName("");
       if (fileRef.current) fileRef.current.value = "";
       window.setTimeout(() => setSent(false), 3200);
@@ -61,9 +62,10 @@ export function QuotationForm({ compact = false }: QuotationFormProps) {
       exit={{ opacity: 0, y: -8 }}
       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
       onSubmit={onSubmit}
+      data-lenis-prevent
       className={`quotation-form-card flex h-full flex-col rounded-[1.35rem] sm:rounded-2xl ${
         compact
-          ? "max-h-[min(68vh,32rem)] gap-2.5 overflow-y-auto p-3.5 sm:gap-3 sm:p-4 lg:max-h-[min(72vh,34rem)]"
+          ? "gap-2.5 p-3.5 sm:max-h-[min(72vh,34rem)] sm:gap-3 sm:overflow-y-auto sm:p-4 lg:max-h-[min(72vh,34rem)]"
           : "gap-3 p-4 sm:gap-3.5 sm:p-5 lg:p-5"
       }`}
     >

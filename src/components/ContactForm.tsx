@@ -14,13 +14,14 @@ export function ContactForm({ compact = false }: ContactFormProps) {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const form = event.currentTarget;
     setSubmitting(true);
     setError("");
 
     try {
-      await submitWebsiteForm(event.currentTarget);
+      await submitWebsiteForm(form);
       setSent(true);
-      event.currentTarget.reset();
+      form.reset();
       window.setTimeout(() => setSent(false), 3200);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Unable to send your message. Please try again.");
@@ -37,6 +38,7 @@ export function ContactForm({ compact = false }: ContactFormProps) {
       exit={{ opacity: 0, y: -8 }}
       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
       onSubmit={handleSubmit}
+      data-lenis-prevent
       className={
         compact
           ? "glass-card-light flex flex-col gap-3 rounded-2xl border border-primary/10 p-4 shadow-[0_16px_48px_-24px_rgba(11,95,126,0.18)] sm:gap-3.5 sm:p-5"
@@ -61,7 +63,7 @@ export function ContactForm({ compact = false }: ContactFormProps) {
         placeholder="Full name"
         aria-label="Full name"
         disabled={submitting}
-        className="border-b border-primary/15 bg-transparent py-2.5 text-[15px] text-primary placeholder-primary/35 outline-none transition-colors focus:border-secondary disabled:opacity-60 sm:py-3 lg:text-[16px]"
+        className="border-b border-primary/15 bg-transparent py-2.5 text-[16px] text-primary placeholder-primary/35 outline-none transition-colors focus:border-secondary disabled:opacity-60 sm:py-3 lg:text-[16px]"
       />
       <input
         required
@@ -70,7 +72,7 @@ export function ContactForm({ compact = false }: ContactFormProps) {
         placeholder="Work email"
         aria-label="Work email"
         disabled={submitting}
-        className="border-b border-primary/15 bg-transparent py-2.5 text-[15px] text-primary placeholder-primary/35 outline-none transition-colors focus:border-secondary disabled:opacity-60 sm:py-3 lg:text-[16px]"
+        className="border-b border-primary/15 bg-transparent py-2.5 text-[16px] text-primary placeholder-primary/35 outline-none transition-colors focus:border-secondary disabled:opacity-60 sm:py-3 lg:text-[16px]"
       />
       <textarea
         required
@@ -79,7 +81,7 @@ export function ContactForm({ compact = false }: ContactFormProps) {
         placeholder="Tell us about your sourcing requirement"
         aria-label="Message"
         disabled={submitting}
-        className="resize-none border-b border-primary/15 bg-transparent py-2.5 text-[15px] text-primary placeholder-primary/35 outline-none transition-colors focus:border-secondary disabled:opacity-60 sm:py-3 lg:text-[16px]"
+        className="resize-none border-b border-primary/15 bg-transparent py-2.5 text-[16px] text-primary placeholder-primary/35 outline-none transition-colors focus:border-secondary disabled:opacity-60 sm:py-3 lg:text-[16px]"
       />
 
       {error && (
