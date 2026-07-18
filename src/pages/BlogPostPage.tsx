@@ -4,6 +4,7 @@ import { SectionLabel } from "@/components/SectionLabel";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { useBlogs } from "@/context/BlogContext";
+import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 
 function formatDate(value?: string) {
   if (!value) return "";
@@ -18,6 +19,8 @@ export default function BlogPostPage() {
   const { slug } = useParams<{ slug: string }>();
   const { publishedPosts, loading } = useBlogs();
   const post = publishedPosts.find((item) => item.slug === slug);
+
+  useDocumentTitle(post?.title ?? "Media", post?.excerpt);
 
   if (loading) {
     return (
@@ -108,8 +111,8 @@ export default function BlogPostPage() {
 
           <div className="mx-auto max-w-[860px] px-6 py-12 lg:px-10 lg:py-16">
             <div className="space-y-5">
-              {paragraphs.map((paragraph) => (
-                <p key={paragraph.slice(0, 40)} className="text-[16px] lg:text-[17px] leading-[1.8] text-primary/78">
+              {paragraphs.map((paragraph, index) => (
+                <p key={index} className="text-[16px] lg:text-[17px] leading-[1.8] text-primary/78">
                   {paragraph}
                 </p>
               ))}

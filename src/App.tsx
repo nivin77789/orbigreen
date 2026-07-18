@@ -7,6 +7,32 @@ import { SmoothScrollProvider } from "@/components/SmoothScroll";
 import { BlogProvider } from "@/context/BlogContext";
 import { resizeLenis, scrollToTarget, scrollToTop } from "@/lib/lenis";
 
+const SITE_NAME = "Orbigreen Techsource";
+const DEFAULT_DESCRIPTION =
+  "Orbigreen Techsource — Single-window sourcing for industrial engineering machinery, parts, and services. Smart. Sustainable. Sourcing.";
+
+const STATIC_PAGE_META: Record<string, { title: string; description?: string }> = {
+  "/": { title: "Industrial Sourcing Excellence", description: DEFAULT_DESCRIPTION },
+  "/about": { title: "About Us", description: "Learn about Orbigreen Techsource and our global industrial sourcing capabilities." },
+  "/resources": { title: "Resources", description: "Guides, insights, FAQs, and case studies for procurement and engineering teams." },
+  "/products": { title: "Product Categories", description: "Industrial product categories sourced globally — castings, machining, fabrication, and more." },
+  "/services": { title: "Services", description: "Global sourcing, engineering, quality inspection, logistics, and advisory services." },
+  "/contact": { title: "Contact Us", description: "Get in touch with Orbigreen Techsource for industrial sourcing support." },
+  "/quotation": { title: "Request Quotation", description: "Submit your RFQ with drawings and specifications for a commercial proposal." },
+  "/global-presence": { title: "Global Network", description: "Our sourcing presence across China, Vietnam, India, Turkey, and beyond." },
+  "/blog": { title: "Media", description: "News, insights, and updates from Orbigreen Techsource." },
+  "/admin/blog": { title: "Blog Admin", description: "Manage Orbigreen blog posts." },
+};
+
+function applyStaticPageMeta(pathname: string) {
+  const meta = STATIC_PAGE_META[pathname];
+  if (!meta) return;
+
+  document.title = `${meta.title} | ${SITE_NAME}`;
+  const description = meta.description ?? DEFAULT_DESCRIPTION;
+  document.querySelector('meta[name="description"]')?.setAttribute("content", description);
+}
+
 const HomePage = lazy(() => import("@/pages/HomePage"));
 const AboutPage = lazy(() => import("@/pages/AboutPage"));
 const ResourcesPage = lazy(() => import("@/pages/ResourcesPage"));
@@ -30,6 +56,7 @@ function ScrollToHash() {
   useEffect(() => {
     const frame = requestAnimationFrame(() => {
       resizeLenis();
+      applyStaticPageMeta(pathname);
 
       if (hash) {
         scrollToTarget(hash, { offset: -76, immediate: false });

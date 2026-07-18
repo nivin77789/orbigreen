@@ -8,6 +8,7 @@ const SECTIONS = [
     label: "Guides",
     description:
       "Practical breakdowns of sourcing, quality, and cost control — written for engineering and procurement teams.",
+    linkTo: "/blog",
     items: [
       "Cheap sourcing vs landed cost",
       "How to qualify overseas suppliers",
@@ -18,6 +19,7 @@ const SECTIONS = [
     label: "Insights",
     description:
       "Market intelligence, diversification strategies, and operational best practices from active sourcing programs.",
+    linkTo: "/blog",
     items: [
       "China+1 strategy (and common pitfalls)",
       "Supplier risk management",
@@ -28,16 +30,18 @@ const SECTIONS = [
     label: "FAQ",
     description:
       "Fast answers to common questions about global sourcing, inspections, and working models.",
+    linkTo: "/contact",
     items: [
-      "What is global sourcing!",
+      "What is global sourcing?",
       "Agent vs buying office",
-      "When do you need factory audits!",
+      "When do you need factory audits?",
     ],
   },
   {
     label: "Case studies",
     description:
       "Real-world examples of cost savings, quality improvement, and delivery performance gains.",
+    linkTo: "/quotation",
     items: [
       "Cost-down & benchmarking",
       "Quality stabilization",
@@ -45,7 +49,6 @@ const SECTIONS = [
     ],
   },
 ];
-
 
 export default function ResourcesPage() {
   return (
@@ -77,8 +80,9 @@ export default function ResourcesPage() {
                 <p className="mt-3 max-w-2xl text-[15px] lg:text-[16px] leading-relaxed text-primary/65">{section.description}</p>
                 <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                   {section.items.map((item, i) => (
-                    <div
+                    <Link
                       key={item}
+                      to={section.linkTo}
                       className="glass-card group flex flex-col justify-between rounded-2xl p-5 transition-all duration-500 ease-out hover:glass-card-hover"
                     >
                       <div>
@@ -92,7 +96,7 @@ export default function ResourcesPage() {
                       <span className="mt-4 text-[11px] lg:text-[12px] font-medium uppercase tracking-[0.2em] text-primary/40 transition-colors group-hover:text-secondary">
                         Read more →
                       </span>
-                    </div>
+                    </Link>
                   ))}
                 </div>
               </div>
@@ -102,7 +106,7 @@ export default function ResourcesPage() {
 
         <section className="border-t border-primary/10 bg-white py-24">
           <div className="mx-auto max-w-[1280px] px-6 text-center lg:px-10">
-            <SectionLabel>Need help!</SectionLabel>
+            <SectionLabel>Need help?</SectionLabel>
             <h2 className="mt-4 text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold tracking-tight text-primary">
               Talk to an expert
             </h2>

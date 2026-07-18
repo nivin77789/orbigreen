@@ -18,7 +18,7 @@ const QUICK_REPLIES = [
 
 const BOT_RESPONSES: Record<string, string> = {
   "our services":
-    "We offer training, consultancy & advisory, global sourcing, engineering services, quality & inspection, site & installation, and transport & logistics.",
+    "We offer consultancy & advisory, global sourcing, engineering services, quality & inspection, site & installation, and transport & logistics.",
   "sourcing markets":
     "We source across China, Vietnam, India, and Turkey with on-the-ground teams for supplier qualification, audits, and delivery management.",
   "contact details": CONTACT_SUMMARY,

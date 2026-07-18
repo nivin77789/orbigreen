@@ -40,7 +40,7 @@ function HelpCard({
         <div className="home-help-card__inner relative z-10 flex min-h-[3rem] items-center gap-2.5 px-3 py-2 sm:min-h-[3.25rem] sm:gap-3 sm:px-4 sm:py-2.5">
           <span className="home-help-card__index shrink-0">{String(index + 1).padStart(2, "0")}</span>
 
-          <p className="min-w-0 flex-1 truncate text-[13px] font-semibold leading-none tracking-tight text-primary sm:text-[14px] lg:text-[15px]">
+          <p className="min-w-0 flex-1 text-[13px] font-semibold leading-snug tracking-tight text-primary sm:text-[14px] lg:text-[15px]">
             {item.question}
           </p>
 

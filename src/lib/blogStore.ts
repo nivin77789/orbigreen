@@ -49,7 +49,9 @@ export async function loadBlogs(): Promise<BlogPost[]> {
   if (stored) return stored.sort((a, b) => sortByDate(b) - sortByDate(a));
 
   const seed = await loadSeedBlogs();
-  writeStorage(seed);
+  if (seed.length > 0) {
+    writeStorage(seed);
+  }
   return seed.sort((a, b) => sortByDate(b) - sortByDate(a));
 }
 

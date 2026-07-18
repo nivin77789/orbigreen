@@ -19,7 +19,8 @@ import {
 } from "@/lib/blogStore";
 
 const ADMIN_SESSION_KEY = "orbigreen_admin_session";
-const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD ?? "orbigreen2026";
+const ADMIN_PASSWORD =
+  import.meta.env.VITE_ADMIN_PASSWORD ?? (import.meta.env.DEV ? "orbigreen2026" : "");
 
 type BlogContextValue = {
   posts: BlogPost[];
@@ -56,7 +57,7 @@ export function BlogProvider({ children }: { children: ReactNode }) {
   }, [refresh]);
 
   const login = useCallback((password: string) => {
-    if (password !== ADMIN_PASSWORD) return false;
+    if (!ADMIN_PASSWORD || password !== ADMIN_PASSWORD) return false;
     sessionStorage.setItem(ADMIN_SESSION_KEY, "true");
     setIsAdmin(true);
     return true;

@@ -1,4 +1,5 @@
 import { lazy, Suspense, useCallback, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { HeroFrameCanvas } from "@/components/HeroFrameCanvas";
 import { HeroVideoSection } from "@/components/HeroVideoSection";
@@ -38,6 +39,23 @@ function ClosingCTA({ visible }: { visible: boolean }) {
       <h2 className="text-balance text-[clamp(1.75rem,4vw,3rem)] font-semibold leading-[1.05] tracking-[-0.03em] text-white">
         Ready to Optimize Your Supply Chain!
       </h2>
+      <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-white/80 sm:text-[16px]">
+        Share your requirements and our team will recommend the right sourcing, quality, and delivery approach.
+      </p>
+      <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+        <Link
+          to="/quotation"
+          className="gradient-border-cta inline-flex rounded-full px-6 py-3 text-[13px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)] sm:px-7 sm:text-[14px]"
+        >
+          Request Quotation
+        </Link>
+        <Link
+          to="/contact"
+          className="inline-flex rounded-full border border-white/35 bg-white/10 px-6 py-3 text-[13px] font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20 sm:px-7 sm:text-[14px]"
+        >
+          Contact Us
+        </Link>
+      </div>
     </motion.div>
   );
 }

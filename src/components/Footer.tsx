@@ -50,8 +50,13 @@ export function Footer() {
               </Link>
             </li>
             <li>
+              <Link to="/resources" className="transition-colors hover:text-primary">
+                Resources
+              </Link>
+            </li>
+            <li>
               <Link to="/global-presence" className="transition-colors hover:text-primary">
-                Get in Touch
+                Global Network
               </Link>
             </li>
             <li>

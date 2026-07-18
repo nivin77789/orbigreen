@@ -4,12 +4,15 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { ProductGallery } from "@/components/ProductGallery";
 import { getProductBySlug, PRODUCTS } from "@/data/productsData";
+import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 export default function ProductGalleryPage() {
   const { slug } = useParams<{ slug: string }>();
   const product = slug ? getProductBySlug(slug) : undefined;
+
+  useDocumentTitle(product?.title ?? "Products", product?.description);
 
   if (!product) {
     return <Navigate to="/products" replace />;

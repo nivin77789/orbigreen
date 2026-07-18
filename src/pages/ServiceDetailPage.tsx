@@ -5,6 +5,7 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { ServiceGrid } from "@/components/ServicesShowcase";
 import { getServiceBySlug, SERVICES } from "@/data/servicesData";
+import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -18,6 +19,8 @@ const fadeUp = {
 export default function ServiceDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const service = slug ? getServiceBySlug(slug) : undefined;
+
+  useDocumentTitle(service?.title ?? "Services", service?.shortDescription);
 
   if (!service) {
     return <Navigate to="/services" replace />;
@@ -66,13 +69,13 @@ export default function ServiceDetailPage() {
                   to="/quotation"
                   className="gradient-border-cta rounded-full px-6 py-3 text-[13px] lg:text-[14px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"
                 >
-                  Get in Touch
+                  Request Quotation
                 </Link>
                 <Link
                   to="/global-presence"
                   className="glass-card-light rounded-full px-6 py-3 text-[13px] lg:text-[14px] font-semibold text-primary transition-all hover:glass-card-hover"
                 >
-                  Get in Touch
+                  Global Network
                 </Link>
               </div>
             </motion.div>

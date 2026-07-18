@@ -1,6 +1,7 @@
-import { useRef, useState } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import { SectionLabel } from "@/components/SectionLabel";
 import { motion } from "framer-motion";
+import { submitWebsiteForm } from "@/lib/submitForm";
 
 const CATEGORIES = [
   "Castings & Forging",
@@ -21,12 +22,36 @@ type QuotationFormProps = {
 
 export function QuotationForm({ compact = false }: QuotationFormProps) {
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
   const [fileName, setFileName] = useState("");
   const fileRef = useRef<HTMLInputElement>(null);
 
   const fieldClass = compact
-    ? "quotation-field w-full rounded-xl border border-primary/10 bg-white/80 px-3 py-2 text-[14px] text-primary placeholder-primary/40 outline-none transition-all focus:border-secondary/50 focus:bg-white focus:shadow-[0_0_0_3px_rgba(92,191,42,0.12)]"
-    : "quotation-field w-full rounded-xl border border-primary/10 bg-white/80 px-3 py-2.5 text-[14px] lg:text-[15px] text-primary placeholder-primary/35 outline-none transition-all focus:border-secondary/50 focus:bg-white focus:shadow-[0_0_0_3px_rgba(92,191,42,0.12)]";
+    ? "quotation-field w-full rounded-xl border border-primary/10 bg-white/80 px-3 py-2 text-[14px] text-primary placeholder-primary/40 outline-none transition-all focus:border-secondary/50 focus:bg-white focus:shadow-[0_0_0_3px_rgba(92,191,42,0.12)] disabled:opacity-60"
+    : "quotation-field w-full rounded-xl border border-primary/10 bg-white/80 px-3 py-2.5 text-[14px] text-primary placeholder-primary/35 outline-none transition-all focus:border-secondary/50 focus:bg-white focus:shadow-[0_0_0_3px_rgba(92,191,42,0.12)] disabled:opacity-60 lg:text-[15px]";
+
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setSubmitting(true);
+    setError("");
+
+    try {
+      await submitWebsiteForm(event.currentTarget, {
+        subject: "[Orbigreen] New quotation request",
+        fileInput: fileRef.current,
+      });
+      setSent(true);
+      event.currentTarget.reset();
+      setFileName("");
+      if (fileRef.current) fileRef.current.value = "";
+      window.setTimeout(() => setSent(false), 3200);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Unable to send your request. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <motion.form
@@ -35,21 +60,15 @@ export function QuotationForm({ compact = false }: QuotationFormProps) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -8 }}
       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-      onSubmit={(e) => {
-        e.preventDefault();
-        setSent(true);
-        setTimeout(() => {
-          setSent(false);
-          setFileName("");
-          if (fileRef.current) fileRef.current.value = "";
-        }, 3200);
-      }}
+      onSubmit={onSubmit}
       className={`quotation-form-card flex h-full flex-col rounded-[1.35rem] sm:rounded-2xl ${
         compact
           ? "max-h-[min(68vh,32rem)] gap-2.5 overflow-y-auto p-3.5 sm:gap-3 sm:p-4 lg:max-h-[min(72vh,34rem)]"
           : "gap-3 p-4 sm:gap-3.5 sm:p-5 lg:p-5"
       }`}
     >
+      <input type="checkbox" name="botcheck" className="hidden" tabIndex={-1} autoComplete="off" />
+
       {!compact && (
         <div className="border-b border-primary/[0.07] pb-2.5">
           <SectionLabel>Request Quotation</SectionLabel>
@@ -57,14 +76,51 @@ export function QuotationForm({ compact = false }: QuotationFormProps) {
       )}
 
       <div className="grid gap-2.5 sm:grid-cols-2">
-        <input required placeholder="Company name *" aria-label="Company name" className={fieldClass} />
-        <input required placeholder="Contact person *" aria-label="Contact person" className={fieldClass} />
-        <input required type="email" placeholder="Work email *" aria-label="Work email" className={fieldClass} />
-        <input required type="tel" placeholder="Phone *" aria-label="Phone" className={fieldClass} />
+        <input
+          required
+          name="company"
+          placeholder="Company name *"
+          aria-label="Company name"
+          disabled={submitting}
+          className={fieldClass}
+        />
+        <input
+          required
+          name="contact_person"
+          placeholder="Contact person *"
+          aria-label="Contact person"
+          disabled={submitting}
+          className={fieldClass}
+        />
+        <input
+          required
+          type="email"
+          name="email"
+          placeholder="Work email *"
+          aria-label="Work email"
+          disabled={submitting}
+          className={fieldClass}
+        />
+        <input
+          required
+          type="tel"
+          name="phone"
+          placeholder="Phone *"
+          aria-label="Phone"
+          disabled={submitting}
+          className={fieldClass}
+        />
       </div>
 
       <div className="grid gap-2.5 sm:grid-cols-2">
-        <select required defaultValue="" aria-label="Product or service category" className={fieldClass}>
+        <select
+          required
+          name="category"
+          defaultValue=""
+          aria-label="Product or service category"
+          disabled={submitting}
+          className={fieldClass}
+        >
           <option value="" disabled>
             Category *
           </option>
@@ -74,34 +130,46 @@ export function QuotationForm({ compact = false }: QuotationFormProps) {
             </option>
           ))}
         </select>
-        <input placeholder="Quantity / volume" aria-label="Estimated quantity or volume" className={fieldClass} />
+        <input
+          name="quantity"
+          placeholder="Quantity / volume"
+          aria-label="Estimated quantity or volume"
+          disabled={submitting}
+          className={fieldClass}
+        />
       </div>
 
       <textarea
         required
+        name="details"
         rows={2}
         placeholder="Requirement details — material, tolerances, delivery, timeline *"
         aria-label="Requirement details"
+        disabled={submitting}
         className={`${fieldClass} resize-none leading-relaxed`}
       />
 
       <label
         className={`quotation-upload flex cursor-pointer items-center gap-2.5 rounded-xl transition-colors ${
           compact ? "px-3 py-2" : "px-3.5 py-2.5 sm:px-4"
-        }`}
+        } ${submitting ? "pointer-events-none opacity-60" : ""}`}
       >
         <input
           ref={fileRef}
+          name="attachments"
           type="file"
           accept="image/*,.pdf,.dwg,.dxf,.step,.stp,.iges,.igs,.zip,.doc,.docx,.xls,.xlsx"
           multiple
+          disabled={submitting}
           className="sr-only"
           onChange={(e) => {
             const names = Array.from(e.target.files ?? []).map((f) => f.name);
             setFileName(names.length ? names.join(", ") : "");
           }}
         />
-        <div className={`quotation-upload__icon flex shrink-0 items-center justify-center rounded-xl ${compact ? "h-8 w-8" : "h-9 w-9"}`}>
+        <div
+          className={`quotation-upload__icon flex shrink-0 items-center justify-center rounded-xl ${compact ? "h-8 w-8" : "h-9 w-9"}`}
+        >
           <svg viewBox="0 0 24 24" fill="none" className={compact ? "h-4 w-4" : "h-5 w-5"} aria-hidden>
             <path
               d="M12 16V4m0 0l-4 4m4-4l4 4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"
@@ -112,20 +180,29 @@ export function QuotationForm({ compact = false }: QuotationFormProps) {
             />
           </svg>
         </div>
-        <span className={`min-w-0 flex-1 truncate font-medium text-primary ${compact ? "text-[13px]" : "text-[13px] lg:text-[14px]"}`}>
+        <span
+          className={`min-w-0 flex-1 truncate font-medium text-primary ${compact ? "text-[13px]" : "text-[13px] lg:text-[14px]"}`}
+        >
           {fileName || "Attach drawings, specs, or images"}
         </span>
       </label>
 
+      {error && (
+        <p className="text-[13px] leading-snug text-red-600" role="alert">
+          {error}
+        </p>
+      )}
+
       <div className={`flex justify-end ${compact ? "pt-0.5" : "border-t border-primary/[0.07] pt-3"}`}>
         <button
           type="submit"
-          className={`gradient-border-cta inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-all ${
-            compact ? "px-5 py-2.5 text-[13px]" : "px-6 py-2.5 text-[13px] lg:text-[14px] sm:px-7 sm:py-3"
+          disabled={submitting}
+          className={`gradient-border-cta inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-all disabled:cursor-not-allowed disabled:opacity-60 ${
+            compact ? "px-5 py-2.5 text-[13px]" : "px-6 py-2.5 text-[13px] sm:px-7 sm:py-3 lg:text-[14px]"
           } ${sent ? "opacity-90" : "hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)]"}`}
         >
-          <span>{sent ? "Sent" : "Submit request"}</span>
-          {!sent && (
+          <span>{sent ? "Sent" : submitting ? "Sending…" : "Submit request"}</span>
+          {!sent && !submitting && (
             <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4" aria-hidden>
               <path
                 d="M5 12h14M13 6l6 6-6 6"

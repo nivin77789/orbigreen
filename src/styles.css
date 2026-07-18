@@ -2010,7 +2010,7 @@
   }
 
   .home-help-card__link-label {
-    display: none;
+    max-width: 5.5rem;
   }
 
   .home-help-card__link {

@@ -62,8 +62,8 @@ export const PRODUCTS: Product[] = [
     category: "Metal Forming",
     description:
       "Closed-die, open-die, and precision forgings for industrial, automotive, and heavy-engineering applications.",
-    image: imgCastings,
-    gallery: buildGallery(imgCastings, 1),
+    image: imgFabrication,
+    gallery: buildGallery(imgFabrication, 1),
     accent: "#0B5F7E",
   },
   {
