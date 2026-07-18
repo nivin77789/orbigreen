@@ -162,8 +162,13 @@
 }
 
 @utility content-auto {
-  content-visibility: auto;
   contain-intrinsic-size: auto 600px;
+}
+
+@media (min-width: 768px) {
+  .content-auto {
+    content-visibility: auto;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1363,8 +1368,13 @@
 }
 
 .home-scroll-track {
-  content-visibility: auto;
   contain-intrinsic-size: auto 400vh;
+}
+
+@media (min-width: 768px) {
+  .home-scroll-track {
+    content-visibility: auto;
+  }
 }
 
 .home-scroll-stage {

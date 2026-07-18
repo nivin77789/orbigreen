@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { ReactLenis, useLenis } from "lenis/react";
 import "lenis/dist/lenis.css";
 import { setLenis } from "@/lib/lenis";
+import { onMediaQueryChange } from "@/lib/safeStorage";
 
 const NAV_OFFSET = -76;
 
@@ -65,12 +66,12 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
     };
 
     update();
-    reducedMotion.addEventListener("change", update);
-    coarsePointer.addEventListener("change", update);
+    const stopReduced = onMediaQueryChange(reducedMotion, update);
+    const stopCoarse = onMediaQueryChange(coarsePointer, update);
 
     return () => {
-      reducedMotion.removeEventListener("change", update);
-      coarsePointer.removeEventListener("change", update);
+      stopReduced();
+      stopCoarse();
     };
   }, []);
 

@@ -32,7 +32,12 @@ export function HeroFrameCanvas({
     const canvas = canvasRef.current;
     if (!canvas || !shouldDraw) return;
 
-    const ctx = canvas.getContext("2d", { alpha: false, desynchronized: true })!;
+    const ctx =
+      canvas.getContext("2d", { alpha: false, desynchronized: true }) ??
+      canvas.getContext("2d", { alpha: false }) ??
+      canvas.getContext("2d");
+
+    if (!ctx) return;
     let w = 0;
     let h = 0;
     let dpr = 1;

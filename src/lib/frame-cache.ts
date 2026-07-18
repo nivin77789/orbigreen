@@ -142,15 +142,29 @@ export function preloadRemainingFramesOnIdle(concurrency = 2) {
     await Promise.all(Array.from({ length: Math.min(concurrency, 4) }, () => worker()));
   };
 
-  const idleId = window.requestIdleCallback(
-    () => {
-      void run();
-    },
-    { timeout: 8000 },
-  );
+  const scheduleIdle = (callback: () => void, timeout = 8000) => {
+    if (typeof window.requestIdleCallback === "function") {
+      return window.requestIdleCallback(callback, { timeout });
+    }
+
+    return window.setTimeout(callback, 1);
+  };
+
+  const cancelIdle = (id: number) => {
+    if (typeof window.cancelIdleCallback === "function") {
+      window.cancelIdleCallback(id);
+      return;
+    }
+
+    window.clearTimeout(id);
+  };
+
+  const idleId = scheduleIdle(() => {
+    void run();
+  });
 
   return () => {
     cancelled = true;
-    window.cancelIdleCallback(idleId);
+    cancelIdle(idleId);
   };
 }
