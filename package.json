@@ -10,6 +10,7 @@
     "optimize-hero-frames": "node scripts/optimize-hero-frames.mjs"
   },
   "dependencies": {
+    "firebase": "^12.16.0",
     "framer-motion": "^12.40.0",
     "lenis": "^1.3.23",
     "react": "^19.2.0",

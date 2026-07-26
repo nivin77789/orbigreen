@@ -23,6 +23,7 @@ const STATIC_PAGE_META: Record<string, { title: string; description?: string }> 
   "/global-presence": { title: "Global Network", description: "Our sourcing presence across China, Vietnam, India, Turkey, and beyond." },
   "/blog": { title: "Media", description: "News, insights, and updates from Orbigreen Techsource." },
   "/admin/blog": { title: "Blog Admin", description: "Manage Orbigreen blog posts." },
+  "/admin": { title: "Admin", description: "View contact and quotation form submissions." },
 };
 
 function applyStaticPageMeta(pathname: string) {
@@ -47,6 +48,7 @@ const GlobalPresencePage = lazy(() => import("@/pages/GlobalPresencePage"));
 const BlogPage = lazy(() => import("@/pages/BlogPage"));
 const BlogPostPage = lazy(() => import("@/pages/BlogPostPage"));
 const AdminBlogPage = lazy(() => import("@/pages/AdminBlogPage"));
+const AdminPage = lazy(() => import("@/pages/AdminPage"));
 const ChatBot = lazy(() =>
   import("@/components/ChatBot").then((module) => ({ default: module.ChatBot })),
 );
@@ -97,6 +99,7 @@ export default function App() {
                     <Route path="/blog" element={<BlogPage />} />
                     <Route path="/blog/:slug" element={<BlogPostPage />} />
                     <Route path="/admin/blog" element={<AdminBlogPage />} />
+                    <Route path="/admin" element={<AdminPage />} />
                   </Routes>
                 </Suspense>
                 <Suspense fallback={null}>

@@ -19,7 +19,7 @@ export function ContactForm({ compact = false }: ContactFormProps) {
     setError("");
 
     try {
-      await submitWebsiteForm(form);
+      await submitWebsiteForm(form, { collection: "contacts" });
       setSent(true);
       form.reset();
       window.setTimeout(() => setSent(false), 3200);

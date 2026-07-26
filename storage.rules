@@ -1,0 +1,18 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Quotation attachments: public upload (the RFQ form has no login),
+    // public read (the admin page reads these with no server-verified
+    // login, matching the same trade-off as firestore.rules). Capped at
+    // 20MB per file to avoid abuse.
+    match /quotations/{docId}/{fileName} {
+      allow write: if request.resource.size < 20 * 1024 * 1024;
+      allow read: if true;
+    }
+
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

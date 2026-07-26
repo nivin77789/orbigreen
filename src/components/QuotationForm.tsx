@@ -41,6 +41,7 @@ export function QuotationForm({ compact = false }: QuotationFormProps) {
       await submitWebsiteForm(form, {
         subject: "[Orbigreen] New quotation request",
         fileInput: fileRef.current,
+        collection: "quotations",
       });
       setSent(true);
       form.reset();
