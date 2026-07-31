@@ -115,6 +115,48 @@ export async function preloadEssentialFrames(
   report();
 }
 
+export function getLoadedFrameCount(): number {
+  let count = 0;
+
+  for (let frame = 1; frame <= FRAME_COUNT; frame += 1) {
+    const img = frameCache.get(frame);
+    if (img?.complete && img.naturalWidth > 0) {
+      count += 1;
+    }
+  }
+
+  return count;
+}
+
+export function areAllScrollFramesLoaded(): boolean {
+  return getLoadedFrameCount() >= FRAME_COUNT;
+}
+
+export async function preloadAllScrollFrames(
+  onProgress?: (loaded: number, total: number) => void,
+  concurrency = 6,
+): Promise<void> {
+  const targets = Array.from({ length: FRAME_COUNT }, (_, index) => index + 1);
+  const total = targets.length;
+  let nextIndex = 0;
+
+  const report = () => onProgress?.(getLoadedFrameCount(), total);
+
+  const worker = async () => {
+    while (nextIndex < total) {
+      const index = nextIndex;
+      nextIndex += 1;
+      await loadFrame(targets[index]);
+      report();
+    }
+  };
+
+  report();
+  const workers = Math.min(Math.max(1, concurrency), total);
+  await Promise.all(Array.from({ length: workers }, () => worker()));
+  report();
+}
+
 /** Warm remaining frames when the browser is idle (homepage scroll section only). */
 export function preloadRemainingFramesOnIdle(concurrency = 2) {
   if (typeof window === "undefined") return () => {};

@@ -175,8 +175,8 @@ function AboutHero() {
           </h1>
           <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-primary/75 lg:text-[18px]">
             Integrated sourcing for industrial engineering — combining supplier networks, procurement, and quality
-            management to improve supply chain efficiency. We support OEMs worldwide with a single-window approach
-            from components to delivery.
+            management to improve supply chain efficiency. We support OEMs and end-to-end customers worldwide with a
+            single-window approach from components to delivery.
           </p>
           <div className="global-presence-heading-line mt-6" />
           <motion.div

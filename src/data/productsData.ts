@@ -6,6 +6,7 @@ import imgStamping from "../products image/stamping-parts-assemblies.webp";
 import imgProprietary from "../products image/proprietary-machines-parts.webp";
 import imgFasteners from "../products image/fasteners.webp";
 import imgTransmission from "../products image/transmission-gears.webp";
+import { getProductCoverImage, getProductGalleryImages } from "@/data/productGalleryAssets";
 
 export type Product = {
   id: number;
@@ -18,26 +19,30 @@ export type Product = {
   accent: string;
 };
 
-const GALLERY_POOL = [
-  imgCastings,
-  imgMachining,
-  imgFabrication,
-  imgPressureVessels,
-  imgStamping,
-  imgProprietary,
-  imgFasteners,
-  imgTransmission,
-];
+const FALLBACK_IMAGES: Record<string, string> = {
+  castings: imgCastings,
+  forging: imgFabrication,
+  machining: imgMachining,
+  fabrication: imgFabrication,
+  "pressure-vessels": imgPressureVessels,
+  "stamping-parts": imgStamping,
+  "proprietary-machines": imgProprietary,
+  fasteners: imgFasteners,
+  "transmission-gears": imgTransmission,
+  assemblies: imgFabrication,
+};
 
-function buildGallery(main: string, offset: number): string[] {
-  const pool = GALLERY_POOL.filter((img) => img !== main);
-  const picks = [main];
+const THUMBNAIL_OVERRIDES: Record<string, string> = {
+  castings: imgCastings,
+};
 
-  for (let i = 0; picks.length < 4; i += 1) {
-    picks.push(pool[(offset + i) % pool.length]);
-  }
-
-  return picks;
+function productImages(slug: string): { image: string; gallery: string[] } {
+  const fallback = FALLBACK_IMAGES[slug] ?? imgFabrication;
+  const gallery = getProductGalleryImages(slug, fallback);
+  return {
+    image: THUMBNAIL_OVERRIDES[slug] ?? getProductCoverImage(slug, fallback),
+    gallery,
+  };
 }
 
 export function getProductBySlug(slug: string) {
@@ -51,8 +56,7 @@ export const PRODUCTS: Product[] = [
     title: "Castings",
     category: "Metalwork",
     description: "High-quality castings for diverse industrial applications.",
-    image: imgCastings,
-    gallery: buildGallery(imgCastings, 0),
+    ...productImages("castings"),
     accent: "#5CBF2A",
   },
   {
@@ -62,8 +66,7 @@ export const PRODUCTS: Product[] = [
     category: "Metal Forming",
     description:
       "Closed-die, open-die, and precision forgings for industrial, automotive, and heavy-engineering applications.",
-    image: imgFabrication,
-    gallery: buildGallery(imgFabrication, 1),
+    ...productImages("forging"),
     accent: "#0B5F7E",
   },
   {
@@ -72,8 +75,7 @@ export const PRODUCTS: Product[] = [
     title: "Machining",
     category: "Precision",
     description: "CNC and precision machining for tight-tolerance components.",
-    image: imgMachining,
-    gallery: buildGallery(imgMachining, 2),
+    ...productImages("machining"),
     accent: "#0B5F7E",
   },
   {
@@ -82,8 +84,7 @@ export const PRODUCTS: Product[] = [
     title: "Fabrication",
     category: "Structural",
     description: "Custom metal fabrication for structural and industrial use.",
-    image: imgFabrication,
-    gallery: buildGallery(imgFabrication, 3),
+    ...productImages("fabrication"),
     accent: "#8DD128",
   },
   {
@@ -93,8 +94,7 @@ export const PRODUCTS: Product[] = [
     category: "Tanks",
     description:
       "Engineered pressure vessels and industrial storage tanks compliant with international standards.",
-    image: imgPressureVessels,
-    gallery: buildGallery(imgPressureVessels, 4),
+    ...productImages("pressure-vessels"),
     accent: "#0B5F7E",
   },
   {
@@ -103,8 +103,7 @@ export const PRODUCTS: Product[] = [
     title: "Stamping Parts",
     category: "Assemblies",
     description: "Stamped metal parts and assemblies for high-volume production.",
-    image: imgStamping,
-    gallery: buildGallery(imgStamping, 5),
+    ...productImages("stamping-parts"),
     accent: "#5CBF2A",
   },
   {
@@ -113,8 +112,7 @@ export const PRODUCTS: Product[] = [
     title: "Proprietary Machines",
     category: "Custom",
     description: "Custom machinery and specialized components for unique manufacturing needs.",
-    image: imgProprietary,
-    gallery: buildGallery(imgProprietary, 6),
+    ...productImages("proprietary-machines"),
     accent: "#8DD128",
   },
   {
@@ -123,8 +121,7 @@ export const PRODUCTS: Product[] = [
     title: "Fasteners",
     category: "Fixings",
     description: "Industrial fasteners and fixing solutions for assembly and construction.",
-    image: imgFasteners,
-    gallery: buildGallery(imgFasteners, 7),
+    ...productImages("fasteners"),
     accent: "#0B5F7E",
   },
   {
@@ -133,8 +130,7 @@ export const PRODUCTS: Product[] = [
     title: "Transmission & Gears",
     category: "Powertrain",
     description: "Transmission systems, gears, and power transmission components.",
-    image: imgTransmission,
-    gallery: buildGallery(imgTransmission, 0),
+    ...productImages("transmission-gears"),
     accent: "#5CBF2A",
   },
   {
@@ -144,8 +140,7 @@ export const PRODUCTS: Product[] = [
     category: "Integrated",
     description:
       "Sub-assemblies and fully integrated mechanical assemblies — sourced, inspected, and delivered ready for installation.",
-    image: imgFabrication,
-    gallery: buildGallery(imgFabrication, 2),
+    ...productImages("assemblies"),
     accent: "#8DD128",
   },
 ];

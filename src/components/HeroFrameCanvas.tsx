@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { getFrameImage, preloadFramesAround, preloadInitialFrames, preloadRemainingFramesOnIdle } from "@/lib/frame-cache";
+import { getFrameImage, preloadFramesAround, areAllScrollFramesLoaded, preloadRemainingFramesOnIdle } from "@/lib/frame-cache";
 import { HERO_BG, HERO_BG_RGB } from "@/lib/constants";
 import { scrollProgressToFrame } from "@/lib/scroll-frames";
 import { usePageVisible } from "@/hooks/usePageVisible";
@@ -23,8 +23,8 @@ export function HeroFrameCanvas({
   const shouldDraw = active && pageVisible;
 
   useEffect(() => {
-    if (!active) return;
-    preloadInitialFrames();
+    if (!active || areAllScrollFramesLoaded()) return;
+    preloadFramesAround(1, 4);
     return preloadRemainingFramesOnIdle(2);
   }, [active]);
 

@@ -318,6 +318,32 @@
   animation-direction: reverse;
 }
 
+.site-loader-orbit {
+  pointer-events: none;
+}
+
+.site-loader-progress {
+  position: relative;
+  overflow: hidden;
+}
+
+.site-loader-progress::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  animation: site-loader-shimmer 1.6s ease-in-out infinite;
+}
+
+@keyframes site-loader-shimmer {
+  from {
+    transform: translateX(-120%);
+  }
+  to {
+    transform: translateX(120%);
+  }
+}
+
 @keyframes site-loader-spin {
   from {
     transform: rotate(0deg);
@@ -329,9 +355,15 @@
 
 @media (prefers-reduced-motion: reduce) {
   .site-loader-ring,
-  .site-loader-ring--delayed {
+  .site-loader-ring--delayed,
+  .site-loader-orbit {
     animation: none;
     opacity: 0.5;
+  }
+
+  .site-loader-progress::after {
+    animation: none;
+    opacity: 0;
   }
 }
 

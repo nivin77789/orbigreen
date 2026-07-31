@@ -4,9 +4,11 @@ import { BrandLogo } from "@/components/BrandLogo";
 
 type SiteLoaderProps = {
   progress: number;
+  status?: string;
+  totalFrames?: number;
 };
 
-export function SiteLoader({ progress }: SiteLoaderProps) {
+export function SiteLoader({ progress, status = "Preparing experience", totalFrames }: SiteLoaderProps) {
   const clamped = Math.min(100, Math.max(0, progress));
 
   return (
@@ -15,6 +17,10 @@ export function SiteLoader({ progress }: SiteLoaderProps) {
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+      role="alert"
+      aria-live="polite"
+      aria-busy="true"
+      aria-label="Loading website"
     >
       <div className="site-loader-grid pointer-events-none absolute inset-0 opacity-40" aria-hidden />
 
@@ -27,6 +33,12 @@ export function SiteLoader({ progress }: SiteLoaderProps) {
         >
           <div className="site-loader-ring absolute inset-0 -m-6 rounded-full" aria-hidden />
           <div className="site-loader-ring site-loader-ring--delayed absolute inset-0 -m-10 rounded-full" aria-hidden />
+          <motion.div
+            className="site-loader-orbit absolute inset-0 -m-14 rounded-full border border-dashed border-secondary/25"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
+            aria-hidden
+          />
           <div className="relative">
             <BrandLogo variant="loader" />
           </div>
@@ -36,8 +48,15 @@ export function SiteLoader({ progress }: SiteLoaderProps) {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15, duration: 0.5 }}
+          className="text-center"
         >
-          <SectionLabel tone="muted">Preparing experience</SectionLabel>
+          <SectionLabel tone="muted">Loading experience</SectionLabel>
+          <p className="mt-2 text-[13px] leading-snug text-primary/55 sm:text-[14px]">{status}</p>
+          {totalFrames ? (
+            <p className="mt-1 text-[11px] font-medium uppercase tracking-[0.18em] text-primary/35">
+              {totalFrames} scroll frames
+            </p>
+          ) : null}
         </motion.div>
 
         <motion.div
@@ -52,7 +71,7 @@ export function SiteLoader({ progress }: SiteLoaderProps) {
           </div>
           <div className="h-1.5 overflow-hidden rounded-full bg-primary/10">
             <motion.div
-              className="h-full rounded-full bg-gradient-to-r from-primary via-secondary to-accent"
+              className="site-loader-progress h-full rounded-full bg-gradient-to-r from-primary via-secondary to-accent"
               initial={{ width: "0%" }}
               animate={{ width: `${clamped}%` }}
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
