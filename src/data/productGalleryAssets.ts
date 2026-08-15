@@ -1,23 +1,23 @@
-const galleryModules = import.meta.glob<string>("../assets/gallary/**/*.{jpeg,jpg,png,webp}", {
+const galleryModules = import.meta.glob<string>("../assets/Photos Orbi 2/Product Categories/**/*.{jpeg,jpg,png,webp}", {
   eager: true,
   import: "default",
 });
 
 const SLUG_FOLDER_MAP: Record<string, string> = {
-  castings: "Casting and Forgings",
-  forging: "Casting and Forgings",
+  castings: "Casting",
+  forging: "Forging",
   machining: "Machining",
   fabrication: "Fabrication",
-  "pressure-vessels": "Pressure Vessel",
+  "pressure-vessels": "Pressure Vessels",
   fasteners: "Fasteners",
-  "transmission-gears": "Transmission and gears",
-  "stamping-parts": "Structural",
-  assemblies: "Structural",
-  "proprietary-machines": "Fabrication",
+  "transmission-gears": "Transmission & Gears",
+  "stamping-parts": "Stamping Parts",
+  assemblies: "Assemblies",
+  "proprietary-machines": "Proprietary Machines",
 };
 
 function folderFromPath(path: string): string | null {
-  const match = path.match(/gallary\/([^/]+)\//);
+  const match = path.match(/Product Categories\/([^/]+)\//);
   return match?.[1] ?? null;
 }
 

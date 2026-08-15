@@ -4,8 +4,7 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { BlogCard } from "@/components/BlogCard";
 import { useBlogs } from "@/context/BlogContext";
-import machiningImage from "@/products image/machining.webp";
-import fabricationImage from "@/products image/fabrication.webp";
+import { getProductBySlug } from "@/data/productsData";
 import globalSourcingImage from "@/services image/global-sourcing.webp";
 import qualityInspectionImage from "@/services image/quality-inspection.webp";
 import logisticsImage from "@/services image/transport-logistics.webp";
@@ -16,12 +15,12 @@ const MEDIA_GALLERY = [
   {
     title: "Precision Machining",
     label: "Components",
-    image: machiningImage,
+    image: getProductBySlug("machining")!.image,
   },
   {
     title: "Fabrication Programs",
     label: "Manufacturing",
-    image: fabricationImage,
+    image: getProductBySlug("fabrication")!.image,
   },
   {
     title: "Global Sourcing",

@@ -1,11 +1,4 @@
-import imgCastings from "../products image/castings.webp";
-import imgMachining from "../products image/machining.webp";
-import imgFabrication from "../products image/fabrication.webp";
-import imgPressureVessels from "../products image/pressure-vessels-tanks.webp";
-import imgStamping from "../products image/stamping-parts-assemblies.webp";
-import imgProprietary from "../products image/proprietary-machines-parts.webp";
-import imgFasteners from "../products image/fasteners.webp";
-import imgTransmission from "../products image/transmission-gears.webp";
+import fallbackProductImage from "../assets/Photos Orbi 2/Product Categories/Fabrication/36b2cd2b-4bb8-4baf-b3ab-747e2b3eb552.png";
 import { getProductCoverImage, getProductGalleryImages } from "@/data/productGalleryAssets";
 
 export type Product = {
@@ -19,28 +12,11 @@ export type Product = {
   accent: string;
 };
 
-const FALLBACK_IMAGES: Record<string, string> = {
-  castings: imgCastings,
-  forging: imgFabrication,
-  machining: imgMachining,
-  fabrication: imgFabrication,
-  "pressure-vessels": imgPressureVessels,
-  "stamping-parts": imgStamping,
-  "proprietary-machines": imgProprietary,
-  fasteners: imgFasteners,
-  "transmission-gears": imgTransmission,
-  assemblies: imgFabrication,
-};
-
-const THUMBNAIL_OVERRIDES: Record<string, string> = {
-  castings: imgCastings,
-};
-
 function productImages(slug: string): { image: string; gallery: string[] } {
-  const fallback = FALLBACK_IMAGES[slug] ?? imgFabrication;
+  const fallback = fallbackProductImage;
   const gallery = getProductGalleryImages(slug, fallback);
   return {
-    image: THUMBNAIL_OVERRIDES[slug] ?? getProductCoverImage(slug, fallback),
+    image: getProductCoverImage(slug, fallback),
     gallery,
   };
 }

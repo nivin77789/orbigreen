@@ -2,8 +2,8 @@ import imgConsultancy from "../services image/consultancy-advisory.webp";
 import imgSourcing from "../services image/global-sourcing.webp";
 import imgEngineering from "../services image/engineering-services.webp";
 import imgQuality from "../services image/quality-inspection.webp";
-import imgSite from "../services image/site-installation.webp";
 import imgLogistics from "../services image/transport-logistics.webp";
+import imgSiteInstallation from "../assets/Photos Orbi 2/Services/Site & Installation Services/1.jpg";
 
 export type ServiceDetail = {
   slug: string;
@@ -102,7 +102,7 @@ export const SERVICES: ServiceDetail[] = [
     title: "Site & Installation Services",
     shortDescription:
       "Technical site support for installation, supervision, commissioning, and project execution.",
-    image: imgSite,
+    image: imgSiteInstallation,
     accent: "#5CBF2A",
     sectionTitle: "Technical Expertise from Installation to Commissioning",
     overview:
