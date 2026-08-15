@@ -165,9 +165,12 @@ export function ProductsShowcase({ variant = "page", showHeader = true }: Produc
           >
             <Link
               to="/quotation"
-              className="gradient-border-cta rounded-full px-6 py-3 text-[14px] font-semibold transition-all hover:shadow-[0_0_32px_-4px_rgba(92,191,42,0.45)] lg:text-[15px]"
+              className="gradient-border-cta quotation-cta inline-flex items-center rounded-full px-6 py-3 text-[14px] font-semibold lg:text-[15px]"
             >
-              Request sourcing
+              <span>Request Quotation</span>
+              <span className="quotation-cta__arrow" aria-hidden>
+                →
+              </span>
             </Link>
           </motion.div>
         )}

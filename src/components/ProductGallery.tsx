@@ -135,9 +135,12 @@ export function ProductGallery({ product }: ProductGalleryProps) {
 
             <Link
               to="/quotation"
-              className="gradient-border-cta product-gallery-view__cta rounded-full px-6 py-3 text-[14px] font-semibold lg:text-[15px]"
+              className="gradient-border-cta quotation-cta product-gallery-view__cta rounded-full px-6 py-3 text-[14px] font-semibold lg:text-[15px]"
             >
-              Request sourcing
+              <span>Request Quotation</span>
+              <span className="quotation-cta__arrow" aria-hidden>
+                →
+              </span>
             </Link>
           </div>
         </aside>

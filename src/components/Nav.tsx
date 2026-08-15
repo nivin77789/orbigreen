@@ -6,7 +6,7 @@ import { BrandLogo } from "@/components/BrandLogo";
 const NAV = [
   { label: "Home", to: "/" },
   { label: "About Us", to: "/about" },
-  { label: "Products", to: "/products" },
+  { label: "Product Categories", to: "/products" },
   { label: "Services", to: "/services" },
   { label: "Global Network", to: "/global-presence" },
   { label: "Media", to: "/blog" },
@@ -41,7 +41,7 @@ export function Nav() {
               <Link
                 key={item.label}
                 to={item.to}
-                className={`whitespace-nowrap rounded-full px-1 py-1 text-[0.5625rem] font-semibold leading-none transition-all duration-500 ease-out hover:glass-card-hover sm:px-1.5 sm:text-[0.625rem] md:px-1.5 md:text-[0.6875rem] lg:px-2 lg:text-[0.75rem] xl:px-2 xl:text-[11px] 2xl:px-3 2xl:text-[13px] ${
+                className={`whitespace-nowrap rounded-full px-1 py-1 text-[0.5625rem] font-semibold leading-none transition-all duration-500 ease-out hover:glass-card-hover sm:px-1.5 sm:text-[0.625rem] md:px-1.5 md:text-[0.75rem] lg:px-2 lg:text-[0.8125rem] xl:px-2.5 xl:text-[0.875rem] 2xl:px-3 2xl:text-[0.9375rem] ${
                   isActive ? "glass-card-hover text-primary" : "text-primary/85"
                 }`}
               >

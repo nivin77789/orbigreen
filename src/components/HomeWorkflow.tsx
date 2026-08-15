@@ -81,7 +81,7 @@ const WORKFLOW_STEPS: { t: string; d: string; icon: ReactNode }[] = [
   },
   {
     t: "Logistics & Delivery Assurance",
-    d: "Coordinate packaging, export/import documentation, and delivery management to ensure timely, traceable, and compliant shipments.",
+    d: "Coordinate packaging and delivery management for both local and international shipments, including export/import documentation, ensuring timely, traceable, and compliant delivery.",
     icon: (
       <svg {...stroke}>
         <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2" />

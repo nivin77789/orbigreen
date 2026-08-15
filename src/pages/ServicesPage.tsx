@@ -35,10 +35,6 @@ function ServicesHero() {
           <h1 className="mt-3 text-balance text-[clamp(1.85rem,4vw,2.75rem)] font-semibold leading-[1.08] tracking-tight text-primary">
             Services
           </h1>
-          <p className="mt-4 max-w-xl text-[16px] lg:text-[17px] leading-relaxed text-primary/75">
-            Comprehensive industrial sourcing, engineering, and quality solutions designed to optimize your
-            operations end to end.
-          </p>
           <div className="global-presence-heading-line mt-4" />
           <motion.div
             initial={{ opacity: 0, y: 16 }}

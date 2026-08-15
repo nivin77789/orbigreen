@@ -45,11 +45,26 @@ export function HomeAboutSection() {
             <h2 className="mt-4 text-balance text-[clamp(2rem,4vw,3.1rem)] font-semibold leading-[1.08] tracking-tight text-primary">
               About Us
             </h2>
-            <p className="mt-5 max-w-xl text-[17px] lg:text-[18px] leading-relaxed text-primary/72 sm:text-[18px] lg:text-[19px]">
-              Integrated sourcing for industrial engineering — combining supplier networks, procurement, and quality
-              management to improve supply chain efficiency. We support OEMs worldwide with a single-window approach
-              from components to delivery.
-            </p>
+            <div className="mt-5 max-w-xl space-y-4 text-[17px] leading-relaxed text-primary/72 sm:text-[18px] lg:text-[19px]">
+              <p>
+                OrbiGreen is a global partner for <strong>integrated industrial sourcing</strong>, delivering
+                engineered components, turnkey project solutions, and specialised service offerings through a single,
+                seamless interface. Our model unifies supplier development, strategic procurement, and rigorous quality
+                management into one resilient ecosystem designed to elevate performance and create enduring value.
+              </p>
+              <p>
+                We support <strong>OEMs, industrial customers, and end-users</strong> across international markets
+                with sourcing solutions that combine engineering depth, supply chain intelligence, and uncompromising
+                quality governance. From component qualification and vendor onboarding to project execution and final
+                delivery, OrbiGreen ensures consistency, compliance, and reliability at every stage of the value chain.
+              </p>
+              <p>
+                Our <strong>single-window delivery framework</strong> enhances process efficiency, accelerates
+                production readiness, and strengthens global supply chain resilience. By integrating technical
+                precision with worldwide procurement reach, we help customers achieve predictable outcomes, optimise
+                total cost of ownership, and scale confidently across borders.
+              </p>
+            </div>
             <div className="global-presence-heading-line mt-6" />
             <div className="mt-7 flex flex-wrap gap-3">
               <Link

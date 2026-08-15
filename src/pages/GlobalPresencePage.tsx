@@ -113,7 +113,8 @@ export default function GlobalPresencePage() {
               </span>
             </h2>
             <p className="mx-auto mt-5 max-w-xl text-[16px] lg:text-[17px] leading-relaxed text-primary/65">
-              Tell us your target regions and product categories — we'll map the right network for your program.
+              Tell us your target regions and product categories — we’ll map the right supplier network and provide
+              customized, tailor-made service solutions aligned with your program requirements.
             </p>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
               <Link

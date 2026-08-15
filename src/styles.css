@@ -101,6 +101,79 @@
   color: var(--primary);
 }
 
+.quotation-cta {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  overflow: hidden;
+  box-shadow: 0 7px 20px -10px rgba(92, 191, 42, 0.8);
+  transition:
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease;
+  animation: quotation-cta-glow 3.6s ease-in-out infinite;
+}
+
+.quotation-cta::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  width: 45%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.34), transparent);
+  transform: translateX(-280%) skewX(-22deg);
+  transition: transform 0.55s ease;
+}
+
+.quotation-cta > * {
+  position: relative;
+  z-index: 1;
+}
+
+.quotation-cta:hover,
+.quotation-cta:focus-visible {
+  transform: translateY(-2px) scale(1.025);
+  box-shadow: 0 13px 28px -12px rgba(92, 191, 42, 0.95);
+}
+
+.quotation-cta:hover::before,
+.quotation-cta:focus-visible::before {
+  transform: translateX(430%) skewX(-22deg);
+}
+
+.quotation-cta:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.quotation-cta:focus-visible {
+  outline: 3px solid rgba(141, 209, 40, 0.55);
+  outline-offset: 3px;
+}
+
+.quotation-cta__arrow {
+  font-size: 1.1em;
+  line-height: 1;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.quotation-cta:hover .quotation-cta__arrow,
+.quotation-cta:focus-visible .quotation-cta__arrow {
+  transform: translateX(0.28rem);
+}
+
+@keyframes quotation-cta-glow {
+  0%,
+  100% {
+    box-shadow: 0 7px 20px -10px rgba(92, 191, 42, 0.8);
+  }
+
+  50% {
+    box-shadow: 0 10px 24px -9px rgba(141, 209, 40, 0.95);
+  }
+}
+
 @utility glass-nav {
   background: linear-gradient(
     135deg,
@@ -1620,9 +1693,10 @@
 }
 
 .home-workflow__title {
-  font-size: clamp(1.1rem, 2.2vw, 1.55rem);
-  line-height: 1.15;
-  text-shadow: 0 2px 20px rgba(11, 95, 126, 0.35);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  text-shadow: 0 3px 24px rgba(11, 95, 126, 0.48);
 }
 
 .home-workflow__stack {
