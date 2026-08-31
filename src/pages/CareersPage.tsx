@@ -272,62 +272,12 @@ export default function CareersPage() {
 
       <main className="pt-24 lg:pt-28">
         {/* Hero Section */}
-        <section className="relative overflow-hidden px-6 py-12 lg:px-10 lg:py-20">
+        <section className="relative overflow-hidden px-6 pt-8 pb-4 lg:px-10 lg:pt-12 lg:pb-6">
           <div className="mx-auto max-w-[1280px]">
-            <div className="max-w-3xl">
-              <SectionLabel>Join Our Global Team</SectionLabel>
-              <h1 className="mt-3 text-[clamp(2.2rem,4vw,3.75rem)] font-bold tracking-tight text-primary leading-[1.1]">
-                Build the Future of <br className="hidden sm:inline" />
-                <span className="text-secondary">Industrial Sourcing & Engineering</span>
+            <div>
+              <h1 className="text-[clamp(2.75rem,6vw,5.25rem)] font-extrabold tracking-tight text-primary leading-[1.05]">
+                Join Our Global Team
               </h1>
-              <p className="mt-4 text-[16px] sm:text-[18px] leading-relaxed text-primary/70">
-                At Orbigreen Techsource, we combine deep technical manufacturing expertise with global supply chain
-                orchestration. Explore open engineering, quality, operations, and commercial opportunities across our
-                worldwide network.
-              </p>
-            </div>
-
-            {/* Value Highlights */}
-            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              <div className="glass-card-light rounded-2xl p-5 border border-primary/10">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary/15 text-[20px] text-secondary font-bold">
-                  🌐
-                </div>
-                <h3 className="mt-3 text-[16px] font-semibold text-primary">Global Footprint</h3>
-                <p className="mt-1 text-[13px] leading-relaxed text-primary/65">
-                  Collaborate across manufacturing hubs in Asia, Europe, and North America.
-                </p>
-              </div>
-
-              <div className="glass-card-light rounded-2xl p-5 border border-primary/10">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary/15 text-[20px] text-secondary font-bold">
-                  ⚙️
-                </div>
-                <h3 className="mt-3 text-[16px] font-semibold text-primary">Engineering First</h3>
-                <p className="mt-1 text-[13px] leading-relaxed text-primary/65">
-                  Work on high-precision castings, CNC machining, and heavy engineering projects.
-                </p>
-              </div>
-
-              <div className="glass-card-light rounded-2xl p-5 border border-primary/10">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary/15 text-[20px] text-secondary font-bold">
-                  📈
-                </div>
-                <h3 className="mt-3 text-[16px] font-semibold text-primary">Rapid Growth</h3>
-                <p className="mt-1 text-[13px] leading-relaxed text-primary/65">
-                  Accelerate your career trajectory with cross-functional exposure and mentorship.
-                </p>
-              </div>
-
-              <div className="glass-card-light rounded-2xl p-5 border border-primary/10">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary/15 text-[20px] text-secondary font-bold">
-                  🌱
-                </div>
-                <h3 className="mt-3 text-[16px] font-semibold text-primary">Sustainable Vision</h3>
-                <p className="mt-1 text-[13px] leading-relaxed text-primary/65">
-                  Promoting green supply chains, waste reduction, and smart manufacturing.
-                </p>
-              </div>
             </div>
           </div>
         </section>

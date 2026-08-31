@@ -1,5 +1,4 @@
-import { useEffect, useMemo, useState, type FormEvent } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState, type FormEvent } from "react";
 import { collection, getDocs, orderBy, query, type DocumentData } from "firebase/firestore";
 import { SectionLabel } from "@/components/SectionLabel";
 import { Nav } from "@/components/Nav";
@@ -7,26 +6,12 @@ import { Footer } from "@/components/Footer";
 import { db } from "@/lib/firebase";
 import { addJobRole, deleteJobRole, fetchJobs, updateJobRole } from "@/lib/jobService";
 import { addLinkedInPost, deleteLinkedInPost, fetchLinkedInPosts, parseLinkedInEmbedSrc } from "@/lib/linkedinService";
-import { useBlogs } from "@/context/BlogContext";
-import type { BlogPost, BlogPostInput } from "@/types/blog";
 import type { JobRole, JobRoleInput } from "@/types/job";
 import type { LinkedInPost } from "@/types/linkedin";
-import { slugify } from "@/lib/blogStore";
 
 const ADMIN_USERNAME = "admin";
 const ADMIN_PASSWORD = "admin";
 const SESSION_KEY = "orbigreen_admin_session";
-
-const EMPTY_BLOG_FORM: BlogPostInput = {
-  title: "",
-  excerpt: "",
-  content: "",
-  author: "Orbigreen Editorial",
-  category: "Sourcing Insights",
-  coverImage: "",
-  tags: [],
-  published: true,
-};
 
 const fieldClass =
   "mt-1.5 w-full rounded-xl border border-primary/10 bg-white px-3.5 py-2.5 text-[14px] lg:text-[15px] text-primary outline-none transition-all focus:border-secondary/50 focus:bg-white focus:shadow-[0_0_0_3px_rgba(92,191,42,0.12)]";
@@ -44,21 +29,6 @@ function formatDate(value: unknown): string {
     return new Date(value).toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" });
   }
   return "—";
-}
-
-function postToBlogForm(post: BlogPost): BlogPostInput {
-  return {
-    title: post.title,
-    excerpt: post.excerpt,
-    content: post.content,
-    author: post.author,
-    category: post.category,
-    coverImage: post.coverImage ?? "",
-    tags: post.tags,
-    published: post.published,
-    slug: post.slug,
-    publishedAt: post.publishedAt,
-  };
 }
 
 function AdminLogin({ onLogin }: { onLogin: (username: string, password: string) => boolean }) {
@@ -82,7 +52,7 @@ function AdminLogin({ onLogin }: { onLogin: (username: string, password: string)
         Management Center Sign in
       </h1>
       <p className="mt-3 text-[14px] leading-relaxed text-primary/65">
-        Sign in to view form submissions, post job roles, manage blog articles, and embed LinkedIn posts.
+        Sign in to view form submissions, post job roles, and embed LinkedIn posts.
       </p>
 
       <form onSubmit={handleSubmit} className="mt-8 rounded-2xl border border-primary/10 bg-white p-6">
@@ -413,197 +383,6 @@ function JobEditorModal({ initialJob, onSave, onClose }: JobEditorModalProps) {
   );
 }
 
-/* --- BLOG ARTICLE EDITOR MODAL --- */
-function BlogArticleModal({
-  initial,
-  editingId,
-  onSave,
-  onClose,
-}: {
-  initial: BlogPostInput;
-  editingId?: string;
-  onSave: (input: BlogPostInput) => Promise<void>;
-  onClose: () => void;
-}) {
-  const [form, setForm] = useState<BlogPostInput>(initial);
-  const [tagsInput, setTagsInput] = useState(initial.tags.join(", "));
-  const [saving, setSaving] = useState(false);
-
-  const previewSlug = useMemo(
-    () => slugify(form.slug?.trim() || form.title || "new-post"),
-    [form.slug, form.title],
-  );
-
-  const update = <K extends keyof BlogPostInput>(key: K, value: BlogPostInput[K]) => {
-    setForm((current) => ({ ...current, [key]: value }));
-  };
-
-  const handleSubmit = async (event: FormEvent) => {
-    event.preventDefault();
-    setSaving(true);
-    await onSave({
-      ...form,
-      tags: tagsInput
-        .split(",")
-        .map((tag) => tag.trim())
-        .filter(Boolean),
-    });
-    setSaving(false);
-    onClose();
-  };
-
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, []);
-
-  return (
-    <div data-lenis-prevent className="fixed inset-0 z-[150] flex flex-col bg-section text-primary overflow-hidden">
-      <header className="sticky top-0 z-20 flex shrink-0 items-center justify-between border-b border-primary/10 bg-white/90 px-6 py-4 backdrop-blur-md lg:px-12">
-        <div>
-          <SectionLabel>Blog Admin</SectionLabel>
-          <h1 className="mt-1 text-[20px] lg:text-[24px] font-bold tracking-tight text-primary">
-            {editingId ? "Edit Article" : "Create New Blog Article"}
-          </h1>
-          <p className="text-[13px] text-primary/55">Slug preview: /blog/{previewSlug}</p>
-        </div>
-
-        <button
-          type="button"
-          onClick={onClose}
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/5 text-[18px] text-primary/70 transition-colors hover:bg-primary/15 hover:text-primary"
-          aria-label="Close page"
-        >
-          ✕
-        </button>
-      </header>
-
-      <div data-lenis-prevent className="flex-1 overflow-y-auto overscroll-contain px-6 py-8 lg:px-12 lg:py-12">
-        <form
-          id="blog-editor-form"
-          onSubmit={handleSubmit}
-          className="mx-auto max-w-4xl space-y-6 rounded-3xl border border-primary/10 bg-white p-6 sm:p-10 shadow-lg"
-        >
-          <label className="block">
-            <span className={labelClass}>Title *</span>
-            <input
-              value={form.title}
-              onChange={(event) => update("title", event.target.value)}
-              className={fieldClass}
-              required
-            />
-          </label>
-
-          <div className="grid gap-6 sm:grid-cols-2">
-            <label className="block">
-              <span className={labelClass}>Custom slug (optional)</span>
-              <input
-                value={form.slug ?? ""}
-                onChange={(event) => update("slug", event.target.value)}
-                className={fieldClass}
-                placeholder="auto-generated-from-title"
-              />
-            </label>
-
-            <label className="block">
-              <span className={labelClass}>Category *</span>
-              <input
-                value={form.category}
-                onChange={(event) => update("category", event.target.value)}
-                className={fieldClass}
-                required
-              />
-            </label>
-          </div>
-
-          <div className="grid gap-6 sm:grid-cols-2">
-            <label className="block">
-              <span className={labelClass}>Author *</span>
-              <input
-                value={form.author}
-                onChange={(event) => update("author", event.target.value)}
-                className={fieldClass}
-                required
-              />
-            </label>
-
-            <label className="block">
-              <span className={labelClass}>Cover Image URL</span>
-              <input
-                value={form.coverImage ?? ""}
-                onChange={(event) => update("coverImage", event.target.value)}
-                className={fieldClass}
-                placeholder="/blog-covers/example.webp"
-              />
-            </label>
-          </div>
-
-          <label className="block">
-            <span className={labelClass}>Excerpt *</span>
-            <textarea
-              value={form.excerpt}
-              onChange={(event) => update("excerpt", event.target.value)}
-              className={`${fieldClass} min-h-[90px] resize-y`}
-              required
-            />
-          </label>
-
-          <label className="block">
-            <span className={labelClass}>Content *</span>
-            <textarea
-              value={form.content}
-              onChange={(event) => update("content", event.target.value)}
-              className={`${fieldClass} min-h-[240px] resize-y leading-relaxed`}
-              placeholder="Separate paragraphs with a blank line."
-              required
-            />
-          </label>
-
-          <label className="block">
-            <span className={labelClass}>Tags (comma separated)</span>
-            <input
-              value={tagsInput}
-              onChange={(event) => setTagsInput(event.target.value)}
-              className={fieldClass}
-              placeholder="Sourcing, Quality, OEM"
-            />
-          </label>
-
-          <label className="flex items-center gap-3">
-            <input
-              type="checkbox"
-              checked={form.published}
-              onChange={(event) => update("published", event.target.checked)}
-              className="h-4 w-4 rounded border-primary/20 text-secondary focus:ring-secondary"
-            />
-            <span className="text-[14px] lg:text-[15px] font-semibold text-primary">Published</span>
-          </label>
-        </form>
-      </div>
-
-      <footer className="sticky bottom-0 z-20 flex shrink-0 items-center justify-end gap-3 border-t border-primary/10 bg-white/90 px-6 py-4 backdrop-blur-md lg:px-12">
-        <button
-          type="button"
-          onClick={onClose}
-          className="rounded-full border border-primary/15 bg-white px-6 py-3 text-[14px] font-semibold text-primary/70 transition-colors hover:bg-primary/5"
-        >
-          Cancel
-        </button>
-        <button
-          type="submit"
-          form="blog-editor-form"
-          disabled={saving}
-          className="gradient-border-cta rounded-full px-8 py-3 text-[15px] font-semibold disabled:opacity-60"
-        >
-          {saving ? "Saving..." : editingId ? "Update Article" : "Publish Article"}
-        </button>
-      </footer>
-    </div>
-  );
-}
-
 /* --- LINKEDIN POST MODAL --- */
 function LinkedInModal({
   onSave,
@@ -722,7 +501,7 @@ function LinkedInModal({
 /* --- MAIN ADMIN PAGE COMPONENT --- */
 export default function AdminPage() {
   const [isAdmin, setIsAdmin] = useState(() => sessionStorage.getItem(SESSION_KEY) === "1");
-  const [tab, setTab] = useState<"contacts" | "quotations" | "jobs" | "blogs" | "linkedin">("contacts");
+  const [tab, setTab] = useState<"contacts" | "quotations" | "jobs" | "linkedin">("contacts");
   
   // Data States
   const [contacts, setContacts] = useState<Submission[]>([]);
@@ -732,13 +511,9 @@ export default function AdminPage() {
   const [loading, setLoading] = useState(false);
   const [loadError, setLoadError] = useState("");
 
-  // Modals & Editors
+  // Modals
   const [editingJob, setEditingJob] = useState<JobRole | null | "NEW">(null);
-  const [editingBlogId, setEditingBlogId] = useState<string | null | "NEW">(null);
   const [showLinkedInModal, setShowLinkedInModal] = useState(false);
-
-  // Blog Context
-  const { posts: blogPosts, addPost, editPost, removePost } = useBlogs();
 
   const login = (username: string, password: string) => {
     if (username !== ADMIN_USERNAME || password !== ADMIN_PASSWORD) return false;
@@ -826,21 +601,6 @@ export default function AdminPage() {
     await reloadJobs();
   };
 
-  // Blog Actions
-  const handleSaveBlog = async (input: BlogPostInput) => {
-    if (editingBlogId && editingBlogId !== "NEW") {
-      await editPost(editingBlogId, input);
-    } else {
-      await addPost(input);
-    }
-    setEditingBlogId(null);
-  };
-
-  const handleDeleteBlog = async (id: string) => {
-    if (!window.confirm("Delete this article? This cannot be undone.")) return;
-    await removePost(id);
-  };
-
   // LinkedIn Actions
   const handleAddLinkedIn = async (title: string, embedCode: string) => {
     await addLinkedInPost({ title, embedCode });
@@ -853,8 +613,6 @@ export default function AdminPage() {
     await deleteLinkedInPost(id);
     await reloadLinkedInPosts();
   };
-
-  const editingBlogPost = editingBlogId && editingBlogId !== "NEW" ? blogPosts.find((p) => p.id === editingBlogId) : undefined;
 
   return (
     <div className="min-h-screen bg-section text-primary">
@@ -872,7 +630,7 @@ export default function AdminPage() {
                   Management Center
                 </h1>
                 <p className="mt-2 text-[14px] text-primary/65">
-                  View messages, quotation requests, job roles, blog articles, and LinkedIn embedded posts.
+                  View contact messages, quotation requests, manage career postings, and embed LinkedIn posts.
                 </p>
               </div>
               <button
@@ -915,15 +673,6 @@ export default function AdminPage() {
               </button>
               <button
                 type="button"
-                onClick={() => setTab("blogs")}
-                className={`rounded-full px-5 py-2.5 text-[13px] font-semibold transition-colors ${
-                  tab === "blogs" ? "gradient-border-cta" : "glass-card-light text-primary/70"
-                }`}
-              >
-                Blog Articles ({blogPosts.length})
-              </button>
-              <button
-                type="button"
                 onClick={() => setTab("linkedin")}
                 className={`rounded-full px-5 py-2.5 text-[13px] font-semibold transition-colors ${
                   tab === "linkedin" ? "gradient-border-cta" : "glass-card-light text-primary/70"
@@ -933,7 +682,7 @@ export default function AdminPage() {
               </button>
             </div>
 
-            {/* Top Action Bar for Job / Blog / LinkedIn */}
+            {/* Top Action Bar */}
             {tab === "jobs" && (
               <div className="mt-6 flex justify-end">
                 <button
@@ -942,17 +691,6 @@ export default function AdminPage() {
                   className="gradient-border-cta rounded-full px-5 py-2 text-[13px] font-semibold"
                 >
                   + Post New Job Role
-                </button>
-              </div>
-            )}
-            {tab === "blogs" && (
-              <div className="mt-6 flex justify-end">
-                <button
-                  type="button"
-                  onClick={() => setEditingBlogId("NEW")}
-                  className="gradient-border-cta rounded-full px-5 py-2 text-[13px] font-semibold"
-                >
-                  + Create New Article
                 </button>
               </div>
             )}
@@ -1051,62 +789,6 @@ export default function AdminPage() {
                     ))}
                   </div>
                 )
-              ) : tab === "blogs" ? (
-                blogPosts.length === 0 ? (
-                  <p className="px-5 py-8 text-[14px] text-primary/55">No blog articles published yet.</p>
-                ) : (
-                  <div className="divide-y divide-primary/8">
-                    {blogPosts.map((post) => (
-                      <div
-                        key={post.id}
-                        className="flex flex-col gap-4 px-5 py-5 sm:flex-row sm:items-center sm:justify-between"
-                      >
-                        <div className="min-w-0">
-                          <div className="flex flex-wrap items-center gap-2">
-                            <h3 className="text-[15px] lg:text-[16px] font-bold text-primary">{post.title}</h3>
-                            <span
-                              className={`rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] ${
-                                post.published
-                                  ? "bg-secondary/15 text-secondary"
-                                  : "bg-primary/8 text-primary/55"
-                              }`}
-                            >
-                              {post.published ? "Published" : "Draft"}
-                            </span>
-                          </div>
-                          <p className="mt-1 text-[13px] text-primary/55">
-                            /blog/{post.slug} · Updated {formatDate(post.updatedAt)}
-                          </p>
-                          <p className="mt-1.5 line-clamp-2 text-[13px] text-primary/65">{post.excerpt}</p>
-                        </div>
-                        <div className="flex shrink-0 items-center gap-2">
-                          {post.published ? (
-                            <Link
-                              to={`/blog/${post.slug}`}
-                              className="rounded-full border border-primary/10 px-3.5 py-1.5 text-[12px] font-semibold text-primary/70 hover:bg-primary/5"
-                            >
-                              View
-                            </Link>
-                          ) : null}
-                          <button
-                            type="button"
-                            onClick={() => setEditingBlogId(post.id)}
-                            className="rounded-full border border-primary/10 px-3.5 py-1.5 text-[12px] font-semibold text-primary hover:bg-primary/5"
-                          >
-                            Edit
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => void handleDeleteBlog(post.id)}
-                            className="rounded-full border border-red-200 px-3.5 py-1.5 text-[12px] font-semibold text-red-600 hover:bg-red-50"
-                          >
-                            Delete
-                          </button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )
               ) : linkedInPosts.length === 0 ? (
                 <p className="px-5 py-8 text-[14px] text-primary/55">No LinkedIn posts embedded yet.</p>
               ) : (
@@ -1154,15 +836,6 @@ export default function AdminPage() {
           initialJob={editingJob === "NEW" ? null : editingJob}
           onSave={handleSaveJob}
           onClose={() => setEditingJob(null)}
-        />
-      )}
-
-      {editingBlogId && (
-        <BlogArticleModal
-          initial={editingBlogPost ? postToBlogForm(editingBlogPost) : EMPTY_BLOG_FORM}
-          editingId={editingBlogId === "NEW" ? undefined : editingBlogId}
-          onSave={handleSaveBlog}
-          onClose={() => setEditingBlogId(null)}
         />
       )}
 

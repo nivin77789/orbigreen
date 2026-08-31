@@ -23,6 +23,14 @@ export function parseLinkedInEmbedSrc(embedCodeOrUrl: string): string {
   return trimmed;
 }
 
+export function getLinkedInDirectUrl(embedCodeOrUrl: string): string {
+  const src = parseLinkedInEmbedSrc(embedCodeOrUrl);
+  if (src.includes("/embed/feed/update/")) {
+    return src.replace("/embed/feed/update/", "/feed/update/");
+  }
+  return src;
+}
+
 export async function fetchLinkedInPosts(): Promise<LinkedInPost[]> {
   try {
     const q = query(collection(db, "linkedin_posts"), orderBy("createdAt", "desc"));
