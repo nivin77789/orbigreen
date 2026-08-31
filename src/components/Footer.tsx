@@ -60,11 +60,16 @@ export function Footer() {
               </Link>
             </li>
             <li>
+              <Link to="/careers" className="transition-colors hover:text-primary">
+                Careers
+              </Link>
+            </li>
+            <li>
               <Link to="/quotation" className="transition-colors hover:text-primary">
                 Request Quotation
               </Link>
             </li>
-            <li className="col-span-2">
+            <li>
               <Link to="/contact" className="transition-colors hover:text-primary">
                 Contact
               </Link>

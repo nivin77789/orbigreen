@@ -21,9 +21,10 @@ const STATIC_PAGE_META: Record<string, { title: string; description?: string }> 
   "/contact": { title: "Contact Us", description: "Get in touch with Orbigreen Techsource for industrial sourcing support." },
   "/quotation": { title: "Request Quotation", description: "Submit your RFQ with drawings and specifications for a commercial proposal." },
   "/global-presence": { title: "Global Network", description: "Our sourcing presence across China, Vietnam, India, Turkey, and beyond." },
+  "/careers": { title: "Careers", description: "Explore career opportunities in industrial sourcing, quality engineering, and supply chain at Orbigreen Techsource." },
   "/blog": { title: "Media", description: "News, insights, and updates from Orbigreen Techsource." },
   "/admin/blog": { title: "Blog Admin", description: "Manage Orbigreen blog posts." },
-  "/admin": { title: "Admin", description: "View contact and quotation form submissions." },
+  "/admin": { title: "Admin", description: "View contact, quotation form submissions, manage job postings, and review applications." },
 };
 
 function applyStaticPageMeta(pathname: string) {
@@ -45,6 +46,7 @@ const ServiceDetailPage = lazy(() => import("@/pages/ServiceDetailPage"));
 const ContactPage = lazy(() => import("@/pages/ContactPage"));
 const QuotationPage = lazy(() => import("@/pages/QuotationPage"));
 const GlobalPresencePage = lazy(() => import("@/pages/GlobalPresencePage"));
+const CareersPage = lazy(() => import("@/pages/CareersPage"));
 const BlogPage = lazy(() => import("@/pages/BlogPage"));
 const BlogPostPage = lazy(() => import("@/pages/BlogPostPage"));
 const AdminBlogPage = lazy(() => import("@/pages/AdminBlogPage"));
@@ -96,6 +98,7 @@ export default function App() {
                     <Route path="/contact" element={<ContactPage />} />
                     <Route path="/quotation" element={<QuotationPage />} />
                     <Route path="/global-presence" element={<GlobalPresencePage />} />
+                    <Route path="/careers" element={<CareersPage />} />
                     <Route path="/blog" element={<BlogPage />} />
                     <Route path="/blog/:slug" element={<BlogPostPage />} />
                     <Route path="/admin/blog" element={<AdminBlogPage />} />

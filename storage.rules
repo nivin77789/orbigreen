@@ -11,6 +11,11 @@ service firebase.storage {
       allow read: if true;
     }
 
+    match /job_applications/{docId}/{fileName} {
+      allow write: if request.resource.size < 20 * 1024 * 1024;
+      allow read: if true;
+    }
+
     match /{allPaths=**} {
       allow read, write: if false;
     }

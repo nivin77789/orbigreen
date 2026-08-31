@@ -9,6 +9,7 @@ const NAV = [
   { label: "Product Categories", to: "/products" },
   { label: "Services", to: "/services" },
   { label: "Global Network", to: "/global-presence" },
+  { label: "Careers", to: "/careers" },
   { label: "Media", to: "/blog" },
 ];
 
