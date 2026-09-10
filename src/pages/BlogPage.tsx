@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { SectionLabel } from "@/components/SectionLabel";
-import { fetchLinkedInPosts, getLinkedInDirectUrl, parseLinkedInEmbedSrc } from "@/lib/linkedinService";
+import { fetchLinkedInPosts } from "@/lib/linkedinService";
 import type { LinkedInPost } from "@/types/linkedin";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -74,43 +74,35 @@ export default function BlogPage() {
             ) : (
               <div className="mt-8 grid gap-8 md:grid-cols-2">
                 {linkedInPosts.map((post) => {
-                  const directUrl = getLinkedInDirectUrl(post.embedCode);
-                  const embedSrc = parseLinkedInEmbedSrc(post.embedCode);
-
                   return (
                     <div
                       key={post.id}
-                      className="group flex flex-col justify-between overflow-hidden rounded-3xl border border-primary/10 bg-section/40 p-5 sm:p-6 shadow-sm transition-all hover:border-primary/25 hover:shadow-md"
+                      className="group flex flex-col justify-between overflow-hidden rounded-3xl border border-primary/10 bg-white p-5 sm:p-6 shadow-sm transition-all hover:border-primary/25 hover:shadow-md"
                     >
                       <div>
-                        <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-                          <a
-                            href={directUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-[16px] font-bold text-primary transition-colors hover:text-secondary"
-                          >
-                            {post.title} ↗
-                          </a>
-                          <a
-                            href={directUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-[12px] font-semibold text-blue-700 transition-colors hover:bg-blue-100"
-                          >
-                            <span>View on LinkedIn</span>
-                            <span className="text-[13px]">↗</span>
-                          </a>
-                        </div>
+                        {post.imageUrl ? (
+                          <div className="relative mb-5 overflow-hidden rounded-2xl border border-primary/10 bg-slate-50">
+                            <img
+                              src={post.imageUrl}
+                              alt={post.title}
+                              className="w-full aspect-[16/10] object-cover rounded-2xl transition-transform duration-500 group-hover:scale-[1.03]"
+                            />
+                          </div>
+                        ) : null}
 
-                        <div className="relative overflow-hidden rounded-2xl bg-white border border-primary/10 shadow-inner">
-                          <iframe
-                            src={embedSrc}
-                            title={post.title}
-                            className="w-full h-[520px] border-0"
-                            allowFullScreen
-                          />
-                        </div>
+                        <h3 className="text-[19px] lg:text-[21px] font-bold leading-snug tracking-tight text-primary">
+                          {post.title}
+                        </h3>
+                      </div>
+
+                      <div className="mt-6 flex items-center justify-between border-t border-primary/8 pt-4">
+                        <Link
+                          to={`/blog/post/${post.id}`}
+                          className="gradient-border-cta inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[14px] font-semibold transition-transform group-hover:translate-x-1"
+                        >
+                          <span>Read More</span>
+                          <span className="text-[14px]">→</span>
+                        </Link>
                       </div>
                     </div>
                   );

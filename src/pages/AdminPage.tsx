@@ -5,7 +5,7 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { db } from "@/lib/firebase";
 import { addJobRole, deleteJobRole, fetchJobs, updateJobRole } from "@/lib/jobService";
-import { addLinkedInPost, deleteLinkedInPost, fetchLinkedInPosts, parseLinkedInEmbedSrc } from "@/lib/linkedinService";
+import { addLinkedInPost, deleteLinkedInPost, fetchLinkedInPosts, parseLinkedInEmbedSrc, parseLinkedInEmbedHeight } from "@/lib/linkedinService";
 import type { JobRole, JobRoleInput } from "@/types/job";
 import type { LinkedInPost } from "@/types/linkedin";
 
@@ -388,11 +388,13 @@ function LinkedInModal({
   onSave,
   onClose,
 }: {
-  onSave: (title: string, embedCode: string) => Promise<void>;
+  onSave: (title: string, embedCode: string, imageUrl?: string, summary?: string) => Promise<void>;
   onClose: () => void;
 }) {
   const [title, setTitle] = useState("");
   const [embedCode, setEmbedCode] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const [summary, setSummary] = useState("");
   const [saving, setSaving] = useState(false);
   const [err, setErr] = useState("");
 
@@ -405,7 +407,7 @@ function LinkedInModal({
     setSaving(true);
     setErr("");
     try {
-      await onSave(title, embedCode);
+      await onSave(title, embedCode, imageUrl, summary);
       onClose();
     } catch (error) {
       setErr(error instanceof Error ? error.message : "Failed to add LinkedIn post.");
@@ -460,11 +462,35 @@ function LinkedInModal({
           </label>
 
           <label className="block">
+            <span className={labelClass}>Direct Post Image URL (Recommended for full uncropped image)</span>
+            <input
+              type="url"
+              value={imageUrl}
+              onChange={(e) => setImageUrl(e.target.value)}
+              className={fieldClass}
+              placeholder="https://example.com/post-image.jpg"
+            />
+            <span className="mt-1.5 block text-[12px] text-primary/50">
+              Optional. Paste direct image URL to show the full post graphic without cropping.
+            </span>
+          </label>
+
+          <label className="block">
+            <span className={labelClass}>Summary / Excerpt (Optional)</span>
+            <textarea
+              value={summary}
+              onChange={(e) => setSummary(e.target.value)}
+              className={`${fieldClass} min-h-[90px] resize-y`}
+              placeholder="Short description of the post..."
+            />
+          </label>
+
+          <label className="block">
             <span className={labelClass}>LinkedIn Embed Code or Iframe URL *</span>
             <textarea
               value={embedCode}
               onChange={(e) => setEmbedCode(e.target.value)}
-              className={`${fieldClass} min-h-[160px] resize-y font-mono text-[13px]`}
+              className={`${fieldClass} min-h-[140px] resize-y font-mono text-[13px]`}
               placeholder={`Paste raw <iframe src="..."></iframe> embed code OR embed URL here...`}
               required
             />
@@ -602,8 +628,8 @@ export default function AdminPage() {
   };
 
   // LinkedIn Actions
-  const handleAddLinkedIn = async (title: string, embedCode: string) => {
-    await addLinkedInPost({ title, embedCode });
+  const handleAddLinkedIn = async (title: string, embedCode: string, imageUrl?: string, summary?: string) => {
+    await addLinkedInPost({ title, embedCode, imageUrl, summary });
     await reloadLinkedInPosts();
   };
 
@@ -795,6 +821,8 @@ export default function AdminPage() {
                 <div className="grid gap-6 p-6 sm:grid-cols-2">
                   {linkedInPosts.map((post) => {
                     const iframeSrc = parseLinkedInEmbedSrc(post.embedCode);
+                    const embedHeight = parseLinkedInEmbedHeight(post.embedCode);
+                    const iframeHeight = Math.max(embedHeight, 650);
                     return (
                       <div
                         key={post.id}
@@ -806,7 +834,8 @@ export default function AdminPage() {
                             <iframe
                               src={iframeSrc}
                               title={post.title}
-                              className="w-full h-[420px] border-0"
+                              className="w-full border-0"
+                              style={{ height: `${iframeHeight}px` }}
                               allowFullScreen
                             />
                           </div>

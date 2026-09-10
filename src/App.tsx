@@ -49,6 +49,7 @@ const GlobalPresencePage = lazy(() => import("@/pages/GlobalPresencePage"));
 const CareersPage = lazy(() => import("@/pages/CareersPage"));
 const BlogPage = lazy(() => import("@/pages/BlogPage"));
 const BlogPostPage = lazy(() => import("@/pages/BlogPostPage"));
+const MediaPostPage = lazy(() => import("@/pages/MediaPostPage"));
 const AdminBlogPage = lazy(() => import("@/pages/AdminBlogPage"));
 const AdminPage = lazy(() => import("@/pages/AdminPage"));
 const ChatBot = lazy(() =>
@@ -100,6 +101,7 @@ export default function App() {
                     <Route path="/global-presence" element={<GlobalPresencePage />} />
                     <Route path="/careers" element={<CareersPage />} />
                     <Route path="/blog" element={<BlogPage />} />
+                    <Route path="/blog/post/:id" element={<MediaPostPage />} />
                     <Route path="/blog/:slug" element={<BlogPostPage />} />
                     <Route path="/admin/blog" element={<AdminBlogPage />} />
                     <Route path="/admin" element={<AdminPage />} />

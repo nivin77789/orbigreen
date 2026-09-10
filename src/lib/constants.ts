@@ -16,6 +16,6 @@ export const EMAIL = "info@orbigreentech.com";
 export const FORM_RECIPIENT_EMAIL = "orbigreenrfq@gmail.com";
 export const WEB3FORMS_ACCESS_KEY = "ea21d180-9691-4e95-97f5-80265668e478";
 export const OFFICE_ADDRESS =
-  "SCO 26, First Floor, Saraswati Vihar, Dhakoli, Zirakpur, District SAS Nagar, Pin Code: 140603, Punjab, India";
+  "SH 26, First Floor, Saraswati Vihar, Dhakoli, Zirakpur, District SAS Nagar, Pin Code: 140603, Punjab, India";
 
 export const CONTACT_SUMMARY = `Phone: ${PHONE_DISPLAY} · Email: ${EMAIL} · Office: ${OFFICE_ADDRESS}.`;

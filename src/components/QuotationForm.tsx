@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { submitWebsiteForm } from "@/lib/submitForm";
 
 const CATEGORIES = [
-  "Castings & Forging",
+  "Castings & Forgings",
   "Machining & Fabrication",
   "Assemblies & Stamping",
   "Pressure Vessels & Tanks",

@@ -44,7 +44,7 @@ Complete documentation of all user-facing content on the Orbigreen Techsource we
 | **Phone (tel link)** | +919971863450 |
 | **WhatsApp** | https://wa.me/919971863450 |
 | **Email** | info@orbigreen.com |
-| **Office address** | SCO 26, First Floor, Saraswati Vihar, Dhakoli, Zirakpur, Punjab – 160104, India |
+| **Office address** | SH 26, First Floor, Saraswati Vihar, Dhakoli, Zirakpur, Punjab – 160104, India |
 
 ### Brand Colors
 
@@ -706,7 +706,7 @@ The hero includes an inline **Contact Form** or **Quotation Form** (compact mode
 | **Headline** | Let's build your / supply advantage. |
 | **Phone** | +91 99718 63450 |
 | **Email** | info@orbigreen.com |
-| **Office** | SCO 26, First Floor, Saraswati Vihar, Dhakoli, Zirakpur, Punjab – 160104, India |
+| **Office** | SH 26, First Floor, Saraswati Vihar, Dhakoli, Zirakpur, Punjab – 160104, India |
 | **CTA** | Request Quotation → `/quotation` |
 
 ---
@@ -758,7 +758,7 @@ The hero includes an inline **Contact Form** or **Quotation Form** (compact mode
 
 - **Phone:** +91 99718 63450
 - **Email:** info@orbigreen.com
-- **Office:** SCO 26, First Floor, Saraswati Vihar, Dhakoli, Zirakpur, Punjab – 160104, India
+- **Office:** SH 26, First Floor, Saraswati Vihar, Dhakoli, Zirakpur, Punjab – 160104, India
 
 ---
 
@@ -1030,7 +1030,7 @@ Present on all pages.
 
 - +91 99718 63450
 - info@orbigreen.com
-- SCO 26, First Floor, Saraswati Vihar, Dhakoli, Zirakpur, Punjab – 160104, India
+- SH 26, First Floor, Saraswati Vihar, Dhakoli, Zirakpur, Punjab – 160104, India
 
 ---
 
@@ -1104,7 +1104,7 @@ Floating widget on all pages.
 |----------------------------|----------|
 | **our services** | We offer training, consultancy & advisory, global sourcing, engineering services, quality & inspection, site & installation, and transport & logistics. |
 | **sourcing markets** | We source across China, Vietnam, India, and Turkey with on-the-ground teams for supplier qualification, audits, and delivery management. |
-| **contact details** | Phone: +91 99718 63450 · Email: info@orbigreen.com · Office: SCO 26, First Floor, Saraswati Vihar, Dhakoli, Zirakpur, Punjab – 160104, India. |
+| **contact details** | Phone: +91 99718 63450 · Email: info@orbigreen.com · Office: SH 26, First Floor, Saraswati Vihar, Dhakoli, Zirakpur, Punjab – 160104, India. |
 | **get a quote** / **price** / **cost** / **quote** | Submit your requirement on our Request Quotation page — you can attach drawings, specs, and reference files for a detailed commercial proposal. |
 | **hello** / **hi** | Hello! How can we help with your industrial sourcing needs today! |
 | **product** | We source castings, machining, fabrication, pressure vessels, stamping parts, proprietary machines, fasteners, and transmission components. |

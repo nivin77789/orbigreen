@@ -38,7 +38,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 2,
     slug: "forging",
-    title: "Forging",
+    title: "Forgings",
     category: "Metal Forming",
     description:
       "Closed-die, open-die, and precision forgings for industrial, automotive, and heavy-engineering applications.",
