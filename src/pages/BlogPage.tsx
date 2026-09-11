@@ -81,11 +81,11 @@ export default function BlogPage() {
                     >
                       <div>
                         {post.imageUrl ? (
-                          <div className="relative mb-5 overflow-hidden rounded-2xl border border-primary/10 bg-slate-50">
+                          <div className="relative mb-5 flex items-center justify-center overflow-hidden rounded-2xl border border-primary/10 bg-slate-50/70 p-2 sm:p-3">
                             <img
                               src={post.imageUrl}
                               alt={post.title}
-                              className="w-full aspect-[16/10] object-cover rounded-2xl transition-transform duration-500 group-hover:scale-[1.03]"
+                              className="w-full h-auto max-h-[520px] object-contain rounded-xl transition-transform duration-500 group-hover:scale-[1.01]"
                             />
                           </div>
                         ) : null}

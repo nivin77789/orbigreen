@@ -131,7 +131,7 @@ export default function MediaPostPage() {
               <img
                 src={post.imageUrl}
                 alt={post.title}
-                className="w-full h-auto rounded-2xl object-cover"
+                className="w-full h-auto rounded-2xl object-contain max-h-[700px]"
               />
             </motion.div>
           ) : null}
