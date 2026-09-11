@@ -2,7 +2,6 @@ import { useEffect, useState, type ReactNode } from "react";
 import { AnimatePresence } from "framer-motion";
 import { SiteLoader } from "@/components/SiteLoader";
 import { areAllScrollFramesLoaded, preloadAllScrollFrames } from "@/lib/frame-cache";
-import { FRAME_COUNT } from "@/lib/scroll-frames";
 import { isMobileLikeDevice } from "@/lib/safeStorage";
 
 const MIN_LOADER_MS = 650;
@@ -24,7 +23,6 @@ type AppBootstrapProps = {
 export function AppBootstrap({ children }: AppBootstrapProps) {
   const [showLoader, setShowLoader] = useState(true);
   const [progress, setProgress] = useState(0);
-  const [status, setStatus] = useState("Preparing scroll experience");
 
   useEffect(() => {
     if (!showLoader) {
@@ -54,7 +52,6 @@ export function AppBootstrap({ children }: AppBootstrapProps) {
       if (cancelled) return;
       cancelled = true;
       setProgress(100);
-      setStatus("Ready");
       setShowLoader(false);
     };
 
@@ -64,19 +61,15 @@ export function AppBootstrap({ children }: AppBootstrapProps) {
       try {
         if (areAllScrollFramesLoaded()) {
           setProgress(100);
-          setStatus(`Scroll frames ready (${FRAME_COUNT}/${FRAME_COUNT})`);
         } else {
           await preloadAllScrollFrames((loaded, total) => {
             if (cancelled) return;
             const pct = total > 0 ? Math.round((loaded / total) * 100) : 0;
             setProgress(Math.max(4, pct));
-            setStatus(`Loading scroll frames (${loaded}/${total})`);
           }, concurrency);
         }
       } catch {
-        if (!cancelled) {
-          setStatus("Finishing setup…");
-        }
+        // Ignore error during preloading
       }
 
       if (cancelled) return;
@@ -98,7 +91,7 @@ export function AppBootstrap({ children }: AppBootstrapProps) {
     <>
       <AnimatePresence mode="wait">
         {showLoader && (
-          <SiteLoader key="site-loader" progress={progress} status={status} totalFrames={FRAME_COUNT} />
+          <SiteLoader key="site-loader" progress={progress} />
         )}
       </AnimatePresence>
       <div aria-hidden={showLoader} className={showLoader ? "pointer-events-none" : undefined}>

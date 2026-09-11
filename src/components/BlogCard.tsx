@@ -23,7 +23,7 @@ export function BlogCard({ post, index = 0 }: { post: BlogPost; index?: number }
       whileHover={{ y: -4 }}
       className="product-grid-card group flex h-full flex-col overflow-hidden rounded-2xl border border-primary/10 bg-white"
     >
-      <Link to={`/blog/${post.slug}`} className="block">
+      <Link to={`/blog/${post.slug}`} className="flex flex-1 flex-col h-full cursor-pointer">
         <div className="relative aspect-[16/9] overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/15">
           {post.coverImage ? (
             <img
@@ -38,38 +38,33 @@ export function BlogCard({ post, index = 0 }: { post: BlogPost; index?: number }
             {post.category}
           </span>
         </div>
-      </Link>
 
-      <div className="flex flex-1 flex-col p-5 sm:p-6">
-        <p className="text-[12px] lg:text-[13px] font-semibold uppercase tracking-[0.16em] text-primary/45">
-          {formatDate(post.publishedAt ?? post.updatedAt)} · {post.author}
-        </p>
-        <h2 className="mt-2 text-[18px] lg:text-[20px] font-semibold leading-snug tracking-tight text-primary">
-          <Link to={`/blog/${post.slug}`} className="transition-colors hover:text-secondary">
+        <div className="flex flex-1 flex-col p-5 sm:p-6">
+          <p className="text-[12px] lg:text-[13px] font-semibold uppercase tracking-[0.16em] text-primary/45">
+            {formatDate(post.publishedAt ?? post.updatedAt)} · {post.author}
+          </p>
+          <h2 className="mt-2 text-[18px] lg:text-[20px] font-semibold leading-snug tracking-tight text-primary transition-colors group-hover:text-secondary">
             {post.title}
-          </Link>
-        </h2>
-        <p className="mt-3 line-clamp-3 flex-1 text-[14px] lg:text-[15px] leading-relaxed text-primary/68">
-          {post.excerpt}
-        </p>
-        <div className="mt-4 flex flex-wrap gap-2">
-          {post.tags.slice(0, 3).map((tag) => (
-            <span
-              key={tag}
-              className="rounded-full border border-primary/10 bg-section px-2.5 py-1 text-[11px] lg:text-[12px] font-semibold text-primary/70"
-            >
-              {tag}
-            </span>
-          ))}
+          </h2>
+          <p className="mt-3 line-clamp-3 flex-1 text-[14px] lg:text-[15px] leading-relaxed text-primary/68">
+            {post.excerpt}
+          </p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {post.tags.slice(0, 3).map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full border border-primary/10 bg-section px-2.5 py-1 text-[11px] lg:text-[12px] font-semibold text-primary/70"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+          <div className="mt-5 inline-flex items-center gap-1.5 text-[13px] lg:text-[14px] font-semibold text-primary transition-colors group-hover:text-secondary">
+            <span>Read article</span>
+            <span aria-hidden>→</span>
+          </div>
         </div>
-        <Link
-          to={`/blog/${post.slug}`}
-          className="mt-5 inline-flex items-center gap-1.5 text-[13px] lg:text-[14px] font-semibold text-primary transition-colors group-hover:text-secondary"
-        >
-          Read article
-          <span aria-hidden>→</span>
-        </Link>
-      </div>
+      </Link>
     </motion.article>
   );
 }

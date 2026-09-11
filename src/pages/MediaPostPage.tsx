@@ -120,32 +120,13 @@ export default function MediaPostPage() {
             </div>
           </motion.header>
 
-          {/* Full Size Post Image */}
-          {post.imageUrl ? (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.65, delay: 0.1, ease: EASE }}
-              className="mt-8 overflow-hidden rounded-3xl border border-primary/10 bg-white p-3 sm:p-4 shadow-lg"
-            >
-              <img
-                src={post.imageUrl}
-                alt={post.title}
-                className="w-full h-auto rounded-2xl object-contain max-h-[700px]"
-              />
-            </motion.div>
-          ) : null}
-
           {/* Full LinkedIn Embed Section */}
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65, delay: 0.2, ease: EASE }}
-            className="mt-12"
+            transition={{ duration: 0.65, delay: 0.1, ease: EASE }}
+            className="mt-8"
           >
-            <h2 className="mb-4 text-[18px] lg:text-[20px] font-bold text-primary">
-              Original LinkedIn Post Embed
-            </h2>
             <div className="relative overflow-hidden rounded-3xl bg-white border border-primary/10 shadow-md">
               <iframe
                 src={embedSrc}

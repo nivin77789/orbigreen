@@ -75,9 +75,10 @@ export default function BlogPage() {
               <div className="mt-8 grid gap-8 md:grid-cols-2">
                 {linkedInPosts.map((post) => {
                   return (
-                    <div
+                    <Link
                       key={post.id}
-                      className="group flex flex-col justify-between overflow-hidden rounded-3xl border border-primary/10 bg-white p-5 sm:p-6 shadow-sm transition-all hover:border-primary/25 hover:shadow-md"
+                      to={`/blog/post/${post.id}`}
+                      className="group flex flex-col justify-between overflow-hidden rounded-3xl border border-primary/10 bg-white p-5 sm:p-6 shadow-sm transition-all hover:border-primary/25 hover:shadow-md cursor-pointer"
                     >
                       <div>
                         {post.imageUrl ? (
@@ -90,21 +91,18 @@ export default function BlogPage() {
                           </div>
                         ) : null}
 
-                        <h3 className="text-[19px] lg:text-[21px] font-bold leading-snug tracking-tight text-primary">
+                        <h3 className="text-[19px] lg:text-[21px] font-bold leading-snug tracking-tight text-primary transition-colors group-hover:text-secondary">
                           {post.title}
                         </h3>
                       </div>
 
                       <div className="mt-6 flex items-center justify-between border-t border-primary/8 pt-4">
-                        <Link
-                          to={`/blog/post/${post.id}`}
-                          className="gradient-border-cta inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[14px] font-semibold transition-transform group-hover:translate-x-1"
-                        >
+                        <span className="gradient-border-cta inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[14px] font-semibold transition-transform group-hover:translate-x-1">
                           <span>Read More</span>
                           <span className="text-[14px]">→</span>
-                        </Link>
+                        </span>
                       </div>
-                    </div>
+                    </Link>
                   );
                 })}
               </div>
