@@ -8,6 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import type { BlogPost, BlogPostInput } from "@/types/blog";
+import type { WordPressPost } from "@/types/wordpress";
 import {
   createPost,
   deletePost,
@@ -17,6 +18,7 @@ import {
   resetBlogsToSeed,
   updatePost,
 } from "@/lib/blogStore";
+import { fetchWordPressPosts } from "@/lib/wordpressService";
 
 const ADMIN_SESSION_KEY = "orbigreen_admin_session";
 const ADMIN_PASSWORD =
@@ -25,6 +27,8 @@ const ADMIN_PASSWORD =
 type BlogContextValue = {
   posts: BlogPost[];
   publishedPosts: BlogPost[];
+  wpPosts: WordPressPost[];
+  wpLoading: boolean;
   loading: boolean;
   isAdmin: boolean;
   login: (password: string) => boolean;
@@ -34,16 +38,26 @@ type BlogContextValue = {
   removePost: (id: string) => Promise<void>;
   resetToSeed: () => Promise<void>;
   refresh: () => Promise<void>;
+  refreshWpPosts: () => Promise<void>;
 };
 
 const BlogContext = createContext<BlogContextValue | null>(null);
 
 export function BlogProvider({ children }: { children: ReactNode }) {
   const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [wpPosts, setWpPosts] = useState<WordPressPost[]>([]);
   const [loading, setLoading] = useState(true);
+  const [wpLoading, setWpLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(
     () => sessionStorage.getItem(ADMIN_SESSION_KEY) === "true",
   );
+
+  const refreshWpPosts = useCallback(async () => {
+    setWpLoading(true);
+    const data = await fetchWordPressPosts();
+    setWpPosts(data);
+    setWpLoading(false);
+  }, []);
 
   const refresh = useCallback(async () => {
     setLoading(true);
@@ -54,7 +68,8 @@ export function BlogProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     void refresh();
-  }, [refresh]);
+    void refreshWpPosts();
+  }, [refresh, refreshWpPosts]);
 
   const login = useCallback((password: string) => {
     if (!ADMIN_PASSWORD || password !== ADMIN_PASSWORD) return false;
@@ -89,6 +104,8 @@ export function BlogProvider({ children }: { children: ReactNode }) {
     () => ({
       posts,
       publishedPosts: getPublishedPosts(posts),
+      wpPosts,
+      wpLoading,
       loading,
       isAdmin,
       login,
@@ -98,8 +115,23 @@ export function BlogProvider({ children }: { children: ReactNode }) {
       removePost,
       resetToSeed,
       refresh,
+      refreshWpPosts,
     }),
-    [posts, loading, isAdmin, login, logout, addPost, editPost, removePost, resetToSeed, refresh],
+    [
+      posts,
+      wpPosts,
+      wpLoading,
+      loading,
+      isAdmin,
+      login,
+      logout,
+      addPost,
+      editPost,
+      removePost,
+      resetToSeed,
+      refresh,
+      refreshWpPosts,
+    ],
   );
 
   return <BlogContext.Provider value={value}>{children}</BlogContext.Provider>;
