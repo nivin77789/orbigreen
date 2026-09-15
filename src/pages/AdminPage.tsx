@@ -9,8 +9,8 @@ import { addLinkedInPost, deleteLinkedInPost, fetchLinkedInPosts, parseLinkedInE
 import type { JobRole, JobRoleInput } from "@/types/job";
 import type { LinkedInPost } from "@/types/linkedin";
 
-const ADMIN_USERNAME = "admin";
-const ADMIN_PASSWORD = "admin";
+const ADMIN_USERNAME = "Orbigreentechsource";
+const ADMIN_PASSWORD = "Apple@2480";
 const SESSION_KEY = "orbigreen_admin_session";
 
 const fieldClass =
@@ -542,7 +542,7 @@ export default function AdminPage() {
   const [showLinkedInModal, setShowLinkedInModal] = useState(false);
 
   const login = (username: string, password: string) => {
-    if (username !== ADMIN_USERNAME || password !== ADMIN_PASSWORD) return false;
+    if (username.trim() !== ADMIN_USERNAME || password !== ADMIN_PASSWORD) return false;
     sessionStorage.setItem(SESSION_KEY, "1");
     setIsAdmin(true);
     return true;
